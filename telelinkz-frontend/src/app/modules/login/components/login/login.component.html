@@ -1,0 +1,103 @@
+<main class="all-main modal">
+  <section class="welcome-back">
+    <div class="all-welcome-back">
+      <div class="innov8ivs-login">
+        <div class="welcome-content">
+          <div class="welcome-heading">
+            <img
+              src="../../../../../assets/images/login-form-top-image.webp"
+              alt=""
+            />
+          </div>
+          <div class="welcome-heading">
+            <p>
+              Don’t have an account?
+              <a (click)="openRegisterModal()">Sign up!</a>
+            </p>
+          </div>
+        </div>
+        <div class="welcome-back-heading">
+          <h1>Welcome Back</h1>
+          <p>Login into your account</p>
+        </div>
+        <div class="google-images">
+          <a href="#" class="google-account">
+            <span class="google-spn"
+              ><img
+                src="../../../../../assets/images/hughsnet-form-google-icons.webp"
+                alt=""
+            /></span>
+            <span>Google</span>
+          </a>
+          <a href="#" class="google-account">
+            <span class="facebook-spn"
+              ><img
+                src="../../../../../assets/images/hughsnet-form-facebook-icons.webp"
+                alt=""
+            /></span>
+            <span>Facebook</span>
+          </a>
+        </div>
+        <div class="countinue-with">
+          <p>Or continue with</p>
+        </div>
+        <form
+          class="all-form-login"
+          [formGroup]="loginForm"
+          (ngSubmit)="loginUser()"
+        >
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <div class="all-recovery">
+            <div class="remember-me">
+              <div class="remember-me">
+                <input
+                  type="checkbox"
+                  id="toggle"
+                  class="toggle-checkbox"
+                  (change)="toggleRememberMe()"
+                  formControlName="rememberMe"
+                />
+                <label for="toggle" class="toggle-label"></label>
+              </div>
+              <span>Remember me</span>
+            </div>
+            <div class="recovered-pass">
+              <a href="#">Recover Password</a>
+            </div>
+          </div>
+          <button type="submit" class="login-button">Login</button>
+        </form>
+      </div>
+      <div class="innov8ivs-image">
+        <img
+          src="../../../../../assets/images/login-form-welcome-image.webp"
+          alt=""
+        />
+        <div class="hore-top-developer">
+          <a href="#">
+            <img
+              src="../../../../../assets/images/login-form-welcome-section-thumb-up.webp"
+              alt=""
+            />
+            Hire Top Notch Developers
+          </a>
+          <p>
+            Today, we create innovative solutions to the challenges that
+            consumers face in both their everyday lives and events.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
