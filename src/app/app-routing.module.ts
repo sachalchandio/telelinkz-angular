@@ -16,11 +16,13 @@ const routes: Routes = [
           ),
       },
 
-      // {
-      //   path: 'xfinity',
-      //   loadChildren: () =>
-      //     import('./modules/why/why.module').then((m) => m.WhyModule),
-      // },
+      {
+        path: 'xfinity',
+        loadChildren: () =>
+          import('./modules/providers/xfinity/xfinity.module').then(
+            (m) => m.XfinityModule
+          ),
+      },
     ],
   },
 ];

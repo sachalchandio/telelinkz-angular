@@ -1,18 +1,23 @@
 <header>
   <nav class="navbar">
+    <div class="topLogo">
+      <a routerLink="/"
+        ><img src="../../../../../assets/images/teleinkz.jpg"
+      /></a>
+    </div>
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav #sidenav mode="side" opened="true">
-        <mat-toolbar>Menu</mat-toolbar>
+        <mat-toolbar>Telelinkz Sales Portal</mat-toolbar>
         <mat-nav-list>
           <mat-list-item (click)="toggleProviders()">
-            <mat-icon>business</mat-icon>
-            <span>Providers</span>
+            <mat-icon>wifi</mat-icon>
+            <span>Internet Providers</span>
             <mat-icon>chevron_right</mat-icon>
           </mat-list-item>
           <div *ngIf="providersOpen">
             <mat-nav-list>
-              <a mat-list-item href="#">Provider 1</a>
-              <a mat-list-item href="#">Provider 2</a>
+              <a mat-list-item routerLink="/xfinity">Xfinity</a>
+              <a mat-list-item href="#">Cox</a>
               <!-- Add more providers as needed -->
             </mat-nav-list>
           </div>

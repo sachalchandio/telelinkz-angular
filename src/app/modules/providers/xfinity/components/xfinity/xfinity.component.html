@@ -1,0 +1,28 @@
+<main>
+  <div class="fileInput">
+    <div class="fileInputDescription">
+      <mat-icon>folder</mat-icon>
+      <p>Input an Excel File to Import Records</p>
+    </div>
+    <div>
+      <input type="file" (change)="onFileChange($event)" />
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container
+        *ngFor="let column of displayedColumns"
+        [matColumnDef]="column"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</main>
+<!-- <div *ngFor="let row of jsonData">
+  {{ row | json }}
+</div> -->

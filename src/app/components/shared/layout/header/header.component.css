@@ -5,3 +5,14 @@
 mat-sidenav {
   width: 250px;
 }
+
+.topLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.topLogo img {
+  width: 200px;
+  height: auto;
+}

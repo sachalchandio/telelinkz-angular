@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import * as comp from './components';
-import * as xfinity from '../providers/xfinity/components/';
 
 const routes: Routes = [
   {
     path: '',
-    component: comp.HomepageComponent,
+    component: comp.XfinityComponent,
   },
 ];
 
@@ -14,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomeModuleRoutingModule {}
+export class XfinityRoutingModule {}
