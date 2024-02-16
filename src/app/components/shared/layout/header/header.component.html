@@ -1,0 +1,26 @@
+<header>
+  <nav class="navbar">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #sidenav mode="side" opened="true">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list>
+          <mat-list-item (click)="toggleProviders()">
+            <mat-icon>business</mat-icon>
+            <span>Providers</span>
+            <mat-icon>chevron_right</mat-icon>
+          </mat-list-item>
+          <div *ngIf="providersOpen">
+            <mat-nav-list>
+              <a mat-list-item href="#">Provider 1</a>
+              <a mat-list-item href="#">Provider 2</a>
+              <!-- Add more providers as needed -->
+            </mat-nav-list>
+          </div>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <!-- Main content goes here -->
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </nav>
+</header>

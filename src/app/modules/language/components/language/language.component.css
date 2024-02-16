@@ -1,0 +1,1055 @@
+* {
+  margin: 0px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.all-main h1,
+.all-main h2,
+.all-main h3,
+.all-main h4,
+.all-main h5,
+.all-main h6,
+.all-main p {
+  margin: 0;
+}
+
+.all-main img {
+  width: 100%;
+}
+
+.all-main a {
+  text-decoration: none;
+}
+
+/* banner-section-css */
+.language-stack-banner-section {
+  background-image: url(../../../../../assets/images/innov8ivs-languagestack-page-java-background-image.webp);
+  height: 811px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.language-stack-banner-section .all-banner-section {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 200px 20px 0px;
+  display: flex;
+  height: 100%;
+}
+
+.language-stack-banner-section .banner-heading {
+  width: 70%;
+}
+
+.language-stack-banner-section .banner-section-right {
+  width: 30%;
+}
+
+.language-stack-banner-section .banner-heading h1 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+  color: #4b4b4b;
+  padding-bottom: 20px;
+}
+
+.language-stack-banner-section .banner-heading h1 span {
+  color: #ff6200;
+}
+
+.language-stack-banner-section .banner-heading p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  color: #313131;
+  max-width: 637px;
+  padding-bottom: 83px;
+}
+
+.language-stack-banner-section .banner-section-right img {
+  display: none;
+}
+
+.language-stack-banner-section .banner-heading .baannre-buttons {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.language-stack-banner-section .banner-heading .baannre-buttons a {
+  border-radius: 8px;
+  background: #ff6200;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.5s;
+  border: 2px solid transparent;
+}
+
+.language-stack-banner-section .banner-heading .baannre-buttons a:hover {
+  border-radius: 8px;
+  border: 2px solid #ff6200;
+  background: #fff;
+  transition: all 0.5s;
+  color: #ff6200;
+}
+
+.language-stack-banner-section .lokking-developer-text p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4b4b4b;
+  margin-top: 60px;
+  max-width: unset;
+  padding-bottom: 33px;
+}
+
+.language-stack-banner-section .lokking-developer-text p a {
+  color: #ff6200;
+  font-weight: 600;
+}
+
+.banner-logos-language-stack {
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+}
+
+.banner-logos-language-stack img {
+  width: unset;
+}
+
+.language-banner-image {
+  width: 25%;
+}
+
+/* hire developer-sectrion */
+.languagestack-page-developer-heading h2 {
+  color: #4b4b4b;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 50px;
+}
+
+.languagestack-page-developer-heading h2 span {
+  color: #ff6200;
+}
+
+.hire-java-developer-box h3 {
+  color: #4b4b4b;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 50px;
+  margin-bottom: 13px;
+}
+
+.hire-java-developer-boxex {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hire-java-developer-box1 {
+  width: 68%;
+}
+
+.hire-java-developer-list {
+  border-radius: 8px;
+  background: #f1f1f1;
+  padding: 17px 15px;
+}
+
+.javadevelopers-text h4 {
+  color: #4b4b4b;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  margin-bottom: 8px;
+}
+
+.javadevelopers-text h5 {
+  color: #313131;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.javadevelopers-text h5 span {
+  color: #ff6200;
+}
+
+.javadevelopers-text h6 {
+  color: #4b4b4b;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.developer-info-language {
+  display: flex;
+  column-gap: 17px;
+}
+
+.Java-developer-information1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.language-available-hiring {
+  display: flex;
+  column-gap: 23px;
+}
+
+.language-available-hiring.location-text {
+  justify-content: space-between;
+  margin-top: 19px;
+}
+
+.Java-developer-information2 {
+  margin: 15px 0px;
+}
+
+.Java-developer-information2 p {
+  color: #4b4b4b;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.Java-developer-information3 .java-developer-skills {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.java-developer-skills-box1 {
+  display: flex;
+  column-gap: 10px;
+}
+
+.java-developer-skills-box1 .java-developer-skill-text h4 {
+  color: #313131;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 5px;
+  background: #fff;
+  padding: 7px 12px;
+}
+
+.java-developer-skills-box2 a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  background: #ff6200;
+  padding: 8px 14px;
+}
+
+.hire-java-developer-list {
+  margin-bottom: 20px;
+}
+
+.clients-rates-innov8ivs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+}
+
+.clients-rates-innov8ivs span {
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.here-what-heading h3 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+  background-color: #ff6200;
+  border-radius: 8px;
+  padding: 12px 20px;
+}
+
+.hire-java-developer-section-two-boxex {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.hire-java-developer-box2 {
+  width: 30.7%;
+  padding-top: 27px;
+}
+
+.build-your-dream-team {
+  display: flex;
+  border-radius: 8px;
+  background: #ff6200;
+  padding: 0px 40px;
+  height: 188px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.build-your-dream-team h3 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.build-your-dream-team a {
+  color: #ff6200;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 13px 33px;
+}
+
+/* client-testimonial */
+
+.hire-java-developer-boxex .clients-testimonial-profile1 {
+  border-radius: 8px;
+  border: 0.5px solid #8d8d8d;
+  background: #fff;
+  padding: 24px 28px 24px;
+  margin-top: 60px;
+  width: 100%;
+}
+
+.clients-testimonial-profile {
+  row-gap: 0;
+}
+
+.hire-java-developer-boxex .client-testimonial-data {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -34px;
+}
+
+.hire-java-developer-boxex .client-testimonial-content h4 {
+  color: #4b4b4b;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.hire-java-developer-boxex .client-testimonial-image {
+  transform: translate(0px, -64px);
+}
+
+.hire-java-developer-boxex .client-testimonial-content h5 {
+  color: #9f9f9f;
+  text-align: right;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.hire-java-developer-boxex .client-testimonial-paragraph {
+  margin-top: 18px;
+}
+
+.hire-java-developer-boxex .dots-icon img {
+  width: 24.328px;
+  height: 22.5px;
+}
+
+.hire-java-developer-boxex .client-testimonial-paragraph p {
+  color: #4b4b4b;
+  font-size: 14px;
+  font-weight: 300;
+  max-width: 318px;
+}
+
+.hire-java-developer-boxex .client-stars {
+  text-align: right;
+}
+
+.hire-java-developer-boxex .client-stars img {
+  width: 95px;
+  height: 15px;
+}
+
+.hire-java-developer-boxex .line {
+  width: 192.01px;
+  height: 1px;
+  background: #c8c8c8;
+  margin-left: auto;
+  margin-top: 22px;
+  margin-bottom: 15px;
+}
+
+.hire-java-developer-boxex .clients-testimonial-heading {
+  text-align: center;
+}
+
+.hire-java-developer-boxex .clients-testimonial-heading h2 {
+  color: #373737;
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 22px;
+}
+
+.hire-java-developer-boxex .clients-testimonial-heading h2 span {
+  color: #ff6200;
+}
+
+.hire-java-developer-boxex .clients-testimonial-heading p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #313131;
+  max-width: 1366px;
+  margin: 0 auto;
+  margin-bottom: 75px;
+}
+
+.want-to-read {
+  background-color: #f1f1f1;
+  padding: 19px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.want-to-read h4 {
+  color: #313131;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.want-to-read a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  width: 159px;
+  height: 41px;
+  border-radius: 5px;
+  background: #ff6200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-top: 22px;
+}
+
+.java-developaer-hiring-section {
+  background-color: #f1f1f1;
+  padding: 70px 0px;
+}
+
+.hiring-developer-java-section {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 73px 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.hiring-guied-text h2 {
+  color: #ff6200;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 60px;
+}
+
+s .hiring-guied-text p {
+  color: #313131;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 30px;
+}
+
+.hiring-guied-text h3 {
+  color: #313131;
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 47px;
+  padding: 40px 0px;
+}
+
+.hiring-guied-text h4 {
+  color: #313131;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.hiring-guied-text h2 span {
+  color: #4b4b4b;
+}
+
+.hiring-developer-java-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.java-guide-box1 {
+  width: 30%;
+}
+
+.java-guide-box2 {
+  width: 70%;
+}
+
+.hiring-guied-text {
+  border-bottom: 1px solid #a8a8a8;
+  padding-bottom: 40px;
+}
+
+.hiring-guied-text ul li {
+  color: #313131;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 35px;
+}
+
+.hiring-guied-text strong {
+  font-size: 18px;
+}
+
+.hiring-guied-text ul {
+  padding: 40px 0px 0px 30px;
+  font-weight: 600;
+}
+
+.hiring-guied-text .average-title {
+  font-size: 18px;
+}
+
+.hiring-guied-text .average-title span {
+  font-weight: 300;
+}
+
+.frelance-rate {
+  padding: 40px 0px;
+}
+
+.monthly-title-pay {
+  padding-bottom: 40px;
+}
+
+.javaconfidence {
+  padding-top: 40px;
+}
+
+.languange-page-hire-developer {
+  padding: 46px 0px;
+}
+
+.find-expert-heading {
+  text-align: center;
+}
+
+.find-expert-heading h2 {
+  color: #4B4B4B;
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.find-expert-heading p {
+  color: #4B4B4B;
+  font-size: 16px;
+  font-weight: 300;
+}
+.find-expert-section{
+  padding: 74px 0px;
+}
+.find-exprt-stack {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 22px;
+  padding-top: 63px;
+}
+
+.find-exprt-stack-1 {
+  width: 21%;
+  border-radius: 6px;
+  border: 0.5px solid #8D8D8D;
+  background: #FFF;
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.find-exprt-stack-1 h4 {
+  color: #4B4B4B;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+  text-align: center;
+}
+.find-exprt-stack-1:hover h4{
+  color: #fff;
+}
+.find-exprt-stack-1:hover{
+  background: #ff6200;
+  transition: all 0.5s;
+  color: #fff;
+  border-color:   #ff6200;
+}
+
+@media only screen and (max-width: 1350px) {
+
+  .hire-java-developer-boxex,
+  .language-stack-banner-section .all-banner-section {
+    max-width: 1100px;
+  }
+
+  .hire-java-developer-boxex .clients-testimonial-profile1 {
+    padding: 21px 26px 20px;
+  }
+
+  .clients-rates-innov8ivs {
+    column-gap: 10px;
+  }
+
+  .clients-rates-innov8ivs span {
+    font-size: 10px;
+  }
+
+  .clients-rates-innov8ivs span img {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .language-stack-banner-section {
+    height: 665px;
+  }
+
+  .hire-java-developer-boxex,
+  .language-stack-banner-section .all-banner-section {
+    max-width: 900px;
+  }
+
+  .language-stack-banner-section .banner-heading h1 {
+    font-size: 38px;
+  }
+
+  .language-stack-banner-section .banner-heading p {
+    font-size: 16px;
+  }
+
+  .language-stack-banner-section .all-banner-section {
+    padding: 70px 20px 0px;
+  }
+
+  .language-stack-banner-section .lokking-developer-text p {
+    font-size: 14px;
+    margin-top: 76px;
+  }
+
+  .hire-java-developer-box2 {
+    padding-top: 6px;
+  }
+
+  .java-developer-skills-box1 .java-developer-skill-text h4 {
+    font-size: 14px;
+  }
+
+  .java-developer-skills-box2 a {
+    font-size: 14px;
+  }
+
+  .java-developer-skills-box1 {
+    column-gap: 8px;
+  }
+
+  .hire-java-developer-box h3 {
+    font-size: 16px;
+  }
+
+  .Java-developer-information2 p {
+    font-size: 14px;
+  }
+
+  .build-your-dream-team h3 {
+    font-size: 25px;
+  }
+
+  .build-your-dream-team a {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .build-your-dream-team {
+    height: 144px;
+  }
+
+  .here-what-heading h3 {
+    font-size: 19px;
+  }
+
+  .hire-java-developer-boxex .client-testimonial-paragraph p {
+    font-size: 12px;
+  }
+
+  .hire-java-developer-boxex .clients-testimonial-profile1 {
+    padding: 17px 11px 17px;
+  }
+
+  .hiring-guied-text h2 {
+    font-size: 28px;
+    line-height: 45px;
+  }
+
+  .hiring-guied-text-paragraph p {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 899px) {
+  .language-stack-banner-section .banner-heading h1 {
+    font-size: 32px;
+  }
+
+  .language-stack-banner-section .banner-heading p {
+    font-size: 14px;
+    line-height: 24px;
+    padding-bottom: 27px;
+  }
+
+  .language-stack-banner-section .banner-heading .baannre-buttons a {
+    width: 126px;
+    height: 38px;
+    font-size: 13px;
+    border-radius: 5px;
+  }
+
+  .language-stack-banner-section {
+    height: 610px;
+  }
+
+  .languagestack-page-developer-heading h2 {
+    font-size: 25px;
+  }
+
+  .hire-java-developer-box h3 {
+    font-size: 14px;
+  }
+
+  .javadevelopers-text h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .javadevelopers-text h5 {
+    font-size: 14px;
+  }
+
+  .javadevelopers-text h6 {
+    font-size: 13px;
+  }
+
+  .language-available-hiring span {
+    font-size: 14px;
+  }
+
+  .java-developer-skills-box1 {
+    flex-wrap: wrap;
+    width: 70%;
+    row-gap: 10px;
+  }
+
+  .build-your-dream-team {
+    height: 110px;
+    padding: 0 15px;
+  }
+
+  .build-your-dream-team h3 {
+    font-size: 22px;
+  }
+
+  .build-your-dream-team a {
+    font-size: 13px;
+    padding: 0px;
+    height: 38px;
+    width: 126px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .here-what-heading h3 {
+    font-size: 17px;
+  }
+
+  .hire-java-developer-boxex .client-testimonial-paragraph p {
+    font-size: 14px;
+  }
+
+  .hire-java-developer-boxex .client-testimonial-content h4 {
+    font-size: 13px;
+  }
+
+  .hire-java-developer-boxex .client-testimonial-content h5 {
+    font-size: 12px;
+  }
+
+  .want-to-read h4 {
+    font-size: 15px;
+  }
+
+  .want-to-read a {
+    width: 140px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+  .hire-java-developer-boxex .clients-testimonial-profile1 {
+    padding: 17px 16px 13px;
+  }
+
+  .hiring-guied-text h2 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .hiring-guied-text-paragraph p {
+    font-size: 14px;
+  }
+
+  .hiring-guied-text h3 {
+    font-size: 22px;
+    padding: 12px 0px;
+  }
+
+  .hiring-guied-text strong {
+    font-size: 16px;
+  }
+
+  .hiring-guied-text ul li {
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .language-stack-banner-section .all-banner-section {
+    flex-direction: column-reverse;
+  }
+
+  .language-banner-image {
+    width: 100%;
+  }
+
+  .language-stack-banner-section .banner-heading {
+    width: 100%;
+  }
+
+  .language-stack-banner-section {
+    height: 783px;
+  }
+
+  .language-banner-image img {
+    max-width: 47%;
+    margin: 0 auto;
+  }
+
+  .language-banner-image {
+    text-align: center;
+  }
+
+  .language-stack-banner-section .all-banner-section {
+    padding: 50px 20px 0px;
+  }
+
+  .language-stack-banner-section .banner-heading h1 {
+    font-size: 30px;
+  }
+
+  .language-stack-banner-section .banner-heading p {
+    max-width: 338px;
+  }
+
+  .language-stack-banner-section .banner-heading p {
+    padding-bottom: 32px;
+    margin-top: 32px;
+    font-size: 13px;
+  }
+
+  .banner-logos-language-stack {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 20px;
+  }
+
+  .languagestack-page-developer-heading h2 {
+    font-size: 20px;
+    max-width: 262px;
+    margin: 0 auto;
+    line-height: 26px;
+    margin-top: 46px;
+  }
+
+  .hire-java-developer-section-two-boxex {
+    flex-direction: column;
+  }
+
+  .hire-java-developer-box1,
+  .hire-java-developer-box2 {
+    width: 100%;
+  }
+
+  .hire-java-developer-box2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hire-java-developer-box h3 {
+    font-size: 13px;
+    line-height: 24px;
+  }
+
+  .java-developer-skills-box1 {
+    width: 100%;
+  }
+
+  .Java-developer-information3 .java-developer-skills {
+    flex-direction: column;
+    row-gap: 22px;
+    align-items: end;
+  }
+
+  .java-developer-skills-box2 a {
+    width: 101px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .javadevelopers-text h4 {
+    font-size: 20px;
+  }
+
+  .Java-developer-information1 {
+    flex-direction: column;
+  }
+
+  .developer-info-language-inner {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .javadevelopers-text h5 {
+    font-size: 16px;
+  }
+
+  .language-available-hiring {
+    column-gap: 12px;
+    margin-top: 23px;
+  }
+
+  .Java-developer-information2 p {
+    padding: 0 6px;
+  }
+
+  .build-your-dream-team {
+    flex-direction: column;
+    height: unset;
+    padding: 21px 0px;
+    row-gap: 27px;
+  }
+
+  .build-your-dream-team h3 {
+    font-size: 30px;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  .hire-java-developer-box2 {
+    padding-top: 45px;
+  }
+
+  .here-what-heading h3 {
+    font-size: 20px;
+  }
+
+  .hire-java-developer-boxex .client-testimonial-content h4 {
+    font-size: 16px;
+  }
+
+  .hire-java-developer-boxex .client-testimonial-content h5 {
+    font-size: 13px;
+  }
+
+  .languange-page-hire-developer {
+    padding: 46px 0px 30px;
+  }
+
+  .hiring-developer-java-section {
+    flex-direction: column;
+  }
+
+  .java-guide-box1,
+  .java-guide-box2 {
+    width: 100%;
+  }
+
+  .hiring-guied-text h2 {
+    font-size: 20px;
+    line-height: 30px;
+    max-width: 268px;
+  }
+
+  .java-developaer-hiring-section {
+    padding: 23px 20px;
+  }
+
+  .hiring-developer-java-section {
+    padding: 25px 31px;
+  }
+
+  .hiring-guied-text .hiring-guied-text-paragraph:nth-child(2) p {
+    margin-bottom: 20px;
+    line-height: 24px;
+  }
+
+  .hiring-guied-text .hiring-guied-text-paragraph:nth-child(2) p:nth-child(2) {
+    margin-bottom: 0px;
+  }
+
+  .hiring-guied-text .hiring-guied-text-paragraph:nth-child(2) {
+    margin-top: 10px;
+    border-top: 1px solid #a8a8a8;
+    padding-top: 10px;
+  }
+
+  .hiring-guied-text {
+    padding-bottom: 10px;
+  }
+
+  .hiring-guied-text h3 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .hiring-guied-text ul {
+    padding: 0 0px 0px 30px;
+  }
+
+  .hiring-guied-text ul li {
+    font-size: 14px;
+    line-height: 28px;
+  }
+}

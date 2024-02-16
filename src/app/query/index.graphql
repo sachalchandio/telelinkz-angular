@@ -1,0 +1,95 @@
+query LoginUser($email: String!, $password: String!) {
+  loginUser(loginUserInput: { email: $email, password: $password }) {
+    id
+    accessToken
+    name
+    email
+    userType
+    profileImageURL
+    dateOfBirth
+    resume_id
+  }
+}
+
+query GetResume($id: String!) {
+  getResume(id: $id) {
+    id
+    createdAt
+    photo_url
+    hourly_rate
+    orders_completed
+    resume_pdf_url
+    fullName
+    designation
+    country
+    city
+    timezone
+    aboutMe
+    bio
+    devExpYears
+    availability
+    role
+    others
+    bucket_filename
+    certificates {
+      id
+      link
+      title
+      startDate
+      endDate
+    }
+    institutions {
+      id
+      createdAt
+      title
+      degree
+      StartDate
+      EndDate
+    }
+    jobExperiences {
+      id
+      createdAt
+      companyName
+      designation
+      startYear
+      endYear
+      jobResponsibility
+      technologies
+    }
+    tools {
+      id
+      createdAt
+      name
+    }
+    cvlangs {
+      id
+      createdAt
+      name
+    }
+    cvframeworks {
+      id
+      createdAt
+      name
+    }
+    platforms {
+      id
+      createdAt
+      name
+    }
+    paradigms {
+      id
+      createdAt
+      name
+    }
+    storages {
+      id
+      createdAt
+      name
+    }
+    libraries {
+      id
+      createdAt
+      name
+    }
+  }
+}

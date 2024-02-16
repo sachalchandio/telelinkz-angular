@@ -1,0 +1,80 @@
+* {
+  margin: 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* For the scrollbar itself */
+::-webkit-scrollbar {
+  width: 8px;
+  /* width of the entire scrollbar */
+}
+
+.messageContainer::-webkit-scrollbar-thumb {
+  /* background: #f93f05; */
+  background: #ff6200;
+  border-radius: 12px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  /* background: #f93f05; */
+  background: #888;
+  border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Optional: the scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* scrollbar track color */
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.mat-mdc-snack-bar-container {
+  border-radius: 200px !important;
+}
+
+.mdc-button .mdc-button__label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.mat-mdc-snack-bar-container {
+  font-size: 16px;
+  background-color: #ff5733 !important;
+  --mat-snack-bar-button-color: #ffffff !important;
+  --mdc-snackbar-container-color: #ff5733 !important;
+}
+
+.all-main h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+.all-main img {
+  width: 100%;
+}
+
+.all-main a {
+  text-decoration: none;
+}

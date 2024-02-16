@@ -1,0 +1,53 @@
+<div class="container bol-jany-kaa">
+  <div *ngIf="isChatOpen" class="chat-box">
+    <div class="chat-container">
+      <div class="wa-chat-box-header">
+        <img
+          class="wa-chat-box-brand"
+          src="../../../../assets/images/avatar-image.svg"
+        />
+        <div class="wa-chat-box-brand-text">
+          <div class="wa-chat-box-brand-name">Johnson</div>
+          <div class="wa-chat-box-brand-subtitle">
+            Typically replies within a minute
+          </div>
+        </div>
+        <button
+          class="chat-closse-icon"
+          [class.active]="isChatOpen"
+          (click)="minimizeSession()"
+        >
+          <img
+            style="display: table-row"
+            src="../../../../assets/images/remove.png"
+          />
+        </button>
+      </div>
+      <div class="messageContainer">
+        <div
+          *ngFor="let message of dialogFlowResponses; let i = index"
+          [ngClass]="{ even: i % 2 === 0, odd: i % 2 !== 0 }"
+        >
+          {{ message }}
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input
+          [(ngModel)]="userMessage"
+          type="text"
+          placeholder="Type a message..."
+          (keyup.enter)="sendMessage()"
+        />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  <button
+    class="open-chat-btn"
+    [class.active]="isChatOpen"
+    *ngIf="!isChatOpen"
+    (click)="toggleChatBoxDisplay()"
+  >
+    <img src="../../../../assets/images/chatbot.png" alt="" />
+  </button>
+</div>

@@ -1,0 +1,14 @@
+.graphs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Adjust this as needed */
+  align-items: center;
+  row-gap: 6rem;
+  margin-top: 30px;
+}
+
+.graphs canvas {
+  margin: 10px; /* Add margin to ensure there's space between graphs */
+  width: 35vw;
+}

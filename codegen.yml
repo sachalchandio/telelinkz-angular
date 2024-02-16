@@ -1,0 +1,11 @@
+overwrite: true
+schema: "http://localhost:3000/graphql" # Replace with your GraphQL server endpoint
+documents:
+  "src/**/*.graphql"
+  # Path to your GraphQL documents (queries, mutations)
+generates:
+  src/generated/graphqlTypes.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
