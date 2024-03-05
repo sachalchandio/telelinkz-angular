@@ -14,7 +14,6 @@ import {
   XfinityTv,
 } from 'src/generated/graphqlTypes';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs';
 
 interface TableData {
   [key: string]: string | number;
