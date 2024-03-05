@@ -8,6 +8,16 @@
       <input type="file" (change)="onFileChange($event)" />
     </div>
   </div>
+
+  <form [formGroup]="searchForm" (ngSubmit)="onNameSubmit()">
+    <input
+      type="text"
+      formControlName="nameInput"
+      placeholder="Search here..."
+    />
+    <button type="submit">Search</button>
+  </form>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container
@@ -24,6 +34,6 @@
   </div>
 </main>
 
-<div *ngFor="let row of jsonData">
+<!-- <div *ngFor="let row of jsonData">
   {{ row | json }}
-</div>
+</div> -->

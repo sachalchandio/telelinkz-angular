@@ -142,12 +142,17 @@ export type Query = {
   comment: Comment;
   comments: Array<Comment>;
   currentUser: UserDto;
+  findAllSalesByAgentName: Array<XfinitySaleDto>;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
 };
 
 export type QueryCommentArgs = {
   id: Scalars['String']['input'];
+};
+
+export type QueryFindAllSalesByAgentNameArgs = {
+  agentName: Scalars['String']['input'];
 };
 
 export type QueryGetXfinitySaleByIdArgs = {
@@ -391,6 +396,36 @@ export type XfinitySale = {
   zipcode: Scalars['String']['output'];
 };
 
+export type XfinitySaleDto = {
+  __typename?: 'XfinitySaleDTO';
+  HMS: XfinityHomeSecurity;
+  Internet: XfinityInternet;
+  Phone: XfinityHomePhone;
+  TV: XfinityTv;
+  agentName: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  comcastTpvStatus: TpvStatus;
+  concertOrderId: Scalars['String']['output'];
+  cx_firstName: Scalars['String']['output'];
+  cx_lastName: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  installation: Scalars['String']['output'];
+  installationDateFormatted: Scalars['String']['output'];
+  installationTime: Scalars['String']['output'];
+  orderDate: Scalars['DateTime']['output'];
+  orderNumber: Scalars['String']['output'];
+  packageSold: Scalars['String']['output'];
+  phoneNumber: Scalars['String']['output'];
+  phoneNumber_second?: Maybe<Scalars['String']['output']>;
+  product: Scalars['String']['output'];
+  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
+  state: UsState;
+  streetAddress: Scalars['String']['output'];
+  streetAddressLine2?: Maybe<Scalars['String']['output']>;
+  zipcode: Scalars['String']['output'];
+};
+
 /** List of available Xfinity TV packages */
 export enum XfinityTv {
   Choice_10 = 'CHOICE_10',
@@ -463,6 +498,43 @@ export type LoginUserQuery = {
   };
 };
 
+export type FindAllSalesByAgentNameQueryVariables = Exact<{
+  agentName: Scalars['String']['input'];
+}>;
+
+export type FindAllSalesByAgentNameQuery = {
+  __typename?: 'Query';
+  findAllSalesByAgentName: Array<{
+    __typename?: 'XfinitySaleDTO';
+    id: string;
+    orderDate: any;
+    agentName: string;
+    cx_firstName: string;
+    cx_lastName: string;
+    orderNumber: string;
+    installationDateFormatted: string;
+    installationTime: string;
+    installation: string;
+    streetAddress: string;
+    streetAddressLine2?: string | null;
+    city: string;
+    state: UsState;
+    zipcode: string;
+    phoneNumber: string;
+    phoneNumber_second?: string | null;
+    socialSecurityNumber?: string | null;
+    email: string;
+    product: string;
+    packageSold: string;
+    comcastTpvStatus: TpvStatus;
+    concertOrderId: string;
+    Internet: XfinityInternet;
+    TV: XfinityTv;
+    Phone: XfinityHomePhone;
+    HMS: XfinityHomeSecurity;
+  }>;
+};
+
 export const CreateXfinitySaleDocument = gql`
   mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
     createXfinitySale(input: $input) {
@@ -533,6 +605,52 @@ export class LoginUserGQL extends Apollo.Query<
   LoginUserQueryVariables
 > {
   override document = LoginUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const FindAllSalesByAgentNameDocument = gql`
+  query findAllSalesByAgentName($agentName: String!) {
+    findAllSalesByAgentName(agentName: $agentName) {
+      id
+      orderDate
+      agentName
+      cx_firstName
+      cx_lastName
+      orderNumber
+      installationDateFormatted
+      installationTime
+      installation
+      streetAddress
+      streetAddressLine2
+      city
+      state
+      zipcode
+      phoneNumber
+      phoneNumber_second
+      socialSecurityNumber
+      email
+      product
+      packageSold
+      comcastTpvStatus
+      concertOrderId
+      Internet
+      TV
+      Phone
+      HMS
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class FindAllSalesByAgentNameGQL extends Apollo.Query<
+  FindAllSalesByAgentNameQuery,
+  FindAllSalesByAgentNameQueryVariables
+> {
+  override document = FindAllSalesByAgentNameDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

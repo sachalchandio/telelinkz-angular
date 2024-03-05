@@ -12,8 +12,12 @@ import {
   XfinityHomePhone,
   XfinityHomeSecurity,
   XfinityTv,
+  FindAllSalesByAgentNameGQL,
+  FindAllSalesByAgentNameQuery,
+  XfinitySaleDto,
 } from 'src/generated/graphqlTypes';
 import { Apollo } from 'apollo-angular';
+import { FormGroup, FormControl } from '@angular/forms';
 
 interface TableData {
   [key: string]: string | number;
@@ -25,15 +29,84 @@ interface TableData {
   styleUrls: ['./xfinity.component.css'],
 })
 export class XfinityComponent {
-  constructor(
-    private dialog: MatDialog,
-    private createXfinitySaleGQL: CreateXfinitySaleGQL,
-    private apollo: Apollo
-  ) {}
-
+  fetched_sales: XfinitySaleDto[] = [];
+  sales: FindAllSalesByAgentNameQuery['findAllSalesByAgentName'] = [];
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   displayedColumns: string[] = []; // Adjust based on your data
+  searchForm = new FormGroup({
+    nameInput: new FormControl(''), // Initialize your search input control
+  });
+
+  constructor(
+    private dialog: MatDialog,
+    private createXfinitySaleGQL: CreateXfinitySaleGQL,
+    private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
+    private apollo: Apollo
+  ) {}
+
+  onNameSubmit(): void {
+    // Logic to handle form submission
+    if (this.searchForm.value.nameInput) {
+      this.getSalesByAgentName(this.searchForm.value.nameInput);
+    }
+  }
+
+  getSalesByAgentName(agentName: string): void {
+    this.findAllSalesByAgentNameGQL
+      .watch({ agentName })
+      .valueChanges.subscribe({
+        next: (response) => {
+          const transformedData: TableData[] =
+            response.data.findAllSalesByAgentName.map((sale) => ({
+              ID: sale.id,
+              'Order Date': sale.orderDate,
+              'Agent Name': sale.agentName,
+              'Customer First Name': sale.cx_firstName,
+              'Customer Last Name': sale.cx_lastName,
+              'Order Number': sale.orderNumber,
+              'Installation Date': sale.installationDateFormatted,
+              'Installation Time': sale.installationTime,
+              'Installation Type': sale.installation,
+              'Street Address': sale.streetAddress,
+              'Street Address Line 2': sale.streetAddressLine2 || '',
+              // prettier-ignore
+              'City': sale.city,
+              // prettier-ignore
+              'State': sale.state,
+              // prettier-ignore
+              'Zipcode': sale.zipcode,
+              'Phone Number': sale.phoneNumber,
+              'Second Phone Number': sale.phoneNumber_second || '',
+              'Social Security Number': sale.socialSecurityNumber || '',
+              // prettier-ignore
+              'Email': sale.email,
+              // prettier-ignore
+              'Product': sale.product,
+              'Package Sold': sale.packageSold,
+              'Comcast TPV Status': sale.comcastTpvStatus,
+              'Concert Order ID': sale.concertOrderId,
+              // prettier-ignore
+              'Internet': sale.Internet,
+              // prettier-ignore
+              'TV': sale.TV,
+              // prettier-ignore
+              'Phone': sale.Phone,
+              // prettier-ignore
+              'HMS': sale.HMS,
+            }));
+          // Assuming you have a way to set this transformed data to your table's dataSource.
+          this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
+          console.log(transformedData);
+          if (transformedData.length > 0) {
+            this.displayedColumns = Object.keys(transformedData[0]);
+          }
+        },
+        error: (error) => {
+          console.error('There was an error fetching the sales', error);
+        },
+      });
+  }
 
   onFileChange(event: any) {
     const target: DataTransfer = <DataTransfer>event.target;

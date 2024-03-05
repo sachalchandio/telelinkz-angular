@@ -9,3 +9,34 @@ query LoginUser($email: String!, $password: String!) {
     dateOfBirth
   }
 }
+
+query findAllSalesByAgentName($agentName: String!) {
+  findAllSalesByAgentName(agentName: $agentName) {
+    id
+    orderDate
+    agentName
+    cx_firstName
+    cx_lastName
+    orderNumber
+    installationDateFormatted
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+    comcastTpvStatus
+    concertOrderId
+    Internet
+    TV
+    Phone
+    HMS
+  }
+}
