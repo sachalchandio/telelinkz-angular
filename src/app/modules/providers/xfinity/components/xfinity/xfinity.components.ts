@@ -7,6 +7,11 @@ import {
   CreateXfinitySaleMutationVariables,
   SaleStatus,
   TpvStatus,
+  UsState,
+  XfinityInternet,
+  XfinityHomePhone,
+  XfinityHomeSecurity,
+  XfinityTv,
 } from 'src/generated/graphqlTypes';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
@@ -55,6 +60,7 @@ export class XfinityComponent {
           return rowData;
         });
         this.dataSource = this.jsonData;
+        console.log(this.dataSource.length);
         this.sendRowsToBackend(this.dataSource);
       }
     };
@@ -63,14 +69,14 @@ export class XfinityComponent {
 
   async sendRowsToBackend(jsonData: any[]): Promise<void> {
     for (const row of jsonData) {
-      const input = this.transformRowToInput(row); // Make sure this returns the correct input structure
       try {
+        const input = this.transformRowToInput(row); // Make sure this returns the correct input structure
         const result = await this.createXfinitySaleGQL
           .mutate(input)
           .toPromise();
         console.log(result?.data?.createXfinitySale); // Access the mutation result here
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error processing row:', row, error);
       }
     }
   }
@@ -84,35 +90,69 @@ export class XfinityComponent {
 
   // Adjust the method signature if needed, based on the actual definitions of your types
   private transformRowToInput(row: any): CreateXfinitySaleMutationVariables {
+    // Assuming `row['Installation Date']` is in the format "Mar 22, 2023"
+    const dateParts = row['Installation Date'].split(' ');
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    const monthIndex = months.indexOf(dateParts[0]) + 1;
+    const day = dateParts[1].replace(',', ''); // Removes comma
+    const year = dateParts[2];
+    const formattedDate = `${year}-${monthIndex
+      .toString()
+      .padStart(2, '0')}-${day.padStart(2, '0')}`;
+
+    // Transform time to 24-hour format as before
+    let [time, modifier] = row['Installation Time'].split(' ');
+    let [hours, minutes] = time.split(':');
+    if (modifier === 'PM' && hours !== '12') {
+      hours = (parseInt(hours, 10) + 12).toString();
+    } else if (modifier === 'AM' && hours === '12') {
+      hours = '00';
+    }
+    const formattedTime = `${hours}:${minutes}:00`; // Converts to HH:MM:SS format
+
     const input: CreateXfinitySaleInput = {
-      orderDate: row['Submission Date'] as string,
-      agentId: row['Agent Name'] as string, // This assumes the agent's ID is directly available; you might need to fetch or translate this
-      cx_firstName: row['First Name'] as string,
-      cx_lastName: row['Last Name'] as string,
-      orderNumber: row['Order Number'] as string,
-      installationDate: row['Installation Date'] as string,
-      installationTime: row['Installation Time'] as string,
+      orderDate: row['Submission Date'] || null,
+      agentId: row['Agent Name'] || null, // This assumes the agent's ID is directly available; you might need to fetch or translate this
+      cx_firstName: row['First Name'] || null,
+      cx_lastName: row['Last Name'] || null,
+      orderNumber: row['Order Number'] || null,
+      installationDate: formattedDate || '1971-01-01',
+      installationTime: formattedTime || '00:00:00',
       installation:
         row['Installation'] === 'Self Install'
           ? SaleStatus.SelfInstallation
           : SaleStatus.ProInstallation,
-      streetAddress: row['Street Address'] as string,
-      streetAddressLine2: row['Street Address Line 2'] || ('' as string), // Provide default value if necessary
-      city: row['City'] as string,
-      state: row['State / Province'],
-      zipcode: row['Postal / Zip Code'] as string,
-      phoneNumber: row['Phone Number'] as string,
+      streetAddress: row['Street Address'] || null,
+      streetAddressLine2: row['Street Address Line 2'] || null, // Provide default value if necessary
+      city: row['City'] || null,
+      state: row['State / Province'] || UsState.Undetermined,
+      zipcode: row['Postal / Zip Code'] || null,
+      phoneNumber: row['Phone Number'] || null,
       phoneNumber_second: '', // Assuming there's no second phone number in your JSON; adjust as necessary
-      socialSecurityNumber: row['Social Security Number'] as string,
-      email: row['Email'] as string,
-      product: row['Product'] as string,
-      packageSold: row['Package Sold'] as string,
-      comcastTpvStatus: row['Comcast TPV Status'].toUpperCase(),
-      concertOrderId: row['Concert Order ID'] as string,
-      Internet: row['Internet'],
-      TV: row['TV'],
-      Phone: row['Phone'],
-      HMS: row['HMS'],
+      socialSecurityNumber: row['Social Security Number'] || null,
+      email: row['Email'] || null,
+      product: row['Product'] || null,
+      packageSold: row['Package Sold'] || null,
+      comcastTpvStatus:
+        row['Comcast TPV Status'].toUpperCase() || TpvStatus.Pending,
+      concertOrderId: row['Concert Order ID'] || null,
+      Internet: row['Internet'] || XfinityInternet.None,
+      TV: row['TV'] || XfinityTv.None,
+      Phone: row['Phone'] || XfinityHomePhone.None,
+      HMS: row['HMS'] || XfinityHomeSecurity.None,
       // Assuming `SaleStatus` is a valid enum or string for the `saleStatus` field in your GraphQL schema
       // saleStatus: row["Sale Status"],
     };
