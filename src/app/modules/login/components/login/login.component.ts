@@ -74,12 +74,10 @@ export class LoginComponent implements OnDestroy {
                     userType: data.loginUser.userType,
                     profileImageURL: data.loginUser.profileImageURL,
                     dateOfBirth: data.loginUser.dateOfBirth,
-                    resume_id: data.loginUser.resume_id,
                   };
                   // Store Certain Data for later use
                   localStorage.setItem('loginData', JSON.stringify(loginData));
                   localStorage.setItem('email', loginData.email || '');
-                  localStorage.setItem('resume_id', loginData.resume_id || '');
                 }
                 //Display a snackbar message and redirect the user
                 this.snackBar.open('Login Successful', 'Close', {

@@ -57,11 +57,10 @@ p {
 .innov8ivs-image {
   width: 50%;
 }
-.innov8ivs-login{
+.innov8ivs-login {
   padding: 56px 0px;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
 }
-
 
 .welcome-heading p {
   font-size: 14px;
@@ -271,7 +270,6 @@ p {
   position: relative;
 }
 .hore-top-developer {
-  background-image: url(../../../../../assets/images/login-form-welcome-section-images.webp);
   width: 82.1%;
   height: 270px;
   display: flex;
@@ -309,47 +307,47 @@ p {
   max-width: 453px;
   margin-top: 25px;
 }
-.hore-top-developer a img{
+.hore-top-developer a img {
   width: unset;
 }
-.welcome-back{
+.welcome-back {
   overflow-y: hidden;
 }
-@media only screen and (max-width: 1600px){
-  .welcome-content{
+@media only screen and (max-width: 1600px) {
+  .welcome-content {
     max-width: 500px;
+  }
 }
-}
-@media only screen and (max-width: 1499px){
-  .innov8ivs-image img{
+@media only screen and (max-width: 1499px) {
+  .innov8ivs-image img {
     height: 100%;
     object-fit: cover;
   }
-  .welcome-content{
+  .welcome-content {
     flex-direction: column;
     row-gap: 20px;
+  }
+  .hore-top-developer a {
+    font-size: 13px;
+  }
+  .hore-top-developer a img {
+    width: 20px;
+    height: 20px;
+  }
 }
-.hore-top-developer a{
-  font-size: 13px;
-}
-.hore-top-developer a img{
-  width: 20px;
-  height: 20px;
-}
-}
-@media only screen and (max-width: 1132px){
-  .all-welcome-back{
+@media only screen and (max-width: 1132px) {
+  .all-welcome-back {
     flex-direction: column;
   }
-  .innov8ivs-login{
+  .innov8ivs-login {
     width: 100%;
   }
-  .innov8ivs-image{
+  .innov8ivs-image {
     display: none;
   }
 }
-@media only screen and (max-width: 767px){
-  .all-form-login{
+@media only screen and (max-width: 767px) {
+  .all-form-login {
     max-width: 80%;
   }
 }

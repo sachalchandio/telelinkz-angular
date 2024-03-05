@@ -1,0 +1,32 @@
+mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
+  createXfinitySale(input: $input) {
+    id
+    orderDate
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+    comcastTpvStatus
+    concertOrderId
+    Internet
+    TV
+    Phone
+    HMS
+  }
+}
