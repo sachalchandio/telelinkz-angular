@@ -8,6 +8,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { XfinityRoutingModule } from './routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { XfinityFilter } from 'src/app/components/standalone/xfinityFilter/xfinity-filter.component';
 
 const COMPONETS = [comp.XfinityComponent];
 
@@ -25,6 +26,7 @@ const COMPONETS = [comp.XfinityComponent];
     CommonModule,
     MatTableModule,
     MatIconModule,
+    XfinityFilter,
   ],
 })
 export class XfinityModule {}

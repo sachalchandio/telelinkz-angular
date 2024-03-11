@@ -143,6 +143,7 @@ export type Query = {
   comments: Array<Comment>;
   currentUser: UserDto;
   findAllSalesByAgentName: Array<XfinitySaleDto>;
+  findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
 };
@@ -153,6 +154,10 @@ export type QueryCommentArgs = {
 
 export type QueryFindAllSalesByAgentNameArgs = {
   agentName: Scalars['String']['input'];
+};
+
+export type QueryFindSalesWithComplexFilterArgs = {
+  filter: XfinitySaleFilterInputDto;
 };
 
 export type QueryGetXfinitySaleByIdArgs = {
@@ -426,6 +431,39 @@ export type XfinitySaleDto = {
   zipcode: Scalars['String']['output'];
 };
 
+export type XfinitySaleFilterInputDto = {
+  HMS?: InputMaybe<XfinityHomeSecurity>;
+  Internet?: InputMaybe<XfinityInternet>;
+  Phone?: InputMaybe<XfinityHomePhone>;
+  TV?: InputMaybe<XfinityTv>;
+  agentName?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  comcastTpvStatus?: InputMaybe<TpvStatus>;
+  concertOrderId?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['String']['input']>;
+  cx_firstName?: InputMaybe<Scalars['String']['input']>;
+  cx_lastName?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  endDate?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  installation?: InputMaybe<SaleStatus>;
+  installationDate?: InputMaybe<Scalars['String']['input']>;
+  installationTime?: InputMaybe<Scalars['String']['input']>;
+  orderDate?: InputMaybe<Scalars['String']['input']>;
+  orderNumber?: InputMaybe<Scalars['String']['input']>;
+  packageSold?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber_second?: InputMaybe<Scalars['String']['input']>;
+  product?: InputMaybe<Scalars['String']['input']>;
+  socialSecurityNumber?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<UsState>;
+  streetAddress?: InputMaybe<Scalars['String']['input']>;
+  streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['String']['input']>;
+  zipcode?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** List of available Xfinity TV packages */
 export enum XfinityTv {
   Choice_10 = 'CHOICE_10',
@@ -532,6 +570,43 @@ export type FindAllSalesByAgentNameQuery = {
     TV: XfinityTv;
     Phone: XfinityHomePhone;
     HMS: XfinityHomeSecurity;
+  }>;
+};
+
+export type FindSalesWithComplexFilterQueryVariables = Exact<{
+  filter: XfinitySaleFilterInputDto;
+}>;
+
+export type FindSalesWithComplexFilterQuery = {
+  __typename?: 'Query';
+  findSalesWithComplexFilter: Array<{
+    __typename?: 'XfinitySaleDTO';
+    id: string;
+    orderDate: any;
+    cx_firstName: string;
+    cx_lastName: string;
+    orderNumber: string;
+    installationDateFormatted: string;
+    installationTime: string;
+    installation: string;
+    streetAddress: string;
+    streetAddressLine2?: string | null;
+    city: string;
+    state: UsState;
+    zipcode: string;
+    phoneNumber: string;
+    phoneNumber_second?: string | null;
+    socialSecurityNumber?: string | null;
+    email: string;
+    product: string;
+    packageSold: string;
+    comcastTpvStatus: TpvStatus;
+    concertOrderId: string;
+    Internet: XfinityInternet;
+    TV: XfinityTv;
+    Phone: XfinityHomePhone;
+    HMS: XfinityHomeSecurity;
+    agentName: string;
   }>;
 };
 
@@ -651,6 +726,52 @@ export class FindAllSalesByAgentNameGQL extends Apollo.Query<
   FindAllSalesByAgentNameQueryVariables
 > {
   override document = FindAllSalesByAgentNameDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const FindSalesWithComplexFilterDocument = gql`
+  query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
+    findSalesWithComplexFilter(filter: $filter) {
+      id
+      orderDate
+      cx_firstName
+      cx_lastName
+      orderNumber
+      installationDateFormatted
+      installationTime
+      installation
+      streetAddress
+      streetAddressLine2
+      city
+      state
+      zipcode
+      phoneNumber
+      phoneNumber_second
+      socialSecurityNumber
+      email
+      product
+      packageSold
+      comcastTpvStatus
+      concertOrderId
+      Internet
+      TV
+      Phone
+      HMS
+      agentName
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class FindSalesWithComplexFilterGQL extends Apollo.Query<
+  FindSalesWithComplexFilterQuery,
+  FindSalesWithComplexFilterQueryVariables
+> {
+  override document = FindSalesWithComplexFilterDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

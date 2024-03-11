@@ -40,3 +40,34 @@ query findAllSalesByAgentName($agentName: String!) {
     HMS
   }
 }
+
+query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
+  findSalesWithComplexFilter(filter: $filter) {
+    id
+    orderDate
+    cx_firstName
+    cx_lastName
+    orderNumber
+    installationDateFormatted
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+    comcastTpvStatus
+    concertOrderId
+    Internet
+    TV
+    Phone
+    HMS
+    agentName
+  }
+}

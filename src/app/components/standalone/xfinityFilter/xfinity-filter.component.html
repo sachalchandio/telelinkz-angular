@@ -1,0 +1,205 @@
+<form
+  [formGroup]="filterForm"
+  (ngSubmit)="onFilterSubmit()"
+  class="filter-form"
+>
+  <div class="form-group">
+    <label for="id">ID</label>
+    <input formControlName="id" placeholder="ID" />
+  </div>
+
+  <div class="form-group">
+    <label for="createdAt">createdAt</label>
+    <input formControlName="createdAt" placeholder="Created At" type="date" />
+  </div>
+
+  <div class="form-group">
+    <label for="updatedAt">updatedAt</label>
+    <input formControlName="updatedAt" placeholder="Updated At" type="date" />
+  </div>
+
+  <div class="form-group">
+    <label for="startDate">startDate</label>
+    <input formControlName="startDate" placeholder="Start Date" type="date" />
+  </div>
+
+  <div class="form-group">
+    <label for="endDate">endDate</label>
+    <input formControlName="endDate" placeholder="End Date" type="date" />
+  </div>
+
+  <div class="form-group">
+    <label for="orderDate">orderDate</label>
+    <input formControlName="orderDate" placeholder="Order Date" type="date" />
+  </div>
+
+  <div class="form-group">
+    <label for="cx_firstName">cx_firstName</label>
+    <input formControlName="cx_firstName" placeholder="Customer First Name" />
+  </div>
+
+  <div class="form-group">
+    <label for="cx_lastName">cx_lastName</label>
+    <input formControlName="cx_lastName" placeholder="Customer Last Name" />
+  </div>
+
+  <div class="form-group">
+    <label for="orderNumber">orderNumber</label>
+    <input formControlName="orderNumber" placeholder="Order Number" />
+  </div>
+
+  <div class="form-group">
+    <label for="installationDate">installationDate</label>
+    <input
+      formControlName="installationDate"
+      placeholder="Installation Date"
+      type="date"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="installationTime">installationTime</label>
+    <input formControlName="installationTime" placeholder="Installation Time" />
+  </div>
+
+  <div class="form-group">
+    <label for="installation">installation</label>
+    <select formControlName="installation">
+      <option value="">Select Installation Status</option>
+      <option *ngFor="let status of saleStatuses" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="streetAddress">streetAddress</label>
+    <input formControlName="streetAddress" placeholder="Street Address" />
+  </div>
+
+  <div class="form-group">
+    <label for="streetAddressLine2">streetAddressLine2</label>
+    <input
+      formControlName="streetAddressLine2"
+      placeholder="Street Address Line 2"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="city">city</label>
+    <input formControlName="city" placeholder="City" />
+  </div>
+
+  <div class="form-group">
+    <label for="state">state</label>
+    <select formControlName="state">
+      <option value="">Select State</option>
+      <option *ngFor="let state of USStates" [value]="state">
+        {{ state }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="zipcode">zipcode</label>
+    <input formControlName="zipcode" placeholder="Zipcode" />
+  </div>
+
+  <div class="form-group">
+    <label for="phoneNumber">phoneNumber</label>
+    <input formControlName="phoneNumber" placeholder="Phone Number" />
+  </div>
+
+  <div class="form-group">
+    <label for="phoneNumber_second">phoneNumber_second</label>
+    <input
+      formControlName="phoneNumber_second"
+      placeholder="Second Phone Number"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="socialSecurityNumber">socialSecurityNumber</label>
+    <input
+      formControlName="socialSecurityNumber"
+      placeholder="Social Security Number"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">email</label>
+    <input formControlName="email" placeholder="Email" />
+  </div>
+
+  <div class="form-group">
+    <label for="product">product</label>
+    <input formControlName="product" placeholder="Product" />
+  </div>
+
+  <div class="form-group">
+    <label for="packageSold">packageSold</label>
+    <input formControlName="packageSold" placeholder="Package Sold" />
+  </div>
+
+  <div class="form-group">
+    <label for="comcastTpvStatus">comcastTpvStatus</label>
+    <select formControlName="comcastTpvStatus">
+      <option value="">Select TPV Status</option>
+      <option *ngFor="let status of TpvStatuses" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="concertOrderId">concertOrderId</label>
+    <input formControlName="concertOrderId" placeholder="Concert Order ID" />
+  </div>
+
+  <div class="form-group">
+    <label for="Internet">Internet</label>
+    <select formControlName="Internet">
+      <option value="">Select Internet Package</option>
+      <option *ngFor="let package of InternetPackages" [value]="package">
+        {{ package }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="TV">TV</label>
+    <select formControlName="TV">
+      <option value="">Select TV Package</option>
+      <option *ngFor="let tv of TVPackages" [value]="tv">
+        {{ tv }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="Phone">Phone</label>
+    <select formControlName="Phone">
+      <option value="">Select Phone Option</option>
+      <option *ngFor="let phone of PhonePackages" [value]="phone">
+        {{ phone }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="HMS">HMS</label>
+    <select formControlName="HMS">
+      <option value="">Select Home Security Option</option>
+      <option *ngFor="let hms of HMSPackages" [value]="hms">
+        {{ hms }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="agentName">agentName</label>
+    <input formControlName="agentName" placeholder="Agent Name" />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
