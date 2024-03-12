@@ -144,6 +144,7 @@ export type Query = {
   currentUser: UserDto;
   findAllSalesByAgentName: Array<XfinitySaleDto>;
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
+  getAllAgents: Array<UserDto>;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
 };
@@ -536,6 +537,13 @@ export type LoginUserQuery = {
   };
 };
 
+export type GetAllAgentsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllAgentsQuery = {
+  __typename?: 'Query';
+  getAllAgents: Array<{ __typename?: 'UserDto'; id: string; name: string }>;
+};
+
 export type FindAllSalesByAgentNameQueryVariables = Exact<{
   agentName: Scalars['String']['input'];
 }>;
@@ -680,6 +688,28 @@ export class LoginUserGQL extends Apollo.Query<
   LoginUserQueryVariables
 > {
   override document = LoginUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const GetAllAgentsDocument = gql`
+  query GetAllAgents {
+    getAllAgents {
+      id
+      name
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class GetAllAgentsGQL extends Apollo.Query<
+  GetAllAgentsQuery,
+  GetAllAgentsQueryVariables
+> {
+  override document = GetAllAgentsDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

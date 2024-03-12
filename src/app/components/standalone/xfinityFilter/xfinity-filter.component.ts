@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -17,9 +17,11 @@ import {
   TpvStatus,
   UsState,
   SaleStatus,
+  GetAllAgentsGQL,
 } from 'src/generated/graphqlTypes';
+import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 
-interface TableData {
+export interface TableData {
   [key: string]: string | number;
 }
 
@@ -30,7 +32,8 @@ interface TableData {
   templateUrl: './xfinity-filter.component.html',
   styleUrls: ['./xfinity-filter.component.css'],
 })
-export class XfinityFilter {
+export class XfinityFilter implements OnInit {
+  agentNames: string[] = [];
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   displayedColumns: string[] = []; // Adjust based on your data
@@ -54,7 +57,7 @@ export class XfinityFilter {
     orderNumber: new FormControl(''),
     installationDate: new FormControl(''),
     installationTime: new FormControl(''),
-    installation: new FormControl(SaleStatus.Complete),
+    installation: new FormControl(SaleStatus.Undetermined),
     streetAddress: new FormControl(''),
     streetAddressLine2: new FormControl(''),
     city: new FormControl(''),
@@ -77,8 +80,25 @@ export class XfinityFilter {
 
   constructor(
     // private apollo: Apollo,
-    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL
+    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL,
+    private xfinityDataService: XfinitySharedDataService,
+    private getAllAgentsGQL: GetAllAgentsGQL
   ) {}
+
+  ngOnInit(): void {
+    this.getAgentNames();
+  }
+
+  getAgentNames(): void {
+    this.getAllAgentsGQL.watch().valueChanges.subscribe({
+      next: (response) => {
+        this.agentNames = response.data.getAllAgents.map(({ name }) => name);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   onFilterSubmit(): void {
     if (this.filterForm.valid) {
@@ -145,9 +165,15 @@ export class XfinityFilter {
             }));
           // Assuming you have a way to set this transformed data to your table's dataSource.
           this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
+          // Save the dataSoruce in service to share it with display component for excel view
+          this.xfinityDataService.updateData(this.dataSource);
           console.log(transformedData);
           if (transformedData.length > 0) {
             this.displayedColumns = Object.keys(transformedData[0]);
+            // Save the dataSoruce in service to share it with display component for excel view
+            this.xfinityDataService.updateDisplayedColumns(
+              this.displayedColumns
+            );
           }
         },
         error: (error) => {

@@ -15,9 +15,10 @@ import {
   FindAllSalesByAgentNameGQL,
   FindAllSalesByAgentNameQuery,
   XfinitySaleDto,
+  GetAllAgentsGQL,
 } from 'src/generated/graphqlTypes';
-import { Apollo } from 'apollo-angular';
 import { FormGroup, FormControl } from '@angular/forms';
+import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 
 interface TableData {
   [key: string]: string | number;
@@ -29,6 +30,7 @@ interface TableData {
   styleUrls: ['./xfinity.component.css'],
 })
 export class XfinityComponent {
+  agentNames: string[] = [];
   fetched_sales: XfinitySaleDto[] = [];
   sales: FindAllSalesByAgentNameQuery['findAllSalesByAgentName'] = [];
   jsonData: TableData[] = [];
@@ -42,8 +44,19 @@ export class XfinityComponent {
     private dialog: MatDialog,
     private createXfinitySaleGQL: CreateXfinitySaleGQL,
     private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
-    private apollo: Apollo
+    private getAllAgentsGQL: GetAllAgentsGQL,
+    private sharedDataService: XfinitySharedDataService
   ) {}
+
+  ngOnInit(): void {
+    this.sharedDataService.currentDisplayedColumns.subscribe((columns) => {
+      this.displayedColumns = columns;
+    });
+
+    this.sharedDataService.currentData.subscribe((data) => {
+      this.dataSource = data;
+    });
+  }
 
   onNameSubmit(): void {
     // Logic to handle form submission

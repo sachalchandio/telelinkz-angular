@@ -10,6 +10,13 @@ query LoginUser($email: String!, $password: String!) {
   }
 }
 
+query GetAllAgents {
+  getAllAgents {
+    id
+    name
+  }
+}
+
 query findAllSalesByAgentName($agentName: String!) {
   findAllSalesByAgentName(agentName: $agentName) {
     id

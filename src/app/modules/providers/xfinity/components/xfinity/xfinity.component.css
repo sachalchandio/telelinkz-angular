@@ -2,6 +2,14 @@ main {
   margin-left: 30px;
 }
 
+.table-container {
+  width: 80vw; /* or any specific width */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Ensure the container does not overflow its parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 500px; /* Example fixed height */
+}
+
 table {
   width: 100%;
 }

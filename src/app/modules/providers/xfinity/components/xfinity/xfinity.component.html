@@ -11,16 +11,16 @@
 
   <xfinity-filter-form></xfinity-filter-form>
 
-  <form [formGroup]="searchForm" (ngSubmit)="onNameSubmit()">
+  <!-- <form [formGroup]="searchForm" (ngSubmit)="onNameSubmit()">
     <input
       type="text"
       formControlName="nameInput"
       placeholder="Search here..."
     />
     <button type="submit">Search</button>
-  </form>
+  </form> -->
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8 table-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container
         *ngFor="let column of displayedColumns"

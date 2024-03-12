@@ -59,17 +59,7 @@
 
   <div class="form-group">
     <label for="installationTime">installationTime</label>
-    <input formControlName="installationTime" placeholder="Installation Time" />
-  </div>
-
-  <div class="form-group">
-    <label for="installation">installation</label>
-    <select formControlName="installation">
-      <option value="">Select Installation Status</option>
-      <option *ngFor="let status of saleStatuses" [value]="status">
-        {{ status }}
-      </option>
-    </select>
+    <input formControlName="installationTime" placeholder="08:00:00" />
   </div>
 
   <div class="form-group">
@@ -88,16 +78,6 @@
   <div class="form-group">
     <label for="city">city</label>
     <input formControlName="city" placeholder="City" />
-  </div>
-
-  <div class="form-group">
-    <label for="state">state</label>
-    <select formControlName="state">
-      <option value="">Select State</option>
-      <option *ngFor="let state of USStates" [value]="state">
-        {{ state }}
-      </option>
-    </select>
   </div>
 
   <div class="form-group">
@@ -142,6 +122,31 @@
   </div>
 
   <div class="form-group">
+    <label for="concertOrderId">concertOrderId</label>
+    <input formControlName="concertOrderId" placeholder="Concert Order ID" />
+  </div>
+
+  <div class="form-group">
+    <label for="installation">installation</label>
+    <select formControlName="installation">
+      <option value="">Select Installation Status</option>
+      <option *ngFor="let status of saleStatuses" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="state">state</label>
+    <select formControlName="state">
+      <option value="">Select State</option>
+      <option *ngFor="let state of USStates" [value]="state">
+        {{ state }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="comcastTpvStatus">comcastTpvStatus</label>
     <select formControlName="comcastTpvStatus">
       <option value="">Select TPV Status</option>
@@ -149,11 +154,6 @@
         {{ status }}
       </option>
     </select>
-  </div>
-
-  <div class="form-group">
-    <label for="concertOrderId">concertOrderId</label>
-    <input formControlName="concertOrderId" placeholder="Concert Order ID" />
   </div>
 
   <div class="form-group">
@@ -196,9 +196,19 @@
     </select>
   </div>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="agentName">agentName</label>
     <input formControlName="agentName" placeholder="Agent Name" />
+  </div> -->
+
+  <div class="form-group">
+    <label for="agentName">agentName</label>
+    <select formControlName="agentName">
+      <option value="">Select an Agent</option>
+      <option *ngFor="let name of agentNames" [value]="name">
+        {{ name }}
+      </option>
+    </select>
   </div>
 
   <button type="submit">Submit</button>
