@@ -1,5 +1,9 @@
 main {
   margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .table-container {
@@ -19,10 +23,10 @@ td.mat-cell {
   padding: 8px;
 }
 
-.mat-elevation-z8 {
+/* .mat-elevation-z8 {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
+} */
 
 .fileInput {
   height: 150px;
