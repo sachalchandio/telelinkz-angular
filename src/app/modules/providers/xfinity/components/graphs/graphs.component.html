@@ -1,0 +1,23 @@
+<div class="graphs">
+  <div style="text-align: center">
+    <h1>Enter a Year</h1>
+    <form [formGroup]="yearForm" (ngSubmit)="onYearSubmit()">
+      <input type="number" formControlName="year" placeholder="Enter year" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div>
+    <h1>Internet Package Distribution</h1>
+    <canvas
+      width
+      *ngIf="chartData && chartData.datasets.length > 0"
+      #canvasInternetYearly
+      baseChart
+      [data]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="chartType"
+    ></canvas>
+  </div>
+</div>

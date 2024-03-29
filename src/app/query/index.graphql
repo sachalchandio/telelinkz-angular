@@ -17,6 +17,13 @@ query GetAllAgents {
   }
 }
 
+query GetXfinitySalesDataByYear($query: XfinitySalesByYearInput!) {
+  getXfinitySalesDataByYear(query: $query) {
+    label
+    data
+  }
+}
+
 query findAllSalesByAgentName($agentName: String!) {
   findAllSalesByAgentName(agentName: $agentName) {
     id

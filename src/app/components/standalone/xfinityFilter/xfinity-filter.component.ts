@@ -7,7 +7,6 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import {
-  XfinitySaleDto,
   XfinitySaleFilterInputDto,
   FindSalesWithComplexFilterGQL,
   XfinityHomeSecurity,

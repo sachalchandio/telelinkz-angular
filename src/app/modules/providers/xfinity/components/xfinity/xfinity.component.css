@@ -42,3 +42,48 @@ td.mat-cell {
   flex-direction: row;
   column-gap: 10px;
 }
+
+.entry-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dashboard-button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Professional font */
+  font-size: 16px;
+  color: white; /* Text color */
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  background-image: linear-gradient(
+    to right,
+    #6a11cb 0%,
+    #2575fc 100%
+  ); /* Sophisticated gradient */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  margin: 10px; /* Space between buttons */
+}
+
+.dashboard-button:hover {
+  background-image: linear-gradient(
+    to right,
+    #2575fc 0%,
+    #6a11cb 100%
+  ); /* Inverted gradient on hover */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Increased shadow for hover */
+}
+
+.dashboard-button.filters::before {
+  content: "\f0b0"; /* Example content code for a filter icon */
+  font-family: FontAwesome; /* Assuming use of FontAwesome for icons */
+  margin-right: 10px;
+}
+
+.dashboard-button.graphs::before {
+  content: "\f201"; /* Example content code for a graphs icon */
+  font-family: FontAwesome;
+  margin-right: 10px;
+}

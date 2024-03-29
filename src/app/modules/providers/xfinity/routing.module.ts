@@ -6,6 +6,16 @@ const routes: Routes = [
   {
     path: '',
     component: comp.XfinityComponent,
+    children: [
+      // {
+      //   path: '',
+      //   component: comp.ChildComponent0,
+      // },
+      {
+        path: 'graphs',
+        component: comp.GraphsComponent,
+      },
+    ],
   },
 ];
 

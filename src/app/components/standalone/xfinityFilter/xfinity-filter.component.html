@@ -9,47 +9,47 @@
   </div>
 
   <div class="form-group">
-    <label for="createdAt">createdAt</label>
+    <label for="createdAt">Created At</label>
     <input formControlName="createdAt" placeholder="Created At" type="date" />
   </div>
 
   <div class="form-group">
-    <label for="updatedAt">updatedAt</label>
+    <label for="updatedAt">Updated At</label>
     <input formControlName="updatedAt" placeholder="Updated At" type="date" />
   </div>
 
   <div class="form-group">
-    <label for="startDate">startDate</label>
+    <label for="startDate">Start Date</label>
     <input formControlName="startDate" placeholder="Start Date" type="date" />
   </div>
 
   <div class="form-group">
-    <label for="endDate">endDate</label>
+    <label for="endDate">End Date</label>
     <input formControlName="endDate" placeholder="End Date" type="date" />
   </div>
 
   <div class="form-group">
-    <label for="orderDate">orderDate</label>
+    <label for="orderDate">Order Date</label>
     <input formControlName="orderDate" placeholder="Order Date" type="date" />
   </div>
 
   <div class="form-group">
-    <label for="cx_firstName">cx_firstName</label>
+    <label for="cx_firstName">Customer First Name</label>
     <input formControlName="cx_firstName" placeholder="Customer First Name" />
   </div>
 
   <div class="form-group">
-    <label for="cx_lastName">cx_lastName</label>
+    <label for="cx_lastName">Customer Last Name</label>
     <input formControlName="cx_lastName" placeholder="Customer Last Name" />
   </div>
 
   <div class="form-group">
-    <label for="orderNumber">orderNumber</label>
+    <label for="orderNumber">Order Number</label>
     <input formControlName="orderNumber" placeholder="Order Number" />
   </div>
 
   <div class="form-group">
-    <label for="installationDate">installationDate</label>
+    <label for="installationDate">Installation Date</label>
     <input
       formControlName="installationDate"
       placeholder="Installation Date"
@@ -58,17 +58,17 @@
   </div>
 
   <div class="form-group">
-    <label for="installationTime">installationTime</label>
+    <label for="installationTime">Installation Time</label>
     <input formControlName="installationTime" placeholder="08:00:00" />
   </div>
 
   <div class="form-group">
-    <label for="streetAddress">streetAddress</label>
+    <label for="streetAddress">Street Address</label>
     <input formControlName="streetAddress" placeholder="Street Address" />
   </div>
 
   <div class="form-group">
-    <label for="streetAddressLine2">streetAddressLine2</label>
+    <label for="streetAddressLine2">Street Address Line 2</label>
     <input
       formControlName="streetAddressLine2"
       placeholder="Street Address Line 2"
@@ -76,22 +76,22 @@
   </div>
 
   <div class="form-group">
-    <label for="city">city</label>
+    <label for="city">City</label>
     <input formControlName="city" placeholder="City" />
   </div>
 
   <div class="form-group">
-    <label for="zipcode">zipcode</label>
+    <label for="zipcode">Zipcode</label>
     <input formControlName="zipcode" placeholder="Zipcode" />
   </div>
 
   <div class="form-group">
-    <label for="phoneNumber">phoneNumber</label>
+    <label for="phoneNumber">PhoneNumber</label>
     <input formControlName="phoneNumber" placeholder="Phone Number" />
   </div>
 
   <div class="form-group">
-    <label for="phoneNumber_second">phoneNumber_second</label>
+    <label for="phoneNumber_second">Secondary Phone Number</label>
     <input
       formControlName="phoneNumber_second"
       placeholder="Second Phone Number"
@@ -99,7 +99,7 @@
   </div>
 
   <div class="form-group">
-    <label for="socialSecurityNumber">socialSecurityNumber</label>
+    <label for="socialSecurityNumber">Social Security Number</label>
     <input
       formControlName="socialSecurityNumber"
       placeholder="Social Security Number"
@@ -107,27 +107,27 @@
   </div>
 
   <div class="form-group">
-    <label for="email">email</label>
+    <label for="email">Email</label>
     <input formControlName="email" placeholder="Email" />
   </div>
 
   <div class="form-group">
-    <label for="product">product</label>
+    <label for="product">Product</label>
     <input formControlName="product" placeholder="Product" />
   </div>
 
   <div class="form-group">
-    <label for="packageSold">packageSold</label>
+    <label for="packageSold">Package Sold</label>
     <input formControlName="packageSold" placeholder="Package Sold" />
   </div>
 
   <div class="form-group">
-    <label for="concertOrderId">concertOrderId</label>
+    <label for="concertOrderId">Concert Order ID</label>
     <input formControlName="concertOrderId" placeholder="Concert Order ID" />
   </div>
 
   <div class="form-group">
-    <label for="installation">installation</label>
+    <label for="installation">Installation</label>
     <select formControlName="installation">
       <option value="">Select Installation Status</option>
       <option *ngFor="let status of saleStatuses" [value]="status">
@@ -137,7 +137,7 @@
   </div>
 
   <div class="form-group">
-    <label for="state">state</label>
+    <label for="state">State</label>
     <select formControlName="state">
       <option value="">Select State</option>
       <option *ngFor="let state of USStates" [value]="state">
@@ -147,7 +147,7 @@
   </div>
 
   <div class="form-group">
-    <label for="comcastTpvStatus">comcastTpvStatus</label>
+    <label for="comcastTpvStatus">Comcast TPV Status</label>
     <select formControlName="comcastTpvStatus">
       <option value="">Select TPV Status</option>
       <option *ngFor="let status of TpvStatuses" [value]="status">
@@ -187,7 +187,7 @@
   </div>
 
   <div class="form-group">
-    <label for="HMS">HMS</label>
+    <label for="HMS">Home Security</label>
     <select formControlName="HMS">
       <option value="">Select Home Security Option</option>
       <option *ngFor="let hms of HMSPackages" [value]="hms">
@@ -202,7 +202,7 @@
   </div> -->
 
   <div class="form-group">
-    <label for="agentName">agentName</label>
+    <label for="agentName">Sales Agent Name</label>
     <select formControlName="agentName">
       <option value="">Select an Agent</option>
       <option *ngFor="let name of agentNames" [value]="name">

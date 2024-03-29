@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as XLSX from 'xlsx';
 import {
@@ -19,6 +19,7 @@ import {
 } from 'src/generated/graphqlTypes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
+import { Chart } from 'chart.js';
 
 interface TableData {
   [key: string]: string | number;

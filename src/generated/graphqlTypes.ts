@@ -146,6 +146,7 @@ export type Query = {
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getAllAgents: Array<UserDto>;
   getXfinitySaleById: XfinitySale;
+  getXfinitySalesDataByYear: Array<XfinitySalesByYear>;
   loginUser: LoginUserResponse;
 };
 
@@ -163,6 +164,10 @@ export type QueryFindSalesWithComplexFilterArgs = {
 
 export type QueryGetXfinitySaleByIdArgs = {
   id: Scalars['String']['input'];
+};
+
+export type QueryGetXfinitySalesDataByYearArgs = {
+  query: XfinitySalesByYearInput;
 };
 
 export type QueryLoginUserArgs = {
@@ -465,6 +470,16 @@ export type XfinitySaleFilterInputDto = {
   zipcode?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type XfinitySalesByYear = {
+  __typename?: 'XfinitySalesByYear';
+  data: Array<Scalars['Int']['output']>;
+  label: Scalars['String']['output'];
+};
+
+export type XfinitySalesByYearInput = {
+  year: Scalars['Int']['input'];
+};
+
 /** List of available Xfinity TV packages */
 export enum XfinityTv {
   Choice_10 = 'CHOICE_10',
@@ -542,6 +557,19 @@ export type GetAllAgentsQueryVariables = Exact<{ [key: string]: never }>;
 export type GetAllAgentsQuery = {
   __typename?: 'Query';
   getAllAgents: Array<{ __typename?: 'UserDto'; id: string; name: string }>;
+};
+
+export type GetXfinitySalesDataByYearQueryVariables = Exact<{
+  query: XfinitySalesByYearInput;
+}>;
+
+export type GetXfinitySalesDataByYearQuery = {
+  __typename?: 'Query';
+  getXfinitySalesDataByYear: Array<{
+    __typename?: 'XfinitySalesByYear';
+    label: string;
+    data: Array<number>;
+  }>;
 };
 
 export type FindAllSalesByAgentNameQueryVariables = Exact<{
@@ -710,6 +738,28 @@ export class GetAllAgentsGQL extends Apollo.Query<
   GetAllAgentsQueryVariables
 > {
   override document = GetAllAgentsDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const GetXfinitySalesDataByYearDocument = gql`
+  query GetXfinitySalesDataByYear($query: XfinitySalesByYearInput!) {
+    getXfinitySalesDataByYear(query: $query) {
+      label
+      data
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class GetXfinitySalesDataByYearGQL extends Apollo.Query<
+  GetXfinitySalesDataByYearQuery,
+  GetXfinitySalesDataByYearQueryVariables
+> {
+  override document = GetXfinitySalesDataByYearDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

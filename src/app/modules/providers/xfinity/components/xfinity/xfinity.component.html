@@ -1,4 +1,30 @@
 <main>
+  <div class="entry-buttons">
+    <!-- Filters Button -->
+    <a href="/xfinity" class="dashboard-button filters">
+      <i class="icon-filter"></i>
+      <span>Filters</span>
+    </a>
+
+    <!-- Graphs Button -->
+    <a href="/xfinity/graphs" class="dashboard-button graphs">
+      <i class="icon-graph"></i>
+      <span>Graphs</span>
+    </a>
+
+    <!-- New Sale Button -->
+    <a href="/xfinity/new-interaction" class="dashboard-button graphs">
+      <i class="icon-new-sale"></i>
+      <span>New Sale</span>
+    </a>
+
+    <!-- Add File Data File -->
+    <a href="/xfinity/new-file" class="dashboard-button graphs">
+      <i class="icon-new-sale"></i>
+      <span>New Data File</span>
+    </a>
+  </div>
+
   <div class="fileInput">
     <div class="fileInputDescription">
       <mat-icon>folder</mat-icon>
@@ -9,6 +35,7 @@
     </div>
   </div>
 
+  <xfinity-graphs></xfinity-graphs>
   <xfinity-filter-form></xfinity-filter-form>
 
   <!-- <form [formGroup]="searchForm" (ngSubmit)="onNameSubmit()">
