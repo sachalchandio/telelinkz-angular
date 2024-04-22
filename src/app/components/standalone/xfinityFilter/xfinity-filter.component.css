@@ -50,3 +50,7 @@ button[type="submit"]:hover {
   height: 34px;
   width: 66px;
 }
+
+.table-container {
+  overflow-x: scroll; /* Enables horizontal scrolling */
+}

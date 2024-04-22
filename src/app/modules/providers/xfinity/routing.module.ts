@@ -7,10 +7,10 @@ const routes: Routes = [
     path: '',
     component: comp.XfinityComponent,
     children: [
-      // {
-      //   path: '',
-      //   component: comp.ChildComponent0,
-      // },
+      {
+        path: 'filters',
+        component: comp.XfinityFilter,
+      },
       {
         path: 'graphs',
         component: comp.GraphsComponent,

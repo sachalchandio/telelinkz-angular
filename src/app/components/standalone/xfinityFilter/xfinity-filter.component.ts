@@ -19,6 +19,7 @@ import {
   GetAllAgentsGQL,
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
+import { MatTableModule } from '@angular/material/table';
 
 export interface TableData {
   [key: string]: string | number;
@@ -27,7 +28,7 @@ export interface TableData {
 @Component({
   standalone: true,
   selector: 'xfinity-filter-form',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatTableModule],
   templateUrl: './xfinity-filter.component.html',
   styleUrls: ['./xfinity-filter.component.css'],
 })

@@ -59,12 +59,12 @@ export class XfinityComponent {
     });
   }
 
-  onNameSubmit(): void {
-    // Logic to handle form submission
-    if (this.searchForm.value.nameInput) {
-      this.getSalesByAgentName(this.searchForm.value.nameInput);
-    }
-  }
+  // onNameSubmit(): void {
+  //   // Logic to handle form submission
+  //   if (this.searchForm.value.nameInput) {
+  //     this.getSalesByAgentName(this.searchForm.value.nameInput);
+  //   }
+  // }
 
   getSalesByAgentName(agentName: string): void {
     this.findAllSalesByAgentNameGQL
