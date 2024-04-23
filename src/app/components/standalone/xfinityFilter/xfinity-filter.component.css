@@ -13,11 +13,18 @@
 .form-group {
   margin-bottom: 20px;
   width: 25%;
+  position: relative;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  font-size: 10px;
+  position: absolute;
+  top: -7px;
+  left: 11px;
+  background-color: #fff;
+  padding: 0 5px;
 }
 
 .form-group input,
@@ -26,6 +33,8 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 10px;
+  color: #757575;
 }
 
 .form-group select {
@@ -39,6 +48,8 @@ button[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 21px;
+  margin-left: auto;
 }
 
 button[type="submit"]:hover {
