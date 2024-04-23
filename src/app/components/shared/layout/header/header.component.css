@@ -1,7 +1,10 @@
+.left_side_header{
+  height: 99vh;
+  overflow: hidden;
+}
 .sidenav-container {
   height: 75vh;
 }
-
 mat-sidenav {
   width: 250px;
 }
@@ -13,6 +16,11 @@ mat-sidenav {
   justify-content: center;
 }
 .topLogo img {
-  width: 200px;
+  width: 132px;
   height: auto;
+}
+span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
+  align-items: center;
+  display: flex;
+  gap: 10px;
 }
