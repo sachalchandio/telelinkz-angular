@@ -1,1 +1,1 @@
-export * from './xfinity/xfinity.components';
+export * from './xfinity/xfinity.component';
