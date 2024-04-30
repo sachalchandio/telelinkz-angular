@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: comp.XfinityComponent,
   },
+  {
+    path: 'filter',
+    component: comp.RecordSearch,
+  },
 ];
 
 @NgModule({
