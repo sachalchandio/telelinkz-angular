@@ -7,31 +7,91 @@
     </div>
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav #sidenav mode="side" opened="true">
-        <mat-toolbar>Telelinkz Sales Portal</mat-toolbar>
+        <mat-toolbar><span class="tlkx">Telelinkz </span> <span class="slp"> Sales Portal</span></mat-toolbar>
         <mat-nav-list>
           <mat-list-item (click)="toggleProviders()">
+           <span class="toggle_inner_flex">
             <mat-icon>wifi</mat-icon>
             <span>Internet Providers</span>
             <mat-icon>chevron_right</mat-icon>
+           </span>
           </mat-list-item>
           <div *ngIf="providersOpen">
             <mat-nav-list>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
-              <a mat-list-item routerLink="/xfinity">Xfinity</a>
-              <a mat-list-item href="#">Cox</a>
+              <a  class="nav-link active" mat-list-item routerLink="/xfinity">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/Xfinity-Logo.png"/>
+                   <span class="navlink_txt">Xfinity</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/att-emblem.png"/>
+                   <span class="navlink_txt atat">atnt</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/comcast.jpg"/>
+                   <span class="navlink_txt comcast">Comcast</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/consolidated.png"/>
+                   <span class="navlink_txt consulated">Consolidated</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/cropped-Asset.png"/>
+                   <span class="navlink_txt brightspeed">Brightspeed</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/frontier-communications.png"/>
+                   <span class="navlink_txt frontier">Frontier</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/erthlink.png"/>
+                   <span class="navlink_txt erthlink">Earthlink</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/kinetic-by-windstream.png"/>
+                   <span class="navlink_txt kinetic">kinetic</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/hughesnet.png"/>
+                   <span class="navlink_txt hughesnet">hughesnet</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/metronet.png"/>
+                   <span class="navlink_txt metronet">metronet</span>
+                </span>
+              </a>
+              <a class="nav-link"mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/optimum.png"/>
+                   <span class="navlink_txt optimum">optimum</span>
+                </span>
+              </a>
+              <a class="nav-link" mat-list-item href="#">
+                <span class="test_wraper">
+                  <img src="../../../../../assets/images/spectrum.png"/>
+                   <span class="navlink_txt spectrum">spectrum</span>
+                </span>
+              </a>
+             
               <!-- Add more providers as needed -->
             </mat-nav-list>
           </div>

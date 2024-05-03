@@ -6,7 +6,7 @@
 
 /* For the scrollbar itself */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
   height: 10px;
   /* width of the entire scrollbar */
 }
@@ -27,7 +27,7 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #0071f4;
 }
 
 /* Optional: the scrollbar track (background) */

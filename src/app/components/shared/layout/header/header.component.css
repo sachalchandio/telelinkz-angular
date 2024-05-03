@@ -1,6 +1,7 @@
 .left_side_header{
   height: 99vh;
   overflow: hidden;
+  background-color: #fff;
 }
 .sidenav-container {
   height: 75vh;
@@ -8,7 +9,12 @@
 mat-sidenav {
   width: 250px;
 }
-
+.nav-link .mat-mdc-list-item-unscoped-content {
+  display: inline-block;
+}
+img{
+  max-width: 100%;
+}
 .topLogo {
   display: flex;
   flex-direction: row;
@@ -23,4 +29,98 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
   align-items: center;
   display: flex;
   gap: 10px;
+}
+.nav-link{
+  max-width: 185px;
+  margin: 4px 0px 4px 15px;
+  font-size: 18px;
+  padding: 1px 8px;
+}
+.nav-link .mat-mdc-list-item-unscoped-content{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 6px;
+}
+.nav-link img {
+  width: 25px;
+  height: 25px;
+  /* object-fit: cover; */
+  border-radius: 100px;
+}
+
+.active{
+  background-color: #e7eaeb;
+  border-radius: 8px;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  /* padding: 1px 10px; */
+  color: #fff;
+}
+.navlink_txt{
+  display: inline-block;
+  color: #000;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.atat {
+  color: #009cdd ;
+}
+.comcast {
+  color: #f70000;
+}
+.consulated {
+  color: #0057a5;
+}
+.brightspeed {
+  color: #ffc700;
+}
+.erthlink {
+  color: #f08e26;
+}
+.frontier {
+  color: red;
+}
+.kinetic {
+  color: #ff4600;
+}
+.hughesnet {
+  color: #0099fa;
+}
+.metronet {
+  color: #9b4ef1;
+}
+.optimum {
+  color: #ff5900;
+}
+.spectrum {
+  color: #0078bc;
+}
+
+
+
+.test_wraper{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+.toggle_inner_flex {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  font-weight: 600;
+}
+.tlkx {
+  color: #00224a;
+}
+.slp {
+  color: #ffaa00;
+  margin-left: 5px;
+}
+.slp,.tlkx{
+  font-weight: 700;
 }
