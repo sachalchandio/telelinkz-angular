@@ -15,7 +15,15 @@
   width: 25%;
   position: relative;
 }
-
+.form-group i {
+  position: absolute;
+  color: #b9b9b9;
+  font-size: 14px;
+  position: absolute;
+  color: #b9b9b9;
+  top: 10px;
+  left: 9px;
+}
 .form-group label {
   display: block;
   margin-bottom: 5px;
@@ -29,12 +37,19 @@
 
 .form-group input,
 .form-group select {
-  width: 90%;
+  width: 83%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 10px;
   color: #757575;
+  padding-left: 38px;
+}
+.form-group input:focus-visible{
+  border-color: #fff;
+  background-color: #ffac0b;
+  outline: none;
+  color: #ffffff;
 }
 
 .form-group select {
@@ -60,4 +75,21 @@ button[type="submit"]:hover {
   padding: 0;
   height: 34px;
   width: 66px;
+}
+.form-group::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 33px;
+  width: 1px;
+  height: 16px;
+  background: #b5b5b5;
+}
+.form-group input:focus-visible ~ i {
+  color: #fff;
+}
+@media screen and (max-width:1600px) {
+  .form-group input {
+  width: 77%;
+}
 }

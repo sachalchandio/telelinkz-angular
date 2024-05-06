@@ -33,8 +33,9 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
 .nav-link{
   max-width: 185px;
   margin: 4px 0px 4px 15px;
-  font-size: 18px;
+  font-size: 13px;
   padding: 1px 8px;
+  max-height: 40px;
 }
 .nav-link .mat-mdc-list-item-unscoped-content{
   display: flex;
@@ -43,8 +44,8 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
   gap: 6px;
 }
 .nav-link img {
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
   /* object-fit: cover; */
   border-radius: 100px;
 }
@@ -65,7 +66,7 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
   line-height: 1;
   text-transform: uppercase;
 }
-.atat {
+/* .atat {
   color: #009cdd ;
 }
 .comcast {
@@ -98,14 +99,14 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
 .spectrum {
   color: #0078bc;
 }
-
+ */
 
 
 .test_wraper{
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 10px;
+  gap: 6px;
 }
 .toggle_inner_flex {
   display: flex;
