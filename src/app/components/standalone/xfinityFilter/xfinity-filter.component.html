@@ -1,3 +1,11 @@
+<div class="dashboard_inner_header">
+  <div class="dns_inner_img">
+   <img src="../../../../../../assets/images/xfinty_page_logo.png" alt="">
+  </div>
+  <div class="dns_inner_img dsi_half_right">
+    <img src="../../../../../../assets/images/test_subject.png" alt="">
+   </div>
+</div>
 <form
   [formGroup]="filterForm"
   (ngSubmit)="onFilterSubmit()"
@@ -5,197 +13,200 @@
 >
   <div class="form-group">
     <!-- <label for="id">ID</label> -->
-    <i class="material-icons">input</i>
+   
     <input formControlName="id" placeholder="ID" />
+    <i class="material-icons">input</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">calendar_month</i>
     <input formControlName="createdAt" placeholder="Created At" type="date" />
+    <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">calendar_month</i>
     <input formControlName="updatedAt" placeholder="Updated At" type="date" />
+    <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">calendar_month</i>
     <input formControlName="startDate" placeholder="Start Date" type="date" />
+    <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">calendar_month</i>
     <input formControlName="endDate" placeholder="End Date" type="date" />
+    <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">calendar_month</i>
     <input formControlName="orderDate" placeholder="Order Date" type="date" />
-  </div>
-
-  <div class="form-group">
-    <i class="material-icons">person</i>
-    <input formControlName="cx_firstName" placeholder="Customer First Name" />
-  </div>
-
-  <div class="form-group">
-    <i class="material-icons">person</i>
-    <input formControlName="cx_lastName" placeholder="Customer Last Name" />
-  </div>
-
-  <div class="form-group">
-    <i class="material-icons">assignment</i>
-    <input formControlName="orderNumber" placeholder="Order Number" />
-  </div>
-
-  <div class="form-group">
     <i class="material-icons">calendar_month</i>
+  </div>
+
+  <div class="form-group">
+    <input formControlName="cx_firstName" placeholder="Customer First Name" />
+    <i class="material-icons">person</i>
+  </div>
+
+  <div class="form-group">
+    <input formControlName="cx_lastName" placeholder="Customer Last Name" />
+    <i class="material-icons">person</i>
+  </div>
+
+  <div class="form-group">
+    <input formControlName="orderNumber" placeholder="Order Number" />
+    <i class="material-icons">assignment</i>
+  </div>
+
+  <div class="form-group">
     <input
       formControlName="installationDate"
       placeholder="Installation Date"
       type="date"
     />
+    <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">schedule</i>
     <input formControlName="installationTime" placeholder="08:00:00" />
+    <i class="material-icons">schedule</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">location_on</i>
     <input formControlName="streetAddress" placeholder="Street Address" />
+    <i class="material-icons">location_on</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">location_on</i>
     <input
       formControlName="streetAddressLine2"
       placeholder="Street Address Line 2"
     />
+    <i class="material-icons">location_on</i>
   </div>
 
   <div class="form-group">
     <!-- City Icon -->
-    <i class="material-icons">location_city</i>
     <input formControlName="city" placeholder="City" />
+    <i class="material-icons">location_city</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">local_post_office</i>
     <input formControlName="zipcode" placeholder="Zipcode" />
+    <i class="material-icons">local_post_office</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">phone</i>
     <input formControlName="phoneNumber" placeholder="Phone Number" />
+    <i class="material-icons">phone</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">phone</i>
     <input
       formControlName="phoneNumber_second"
       placeholder="Second Phone Number"
     />
+    <i class="material-icons">phone</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">phone</i>
     <input
       formControlName="socialSecurityNumber"
       placeholder="Social Security Number"
     />
+    <i class="material-icons">phone</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">email</i>
     <input formControlName="email" placeholder="Email" />
+    <i class="material-icons">email</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">local_offer</i>
     <input formControlName="product" placeholder="Product" />
+    <i class="material-icons">local_offer</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">done</i>
+    
     <input formControlName="packageSold" placeholder="Package Sold" />
+    <i class="material-icons">done</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">event</i>
     <input formControlName="concertOrderId" placeholder="Concert Order ID" />
+    <i class="material-icons">event</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">build</i>
+    
     <select formControlName="installation">
       <option value="">Select Installation Status</option>
       <option *ngFor="let status of saleStatuses" [value]="status">
         {{ status }}
       </option>
     </select>
+    <i class="material-icons">build</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">info</i>
     <select formControlName="state">
       <option value="">Select State</option>
       <option *ngFor="let state of USStates" [value]="state">
         {{ state }}
       </option>
     </select>
+    <i class="material-icons">info</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">verified</i>
     <select formControlName="comcastTpvStatus">
       <option value="">Select TPV Status</option>
       <option *ngFor="let status of TpvStatuses" [value]="status">
         {{ status }}
       </option>
     </select>
+    <i class="material-icons">verified</i>
   </div>
 
-  <div class="form-group">
-    <i class="material-icons">wifi</i>
+  <div class="form-group">  
     <select formControlName="Internet">
       <option value="">Select Internet Package</option>
       <option *ngFor="let package of InternetPackages" [value]="package">
         {{ package }}
       </option>
     </select>
+    <i class="material-icons">wifi</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">tv</i>
     <select formControlName="TV">
       <option value="">Select TV Package</option>
       <option *ngFor="let tv of TVPackages" [value]="tv">
         {{ tv }}
       </option>
     </select>
+    <i class="material-icons">tv</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">phone</i>
     <select formControlName="Phone">
       <option value="">Select Phone Option</option>
       <option *ngFor="let phone of PhonePackages" [value]="phone">
         {{ phone }}
       </option>
     </select>
+    <i class="material-icons">phone</i>
   </div>
 
   <div class="form-group">
-    <i class="material-icons">phone_android</i>
     <select formControlName="HMS">
       <option value="">Select Home Security Option</option>
       <option *ngFor="let hms of HMSPackages" [value]="hms">
         {{ hms }}
       </option>
     </select>
+    <i class="material-icons">phone_android</i>
   </div>
 
   <!-- <div class="form-group">
@@ -204,13 +215,13 @@
   </div> -->
 
   <div class="form-group">
-    <i class="material-icons">person</i>
     <select formControlName="agentName">
       <option value="">Select an Agent</option>
       <option *ngFor="let name of agentNames" [value]="name">
         {{ name }}
       </option>
     </select>
+    <i class="material-icons">person</i>
   </div>
 
   <button type="submit">Submit</button>

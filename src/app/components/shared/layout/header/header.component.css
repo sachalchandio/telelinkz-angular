@@ -2,9 +2,18 @@
   height: 99vh;
   overflow: hidden;
   background-color: #fff;
+  border-right: 2px solid #e4f2ff;
+}
+.left_side_header *{
+  font-family: "DM Sans", sans-serif !important;
 }
 .sidenav-container {
-  height: 75vh;
+  height: 93vh;
+}
+.drop_angle_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 mat-sidenav {
   width: 250px;
@@ -33,9 +42,11 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
 .nav-link{
   max-width: 185px;
   margin: 4px 0px 4px 15px;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 400;
   padding: 1px 8px;
   max-height: 40px;
+  line-height: 22px;
 }
 .nav-link .mat-mdc-list-item-unscoped-content{
   display: flex;
@@ -51,62 +62,34 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
 }
 
 .active{
-  background-color: #e7eaeb;
+  /* background-color: #e7eaeb; */
   border-radius: 8px;
   height: 40px !important;
   display: flex;
   align-items: center;
   /* padding: 1px 10px; */
-  color: #fff;
+
 }
+/* .nav-link:hover{
+  background: rgb(254 228 178);
+  box-shadow: 0 3px 11px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5008px);
+  -webkit-backdrop-filter: blur(5.5008px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+} */
 .navlink_txt{
   display: inline-block;
-  color: #000;
-  font-weight: 500;
+  color: #191b23;
+  font-weight: 400;
   line-height: 1;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
-/* .atat {
-  color: #009cdd ;
-}
-.comcast {
-  color: #f70000;
-}
-.consulated {
-  color: #0057a5;
-}
-.brightspeed {
-  color: #ffc700;
-}
-.erthlink {
-  color: #f08e26;
-}
-.frontier {
-  color: red;
-}
-.kinetic {
-  color: #ff4600;
-}
-.hughesnet {
-  color: #0099fa;
-}
-.metronet {
-  color: #9b4ef1;
-}
-.optimum {
-  color: #ff5900;
-}
-.spectrum {
-  color: #0078bc;
-}
- */
-
-
 .test_wraper{
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 6px;
+  gap: 10px;
 }
 .toggle_inner_flex {
   display: flex;
@@ -115,13 +98,18 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
   gap: 10px;
   font-weight: 600;
 }
-.tlkx {
-  color: #00224a;
+.nav-outer-link svg {
+  width: 22px;
+  height: 22px;
 }
-.slp {
-  color: #ffaa00;
-  margin-left: 5px;
+.nav-outer-link{
+  font-size: 18px;
+  font-weight: 400;
 }
-.slp,.tlkx{
-  font-weight: 700;
+.saleswizai{
+  max-width: 63%;
+    margin: 0 auto;
+}
+.my_sub_list {
+  padding-left: 25px;
 }
