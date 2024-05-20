@@ -146,6 +146,7 @@ export type Query = {
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getAllAgents: Array<UserDto>;
   getXfinitySaleById: XfinitySale;
+  getXfinitySalesDataByYear: Array<XfinitySalesByYear>;
   loginUser: LoginUserResponse;
 };
 
@@ -163,6 +164,10 @@ export type QueryFindSalesWithComplexFilterArgs = {
 
 export type QueryGetXfinitySaleByIdArgs = {
   id: Scalars['String']['input'];
+};
+
+export type QueryGetXfinitySalesDataByYearArgs = {
+  query: XfinitySalesByYearInput;
 };
 
 export type QueryLoginUserArgs = {
@@ -465,6 +470,16 @@ export type XfinitySaleFilterInputDto = {
   zipcode?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type XfinitySalesByYear = {
+  __typename?: 'XfinitySalesByYear';
+  data: Array<Scalars['Int']['output']>;
+  label: Scalars['String']['output'];
+};
+
+export type XfinitySalesByYearInput = {
+  year: Scalars['Int']['input'];
+};
+
 /** List of available Xfinity TV packages */
 export enum XfinityTv {
   Choice_10 = 'CHOICE_10',
@@ -660,7 +675,7 @@ export class CreateXfinitySaleGQL extends Apollo.Mutation<
   CreateXfinitySaleMutation,
   CreateXfinitySaleMutationVariables
 > {
-  override document = CreateXfinitySaleDocument;
+  document = CreateXfinitySaleDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -687,7 +702,7 @@ export class LoginUserGQL extends Apollo.Query<
   LoginUserQuery,
   LoginUserQueryVariables
 > {
-  override document = LoginUserDocument;
+  document = LoginUserDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -709,7 +724,7 @@ export class GetAllAgentsGQL extends Apollo.Query<
   GetAllAgentsQuery,
   GetAllAgentsQueryVariables
 > {
-  override document = GetAllAgentsDocument;
+  document = GetAllAgentsDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -755,7 +770,7 @@ export class FindAllSalesByAgentNameGQL extends Apollo.Query<
   FindAllSalesByAgentNameQuery,
   FindAllSalesByAgentNameQueryVariables
 > {
-  override document = FindAllSalesByAgentNameDocument;
+  document = FindAllSalesByAgentNameDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -801,7 +816,7 @@ export class FindSalesWithComplexFilterGQL extends Apollo.Query<
   FindSalesWithComplexFilterQuery,
   FindSalesWithComplexFilterQueryVariables
 > {
-  override document = FindSalesWithComplexFilterDocument;
+  document = FindSalesWithComplexFilterDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

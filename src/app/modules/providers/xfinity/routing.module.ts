@@ -8,6 +8,11 @@ const routes: Routes = [
     component: comp.XfinityComponent,
   },
   {
+    path: 'new-sale',
+    component: comp.XfinityNewSale,
+  },
+
+  {
     path: 'filter',
     component: comp.RecordSearch,
   },

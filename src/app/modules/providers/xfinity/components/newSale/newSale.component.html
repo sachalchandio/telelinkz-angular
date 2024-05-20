@@ -1,0 +1,198 @@
+<form (ngSubmit)="onSubmit()" #xfinitySaleForm="ngForm">
+  <label for="agentName">Agent Name</label>
+  <input
+    type="text"
+    id="agentName"
+    required
+    [(ngModel)]="xfinitySaleInput.agentId"
+    name="agentId"
+  />
+
+  <label for="cxFirstName">Customer First Name</label>
+  <input
+    type="text"
+    id="cxFirstName"
+    required
+    [(ngModel)]="xfinitySaleInput.cx_firstName"
+    name="cx_firstName"
+  />
+
+  <label for="cxLastName">Customer Last Name</label>
+  <input
+    type="text"
+    id="cxLastName"
+    required
+    [(ngModel)]="xfinitySaleInput.cx_lastName"
+    name="cx_lastName"
+  />
+
+  <label for="orderNumber">Order Number</label>
+  <input
+    type="text"
+    id="orderNumber"
+    required
+    [(ngModel)]="xfinitySaleInput.orderNumber"
+    name="orderNumber"
+  />
+
+  <label for="concertOrderId">Concert Order ID</label>
+  <input
+    type="text"
+    id="concertOrderId"
+    required
+    [(ngModel)]="xfinitySaleInput.concertOrderId"
+    name="concertOrderId"
+  />
+
+  <label for="installationDate">Installation Date</label>
+  <input
+    type="date"
+    id="installationDate"
+    required
+    [(ngModel)]="xfinitySaleInput.installationDate"
+    name="installationDate"
+  />
+
+  <label for="installationTime">Installation Time</label>
+  <input
+    type="time"
+    id="installationTime"
+    required
+    [(ngModel)]="xfinitySaleInput.installationTime"
+    name="installationTime"
+  />
+
+  <label for="orderDate">Order Date</label>
+  <input
+    type="date"
+    id="orderDate"
+    required
+    [(ngModel)]="xfinitySaleInput.orderDate"
+    name="orderDate"
+  />
+
+  <label for="installation">Installation Type</label>
+  <select
+    id="installation"
+    required
+    [(ngModel)]="xfinitySaleInput.installation"
+    name="installation"
+  >
+    <option *ngFor="let type of installationTypes" [value]="type">
+      {{ type }}
+    </option>
+  </select>
+
+  <label for="streetAddress">Street Address</label>
+  <input
+    type="text"
+    id="streetAddress"
+    required
+    [(ngModel)]="xfinitySaleInput.streetAddress"
+    name="streetAddress"
+  />
+
+  <label for="streetAddressLine2">Street Address Line 2</label>
+  <input
+    type="text"
+    id="streetAddressLine2"
+    [(ngModel)]="xfinitySaleInput.streetAddressLine2"
+    name="streetAddressLine2"
+  />
+
+  <label for="city">City</label>
+  <input
+    type="text"
+    id="city"
+    required
+    [(ngModel)]="xfinitySaleInput.city"
+    name="city"
+  />
+
+  <label for="state">State</label>
+  <select id="state" required [(ngModel)]="xfinitySaleInput.state" name="state">
+    <option *ngFor="let state of states" [value]="state" required>
+      {{ state }}
+    </option>
+  </select>
+
+  <label for="zipcode">Zipcode</label>
+  <input
+    type="text"
+    id="zipcode"
+    required
+    [(ngModel)]="xfinitySaleInput.zipcode"
+    name="zipcode"
+  />
+
+  <label for="phoneNumber">Phone Number</label>
+  <input
+    type="text"
+    id="phoneNumber"
+    required
+    [(ngModel)]="xfinitySaleInput.phoneNumber"
+    name="phoneNumber"
+  />
+
+  <label for="socialSecurityNumber">Social Security Number</label>
+  <input
+    type="text"
+    id="socialSecurityNumber"
+    [(ngModel)]="xfinitySaleInput.socialSecurityNumber"
+    name="socialSecurityNumber"
+    required
+  />
+
+  <label for="email">Email</label>
+  <input
+    type="email"
+    id="email"
+    required
+    [(ngModel)]="xfinitySaleInput.email"
+    name="email"
+    required
+  />
+
+  <label for="internet">Internet Type</label>
+  <select
+    id="internet"
+    required
+    [(ngModel)]="xfinitySaleInput.Internet"
+    name="Internet"
+  >
+    <option *ngFor="let internet of internetTypes" [value]="internet">
+      {{ internet }}
+    </option>
+  </select>
+
+  <label for="tv">TV Type</label>
+  <select id="tv" required [(ngModel)]="xfinitySaleInput.TV" name="TV">
+    <option *ngFor="let tv of tvTypes" [value]="tv">{{ tv }}</option>
+  </select>
+
+  <label for="phone">Phone Type</label>
+  <select id="phone" required [(ngModel)]="xfinitySaleInput.Phone" name="Phone">
+    <option *ngFor="let phone of phoneTypes" [value]="phone">
+      {{ phone }}
+    </option>
+  </select>
+
+  <label for="hms">HMS Type</label>
+  <select id="hms" required [(ngModel)]="xfinitySaleInput.HMS" name="HMS">
+    <option *ngFor="let hms of hmsTypes" [value]="hms">{{ hms }}</option>
+  </select>
+
+  <label for="comcastTpvStatus">Comcast TPV Status</label>
+  <select
+    id="comcastTpvStatus"
+    required
+    [(ngModel)]="xfinitySaleInput.comcastTpvStatus"
+    name="comcastTpvStatus"
+  >
+    <option *ngFor="let status of tpvStatuses" [value]="status">
+      {{ status }}
+    </option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
