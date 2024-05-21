@@ -11,6 +11,7 @@ import {
   XfinityTv,
   XfinityHomePhone,
   XfinityHomeSecurity,
+  GetAllAgentsGQL,
 } from '../../../../../../generated/graphqlTypes';
 
 @Component({
@@ -19,6 +20,8 @@ import {
   styleUrls: ['./newSale.component.css'],
 })
 export class XfinityNewSale implements OnInit {
+  agentNames: string[] = [];
+
   xfinitySaleInput = {
     agentId: '',
     cx_firstName: '',
@@ -54,9 +57,25 @@ export class XfinityNewSale implements OnInit {
   hmsTypes = Object.values(XfinityHomeSecurity);
   tpvStatuses = Object.values(TpvStatus);
 
-  constructor(private apollo: Apollo) {}
+  constructor(
+    private apollo: Apollo,
+    private getAllAgentsGQL: GetAllAgentsGQL
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAgentNames();
+  }
+
+  getAgentNames(): void {
+    this.getAllAgentsGQL.watch().valueChanges.subscribe({
+      next: (response: { data: { getAllAgents: { name: string }[] } }) => {
+        this.agentNames = response.data.getAllAgents.map(({ name }) => name);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
 
   onSubmit() {
     const variables: CreateXfinitySaleMutationVariables = {

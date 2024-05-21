@@ -1,12 +1,13 @@
 <form (ngSubmit)="onSubmit()" #xfinitySaleForm="ngForm">
-  <label for="agentName">Agent Name</label>
-  <input
-    type="text"
-    id="agentName"
-    required
-    [(ngModel)]="xfinitySaleInput.agentId"
-    name="agentId"
-  />
+  <div class="form-group">
+    <select formControlName="agentName" required>
+      <option value="">Select an Agent</option>
+      <option *ngFor="let name of agentNames" [value]="name">
+        {{ name }}
+      </option>
+    </select>
+    <i class="material-icons">person</i>
+  </div>
 
   <label for="cxFirstName">Customer First Name</label>
   <input
