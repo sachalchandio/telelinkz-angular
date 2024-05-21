@@ -23,7 +23,7 @@ export class XfinityNewSale implements OnInit {
   agentNames: string[] = [];
 
   xfinitySaleInput = {
-    agentId: '',
+    // agentId: '',
     cx_firstName: '',
     cx_lastName: '',
     orderNumber: '',
@@ -79,7 +79,10 @@ export class XfinityNewSale implements OnInit {
 
   onSubmit() {
     const variables: CreateXfinitySaleMutationVariables = {
-      input: this.xfinitySaleInput,
+      input: {
+        ...this.xfinitySaleInput,
+        agentId: localStorage.getItem('agent') || '',
+      },
     };
 
     this.apollo

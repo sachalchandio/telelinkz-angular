@@ -78,7 +78,7 @@ export class UserRegComponent implements OnDestroy {
             Validators.maxLength(200),
           ],
         ], // Set minimum and maximum lengths
-        userType: [UserType.Developer, Validators.required],
+        userType: [UserType.Agent, Validators.required],
       },
       { validator: this.passwordMatchValidator }
     );
@@ -107,7 +107,16 @@ export class UserRegComponent implements OnDestroy {
 
               localStorage.setItem('loginData', JSON.stringify(loginData));
               localStorage.setItem('email', loginData.email || '');
-              localStorage.setItem('resume_id', '');
+
+              // Retrieve the loginData from localStorage
+              const storedLoginData = localStorage.getItem('loginData');
+
+              if (storedLoginData) {
+                localStorage.setItem(
+                  'agent',
+                  JSON.parse(storedLoginData).name || ''
+                );
+              }
 
               this.snackBar.open('Registration successful!', 'Close', {
                 duration: 3000,

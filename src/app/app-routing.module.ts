@@ -15,7 +15,6 @@ const routes: Routes = [
             (m) => m.HomepageModule
           ),
       },
-
       {
         path: 'xfinity',
         loadChildren: () =>

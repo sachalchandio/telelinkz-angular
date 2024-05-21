@@ -267,7 +267,7 @@ p {
 }
 
 .hore-top-developer {
-  background-image: url(../../../../../assets/images/registerpage-login-form-welcome-section-images.webp);
+  background-image: url(/src/assets/images/login-2.webp);
   width: 547px;
   height: 270px;
   display: flex;
