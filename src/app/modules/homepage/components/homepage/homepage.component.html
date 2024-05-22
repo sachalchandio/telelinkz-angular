@@ -1,16 +1,18 @@
 <div class="graphs">
-  <div>
+  <div class="graphContainer">
+    <h2>Line Graph</h2>
     <canvas
       baseChart
       [datasets]="chartData"
       [labels]="chartLabels"
       [options]="chartOptions"
-      [type]="chartType"
+      [type]="'line'"
     >
     </canvas>
   </div>
 
-  <div>
+  <div class="graphContainer">
+    <h2>Bar Graph</h2>
     <canvas
       baseChart
       [datasets]="chartData"
@@ -20,7 +22,8 @@
     >
     </canvas>
   </div>
-  <div>
+  <div class="graphContainer">
+    <h2>Radar Graph</h2>
     <canvas
       baseChart
       [datasets]="chartData"
@@ -30,13 +33,62 @@
     >
     </canvas>
   </div>
-  <div>
+  <div class="graphContainer">
+    <h2>Pie Chart</h2>
     <canvas
       baseChart
       [datasets]="chartData"
       [labels]="chartLabels"
       [options]="chartOptions"
       [type]="'pie'"
+    >
+    </canvas>
+  </div>
+
+  <div class="graphContainer">
+    <h2>Polar Area</h2>
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="'polarArea'"
+    >
+    </canvas>
+  </div>
+
+  <div class="graphContainer">
+    <h2>Doughnut</h2>
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="'doughnut'"
+    >
+    </canvas>
+  </div>
+
+  <div class="graphContainer">
+    <h2>Scatter Graph</h2>
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="'scatter'"
+    >
+    </canvas>
+  </div>
+
+  <div class="graphContainer">
+    <h2>Bubble Graph</h2>
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="'bubble'"
     >
     </canvas>
   </div>

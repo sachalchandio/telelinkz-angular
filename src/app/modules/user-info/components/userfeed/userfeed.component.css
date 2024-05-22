@@ -6,7 +6,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-.pet_heading{
+.pet_heading {
   font-size: 18px;
   text-align: center;
 }
@@ -39,7 +39,7 @@
 }
 .date {
   font-size: 14px;
-  color: #000;
+  color: #1d1c1c;
 }
 .change-description {
   font-size: 13px;

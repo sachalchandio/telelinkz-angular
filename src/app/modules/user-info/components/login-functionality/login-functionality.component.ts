@@ -1,5 +1,6 @@
-import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { UsernameService } from '../../../../services/loginInfo/username.service'; // Adjust the path accordingly
 
 @Component({
   selector: 'sideBar-login-functionality',
@@ -9,19 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './login-functionality.component.css',
 })
 export class SideBarLoginComponent implements OnInit {
-  ngOnInit(): void {
-    this.getUsername();
-  }
-
   isSettingsMenuActive: boolean = false;
   username: string = '';
 
-  toggleSettingsMenu(): void {
-    this.isSettingsMenuActive = !this.isSettingsMenuActive;
+  constructor(private usernameService: UsernameService) {}
+
+  ngOnInit(): void {
+    this.usernameService.username$.subscribe((username) => {
+      this.username = username;
+    });
   }
 
-  getUsername(): void {
-    this.username = localStorage.getItem('agent') || '';
+  toggleSettingsMenu(): void {
+    this.isSettingsMenuActive = !this.isSettingsMenuActive;
   }
 
   logout(): void {
