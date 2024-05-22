@@ -30,3 +30,12 @@ mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
     HMS
   }
 }
+
+mutation RegisterUser($input: RegisterUserInput!) {
+  registerUser(registerUserInput: $input) {
+    email
+    name
+    accessToken
+    userType
+  }
+}

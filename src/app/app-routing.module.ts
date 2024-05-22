@@ -15,12 +15,23 @@ const routes: Routes = [
             (m) => m.HomepageModule
           ),
       },
-
       {
         path: 'xfinity',
         loadChildren: () =>
           import('./modules/providers/xfinity/xfinity.module').then(
             (m) => m.XfinityModule
+          ),
+      },
+      {
+        path: 'login',
+        loadChildren: () =>
+          import('./modules/login/login.module').then((m) => m.LoginModule),
+      },
+      {
+        path: 'register',
+        loadChildren: () =>
+          import('./modules/UserReg/userReg.module').then(
+            (m) => m.UserRegModule
           ),
       },
     ],

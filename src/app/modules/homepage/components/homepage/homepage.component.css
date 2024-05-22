@@ -19,3 +19,6 @@
   height: 100vh;
   overflow: auto;
 } */
+.ng-star-inserted {
+  width: 100%;
+}

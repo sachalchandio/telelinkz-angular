@@ -3,40 +3,27 @@ import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: { input: any; output: any };
+  DateTime: { input: any; output: any; }
 };
 
 export enum AccountStatus {
   Active = 'ACTIVE',
   Deleted = 'DELETED',
   Suspended = 'SUSPENDED',
-  Unverified = 'UNVERIFIED',
+  Unverified = 'UNVERIFIED'
 }
 
 export type Comment = {
@@ -121,17 +108,21 @@ export type Mutation = {
   updateUser: UserDto;
 };
 
+
 export type MutationCreateCommentArgs = {
   createCommentDto: CreateCommentInput;
 };
+
 
 export type MutationCreateXfinitySaleArgs = {
   input: CreateXfinitySaleInput;
 };
 
+
 export type MutationRegisterUserArgs = {
   registerUserInput: RegisterUserInput;
 };
+
 
 export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
@@ -146,24 +137,35 @@ export type Query = {
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getAllAgents: Array<UserDto>;
   getXfinitySaleById: XfinitySale;
+  getXfinitySalesDataByYear: Array<XfinitySalesByYear>;
   loginUser: LoginUserResponse;
 };
+
 
 export type QueryCommentArgs = {
   id: Scalars['String']['input'];
 };
 
+
 export type QueryFindAllSalesByAgentNameArgs = {
   agentName: Scalars['String']['input'];
 };
+
 
 export type QueryFindSalesWithComplexFilterArgs = {
   filter: XfinitySaleFilterInputDto;
 };
 
+
 export type QueryGetXfinitySaleByIdArgs = {
   id: Scalars['String']['input'];
 };
+
+
+export type QueryGetXfinitySalesDataByYearArgs = {
+  query: XfinitySalesByYearInput;
+};
+
 
 export type QueryLoginUserArgs = {
   loginUserInput: LoginUserInput;
@@ -199,7 +201,7 @@ export enum SaleStatus {
   Complete = 'COMPLETE',
   ProInstallation = 'PRO_INSTALLATION',
   SelfInstallation = 'SELF_INSTALLATION',
-  Undetermined = 'UNDETERMINED',
+  Undetermined = 'UNDETERMINED'
 }
 
 /** TPV Status to confirm if it was completed successfully */
@@ -207,7 +209,7 @@ export enum TpvStatus {
   Complete = 'COMPLETE',
   Error = 'ERROR',
   Incomplete = 'INCOMPLETE',
-  Pending = 'PENDING',
+  Pending = 'PENDING'
 }
 
 /** Possible US State */
@@ -262,7 +264,7 @@ export enum UsState {
   Wa = 'WA',
   Wi = 'WI',
   Wv = 'WV',
-  Wy = 'WY',
+  Wy = 'WY'
 }
 
 export type UpdateUserInput = {
@@ -314,20 +316,20 @@ export enum UserType {
   Admin = 'ADMIN',
   Agent = 'AGENT',
   Manager = 'MANAGER',
-  Qa = 'QA',
+  Qa = 'QA'
 }
 
 /** Xfinity Home Phone options */
 export enum XfinityHomePhone {
   None = 'NONE',
-  XfinityVoice = 'XFINITY_VOICE',
+  XfinityVoice = 'XFINITY_VOICE'
 }
 
 /** Xfinity Home Security packages */
 export enum XfinityHomeSecurity {
   HmsProtection = 'HMS_PROTECTION',
   HmsProtectionPlus = 'HMS_PROTECTION_PLUS',
-  None = 'NONE',
+  None = 'NONE'
 }
 
 /** List of available Xfinity Internet packages */
@@ -339,7 +341,7 @@ export enum XfinityInternet {
   GigabitExtra_1200 = 'GIGABIT_EXTRA_1200',
   GigabitX2_2000 = 'GIGABIT_X2_2000',
   None = 'NONE',
-  Superfast_800 = 'SUPERFAST_800',
+  Superfast_800 = 'SUPERFAST_800'
 }
 
 export type XfinitySale = {
@@ -465,12 +467,22 @@ export type XfinitySaleFilterInputDto = {
   zipcode?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type XfinitySalesByYear = {
+  __typename?: 'XfinitySalesByYear';
+  data: Array<Scalars['Int']['output']>;
+  label: Scalars['String']['output'];
+};
+
+export type XfinitySalesByYearInput = {
+  year: Scalars['Int']['input'];
+};
+
 /** List of available Xfinity TV packages */
 export enum XfinityTv {
   Choice_10 = 'CHOICE_10',
   None = 'NONE',
   PopularTv_125 = 'POPULAR_TV_125',
-  UltimateTv_185 = 'ULTIMATE_TV_185',
+  UltimateTv_185 = 'ULTIMATE_TV_185'
 }
 
 /** List of available Atnt Internet packages */
@@ -478,332 +490,242 @@ export enum SaleType {
   CoxSale = 'COX_SALE',
   FrontierSale = 'FRONTIER_SALE',
   None = 'NONE',
-  XfinitySale = 'XFINITY_SALE',
+  XfinitySale = 'XFINITY_SALE'
 }
 
 export type CreateXfinitySaleMutationVariables = Exact<{
   input: CreateXfinitySaleInput;
 }>;
 
-export type CreateXfinitySaleMutation = {
-  __typename?: 'Mutation';
-  createXfinitySale: {
-    __typename?: 'XfinitySale';
-    id: string;
-    orderDate: any;
-    cx_firstName: string;
-    cx_lastName: string;
-    orderNumber: string;
-    installationDate: any;
-    installationTime: string;
-    installation: string;
-    streetAddress: string;
-    streetAddressLine2?: string | null;
-    city: string;
-    state: string;
-    zipcode: string;
-    phoneNumber: string;
-    phoneNumber_second?: string | null;
-    socialSecurityNumber?: string | null;
-    email: string;
-    product: string;
-    packageSold: string;
-    comcastTpvStatus: string;
-    concertOrderId: string;
-    Internet: string;
-    TV: string;
-    Phone: string;
-    HMS: string;
-    agent: { __typename?: 'User'; id: string };
-  };
-};
+
+export type CreateXfinitySaleMutation = { __typename?: 'Mutation', createXfinitySale: { __typename?: 'XfinitySale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: string, concertOrderId: string, Internet: string, TV: string, Phone: string, HMS: string, agent: { __typename?: 'User', id: string } } };
+
+export type RegisterUserMutationVariables = Exact<{
+  input: RegisterUserInput;
+}>;
+
+
+export type RegisterUserMutation = { __typename?: 'Mutation', registerUser: { __typename?: 'RegisterUserResponseDto', email: string, name: string, accessToken: string, userType: UserType } };
 
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 }>;
 
-export type LoginUserQuery = {
-  __typename?: 'Query';
-  loginUser: {
-    __typename?: 'LoginUserResponse';
-    id?: string | null;
-    accessToken: string;
-    name?: string | null;
-    email?: string | null;
-    userType?: UserType | null;
-    profileImageURL?: string | null;
-    dateOfBirth?: string | null;
-  };
-};
 
-export type GetAllAgentsQueryVariables = Exact<{ [key: string]: never }>;
+export type LoginUserQuery = { __typename?: 'Query', loginUser: { __typename?: 'LoginUserResponse', id?: string | null, accessToken: string, name?: string | null, email?: string | null, userType?: UserType | null, profileImageURL?: string | null, dateOfBirth?: string | null } };
 
-export type GetAllAgentsQuery = {
-  __typename?: 'Query';
-  getAllAgents: Array<{ __typename?: 'UserDto'; id: string; name: string }>;
-};
+export type GetAllAgentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllAgentsQuery = { __typename?: 'Query', getAllAgents: Array<{ __typename?: 'UserDto', id: string, name: string }> };
 
 export type FindAllSalesByAgentNameQueryVariables = Exact<{
   agentName: Scalars['String']['input'];
 }>;
 
-export type FindAllSalesByAgentNameQuery = {
-  __typename?: 'Query';
-  findAllSalesByAgentName: Array<{
-    __typename?: 'XfinitySaleDTO';
-    id: string;
-    orderDate: any;
-    agentName: string;
-    cx_firstName: string;
-    cx_lastName: string;
-    orderNumber: string;
-    installationDateFormatted: string;
-    installationTime: string;
-    installation: string;
-    streetAddress: string;
-    streetAddressLine2?: string | null;
-    city: string;
-    state: UsState;
-    zipcode: string;
-    phoneNumber: string;
-    phoneNumber_second?: string | null;
-    socialSecurityNumber?: string | null;
-    email: string;
-    product: string;
-    packageSold: string;
-    comcastTpvStatus: TpvStatus;
-    concertOrderId: string;
-    Internet: XfinityInternet;
-    TV: XfinityTv;
-    Phone: XfinityHomePhone;
-    HMS: XfinityHomeSecurity;
-  }>;
-};
+
+export type FindAllSalesByAgentNameQuery = { __typename?: 'Query', findAllSalesByAgentName: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> };
 
 export type FindSalesWithComplexFilterQueryVariables = Exact<{
   filter: XfinitySaleFilterInputDto;
 }>;
 
-export type FindSalesWithComplexFilterQuery = {
-  __typename?: 'Query';
-  findSalesWithComplexFilter: Array<{
-    __typename?: 'XfinitySaleDTO';
-    id: string;
-    orderDate: any;
-    cx_firstName: string;
-    cx_lastName: string;
-    orderNumber: string;
-    installationDateFormatted: string;
-    installationTime: string;
-    installation: string;
-    streetAddress: string;
-    streetAddressLine2?: string | null;
-    city: string;
-    state: UsState;
-    zipcode: string;
-    phoneNumber: string;
-    phoneNumber_second?: string | null;
-    socialSecurityNumber?: string | null;
-    email: string;
-    product: string;
-    packageSold: string;
-    comcastTpvStatus: TpvStatus;
-    concertOrderId: string;
-    Internet: XfinityInternet;
-    TV: XfinityTv;
-    Phone: XfinityHomePhone;
-    HMS: XfinityHomeSecurity;
-    agentName: string;
-  }>;
-};
+
+export type FindSalesWithComplexFilterQuery = { __typename?: 'Query', findSalesWithComplexFilter: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity, agentName: string }> };
 
 export const CreateXfinitySaleDocument = gql`
-  mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
-    createXfinitySale(input: $input) {
+    mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
+  createXfinitySale(input: $input) {
+    id
+    orderDate
+    agent {
       id
-      orderDate
-      agent {
-        id
-      }
-      cx_firstName
-      cx_lastName
-      orderNumber
-      installationDate
-      installationTime
-      installation
-      streetAddress
-      streetAddressLine2
-      city
-      state
-      zipcode
-      phoneNumber
-      phoneNumber_second
-      socialSecurityNumber
-      email
-      product
-      packageSold
-      comcastTpvStatus
-      concertOrderId
-      Internet
-      TV
-      Phone
-      HMS
     }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class CreateXfinitySaleGQL extends Apollo.Mutation<
-  CreateXfinitySaleMutation,
-  CreateXfinitySaleMutationVariables
-> {
-  override document = CreateXfinitySaleDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    cx_firstName
+    cx_lastName
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+    comcastTpvStatus
+    concertOrderId
+    Internet
+    TV
+    Phone
+    HMS
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateXfinitySaleGQL extends Apollo.Mutation<CreateXfinitySaleMutation, CreateXfinitySaleMutationVariables> {
+    document = CreateXfinitySaleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RegisterUserDocument = gql`
+    mutation RegisterUser($input: RegisterUserInput!) {
+  registerUser(registerUserInput: $input) {
+    email
+    name
+    accessToken
+    userType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RegisterUserGQL extends Apollo.Mutation<RegisterUserMutation, RegisterUserMutationVariables> {
+    document = RegisterUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginUserDocument = gql`
-  query LoginUser($email: String!, $password: String!) {
-    loginUser(loginUserInput: { email: $email, password: $password }) {
-      id
-      accessToken
-      name
-      email
-      userType
-      profileImageURL
-      dateOfBirth
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class LoginUserGQL extends Apollo.Query<
-  LoginUserQuery,
-  LoginUserQueryVariables
-> {
-  override document = LoginUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query LoginUser($email: String!, $password: String!) {
+  loginUser(loginUserInput: {email: $email, password: $password}) {
+    id
+    accessToken
+    name
+    email
+    userType
+    profileImageURL
+    dateOfBirth
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginUserGQL extends Apollo.Query<LoginUserQuery, LoginUserQueryVariables> {
+    document = LoginUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetAllAgentsDocument = gql`
-  query GetAllAgents {
-    getAllAgents {
-      id
-      name
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class GetAllAgentsGQL extends Apollo.Query<
-  GetAllAgentsQuery,
-  GetAllAgentsQueryVariables
-> {
-  override document = GetAllAgentsDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query GetAllAgents {
+  getAllAgents {
+    id
+    name
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetAllAgentsGQL extends Apollo.Query<GetAllAgentsQuery, GetAllAgentsQueryVariables> {
+    document = GetAllAgentsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindAllSalesByAgentNameDocument = gql`
-  query findAllSalesByAgentName($agentName: String!) {
-    findAllSalesByAgentName(agentName: $agentName) {
-      id
-      orderDate
-      agentName
-      cx_firstName
-      cx_lastName
-      orderNumber
-      installationDateFormatted
-      installationTime
-      installation
-      streetAddress
-      streetAddressLine2
-      city
-      state
-      zipcode
-      phoneNumber
-      phoneNumber_second
-      socialSecurityNumber
-      email
-      product
-      packageSold
-      comcastTpvStatus
-      concertOrderId
-      Internet
-      TV
-      Phone
-      HMS
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class FindAllSalesByAgentNameGQL extends Apollo.Query<
-  FindAllSalesByAgentNameQuery,
-  FindAllSalesByAgentNameQueryVariables
-> {
-  override document = FindAllSalesByAgentNameDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query findAllSalesByAgentName($agentName: String!) {
+  findAllSalesByAgentName(agentName: $agentName) {
+    id
+    orderDate
+    agentName
+    cx_firstName
+    cx_lastName
+    orderNumber
+    installationDateFormatted
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+    comcastTpvStatus
+    concertOrderId
+    Internet
+    TV
+    Phone
+    HMS
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class FindAllSalesByAgentNameGQL extends Apollo.Query<FindAllSalesByAgentNameQuery, FindAllSalesByAgentNameQueryVariables> {
+    document = FindAllSalesByAgentNameDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindSalesWithComplexFilterDocument = gql`
-  query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
-    findSalesWithComplexFilter(filter: $filter) {
-      id
-      orderDate
-      cx_firstName
-      cx_lastName
-      orderNumber
-      installationDateFormatted
-      installationTime
-      installation
-      streetAddress
-      streetAddressLine2
-      city
-      state
-      zipcode
-      phoneNumber
-      phoneNumber_second
-      socialSecurityNumber
-      email
-      product
-      packageSold
-      comcastTpvStatus
-      concertOrderId
-      Internet
-      TV
-      Phone
-      HMS
-      agentName
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class FindSalesWithComplexFilterGQL extends Apollo.Query<
-  FindSalesWithComplexFilterQuery,
-  FindSalesWithComplexFilterQueryVariables
-> {
-  override document = FindSalesWithComplexFilterDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
+  findSalesWithComplexFilter(filter: $filter) {
+    id
+    orderDate
+    cx_firstName
+    cx_lastName
+    orderNumber
+    installationDateFormatted
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+    comcastTpvStatus
+    concertOrderId
+    Internet
+    TV
+    Phone
+    HMS
+    agentName
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class FindSalesWithComplexFilterGQL extends Apollo.Query<FindSalesWithComplexFilterQuery, FindSalesWithComplexFilterQueryVariables> {
+    document = FindSalesWithComplexFilterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }

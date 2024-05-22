@@ -1,0 +1,104 @@
+<main class="all-mian modal">
+  <section class="welcome-back registerpage">
+    <div class="all-welcome-back">
+      <div class="innov8ivs-image">
+        <img
+          src="../../../../../assets/images/register-section-image.webp"
+          alt=""
+        />
+        <div class="hore-top-developer">
+          <a href="talent-pool">
+            <img
+              src="../../../../../assets/images/registerpage-login-form-welcome-section-thumb-up.webp"
+              alt=""
+            />
+            Hire Top Notch Developers
+          </a>
+          <p>
+            Today, we create innovative solutions to the challenges that
+            consumers face in both their everyday lives and events.
+          </p>
+        </div>
+      </div>
+      <div class="innov8ivs-login">
+        <div class="welcome-content">
+          <div class="welcome-heading">
+            <img
+              src="../../../../../assets/images/registerpage-login-form-top-image.webp"
+              alt=""
+            />
+          </div>
+          <div class="welcome-heading">
+            <p>
+              Already have an account? <a (click)="openSignin()">Sign in!</a>
+            </p>
+          </div>
+        </div>
+        <div class="welcome-back-heading">
+          <h1>Get Started With Innov8ivs</h1>
+          <p>Getting started is easy</p>
+        </div>
+        <div class="google-images">
+          <a href="#" class="google-account">
+            <span class="google-spn"
+              ><img
+                src="../../../../../assets/images/registerpage-hughsnet-form-google-icons.webp"
+                alt=""
+            /></span>
+            <span>Google</span>
+          </a>
+          <a href="#" class="google-account">
+            <span class="facebook-spn"
+              ><img
+                src="../../../../../assets/images/registerpage-hughsnet-form-facebook-icons.webp"
+                alt=""
+            /></span>
+            <span>Facebook</span>
+          </a>
+        </div>
+        <div class="countinue-with">
+          <p>Or continue with</p>
+        </div>
+
+        <form
+          class="all-form-register"
+          *ngIf="registerForm"
+          [formGroup]="registerForm"
+          (ngSubmit)="registerUser()"
+        >
+          <input type="text" placeholder="Full Name" formControlName="name" />
+          <input
+            type="email"
+            placeholder="Enter Email"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              registerForm.get('email')?.hasError('required') &&
+              registerForm.get('email')?.touched
+            "
+          >
+            Email is required.
+          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+          />
+          <button type="submit" class="login-button">Create Account</button>
+        </form>
+        <div class="our-condo">
+          <p>
+            By continuing you indicate that you read and agreed to the Terms of
+            Use
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

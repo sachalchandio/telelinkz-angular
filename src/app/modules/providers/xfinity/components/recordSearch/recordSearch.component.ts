@@ -15,7 +15,6 @@ import {
   FindAllSalesByAgentNameGQL,
   FindAllSalesByAgentNameQuery,
   XfinitySaleDto,
-  GetAllAgentsGQL,
 } from 'src/generated/graphqlTypes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
@@ -44,7 +43,6 @@ export class RecordSearch {
     private dialog: MatDialog,
     private createXfinitySaleGQL: CreateXfinitySaleGQL,
     private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
-    private getAllAgentsGQL: GetAllAgentsGQL,
     private sharedDataService: XfinitySharedDataService
   ) {}
 

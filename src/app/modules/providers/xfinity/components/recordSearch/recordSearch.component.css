@@ -1,3 +1,7 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
+main{
+  font-family: 'Open Sans', sans-serif;
+}
 main[_ngcontent-ng-c2913988393] {
   /* display: flex;
     flex-direction: column;
@@ -8,7 +12,11 @@ main[_ngcontent-ng-c2913988393] {
   overflow-x: hidden;
   padding-top: 15px;
 }
-
+.full_vh{
+  height: 100vh;
+  overflow-y: auto;
+  padding: 0px 20px;
+}
 .table-container {
   width: 78vw; /* or any specific width */
   overflow-x: auto; /* Enable horizontal scrolling */
@@ -17,6 +25,8 @@ main[_ngcontent-ng-c2913988393] {
   max-height: 500px; /* Example fixed height */
   /* min-height: 400px; */
   margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(56, 65, 74, 0.15);
 }
 @media screen and (min-width: 1440px) {
   .table-container {
@@ -25,27 +35,32 @@ main[_ngcontent-ng-c2913988393] {
 }
 table {
   width: 100%;
-  background: #00a0ea;
+  /* background: #00a0ea; */
   background-repeat: no-repeat;
 }
 table thead {
   position: sticky;
   top: 0;
 }
+table tr{
+  border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f9fc;
+}
 table tr td {
   font-size: 12px;
   padding: 0 15px;
   font-family: "Roboto", sans-serif;
-  color: #fff;
+  /* color: #fff; */
 }
 table tr:nth-child(odd) {
-  background-color: #52a9ec;
+  background-color: #ebf3f9;
 }
 table tr td {
   min-width: 200px;
 }
 table tr th {
-  background-color: #00a0ea;
+  background-color: #880ef5;
   color: #fff;
 }
 th.mat-header-cell,
@@ -63,13 +78,14 @@ thead {
 
 .fileInput {
   height: 150px;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   column-gap: 20px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
+  display: none;
 }
 
 .fileInputDescription {
@@ -85,4 +101,9 @@ thead {
 }
 .fileInputDescription p {
   font-weight: 500;
+}
+@media screen and (max-width:1210px) {
+  .table-container{
+    width: 73vw;
+  }
 }

@@ -10,7 +10,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { XfinityFilter } from 'src/app/components/standalone/xfinityFilter/xfinity-filter.component';
 
-const COMPONETS = [comp.XfinityComponent, comp.RecordSearch];
+const COMPONETS = [
+  comp.XfinityComponent,
+  comp.RecordSearch,
+  comp.XfinityNewSale,
+];
 
 @NgModule({
   declarations: [...COMPONETS],
