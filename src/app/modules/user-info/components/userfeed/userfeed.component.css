@@ -1,14 +1,17 @@
 .userfeed-section {
-  width: 80%; /* Adjust as needed for your sidebar */
+  width: 90%; /* Adjust as needed for your sidebar */
   margin: 0 auto;
   padding: 10px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
+.pet_heading{
+  font-size: 18px;
+  text-align: center;
+}
 .userfeed-section h2 {
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
   margin-bottom: 10px;
 }
 
@@ -33,4 +36,11 @@
   flex-grow: 1;
   margin-left: 10px;
   color: #666;
+}
+.date {
+  font-size: 14px;
+  color: #000;
+}
+.change-description {
+  font-size: 13px;
 }
