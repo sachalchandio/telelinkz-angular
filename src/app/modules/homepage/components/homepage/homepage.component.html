@@ -1,95 +1,51 @@
 <div class="graphs">
-  <div class="graphContainer">
-    <h2>Line Graph</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'line'"
-    >
-    </canvas>
+  <div class="cards_wraper">
+    <!-- <div class="card">
+        <p>Xfinity Sale Filter</p>
+        <i class="material-icons">filter_alt</i>
+    </div> -->
+    <!--test cars -->
   </div>
-
-  <div class="graphContainer">
-    <h2>Bar Graph</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'bar'"
-    >
-    </canvas>
-  </div>
-  <div class="graphContainer">
-    <h2>Radar Graph</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'radar'"
-    >
-    </canvas>
-  </div>
-  <div class="graphContainer">
-    <h2>Pie Chart</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'pie'"
-    >
-    </canvas>
-  </div>
-
-  <div class="graphContainer">
-    <h2>Polar Area</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'polarArea'"
-    >
-    </canvas>
-  </div>
-
-  <div class="graphContainer">
-    <h2>Doughnut</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'doughnut'"
-    >
-    </canvas>
-  </div>
-
-  <div class="graphContainer">
-    <h2>Scatter Graph</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'scatter'"
-    >
-    </canvas>
-  </div>
-
-  <div class="graphContainer">
-    <h2>Bubble Graph</h2>
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'bubble'"
-    >
-    </canvas>
+  <div class="graphs_wraper">
+    <div class="graphContainer">
+      <h2>Line Graph</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'line'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Bar Graph</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'bar'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Radar Graph</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'radar'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Pie Chart</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'pie'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Polar Area</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'polarArea'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Doughnut</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'doughnut'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Scatter Graph</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'scatter'">
+      </canvas>
+    </div>
+    <div class="graphContainer">
+      <h2>Bubble Graph</h2>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [type]="'bubble'">
+      </canvas>
+    </div>
   </div>
 </div>

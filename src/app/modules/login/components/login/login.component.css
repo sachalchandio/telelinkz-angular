@@ -1,3 +1,9 @@
+.all-main.modal{
+  /* width: 63vw; */
+  height: 100vh;
+  overflow-x:hidden;
+  overflow: auto;
+}
 .error-message {
   color: red;
   font-size: 14px;
@@ -41,7 +47,7 @@ p {
 
 .all-welcome-back {
   display: flex;
-  max-width: 1440px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
@@ -58,7 +64,7 @@ p {
   width: 50%;
 }
 .innov8ivs-login {
-  padding: 56px 0px;
+  padding: 0px 0px;
   background-color: #f0f2f5;
 }
 
@@ -312,6 +318,18 @@ p {
 }
 .welcome-back {
   overflow-y: hidden;
+}
+.welcome-back {
+  max-width: 1000px;
+  margin: auto;
+  vertical-align: middle;
+}
+.welcome-back {
+  max-width: 1000px;
+  margin: auto;
+  vertical-align: middle;
+  padding-top: 68px;
+  align-items: stretch;
 }
 @media only screen and (max-width: 1600px) {
   .welcome-content {

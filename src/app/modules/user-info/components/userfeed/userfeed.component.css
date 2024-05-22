@@ -1,18 +1,19 @@
 .userfeed-section {
-  width: 90%; /* Adjust as needed for your sidebar */
+  width: 100%; /* Adjust as needed for your sidebar */
   margin: 0 auto;
-  padding: 10px;
+  /* padding: 10px; */
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 5px;
+  overflow: hidden;
 }
 .pet_heading {
   font-size: 18px;
   text-align: center;
 }
 .userfeed-section h2 {
-  /* font-size: 1.5em; */
-  margin-bottom: 10px;
+  font-size: 1.5em;
+  /* margin-bottom: 10px; */
 }
 
 .userfeed-list {
@@ -37,10 +38,23 @@
   margin-left: 10px;
   color: #666;
 }
-.date {
-  font-size: 14px;
+.date{
+  font-size: 13px;
   color: #1d1c1c;
+  min-width: 4.625rem;
+  flex-shrink: revert-layer;
 }
 .change-description {
   font-size: 13px;
+}
+.pet_heading {
+  background-color: #880ef5;
+  color: #fff;
+  padding: 12px 10px;
+}
+.userfeed-list li{
+  padding: 5px 15px;
+}
+.userfeed-list li:nth-child(odd) {
+  background-color: #ebf3f9;
 }

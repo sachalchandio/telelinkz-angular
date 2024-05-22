@@ -31,6 +31,7 @@ const COMPONENTS = [
   shared.FooterComponent,
   shared.HeaderComponent,
   shared.rightBarComponent,
+  shared.NavbarTopComponent,
   ErrorMessageDialog,
 ];
 

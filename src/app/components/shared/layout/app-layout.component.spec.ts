@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppLayoutComponent } from './app-layout.component';
+import { NavbarTopComponent } from './navbarTop/navbarTop.component'; // Import the NavbarTopComponent
+
 
 describe('AppLayoutComponent', () => {
   let component: AppLayoutComponent;

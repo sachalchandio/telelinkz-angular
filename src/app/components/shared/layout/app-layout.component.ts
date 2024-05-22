@@ -9,4 +9,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AppLayoutComponent {
   constructor() {}
+  isSidebarActive = false;
+
+  onToggleSidebar() {
+    this.isSidebarActive = !this.isSidebarActive;
+  }
 }

@@ -1,5 +1,10 @@
 <div class="basic-layout">
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-rightBar></app-rightBar>
+  <div class="header_outer">
+    <app-header [class.now_closed]="isSidebarActive" class="my_opppen"></app-header>
+  </div>
+  <div class="main-screen">
+    <navbarTop (toggleSidebar)="onToggleSidebar()"></navbarTop>
+    <router-outlet></router-outlet>
+    <!-- <app-rightBar></app-rightBar> -->
+  </div>
 </div>

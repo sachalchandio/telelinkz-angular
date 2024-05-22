@@ -1,0 +1,13 @@
+.top_header{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #91b8d6af;
+    position: static;
+    top: 0;
+}
+.header_button{
+    border: none;
+    background-color: none;
+}

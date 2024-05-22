@@ -4,20 +4,22 @@
   justify-content: space-evenly;
   margin: 0 auto;
 }
-
-.card-wrapper {
-  width: 400px;
-  height: 500px;
-  position: relative;
+img{
+  max-width: 100%;
 }
 
+.card-wrapper{
+  width: 300px;
+  height: 290px;
+  position: relative;
+}
 .card {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 350px;
-  height: 450px;
-  transform: translate(-50%, -50%);
+  /* top: 50%;
+  left: 50%; */
+  width: 310px;
+  height: 270px;
+  /* transform: translate(-50%, -50%); */
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
@@ -61,10 +63,9 @@
 
     a {
       position: relative;
-      display: block;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
       background: #fff;
       font-size: 23px;
@@ -74,6 +75,9 @@
       transition: 0.4s;
       transform: translateY(200px);
       opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -116,25 +120,42 @@
 /**** Personal Details ****/
 
 .details {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #fff;
-  width: 100%;
-  height: 120px;
-  z-index: 1;
-  padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 80px;
+    z-index: 1;
+    padding: 10px;
+
 
   h2 {
-    margin: 30px 0;
+    margin: 0px 0;
     padding: 0;
     text-align: center;
 
     .job-title {
       font-size: 1rem;
-      line-height: 2.5rem;
+      line-height: 1.5rem;
       color: #333;
       font-weight: 300;
     }
+  }
+}
+.social-icons {
+  padding: 0 !important;
+}
+@media screen and (max-width:1500px) {
+  .card-wrapper{
+    width: 250px;
+    height: 250px;
+  }
+  .card {
+    position: absolute;
+    /* top: 50%;
+    left: 50%; */
+    width: 250px;
+    height: 250px;
   }
 }

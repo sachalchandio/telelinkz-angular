@@ -1,0 +1,67 @@
+<style>
+    img{
+      max-width: 100%;
+    }
+  .top_header{
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f4f7fa;
+    position: static;
+    top: 0;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+}
+.top_header i {
+  color: #39465f;
+  font-size: 25px;
+}
+.header_button{
+    border: none;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    margin: 0 8px;
+}
+.avatar{
+  border-radius: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+.setting_icon i{
+  animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>
+
+<div class="top_header">
+  <div>
+    <button class="header_button" (click)="onButtonClick()">
+      <i class="material-icons">menu</i>
+    </button>
+  </div>
+  <div>
+   <button class="header_button">
+    <i class="material-icons">light_mode</i>
+   </button>
+   <button class="header_button setting_icon">
+    <i class="material-icons">settings</i>
+   </button>
+   <button class="header_button">
+    <i class="material-icons">diamond</i>
+   </button>
+   <button class="header_button">
+    <i class="material-icons">notifications</i>
+   </button>
+   <button class="header_button avatar">
+    <img src="../../../../../assets/images/avatar-2.jpg" alt="">
+   </button>
+  </div>
+</div>

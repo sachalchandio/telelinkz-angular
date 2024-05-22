@@ -3,6 +3,12 @@
   overflow: hidden;
   background-color: #fff;
   border-right: 2px solid #e4f2ff;
+  width: 250px;
+  transform: 0.5s;
+}
+.now_closed .left_side_header {
+  width: 0px;
+  overflow: hidden;
 }
 .left_side_header *{
   font-family: "DM Sans", sans-serif !important;
@@ -18,6 +24,7 @@
 mat-sidenav {
   width: 250px;
 }
+
 .nav-link .mat-mdc-list-item-unscoped-content {
   display: inline-block;
 }
