@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   overflow-y: scroll;
+  height: calc(100vh - 20px);
 }
 
 .rightBar .component-container {
@@ -20,4 +21,13 @@
 
 .rightBar .image-container img {
   width: 90%;
+}
+.rightBarTitle {
+  padding: 23px 0;
+  font-size: 25px;
+  font-weight: 600;
+}
+.rightBar {
+  background-color: #fff;
+  padding: 10px 20px;
 }
