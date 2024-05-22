@@ -18,6 +18,9 @@ import {
   UsState,
   SaleStatus,
   GetAllAgentsGQL,
+  User,
+  UserType,
+  LoginUserQuery,
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 
@@ -34,6 +37,7 @@ export interface TableData {
 })
 export class XfinityFilter implements OnInit {
   agentNames: string[] = [];
+  agentType: UserType = UserType.Agent;
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   displayedColumns: string[] = []; // Adjust based on your data
@@ -90,14 +94,22 @@ export class XfinityFilter implements OnInit {
   }
 
   getAgentNames(): void {
-    this.getAllAgentsGQL.watch().valueChanges.subscribe({
-      next: (response) => {
-        this.agentNames = response.data.getAllAgents.map(({ name }) => name);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    this.agentType = localStorage.getItem('agentType') as UserType;
+    if (
+      this.agentType === UserType.Admin ||
+      this.agentType === UserType.Manager
+    ) {
+      this.getAllAgentsGQL.watch().valueChanges.subscribe({
+        next: (response) => {
+          this.agentNames = response.data.getAllAgents.map(({ name }) => name);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    } else {
+      this.agentNames.push(localStorage.getItem('agent') || '');
+    }
   }
 
   onFilterSubmit(): void {
