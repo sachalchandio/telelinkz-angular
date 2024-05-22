@@ -1,0 +1,36 @@
+.userfeed-section {
+  width: 80%; /* Adjust as needed for your sidebar */
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.userfeed-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.userfeed-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.userfeed-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.userfeed-list .date {
+  font-weight: bold;
+  color: #333;
+}
+
+.userfeed-list .change-description {
+  flex-grow: 1;
+  margin-left: 10px;
+  color: #666;
+}

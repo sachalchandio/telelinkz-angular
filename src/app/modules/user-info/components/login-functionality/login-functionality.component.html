@@ -1,0 +1,27 @@
+<div class="user-profile">
+  <img
+    src="../../../../../assets//images/avatar.png"
+    alt="User Avatar"
+    class="user-avatar"
+  />
+  <div class="user-info">
+    <span class="user-name">{{ username }}</span>
+    <button class="logout-button" (click)="logout()">
+      <span class="material-icons">logout</span> Logout
+    </button>
+    <div class="settings-menu">
+      <button class="settings-button" (click)="toggleSettingsMenu()">
+        <span class="material-icons">settings</span> Settings
+      </button>
+      <div
+        class="settings-content"
+        [ngClass]="{ active: isSettingsMenuActive }"
+      >
+        <a href="#">Profile</a>
+        <a href="#">Account</a>
+        <a href="#">Notifications</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+  </div>
+</div>

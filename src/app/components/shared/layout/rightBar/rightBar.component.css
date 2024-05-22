@@ -1,0 +1,23 @@
+.rightBar {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.rightBar .component-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}
+
+.rightBar .image-container {
+  text-align: center;
+}
+
+.rightBar .image-container img {
+  width: 90%;
+}
