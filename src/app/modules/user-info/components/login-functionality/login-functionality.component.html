@@ -5,7 +5,7 @@
     class="user-avatar"
   />
   <div class="user-info">
-    <span class="user-name">{{ username }}</span>
+    <span class="user-name">{{ username || "John Doe" }}</span>
     <button class="logout-button" (click)="logout()">
       <span class="material-icons">logout</span> Logout
     </button>
