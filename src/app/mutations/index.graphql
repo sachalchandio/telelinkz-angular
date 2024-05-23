@@ -48,7 +48,7 @@ mutation CreateComment($createCommentInput: CreateCommentInput!) {
     status
     user {
       id
-      username
+      name
     }
     saleId
     saleType
@@ -73,10 +73,8 @@ mutation UpdateComment($id: String!, $updateCommentInput: UpdateCommentInput!) {
       id
       name
     }
-    sale {
-      id
-      # Add other sale fields if necessary
-    }
+    saleId
+    saleType
     parentComment {
       id
       text

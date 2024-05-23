@@ -79,30 +79,6 @@ query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
   }
 }
 
-query GetXfinitySaleComments($id: ID!) {
-  xfinitySale(id: $id) {
-    id
-    comments {
-      id
-      text
-      fieldName
-      status
-      user {
-        id
-        username
-      }
-      parentComment {
-        id
-        text
-      }
-      replies {
-        id
-        text
-      }
-    }
-  }
-}
-
 query CommentsBySale($saleId: ID!, $saleType: String!) {
   commentsBySale(saleId: $saleId, saleType: $saleType) {
     id

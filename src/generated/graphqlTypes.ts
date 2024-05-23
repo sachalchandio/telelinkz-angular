@@ -36,7 +36,8 @@ export type Comment = {
   id: Scalars['ID']['output'];
   parentComment?: Maybe<Comment>;
   replies?: Maybe<Array<Comment>>;
-  sale?: Maybe<XfinitySale>;
+  saleId: Scalars['String']['output'];
+  saleType: SaleType;
   /** Resolved status of the comment */
   status: CommentStatus;
   /** Leave a note */
@@ -56,9 +57,16 @@ export type CreateCommentInput = {
   fieldName: SaleField;
   parentCommentId?: InputMaybe<Scalars['ID']['input']>;
   saleId: Scalars['ID']['input'];
+  saleType: SaleType;
   status?: CommentStatus;
   text: Scalars['String']['input'];
   userId: Scalars['ID']['input'];
+};
+
+export type CreateSaleStageInput = {
+  saleId: Scalars['ID']['input'];
+  saleType: SaleType;
+  stage: SaleFlag;
 };
 
 export type CreateXfinitySaleInput = {
@@ -118,26 +126,27 @@ export type LoginUserResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  changeSaleStage: Scalars['Boolean']['output'];
   createComment: Comment;
+  createSaleStage: SaleStage;
   createXfinitySale: XfinitySale;
   registerUser: RegisterUserResponseDto;
   removeComment: Scalars['Boolean']['output'];
+  removeSaleStage: Scalars['Boolean']['output'];
   seedUsers?: Maybe<Array<User>>;
   updateComment: Comment;
+  updateSaleStage: SaleStage;
   updateUser: UserDto;
-};
-
-
-export type MutationChangeSaleStageArgs = {
-  newStage: SaleFlag;
-  saleId: Scalars['String']['input'];
-  userId: Scalars['String']['input'];
 };
 
 
 export type MutationCreateCommentArgs = {
   createCommentInput: CreateCommentInput;
+};
+
+
+export type MutationCreateSaleStageArgs = {
+  createSaleStageInput: CreateSaleStageInput;
+  userId: Scalars['ID']['input'];
 };
 
 
@@ -156,9 +165,21 @@ export type MutationRemoveCommentArgs = {
 };
 
 
+export type MutationRemoveSaleStageArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationUpdateCommentArgs = {
   id: Scalars['String']['input'];
   updateCommentInput: UpdateCommentInput;
+};
+
+
+export type MutationUpdateSaleStageArgs = {
+  id: Scalars['ID']['input'];
+  updateSaleStageInput: UpdateSaleStageInput;
+  userId: Scalars['ID']['input'];
 };
 
 
@@ -170,17 +191,26 @@ export type Query = {
   __typename?: 'Query';
   comment: Comment;
   comments: Array<Comment>;
+  commentsBySale: Array<Comment>;
   currentUser: UserDto;
   findAllSalesByAgentName: Array<XfinitySaleDto>;
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getAllAgents: Array<UserDto>;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
+  saleStage: SaleStage;
+  saleStages: Array<SaleStage>;
 };
 
 
 export type QueryCommentArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type QueryCommentsBySaleArgs = {
+  saleId: Scalars['ID']['input'];
+  saleType: Scalars['String']['input'];
 };
 
 
@@ -201,6 +231,11 @@ export type QueryGetXfinitySaleByIdArgs = {
 
 export type QueryLoginUserArgs = {
   loginUserInput: LoginUserInput;
+};
+
+
+export type QuerySaleStageArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type RegisterUserInput = {
@@ -270,14 +305,29 @@ export enum SaleFlag {
   Unassigned = 'UNASSIGNED'
 }
 
+export type SaleStage = {
+  __typename?: 'SaleStage';
+  /** Created at Date */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Primary ID */
+  id: Scalars['ID']['output'];
+  /** Identifier of the sale */
+  saleId: Scalars['String']['output'];
+  saleType: SaleType;
+  /** Stage of the sale */
+  stage: Scalars['String']['output'];
+  /** Updated at Date */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
 export type SaleStageHistory = {
   __typename?: 'SaleStageHistory';
   /** Created at Date */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** Primary ID */
   id: Scalars['ID']['output'];
-  /** Sale that the stage change is associated with */
-  sale: XfinitySale;
+  saleId: Scalars['String']['output'];
+  saleType: SaleType;
   /** Stage of the sale */
   stage: SaleFlag;
   /** Timestamp of the change */
@@ -287,6 +337,12 @@ export type SaleStageHistory = {
   /** User who made the change */
   user: User;
 };
+
+/** Which provider does the sale belong to */
+export enum SaleType {
+  SpectrumSale = 'SPECTRUM_SALE',
+  XfinitySale = 'XFINITY_SALE'
+}
 
 /** TPV Status to confirm if it was completed successfully */
 export enum TpvStatus {
@@ -355,9 +411,16 @@ export type UpdateCommentInput = {
   fieldName?: InputMaybe<SaleField>;
   parentCommentId?: InputMaybe<Scalars['ID']['input']>;
   saleId?: InputMaybe<Scalars['ID']['input']>;
+  saleType?: InputMaybe<SaleType>;
   status?: InputMaybe<CommentStatus>;
   text?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type UpdateSaleStageInput = {
+  saleId?: InputMaybe<Scalars['ID']['input']>;
+  saleType?: InputMaybe<SaleType>;
+  stage?: InputMaybe<SaleFlag>;
 };
 
 export type UpdateUserInput = {
@@ -453,8 +516,7 @@ export type XfinitySale = {
   city: Scalars['String']['output'];
   /** Comcast TPV status of the sale */
   comcastTpvStatus: Scalars['String']['output'];
-  /** Comments related to the sale */
-  comments: Array<Comment>;
+  comments?: Maybe<Array<Comment>>;
   /** The unique concert order ID associated with the sale */
   concertOrderId: Scalars['String']['output'];
   /** Created at Date */
@@ -485,8 +547,6 @@ export type XfinitySale = {
   phoneNumber_second?: Maybe<Scalars['String']['output']>;
   /** Product associated with the sale */
   product: Scalars['String']['output'];
-  /** Current state of the sale */
-  saleState: SaleFlag;
   /** Social Security Number associated with the sale */
   socialSecurityNumber?: Maybe<Scalars['String']['output']>;
   /** History of stage changes */
@@ -593,7 +653,7 @@ export type CreateCommentMutationVariables = Exact<{
 }>;
 
 
-export type CreateCommentMutation = { __typename?: 'Mutation', createComment: { __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, user: { __typename?: 'User', id: string, name: string }, sale?: { __typename?: 'XfinitySale', id: string } | null, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null } };
+export type CreateCommentMutation = { __typename?: 'Mutation', createComment: { __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, saleId: string, saleType: SaleType, user: { __typename?: 'User', id: string, name: string }, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null } };
 
 export type UpdateCommentMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -601,7 +661,24 @@ export type UpdateCommentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCommentMutation = { __typename?: 'Mutation', updateComment: { __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, user: { __typename?: 'User', id: string, name: string }, sale?: { __typename?: 'XfinitySale', id: string } | null, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null } };
+export type UpdateCommentMutation = { __typename?: 'Mutation', updateComment: { __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, saleId: string, saleType: SaleType, user: { __typename?: 'User', id: string, name: string }, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null } };
+
+export type CreateSaleStageMutationVariables = Exact<{
+  createSaleStageInput: CreateSaleStageInput;
+  userId: Scalars['ID']['input'];
+}>;
+
+
+export type CreateSaleStageMutation = { __typename?: 'Mutation', createSaleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
+
+export type UpdateSaleStageMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  updateSaleStageInput: UpdateSaleStageInput;
+  userId: Scalars['ID']['input'];
+}>;
+
+
+export type UpdateSaleStageMutation = { __typename?: 'Mutation', updateSaleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
 
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -629,6 +706,14 @@ export type FindSalesWithComplexFilterQueryVariables = Exact<{
 
 
 export type FindSalesWithComplexFilterQuery = { __typename?: 'Query', findSalesWithComplexFilter: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity, agentName: string }> };
+
+export type CommentsBySaleQueryVariables = Exact<{
+  saleId: Scalars['ID']['input'];
+  saleType: Scalars['String']['input'];
+}>;
+
+
+export type CommentsBySaleQuery = { __typename?: 'Query', commentsBySale: Array<{ __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, saleId: string, saleType: SaleType, user: { __typename?: 'User', id: string, name: string }, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null }> };
 
 export const CreateXfinitySaleDocument = gql`
     mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
@@ -707,9 +792,8 @@ export const CreateCommentDocument = gql`
       id
       name
     }
-    sale {
-      id
-    }
+    saleId
+    saleType
     parentComment {
       id
       text
@@ -743,9 +827,8 @@ export const UpdateCommentDocument = gql`
       id
       name
     }
-    sale {
-      id
-    }
+    saleId
+    saleType
     parentComment {
       id
       text
@@ -763,6 +846,52 @@ export const UpdateCommentDocument = gql`
   })
   export class UpdateCommentGQL extends Apollo.Mutation<UpdateCommentMutation, UpdateCommentMutationVariables> {
     document = UpdateCommentDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSaleStageDocument = gql`
+    mutation CreateSaleStage($createSaleStageInput: CreateSaleStageInput!, $userId: ID!) {
+  createSaleStage(createSaleStageInput: $createSaleStageInput, userId: $userId) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSaleStageGQL extends Apollo.Mutation<CreateSaleStageMutation, CreateSaleStageMutationVariables> {
+    document = CreateSaleStageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateSaleStageDocument = gql`
+    mutation UpdateSaleStage($id: ID!, $updateSaleStageInput: UpdateSaleStageInput!, $userId: ID!) {
+  updateSaleStage(
+    id: $id
+    updateSaleStageInput: $updateSaleStageInput
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateSaleStageGQL extends Apollo.Mutation<UpdateSaleStageMutation, UpdateSaleStageMutationVariables> {
+    document = UpdateSaleStageDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -892,6 +1021,41 @@ export const FindSalesWithComplexFilterDocument = gql`
   })
   export class FindSalesWithComplexFilterGQL extends Apollo.Query<FindSalesWithComplexFilterQuery, FindSalesWithComplexFilterQueryVariables> {
     document = FindSalesWithComplexFilterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CommentsBySaleDocument = gql`
+    query CommentsBySale($saleId: ID!, $saleType: String!) {
+  commentsBySale(saleId: $saleId, saleType: $saleType) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      name
+    }
+    saleId
+    saleType
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CommentsBySaleGQL extends Apollo.Query<CommentsBySaleQuery, CommentsBySaleQueryVariables> {
+    document = CommentsBySaleDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
