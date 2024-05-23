@@ -50,10 +50,8 @@ mutation CreateComment($createCommentInput: CreateCommentInput!) {
       id
       username
     }
-    sale {
-      id
-      # Add other sale fields if necessary
-    }
+    saleId
+    saleType
     parentComment {
       id
       text
@@ -87,5 +85,37 @@ mutation UpdateComment($id: String!, $updateCommentInput: UpdateCommentInput!) {
       id
       text
     }
+  }
+}
+
+mutation CreateSaleStage(
+  $createSaleStageInput: CreateSaleStageInput!
+  $userId: ID!
+) {
+  createSaleStage(
+    createSaleStageInput: $createSaleStageInput
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+
+mutation UpdateSaleStage(
+  $id: ID!
+  $updateSaleStageInput: UpdateSaleStageInput!
+  $userId: ID!
+) {
+  updateSaleStage(
+    id: $id
+    updateSaleStageInput: $updateSaleStageInput
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
   }
 }

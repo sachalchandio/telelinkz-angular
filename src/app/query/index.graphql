@@ -102,3 +102,26 @@ query GetXfinitySaleComments($id: ID!) {
     }
   }
 }
+
+query CommentsBySale($saleId: ID!, $saleType: String!) {
+  commentsBySale(saleId: $saleId, saleType: $saleType) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      name
+    }
+    saleId
+    saleType
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
+  }
+}
