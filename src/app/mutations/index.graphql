@@ -39,3 +39,53 @@ mutation RegisterUser($input: RegisterUserInput!) {
     userType
   }
 }
+
+mutation CreateComment($createCommentInput: CreateCommentInput!) {
+  createComment(createCommentInput: $createCommentInput) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      username
+    }
+    sale {
+      id
+      # Add other sale fields if necessary
+    }
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
+  }
+}
+
+mutation UpdateComment($id: String!, $updateCommentInput: UpdateCommentInput!) {
+  updateComment(id: $id, updateCommentInput: $updateCommentInput) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      name
+    }
+    sale {
+      id
+      # Add other sale fields if necessary
+    }
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
+  }
+}
