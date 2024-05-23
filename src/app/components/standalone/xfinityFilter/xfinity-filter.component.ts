@@ -16,7 +16,7 @@ import {
   XfinityInternet,
   TpvStatus,
   UsState,
-  SaleStatus,
+  InstallationType,
   GetAllAgentsGQL,
   User,
   UserType,
@@ -41,7 +41,7 @@ export class XfinityFilter implements OnInit {
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   displayedColumns: string[] = []; // Adjust based on your data
-  saleStatuses = Object.values(SaleStatus);
+  saleStatuses = Object.values(InstallationType);
   USStates = Object.values(UsState);
   InternetPackages = Object.values(XfinityInternet);
   TVPackages = Object.values(XfinityTv);
@@ -61,7 +61,7 @@ export class XfinityFilter implements OnInit {
     orderNumber: new FormControl(''),
     installationDate: new FormControl(''),
     installationTime: new FormControl(''),
-    installation: new FormControl(SaleStatus.Undetermined),
+    installation: new FormControl(InstallationType.Undetermined),
     streetAddress: new FormControl(''),
     streetAddressLine2: new FormControl(''),
     city: new FormControl(''),

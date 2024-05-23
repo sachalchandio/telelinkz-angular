@@ -64,7 +64,7 @@ export type CreateXfinitySaleInput = {
   cx_firstName: Scalars['String']['input'];
   cx_lastName: Scalars['String']['input'];
   email: Scalars['String']['input'];
-  installation: SaleStatus;
+  installation: InstallationType;
   installationDate: Scalars['String']['input'];
   installationTime: Scalars['String']['input'];
   orderDate: Scalars['String']['input'];
@@ -79,6 +79,14 @@ export type CreateXfinitySaleInput = {
   streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
   zipcode: Scalars['String']['input'];
 };
+
+/** Possible statuses of Installation */
+export enum InstallationType {
+  Complete = 'COMPLETE',
+  ProInstallation = 'PRO_INSTALLATION',
+  SelfInstallation = 'SELF_INSTALLATION',
+  Undetermined = 'UNDETERMINED'
+}
 
 export type LoginUserInput = {
   /** User email */
@@ -137,7 +145,6 @@ export type Query = {
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getAllAgents: Array<UserDto>;
   getXfinitySaleById: XfinitySale;
-  getXfinitySalesDataByYear: Array<XfinitySalesByYear>;
   loginUser: LoginUserResponse;
 };
 
@@ -159,11 +166,6 @@ export type QueryFindSalesWithComplexFilterArgs = {
 
 export type QueryGetXfinitySaleByIdArgs = {
   id: Scalars['String']['input'];
-};
-
-
-export type QueryGetXfinitySalesDataByYearArgs = {
-  query: XfinitySalesByYearInput;
 };
 
 
@@ -195,14 +197,6 @@ export type RegisterUserResponseDto = {
   /** User type */
   userType: UserType;
 };
-
-/** Possible statuses of Installation */
-export enum SaleStatus {
-  Complete = 'COMPLETE',
-  ProInstallation = 'PRO_INSTALLATION',
-  SelfInstallation = 'SELF_INSTALLATION',
-  Undetermined = 'UNDETERMINED'
-}
 
 /** TPV Status to confirm if it was completed successfully */
 export enum TpvStatus {
@@ -449,7 +443,7 @@ export type XfinitySaleFilterInputDto = {
   email?: InputMaybe<Scalars['String']['input']>;
   endDate?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  installation?: InputMaybe<SaleStatus>;
+  installation?: InputMaybe<InstallationType>;
   installationDate?: InputMaybe<Scalars['String']['input']>;
   installationTime?: InputMaybe<Scalars['String']['input']>;
   orderDate?: InputMaybe<Scalars['String']['input']>;
@@ -465,16 +459,6 @@ export type XfinitySaleFilterInputDto = {
   streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: InputMaybe<Scalars['String']['input']>;
   zipcode?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type XfinitySalesByYear = {
-  __typename?: 'XfinitySalesByYear';
-  data: Array<Scalars['Int']['output']>;
-  label: Scalars['String']['output'];
-};
-
-export type XfinitySalesByYearInput = {
-  year: Scalars['Int']['input'];
 };
 
 /** List of available Xfinity TV packages */

@@ -5,7 +5,7 @@ import {
   CreateXfinitySaleGQL,
   CreateXfinitySaleInput,
   CreateXfinitySaleMutationVariables,
-  SaleStatus,
+  InstallationType,
   TpvStatus,
   UsState,
   XfinityInternet,
@@ -216,8 +216,8 @@ export class RecordSearch {
       installationTime: formattedTime || '00:00:00',
       installation:
         row['Installation'] === 'Self Install'
-          ? SaleStatus.SelfInstallation
-          : SaleStatus.ProInstallation,
+          ? InstallationType.SelfInstallation
+          : InstallationType.ProInstallation,
       streetAddress: row['Street Address'] || null,
       streetAddressLine2: row['Street Address Line 2'] || null, // Provide default value if necessary
       city: row['City'] || null,
