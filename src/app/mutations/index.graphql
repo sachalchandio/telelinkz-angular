@@ -39,3 +39,99 @@ mutation RegisterUser($input: RegisterUserInput!) {
     userType
   }
 }
+
+mutation CreateComment($createCommentInput: CreateCommentInput!) {
+  createComment(createCommentInput: $createCommentInput) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      name
+    }
+    saleId
+    saleType
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
+  }
+}
+
+mutation UpdateComment($id: String!, $updateCommentInput: UpdateCommentInput!) {
+  updateComment(id: $id, updateCommentInput: $updateCommentInput) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      name
+    }
+    saleId
+    saleType
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
+  }
+}
+mutation SetSaleStage(
+  $saleId: ID!
+  $saleType: SaleType!
+  $stage: SaleFlag!
+  $userId: ID!
+) {
+  setSaleStage(
+    saleId: $saleId
+    saleType: $saleType
+    stage: $stage
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+
+mutation CreateSaleStage(
+  $createSaleStageInput: CreateSaleStageInput!
+  $userId: ID!
+) {
+  createSaleStage(
+    createSaleStageInput: $createSaleStageInput
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+
+mutation UpdateSaleStage(
+  $id: ID!
+  $updateSaleStageInput: UpdateSaleStageInput!
+  $userId: ID!
+) {
+  updateSaleStage(
+    id: $id
+    updateSaleStageInput: $updateSaleStageInput
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}

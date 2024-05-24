@@ -17,6 +17,19 @@ query GetAllAgents {
   }
 }
 
+query GetSaleStage($id: ID!) {
+  saleStage(id: $id) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+
+query GetSaleFlag($saleId: ID!, $saleType: SaleType!) {
+  getSaleFlag(saleId: $saleId, saleType: $saleType)
+}
+
 query findAllSalesByAgentName($agentName: String!) {
   findAllSalesByAgentName(agentName: $agentName) {
     id
@@ -76,5 +89,28 @@ query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
     Phone
     HMS
     agentName
+  }
+}
+
+query CommentsBySale($saleId: ID!, $saleType: String!) {
+  commentsBySale(saleId: $saleId, saleType: $saleType) {
+    id
+    text
+    fieldName
+    status
+    user {
+      id
+      name
+    }
+    saleId
+    saleType
+    parentComment {
+      id
+      text
+    }
+    replies {
+      id
+      text
+    }
   }
 }

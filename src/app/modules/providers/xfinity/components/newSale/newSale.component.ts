@@ -4,7 +4,7 @@ import {
   CreateXfinitySaleMutation,
   CreateXfinitySaleMutationVariables,
   CreateXfinitySaleDocument,
-  SaleStatus,
+  InstallationType,
   UsState,
   TpvStatus,
   XfinityInternet,
@@ -31,7 +31,7 @@ export class XfinityNewSale implements OnInit {
     installationDate: '',
     installationTime: '',
     orderDate: '',
-    installation: SaleStatus.Undetermined,
+    installation: InstallationType.Undetermined,
     streetAddress: '',
     streetAddressLine2: '',
     city: '',
@@ -49,7 +49,7 @@ export class XfinityNewSale implements OnInit {
     HMS: XfinityHomeSecurity.None,
   };
 
-  installationTypes = Object.values(SaleStatus);
+  installationTypes = Object.values(InstallationType);
   states = Object.values(UsState);
   internetTypes = Object.values(XfinityInternet);
   tvTypes = Object.values(XfinityTv);
