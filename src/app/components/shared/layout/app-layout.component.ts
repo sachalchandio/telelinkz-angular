@@ -14,4 +14,9 @@ export class AppLayoutComponent {
   onToggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
   }
+  isRightSidebarActive = false;
+
+  onToggleRightSidebar() {
+    this.isRightSidebarActive = !this.isRightSidebarActive;
+  }
 }

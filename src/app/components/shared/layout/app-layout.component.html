@@ -3,8 +3,8 @@
     <app-header [class.now_closed]="isSidebarActive" class="my_opppen"></app-header>
   </div>
   <div class="main-screen">
-    <navbarTop (toggleSidebar)="onToggleSidebar()"></navbarTop>
+    <navbarTop (toggleSidebar)="onToggleSidebar()" (toggleRightSidebar)="onToggleRightSidebar()" class="top_navBar"></navbarTop>
     <router-outlet></router-outlet>
-    <!-- <app-rightBar></app-rightBar> -->
+    <app-rightBar [class.showSidebar]="isRightSidebarActive" class="rightsidebar"></app-rightBar>
   </div>
 </div>

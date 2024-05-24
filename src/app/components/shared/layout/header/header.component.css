@@ -6,10 +6,6 @@
   width: 250px;
   transform: 0.5s;
 }
-.now_closed .left_side_header {
-  width: 0px;
-  overflow: hidden;
-}
 .left_side_header *{
   font-family: "DM Sans", sans-serif !important;
 }
@@ -119,4 +115,12 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
 }
 .my_sub_list {
   padding-left: 25px;
+}
+.welcome_note {
+  margin-top: auto;
+}
+.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

@@ -16,8 +16,13 @@ export class NavbarTopComponent {
   constructor(private authService: AuthenticationService) {}
   @Output() toggleSidebar = new EventEmitter<void>();
 
+  @Output() toggleRightSidebar = new EventEmitter<void>();
+
   onButtonClick() {
     this.toggleSidebar.emit();
+  }
+  onRightButtonClick() {
+    this.toggleRightSidebar.emit();
   }
 
 }

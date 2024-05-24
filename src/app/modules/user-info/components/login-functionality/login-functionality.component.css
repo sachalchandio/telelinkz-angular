@@ -159,3 +159,62 @@ img{
     height: 250px;
   }
 }
+/*new card css start from here*/
+.user_card{
+  background-color: #fff;
+  padding: .625rem 1.25rem;
+  border: 1px solid #dbe0e5;
+  box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12);
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+.user_image{
+  border-radius: 100px;
+  padding: 10px;
+  border: 5px solid #dbe0e5;
+}
+.user_name{
+  color: rgb(29, 38, 48);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 25px;
+}
+.text-center{
+  text-align: center;
+  margin-top: 2rem;
+}
+.chat-avtar {
+  position: relative;
+  margin: auto auto;
+  display: inline-flex !important;
+}
+.social_icon svg{
+  width: 20px;
+  height: 20px;
+}
+.user_icon_list{
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+}
+.social_icon{
+  background: #ebedef;
+  color: #39465F;
+  border-color: #ebedef;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+}

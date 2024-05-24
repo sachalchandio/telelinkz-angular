@@ -13,8 +13,8 @@ main[_ngcontent-ng-c2913988393] {
   padding-top: 15px;
 }
 .full_vh{
-  height: 100vh;
-  overflow-y: auto;
+  /* height: 100vh; */
+  /* overflow-y: auto; */
   padding: 0px 20px;
 }
 .table-container {

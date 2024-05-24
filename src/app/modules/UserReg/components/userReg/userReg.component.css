@@ -23,8 +23,8 @@ p {
   margin: 0;
 }
 
-.all-main img {
-  width: 100%;
+img{
+  max-width: 100%;
 }
 
 .all-main a {
@@ -42,8 +42,12 @@ p {
 
 .all-welcome-back {
   display: flex;
-  max-width: 1440px;
+  max-width: 1080px;
   margin: 0 auto;
+  /* box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12); */
+  border: 1px solid #dbe0e5;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .welcome-content {
@@ -58,7 +62,7 @@ p {
 }
 
 .innov8ivs-login {
-  padding: 28px 53px 0px;
+  padding: 20px;
 }
 
 .welcome-heading p {
@@ -84,7 +88,7 @@ p {
 }
 
 .welcome-back-heading {
-  margin-top: 91px;
+  margin-top: 20spx;
 }
 
 .welcome-back-heading p {
@@ -265,7 +269,9 @@ p {
 .innov8ivs-image {
   position: relative;
 }
-
+.innov8ivs-image img{
+  height: 100%;
+}
 .hore-top-developer {
   background-image: url(/src/assets/images/login-2.webp);
   width: 547px;
