@@ -9,6 +9,9 @@ import { XfinityRoutingModule } from './routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { XfinityFilter } from 'src/app/components/standalone/xfinityFilter/xfinity-filter.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 const COMPONETS = [
   comp.XfinityComponent,
@@ -31,6 +34,9 @@ const COMPONETS = [
     MatTableModule,
     MatIconModule,
     XfinityFilter,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
 })
 export class XfinityModule {}

@@ -4,9 +4,9 @@ import {
   SetSaleStageDocument,
   SaleFlag,
   SaleType,
-  GetSaleStageQuery,
-  GetSaleStageDocument,
-  GetSaleStageQueryVariables,
+  GetSaleFlagDocument,
+  GetSaleFlagQuery,
+  GetSaleFlagQueryVariables,
 } from 'src/generated/graphqlTypes';
 
 @Injectable({
@@ -15,11 +15,12 @@ import {
 export class SaleStageService {
   constructor(private apollo: Apollo) {}
 
-  getSaleStage(saleId: string) {
-    return this.apollo.query<GetSaleStageQuery, GetSaleStageQueryVariables>({
-      query: GetSaleStageDocument,
+  getSaleStage(saleId: string, saleType: SaleType) {
+    return this.apollo.query<GetSaleFlagQuery, GetSaleFlagQueryVariables>({
+      query: GetSaleFlagDocument,
       variables: {
-        id: saleId,
+        saleId: saleId,
+        saleType: saleType,
       },
     });
   }

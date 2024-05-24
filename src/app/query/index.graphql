@@ -26,6 +26,10 @@ query GetSaleStage($id: ID!) {
   }
 }
 
+query GetSaleFlag($saleId: ID!, $saleType: SaleType!) {
+  getSaleFlag(saleId: $saleId, saleType: $saleType)
+}
+
 query findAllSalesByAgentName($agentName: String!) {
   findAllSalesByAgentName(agentName: $agentName) {
     id

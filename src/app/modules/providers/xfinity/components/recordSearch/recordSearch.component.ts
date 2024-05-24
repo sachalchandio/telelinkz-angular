@@ -37,6 +37,7 @@ export class RecordSearch implements OnInit {
   sales: FindAllSalesByAgentNameQuery['findAllSalesByAgentName'] = [];
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
+  saleFlags = Object.values(SaleFlag);
   displayedColumns: string[] = [
     'SaleFlag',
     'ID',
@@ -70,15 +71,15 @@ export class RecordSearch implements OnInit {
     });
   }
 
-  async onRowClick(row: any): Promise<void> {
-    console.log('Row clicked:', row);
+  async onStatusChange(row: any, selectedStatus: SaleFlag): Promise<void> {
+    console.log('Row updated:', row, 'Selected Status:', selectedStatus);
 
     // Example userId, replace with the actual user ID
     const userId = '4a1b9056-4844-4964-8438-4c2be59e499c';
 
     try {
       const response = await this.saleStageService
-        .setSaleStage(row.ID, SaleType.XfinitySale, SaleFlag.Built, userId)
+        .setSaleStage(row.ID, SaleType.XfinitySale, selectedStatus, userId)
         .toPromise();
       if (response?.data) {
         console.log('Sale stage set:', response.data);
@@ -87,81 +88,6 @@ export class RecordSearch implements OnInit {
       }
     } catch (error) {
       console.error('Error setting sale stage:', error);
-    }
-  }
-
-  // onNameSubmit(): void {
-  //   // Logic to handle form submission
-  //   if (this.searchForm.value.nameInput) {
-  //     this.getSalesByAgentName(this.searchForm.value.nameInput);
-  //   }
-  // }
-
-  // getSalesByAgentName(agentName: string): void {
-  //   this.findAllSalesByAgentNameGQL
-  //     .watch({ agentName })
-  //     .valueChanges.subscribe({
-  //       next: async (response) => {
-  //         const transformedData: TableData[] = await Promise.all(
-  //           response.data.findAllSalesByAgentName.map(async (sale) => ({
-  //             ID: sale.id,
-  //             SaleFlag:
-  //               (await this.getSaleFlag(sale.id)) || SaleFlag.Unassigned,
-  //             'Order Date': sale.orderDate,
-  //             'Agent Name': sale.agentName,
-  //             'Customer First Name': sale.cx_firstName,
-  //             'Customer Last Name': sale.cx_lastName,
-  //             'Order Number': sale.orderNumber,
-  //             'Installation Date': sale.installationDateFormatted,
-  //             'Installation Time': sale.installationTime,
-  //             'Installation Type': sale.installation,
-  //             'Street Address': sale.streetAddress,
-  //             'Street Address Line 2': sale.streetAddressLine2 || '',
-  //             City: sale.city,
-  //             State: sale.state,
-  //             Zipcode: sale.zipcode,
-  //             'Phone Number': sale.phoneNumber,
-  //             'Second Phone Number': sale.phoneNumber_second || '',
-  //             'Social Security Number': sale.socialSecurityNumber || '',
-  //             Email: sale.email,
-  //             Product: sale.product,
-  //             'Package Sold': sale.packageSold,
-  //             'Comcast TPV Status': sale.comcastTpvStatus,
-  //             'Concert Order ID': sale.concertOrderId,
-  //             Internet: sale.Internet,
-  //             TV: sale.TV,
-  //             Phone: sale.Phone,
-  //             HMS: sale.HMS,
-  //           }))
-  //         );
-  //         // Assuming you have a way to set this transformed data to your table's dataSource.
-  //         this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
-  //         console.log(transformedData);
-  //         if (transformedData.length > 0) {
-  //           this.displayedColumns = Object.keys(transformedData[0]);
-  //         }
-  //       },
-  //       error: (error) => {
-  //         console.error('There was an error fetching the sales', error);
-  //       },
-  //     });
-  // }
-
-  async getSaleFlag(saleId: string): Promise<SaleFlag | null> {
-    try {
-      const response = await this.saleStageService
-        .getSaleStage(saleId)
-        .toPromise();
-      const stage = response?.data?.saleStage.stage;
-
-      if (stage && Object.values(SaleFlag).includes(stage as SaleFlag)) {
-        return stage as SaleFlag;
-      }
-
-      return null;
-    } catch (error) {
-      console.error('Error fetching sale stage:', error);
-      return null;
     }
   }
 

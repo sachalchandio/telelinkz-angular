@@ -205,6 +205,7 @@ export type Query = {
   findAllSalesByAgentName: Array<XfinitySaleDto>;
   findSalesWithComplexFilter: Array<XfinitySaleDto>;
   getAllAgents: Array<UserDto>;
+  getSaleFlag: SaleFlag;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
   saleStage: SaleStage;
@@ -230,6 +231,12 @@ export type QueryFindAllSalesByAgentNameArgs = {
 
 export type QueryFindSalesWithComplexFilterArgs = {
   filter: XfinitySaleFilterInputDto;
+};
+
+
+export type QueryGetSaleFlagArgs = {
+  saleId: Scalars['ID']['input'];
+  saleType: SaleType;
 };
 
 
@@ -719,6 +726,14 @@ export type GetSaleStageQueryVariables = Exact<{
 
 export type GetSaleStageQuery = { __typename?: 'Query', saleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
 
+export type GetSaleFlagQueryVariables = Exact<{
+  saleId: Scalars['ID']['input'];
+  saleType: SaleType;
+}>;
+
+
+export type GetSaleFlagQuery = { __typename?: 'Query', getSaleFlag: SaleFlag };
+
 export type FindAllSalesByAgentNameQueryVariables = Exact<{
   agentName: Scalars['String']['input'];
 }>;
@@ -1008,6 +1023,22 @@ export const GetSaleStageDocument = gql`
   })
   export class GetSaleStageGQL extends Apollo.Query<GetSaleStageQuery, GetSaleStageQueryVariables> {
     document = GetSaleStageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetSaleFlagDocument = gql`
+    query GetSaleFlag($saleId: ID!, $saleType: SaleType!) {
+  getSaleFlag(saleId: $saleId, saleType: $saleType)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetSaleFlagGQL extends Apollo.Query<GetSaleFlagQuery, GetSaleFlagQueryVariables> {
+    document = GetSaleFlagDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
