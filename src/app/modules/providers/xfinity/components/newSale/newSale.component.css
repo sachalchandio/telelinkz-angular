@@ -6,4 +6,212 @@
 .rightBar {
     background-color: #000;
     padding: 10px 20px;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.new_sale_wraper{
+    padding: 0 1.875rem;
+}
+.my_form {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 11px;
+  margin: 48px 0px 30px 0;
+  box-shadow: 0 1px 2px rgba(56, 65, 74, 0.15);
+  font-family: "Poppins", sans-serif;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 25%;
+  position: relative;
+}
+.form-group i {
+  position: absolute;
+  color: #b9b9b9;
+  font-size: 14px;
+  position: absolute;
+  color: #b9b9b9;
+  top: 12px;
+  left: 9px;
+}
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 10px;
+  position: absolute;
+  top: -7px;
+  left: 11px;
+  background-color: transparent;
+  padding: 0 5px;
+  z-index: 2;
+  /* position: relative; */
+}
+.form-group label::after{
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    z-index: -1;
+}
+
+.form-group input,
+.form-group select {
+  width: 83%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #757575;
+  padding-left: 38px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.form-group input:focus-visible,
+.form-group select:focus-visible{
+  border-color: #fff;
+  background-color: #ffac0b;
+  outline: none;
+  color: #ffffff;
+}
+.form-group input:focus-visible + i,
+.form-group select:focus-visible + i{
+  color: #fff;
+} 
+
+.form-group select {
+  width: 96%;
+}
+
+/* button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 21px;
+  margin-left: auto;
+  background-color: #0e72fe;
+} */
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  height: auto;
+}
+.form-group button {
+  padding: 0;
+  height: 34px;
+  width: 66px;
+}
+.form-group::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 33px;
+  width: 1px;
+  height: 16px;
+  background: #b5b5b5;
+}
+.form-group input:focus-visible ~ i {
+  color: #fff;
+}
+.form-group:focus-visible ~ i {
+  color: #fff;
+}
+.dashboard_inner_header{
+  min-height: 115px;
+  background-position: center;
+  background-size: cover;
+  max-width: 100%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  margin: 46px 0 0 0;
+}
+.dashboard_inner_header::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -22px;
+  --bgWidth: 10000px;
+  height: 100px;
+  background: linear-gradient(to right, #1e5799 0%, #33167a 19%, #5449eb 60%, #8700a3 83%, #1e5799 100%);
+  background-size: var(--bgWidth) 100%;
+  animation: bg 10s linear infinite;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 15px;
+}
+.dns_inner_img img{
+  max-width: 200px;
+  position: relative;
+}
+.dsi_half_right{
+  position: relative;
+}
+.dsi_half_right img {
+  position: absolute;
+  right: 0;
+  bottom: -75px;
+  width: 200px;
+}
+@keyframes bg {
+  0% {
+    background-position-x: 0;
+  }
+  
+  100% {
+    background-position-x: calc(var(--bgWidth) * 1);
+  }
+}
+.dns_inner_img{
+    width: 188px;
+}
+h1.new_sale {
+    color: #fff;
+    position: relative;
+    font-size: 3.125rem;
+    font-weight: 500;
+}
+.xf_btns{
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 21px;
+    margin-left: auto;
+    background: linear-gradient(90deg, rgba(39, 19, 104, 1) 22%, rgba(107, 27, 222, 1) 47%, rgba(118, 0, 149, 1) 100%);
+    width: 150px;
+    min-height: 42px;
+    font-size: 19px;
+    margin-left: auto;
+}
+@media screen and (max-width:1600px) {
+  .form-group input {
+  width: 77%;
+}
+}
+@media screen and (min-width:1440px){
+  .form-group input,
+.form-group select {
+  font-size: 12px;
+}
+.form-group i {
+  font-size: 17px;
+}
 }
