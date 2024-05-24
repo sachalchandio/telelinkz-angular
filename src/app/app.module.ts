@@ -19,12 +19,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgChartsModule } from 'ng2-charts';
+import { UserInfoModule } from './modules/user-info/user-info.module';
+import {
+  SideBarLoginComponent,
+  UserfeedComponent,
+} from './modules/user-info/components';
 
 const COMPONENTS = [
   // shared
   shared.AppLayoutComponent,
   shared.FooterComponent,
   shared.HeaderComponent,
+  shared.rightBarComponent,
+  shared.NavbarTopComponent,
   ErrorMessageDialog,
 ];
 
@@ -44,6 +51,8 @@ const COMPONENTS = [
     MatListModule,
     MatToolbarModule,
     NgChartsModule,
+    UserfeedComponent,
+    SideBarLoginComponent,
     // UserRegModule,
     // LoginModule,
   ],

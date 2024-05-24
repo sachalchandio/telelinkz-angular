@@ -1,0 +1,220 @@
+.container {
+  max-width: 600px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+img{
+  max-width: 100%;
+}
+
+.card-wrapper{
+  width: 300px;
+  height: 290px;
+  position: relative;
+}
+.card {
+  position: absolute;
+  /* top: 50%;
+  left: 50%; */
+  width: 310px;
+  height: 270px;
+  /* transform: translate(-50%, -50%); */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: 0.5s;
+
+  .card-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #000;
+    transition: 0.5s;
+  }
+
+  &:hover img {
+    opacity: 0.4;
+    transition: 0.5s;
+  }
+}
+
+.card:hover .card-image {
+  transform: translateY(-100px);
+  transition: all 0.9s;
+}
+
+/**** Social Icons *****/
+
+.social-icons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+
+  li {
+    list-style: none;
+
+    a {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background: #fff;
+      font-size: 23px;
+      color: #333;
+      font-weight: bold;
+      margin: 0 6px;
+      transition: 0.4s;
+      transform: translateY(200px);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.card:hover .social-icons li a {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.social-icons li a:hover {
+  background: #000;
+  transition: 0.2s;
+  .fab {
+    color: #fff;
+  }
+}
+
+.social-icons li a .fab {
+  transition: 0.8s;
+
+  &:hover {
+    transform: rotateY(360deg);
+    color: #fff;
+  }
+}
+
+.card:hover li:nth-child(1) a {
+  transition-delay: 0.1s;
+}
+.card:hover li:nth-child(2) a {
+  transition-delay: 0.2s;
+}
+.card:hover li:nth-child(3) a {
+  transition-delay: 0.3s;
+}
+.card:hover li:nth-child(4) a {
+  transition-delay: 0.4s;
+}
+
+/**** Personal Details ****/
+
+.details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 80px;
+    z-index: 1;
+    padding: 10px;
+
+
+  h2 {
+    margin: 0px 0;
+    padding: 0;
+    text-align: center;
+
+    .job-title {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: #333;
+      font-weight: 300;
+    }
+  }
+}
+.social-icons {
+  padding: 0 !important;
+}
+@media screen and (max-width:1500px) {
+  .card-wrapper{
+    width: 250px;
+    height: 250px;
+  }
+  .card {
+    position: absolute;
+    /* top: 50%;
+    left: 50%; */
+    width: 250px;
+    height: 250px;
+  }
+}
+/*new card css start from here*/
+.user_card{
+  background-color: #fff;
+  padding: .625rem 1.25rem;
+  border: 1px solid #dbe0e5;
+  box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12);
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+.user_image{
+  border-radius: 100px;
+  padding: 10px;
+  border: 5px solid #dbe0e5;
+}
+.user_name{
+  color: rgb(29, 38, 48);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 25px;
+}
+.text-center{
+  text-align: center;
+  margin-top: 2rem;
+}
+.chat-avtar {
+  position: relative;
+  margin: auto auto;
+  display: inline-flex !important;
+}
+.social_icon svg{
+  width: 20px;
+  height: 20px;
+}
+.user_icon_list{
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+}
+.social_icon{
+  background: #ebedef;
+  color: #39465F;
+  border-color: #ebedef;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+}

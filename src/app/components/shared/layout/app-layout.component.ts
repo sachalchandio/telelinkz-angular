@@ -9,4 +9,14 @@ import { CommonModule } from '@angular/common';
 })
 export class AppLayoutComponent {
   constructor() {}
+  isSidebarActive = false;
+
+  onToggleSidebar() {
+    this.isSidebarActive = !this.isSidebarActive;
+  }
+  isRightSidebarActive = false;
+
+  onToggleRightSidebar() {
+    this.isRightSidebarActive = !this.isRightSidebarActive;
+  }
 }

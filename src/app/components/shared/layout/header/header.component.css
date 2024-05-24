@@ -3,6 +3,8 @@
   overflow: hidden;
   background-color: #fff;
   border-right: 2px solid #e4f2ff;
+  width: 250px;
+  transform: 0.5s;
 }
 .left_side_header *{
   font-family: "DM Sans", sans-serif !important;
@@ -18,6 +20,7 @@
 mat-sidenav {
   width: 250px;
 }
+
 .nav-link .mat-mdc-list-item-unscoped-content {
   display: inline-block;
 }
@@ -112,4 +115,12 @@ span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
 }
 .my_sub_list {
   padding-left: 25px;
+}
+.welcome_note {
+  margin-top: auto;
+}
+.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

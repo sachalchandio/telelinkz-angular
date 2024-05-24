@@ -7,3 +7,40 @@
 .ng-star-inserted {
   width: 100%;
 }
+.main-screen {
+  width: 100%;
+  height: calc(100vh - 25px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  background-color: #f4f7fa;
+}
+.my_opppen{
+  width: 250px;
+  transition: 0.5s;
+  scroll-behavior:smooth ;
+  display: block;
+  overflow: hidden;
+}
+.now_closed{
+  width: 0px;
+  overflow: hidden;
+  display: inline-block;
+}
+.rightsidebar{
+  position: fixed;
+  top: 0;
+  right: -340px;
+  height: 100vh;
+  z-index: 1;
+  transition: 0.5s;
+}
+.showSidebar{
+  right: 0px;
+}
+.top_navBar{
+  position: relative;
+  z-index: 3;
+}
+
+

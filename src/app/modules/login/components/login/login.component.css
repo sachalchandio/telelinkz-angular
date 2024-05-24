@@ -1,3 +1,9 @@
+.all-main.modal{
+  /* width: 63vw; */
+  /* height: 100vh; */
+  overflow-x:hidden;
+  overflow: auto;
+}
 .error-message {
   color: red;
   font-size: 14px;
@@ -21,9 +27,8 @@ h6,
 p {
   margin: 0;
 }
-
-.all-main img {
-  width: 100%;
+img{
+  max-width: 100%;
 }
 
 .all-main a {
@@ -38,11 +43,17 @@ p {
   letter-spacing: 0em;
   text-align: left;
 }
-
+.welcome-heading img{
+  max-width: 200px;
+}
 .all-welcome-back {
   display: flex;
-  max-width: 1440px;
+  max-width: 1080px;
   margin: 0 auto;
+  /* box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12); */
+  border: 1px solid #dbe0e5;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .welcome-content {
@@ -57,8 +68,12 @@ p {
 .innov8ivs-image {
   width: 50%;
 }
+.innov8ivs-image > img{
+  height: 100%;
+  filter: blur(2px);
+}
 .innov8ivs-login {
-  padding: 56px 0px;
+  padding: 35px 0px;
   background-color: #f0f2f5;
 }
 
@@ -85,7 +100,7 @@ p {
 }
 
 .welcome-back-heading {
-  margin-top: 91px;
+  margin-top: 50px;
 }
 
 .welcome-back-heading p {
@@ -312,6 +327,18 @@ p {
 }
 .welcome-back {
   overflow-y: hidden;
+}
+.welcome-back {
+  max-width: 1000px;
+  margin: auto;
+  vertical-align: middle;
+}
+.welcome-back {
+  max-width: 1000px;
+  margin: auto;
+  vertical-align: middle;
+  padding-top: 68px;
+  align-items: stretch;
 }
 @media only screen and (max-width: 1600px) {
   .welcome-content {

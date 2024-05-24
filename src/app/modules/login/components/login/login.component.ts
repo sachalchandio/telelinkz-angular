@@ -78,6 +78,7 @@ export class LoginComponent implements OnDestroy {
                   // Store Certain Data for later use
                   localStorage.setItem('loginData', JSON.stringify(loginData));
                   localStorage.setItem('email', loginData.email || '');
+                  localStorage.setItem('userType', loginData.userType || '');
                   // Retrieve the loginData from localStorage
                   const storedLoginData = localStorage.getItem('loginData');
 

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TalentPoolMain } from './talent-pool-main.component';
+import {  NavbarTopComponent } from './navbarTop.component';
 
-describe('TalentPoolMain', () => {
-  let component: TalentPoolMain;
-  let fixture: ComponentFixture<TalentPoolMain>;
+describe('NavbarTopComponent', () => {
+  let component: NavbarTopComponent;
+  let fixture: ComponentFixture<NavbarTopComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TalentPoolMain]
+      declarations: [NavbarTopComponent]
     });
-    fixture = TestBed.createComponent(TalentPoolMain);
+    fixture = TestBed.createComponent(NavbarTopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
