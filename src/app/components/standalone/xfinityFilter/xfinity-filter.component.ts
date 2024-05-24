@@ -18,11 +18,12 @@ import {
   UsState,
   InstallationType,
   GetAllAgentsGQL,
-  User,
   UserType,
-  LoginUserQuery,
+  SaleFlag,
+  SaleType,
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
+import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
 
 export interface TableData {
   [key: string]: string | number;
@@ -83,18 +84,38 @@ export class XfinityFilter implements OnInit {
   });
 
   constructor(
-    // private apollo: Apollo,
     private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL,
     private xfinityDataService: XfinitySharedDataService,
-    private getAllAgentsGQL: GetAllAgentsGQL
+    private getAllAgentsGQL: GetAllAgentsGQL,
+    private saleStageService: SaleStageService // Ensure this is injected correctly
   ) {}
 
   ngOnInit(): void {
     this.getAgentNames();
   }
 
+  async onRowClick(row: any): Promise<void> {
+    console.log('Row clicked:', row);
+
+    // Example userId, replace with the actual user ID
+    const userId = '4a1b9056-4844-4964-8438-4c2be59e499c';
+
+    try {
+      const response = await this.saleStageService
+        .setSaleStage(row.ID, SaleType.XfinitySale, SaleFlag.Built, userId)
+        .toPromise();
+      if (response?.data) {
+        console.log('Sale stage set:', response.data);
+      } else {
+        console.error('Error: Response data is undefined');
+      }
+    } catch (error) {
+      console.error('Error setting sale stage:', error);
+    }
+  }
+
   getAgentNames(): void {
-    this.agentType = localStorage.getItem('agentType') as UserType;
+    this.agentType = localStorage.getItem('userType') as UserType;
     if (
       this.agentType === UserType.Admin ||
       this.agentType === UserType.Manager
@@ -112,17 +133,35 @@ export class XfinityFilter implements OnInit {
     }
   }
 
+  async getSaleFlag(saleId: string): Promise<SaleFlag | null> {
+    try {
+      const response = await this.saleStageService
+        .getSaleStage(saleId)
+        .toPromise();
+      const stage = response?.data?.saleStage.stage;
+
+      if (stage && Object.values(SaleFlag).includes(stage as SaleFlag)) {
+        return stage as SaleFlag;
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Error fetching sale stage:', error);
+      return null;
+    }
+  }
+
   onFilterSubmit(): void {
     if (this.filterForm.valid) {
       const formValue: Partial<XfinitySaleFilterInputDto> =
         this.filterForm.value;
 
       for (const [key, value] of Object.entries(formValue)) {
-        if (!value && value == 'NONE') {
+        if (!value && value === 'NONE') {
           delete formValue[key as keyof XfinitySaleFilterInputDto];
         }
 
-        if (value == 'UNDETERMINED') {
+        if (value === 'UNDETERMINED') {
           delete formValue[key as keyof XfinitySaleFilterInputDto];
         }
       }
@@ -137,56 +176,55 @@ export class XfinityFilter implements OnInit {
       .watch({ filter })
       .valueChanges.subscribe({
         next: (response) => {
-          const transformedData: TableData[] =
-            response.data.findSalesWithComplexFilter.map((sale) => ({
-              ID: sale.id,
-              'Order Date': sale.orderDate,
-              'Agent Name': sale.agentName,
-              'Customer First Name': sale.cx_firstName,
-              'Customer Last Name': sale.cx_lastName,
-              'Order Number': sale.orderNumber,
-              'Installation Date': sale.installationDateFormatted,
-              'Installation Time': sale.installationTime,
-              'Installation Type': sale.installation,
-              'Street Address': sale.streetAddress,
-              'Street Address Line 2': sale.streetAddressLine2 || '',
-              // prettier-ignore
-              'City': sale.city,
-              // prettier-ignore
-              'State': sale.state,
-              // prettier-ignore
-              'Zipcode': sale.zipcode,
-              'Phone Number': sale.phoneNumber,
-              'Second Phone Number': sale.phoneNumber_second || '',
-              'Social Security Number': sale.socialSecurityNumber || '',
-              // prettier-ignore
-              'Email': sale.email,
-              // prettier-ignore
-              'Product': sale.product,
-              'Package Sold': sale.packageSold,
-              'Comcast TPV Status': sale.comcastTpvStatus,
-              'Concert Order ID': sale.concertOrderId,
-              // prettier-ignore
-              'Internet': sale.Internet,
-              // prettier-ignore
-              'TV': sale.TV,
-              // prettier-ignore
-              'Phone': sale.Phone,
-              // prettier-ignore
-              'HMS': sale.HMS,
-            }));
-          // Assuming you have a way to set this transformed data to your table's dataSource.
-          this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
-          // Save the dataSoruce in service to share it with display component for excel view
-          this.xfinityDataService.updateData(this.dataSource);
-          console.log(transformedData);
-          if (transformedData.length > 0) {
-            this.displayedColumns = Object.keys(transformedData[0]);
-            // Save the dataSoruce in service to share it with display component for excel view
-            this.xfinityDataService.updateDisplayedColumns(
-              this.displayedColumns
+          (async () => {
+            const transformedData: TableData[] = await Promise.all(
+              response.data.findSalesWithComplexFilter.map(async (sale) => ({
+                ID: sale.id,
+                SaleFlag:
+                  (await this.getSaleFlag(sale.id)) || SaleFlag.Unassigned,
+                'Order Date': sale.orderDate,
+                'Agent Name': sale.agentName,
+                'Customer First Name': sale.cx_firstName,
+                'Customer Last Name': sale.cx_lastName,
+                'Order Number': sale.orderNumber,
+                'Installation Date': sale.installationDateFormatted,
+                'Installation Time': sale.installationTime,
+                'Installation Type': sale.installation,
+                'Street Address': sale.streetAddress,
+                'Street Address Line 2': sale.streetAddressLine2 || '',
+                City: sale.city,
+                State: sale.state,
+                Zipcode: sale.zipcode,
+                'Phone Number': sale.phoneNumber,
+                'Second Phone Number': sale.phoneNumber_second || '',
+                'Social Security Number': sale.socialSecurityNumber || '',
+                Email: sale.email,
+                Product: sale.product,
+                'Package Sold': sale.packageSold,
+                'Comcast TPV Status': sale.comcastTpvStatus,
+                'Concert Order ID': sale.concertOrderId,
+                Internet: sale.Internet,
+                TV: sale.TV,
+                Phone: sale.Phone,
+                HMS: sale.HMS,
+              }))
             );
-          }
+
+            // Assuming you have a way to set this transformed data to your table's dataSource.
+            this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
+            // Save the dataSource in service to share it with display component for excel view
+            this.xfinityDataService.updateData(this.dataSource);
+            console.log(transformedData);
+            if (transformedData.length > 0) {
+              this.displayedColumns = Object.keys(transformedData[0]);
+              // Save the dataSource in service to share it with display component for excel view
+              this.xfinityDataService.updateDisplayedColumns(
+                this.displayedColumns
+              );
+            }
+          })().catch((error) => {
+            console.error('Error processing sales data:', error);
+          });
         },
         error: (error) => {
           console.error('There was an error fetching the sales', error);

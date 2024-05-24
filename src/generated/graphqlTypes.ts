@@ -133,6 +133,7 @@ export type Mutation = {
   removeComment: Scalars['Boolean']['output'];
   removeSaleStage: Scalars['Boolean']['output'];
   seedUsers?: Maybe<Array<User>>;
+  setSaleStage: SaleStage;
   updateComment: Comment;
   updateSaleStage: SaleStage;
   updateUser: UserDto;
@@ -167,6 +168,14 @@ export type MutationRemoveCommentArgs = {
 
 export type MutationRemoveSaleStageArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationSetSaleStageArgs = {
+  saleId: Scalars['ID']['input'];
+  saleType: SaleType;
+  stage: SaleFlag;
+  userId: Scalars['ID']['input'];
 };
 
 
@@ -663,6 +672,16 @@ export type UpdateCommentMutationVariables = Exact<{
 
 export type UpdateCommentMutation = { __typename?: 'Mutation', updateComment: { __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, saleId: string, saleType: SaleType, user: { __typename?: 'User', id: string, name: string }, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null } };
 
+export type SetSaleStageMutationVariables = Exact<{
+  saleId: Scalars['ID']['input'];
+  saleType: SaleType;
+  stage: SaleFlag;
+  userId: Scalars['ID']['input'];
+}>;
+
+
+export type SetSaleStageMutation = { __typename?: 'Mutation', setSaleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
+
 export type CreateSaleStageMutationVariables = Exact<{
   createSaleStageInput: CreateSaleStageInput;
   userId: Scalars['ID']['input'];
@@ -692,6 +711,13 @@ export type GetAllAgentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllAgentsQuery = { __typename?: 'Query', getAllAgents: Array<{ __typename?: 'UserDto', id: string, name: string }> };
+
+export type GetSaleStageQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetSaleStageQuery = { __typename?: 'Query', saleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
 
 export type FindAllSalesByAgentNameQueryVariables = Exact<{
   agentName: Scalars['String']['input'];
@@ -851,6 +877,32 @@ export const UpdateCommentDocument = gql`
       super(apollo);
     }
   }
+export const SetSaleStageDocument = gql`
+    mutation SetSaleStage($saleId: ID!, $saleType: SaleType!, $stage: SaleFlag!, $userId: ID!) {
+  setSaleStage(
+    saleId: $saleId
+    saleType: $saleType
+    stage: $stage
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetSaleStageGQL extends Apollo.Mutation<SetSaleStageMutation, SetSaleStageMutationVariables> {
+    document = SetSaleStageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const CreateSaleStageDocument = gql`
     mutation CreateSaleStage($createSaleStageInput: CreateSaleStageInput!, $userId: ID!) {
   createSaleStage(createSaleStageInput: $createSaleStageInput, userId: $userId) {
@@ -935,6 +987,27 @@ export const GetAllAgentsDocument = gql`
   })
   export class GetAllAgentsGQL extends Apollo.Query<GetAllAgentsQuery, GetAllAgentsQueryVariables> {
     document = GetAllAgentsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetSaleStageDocument = gql`
+    query GetSaleStage($id: ID!) {
+  saleStage(id: $id) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetSaleStageGQL extends Apollo.Query<GetSaleStageQuery, GetSaleStageQueryVariables> {
+    document = GetSaleStageDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

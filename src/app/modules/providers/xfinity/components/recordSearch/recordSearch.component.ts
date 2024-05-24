@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as XLSX from 'xlsx';
 import {
@@ -15,9 +15,12 @@ import {
   FindAllSalesByAgentNameGQL,
   FindAllSalesByAgentNameQuery,
   XfinitySaleDto,
+  SaleFlag,
+  SaleType,
 } from 'src/generated/graphqlTypes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
+import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
 
 interface TableData {
   [key: string]: string | number;
@@ -28,13 +31,23 @@ interface TableData {
   templateUrl: './recordSearch.component.html',
   styleUrls: ['./recordSearch.component.css'],
 })
-export class RecordSearch {
+export class RecordSearch implements OnInit {
   agentNames: string[] = [];
   fetched_sales: XfinitySaleDto[] = [];
   sales: FindAllSalesByAgentNameQuery['findAllSalesByAgentName'] = [];
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
-  displayedColumns: string[] = []; // Adjust based on your data
+  displayedColumns: string[] = [
+    'SaleFlag',
+    'ID',
+    'Order Date',
+    'Customer First Name',
+    'Customer Last Name',
+    'Installation Date',
+    'Installation Time',
+    'Product',
+    'Package Sold',
+  ]; // Add other necessary columns
   searchForm = new FormGroup({
     nameInput: new FormControl(''), // Initialize your search input control
   });
@@ -43,7 +56,8 @@ export class RecordSearch {
     private dialog: MatDialog,
     private createXfinitySaleGQL: CreateXfinitySaleGQL,
     private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
-    private sharedDataService: XfinitySharedDataService
+    private sharedDataService: XfinitySharedDataService,
+    private saleStageService: SaleStageService
   ) {}
 
   ngOnInit(): void {
@@ -56,67 +70,99 @@ export class RecordSearch {
     });
   }
 
-  onNameSubmit(): void {
-    // Logic to handle form submission
-    if (this.searchForm.value.nameInput) {
-      this.getSalesByAgentName(this.searchForm.value.nameInput);
+  async onRowClick(row: any): Promise<void> {
+    console.log('Row clicked:', row);
+
+    // Example userId, replace with the actual user ID
+    const userId = '4a1b9056-4844-4964-8438-4c2be59e499c';
+
+    try {
+      const response = await this.saleStageService
+        .setSaleStage(row.ID, SaleType.XfinitySale, SaleFlag.Built, userId)
+        .toPromise();
+      if (response?.data) {
+        console.log('Sale stage set:', response.data);
+      } else {
+        console.error('Error: Response data is undefined');
+      }
+    } catch (error) {
+      console.error('Error setting sale stage:', error);
     }
   }
 
-  getSalesByAgentName(agentName: string): void {
-    this.findAllSalesByAgentNameGQL
-      .watch({ agentName })
-      .valueChanges.subscribe({
-        next: (response) => {
-          const transformedData: TableData[] =
-            response.data.findAllSalesByAgentName.map((sale) => ({
-              ID: sale.id,
-              'Order Date': sale.orderDate,
-              'Agent Name': sale.agentName,
-              'Customer First Name': sale.cx_firstName,
-              'Customer Last Name': sale.cx_lastName,
-              'Order Number': sale.orderNumber,
-              'Installation Date': sale.installationDateFormatted,
-              'Installation Time': sale.installationTime,
-              'Installation Type': sale.installation,
-              'Street Address': sale.streetAddress,
-              'Street Address Line 2': sale.streetAddressLine2 || '',
-              // prettier-ignore
-              'City': sale.city,
-              // prettier-ignore
-              'State': sale.state,
-              // prettier-ignore
-              'Zipcode': sale.zipcode,
-              'Phone Number': sale.phoneNumber,
-              'Second Phone Number': sale.phoneNumber_second || '',
-              'Social Security Number': sale.socialSecurityNumber || '',
-              // prettier-ignore
-              'Email': sale.email,
-              // prettier-ignore
-              'Product': sale.product,
-              'Package Sold': sale.packageSold,
-              'Comcast TPV Status': sale.comcastTpvStatus,
-              'Concert Order ID': sale.concertOrderId,
-              // prettier-ignore
-              'Internet': sale.Internet,
-              // prettier-ignore
-              'TV': sale.TV,
-              // prettier-ignore
-              'Phone': sale.Phone,
-              // prettier-ignore
-              'HMS': sale.HMS,
-            }));
-          // Assuming you have a way to set this transformed data to your table's dataSource.
-          this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
-          console.log(transformedData);
-          if (transformedData.length > 0) {
-            this.displayedColumns = Object.keys(transformedData[0]);
-          }
-        },
-        error: (error) => {
-          console.error('There was an error fetching the sales', error);
-        },
-      });
+  // onNameSubmit(): void {
+  //   // Logic to handle form submission
+  //   if (this.searchForm.value.nameInput) {
+  //     this.getSalesByAgentName(this.searchForm.value.nameInput);
+  //   }
+  // }
+
+  // getSalesByAgentName(agentName: string): void {
+  //   this.findAllSalesByAgentNameGQL
+  //     .watch({ agentName })
+  //     .valueChanges.subscribe({
+  //       next: async (response) => {
+  //         const transformedData: TableData[] = await Promise.all(
+  //           response.data.findAllSalesByAgentName.map(async (sale) => ({
+  //             ID: sale.id,
+  //             SaleFlag:
+  //               (await this.getSaleFlag(sale.id)) || SaleFlag.Unassigned,
+  //             'Order Date': sale.orderDate,
+  //             'Agent Name': sale.agentName,
+  //             'Customer First Name': sale.cx_firstName,
+  //             'Customer Last Name': sale.cx_lastName,
+  //             'Order Number': sale.orderNumber,
+  //             'Installation Date': sale.installationDateFormatted,
+  //             'Installation Time': sale.installationTime,
+  //             'Installation Type': sale.installation,
+  //             'Street Address': sale.streetAddress,
+  //             'Street Address Line 2': sale.streetAddressLine2 || '',
+  //             City: sale.city,
+  //             State: sale.state,
+  //             Zipcode: sale.zipcode,
+  //             'Phone Number': sale.phoneNumber,
+  //             'Second Phone Number': sale.phoneNumber_second || '',
+  //             'Social Security Number': sale.socialSecurityNumber || '',
+  //             Email: sale.email,
+  //             Product: sale.product,
+  //             'Package Sold': sale.packageSold,
+  //             'Comcast TPV Status': sale.comcastTpvStatus,
+  //             'Concert Order ID': sale.concertOrderId,
+  //             Internet: sale.Internet,
+  //             TV: sale.TV,
+  //             Phone: sale.Phone,
+  //             HMS: sale.HMS,
+  //           }))
+  //         );
+  //         // Assuming you have a way to set this transformed data to your table's dataSource.
+  //         this.dataSource = transformedData; // Update your table's dataSource with the transformed data.
+  //         console.log(transformedData);
+  //         if (transformedData.length > 0) {
+  //           this.displayedColumns = Object.keys(transformedData[0]);
+  //         }
+  //       },
+  //       error: (error) => {
+  //         console.error('There was an error fetching the sales', error);
+  //       },
+  //     });
+  // }
+
+  async getSaleFlag(saleId: string): Promise<SaleFlag | null> {
+    try {
+      const response = await this.saleStageService
+        .getSaleStage(saleId)
+        .toPromise();
+      const stage = response?.data?.saleStage.stage;
+
+      if (stage && Object.values(SaleFlag).includes(stage as SaleFlag)) {
+        return stage as SaleFlag;
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Error fetching sale stage:', error);
+      return null;
+    }
   }
 
   onFileChange(event: any) {
@@ -242,10 +288,4 @@ export class RecordSearch {
 
     return { input };
   }
-
-  // openHireDev(): void {
-  //   const dialogRef = this.dialog.open(ChildComponent0, {
-  //     data: { component_name: true },
-  //   });
-  // }
 }

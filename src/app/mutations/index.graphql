@@ -85,6 +85,24 @@ mutation UpdateComment($id: String!, $updateCommentInput: UpdateCommentInput!) {
     }
   }
 }
+mutation SetSaleStage(
+  $saleId: ID!
+  $saleType: SaleType!
+  $stage: SaleFlag!
+  $userId: ID!
+) {
+  setSaleStage(
+    saleId: $saleId
+    saleType: $saleType
+    stage: $stage
+    userId: $userId
+  ) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
 
 mutation CreateSaleStage(
   $createSaleStageInput: CreateSaleStageInput!

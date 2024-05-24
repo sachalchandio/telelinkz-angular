@@ -17,6 +17,15 @@ query GetAllAgents {
   }
 }
 
+query GetSaleStage($id: ID!) {
+  saleStage(id: $id) {
+    id
+    stage
+    saleId
+    saleType
+  }
+}
+
 query findAllSalesByAgentName($agentName: String!) {
   findAllSalesByAgentName(agentName: $agentName) {
     id
