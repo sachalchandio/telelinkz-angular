@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import * as XLSX from 'xlsx';
 import {
   CreateXfinitySaleGQL,
@@ -17,8 +18,9 @@ import {
   XfinitySaleDto,
   SaleFlag,
   SaleType,
+  XfinitySaleFilterInputDto,
+  FindSalesWithComplexFilterGQL,
 } from 'src/generated/graphqlTypes';
-import { FormGroup, FormControl } from '@angular/forms';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
 
@@ -38,25 +40,19 @@ export class RecordSearch implements OnInit {
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   saleFlags = Object.values(SaleFlag);
-  displayedColumns: string[] = [
-    'SaleFlag',
-    'ID',
-    'Order Date',
-    'Customer First Name',
-    'Customer Last Name',
-    'Installation Date',
-    'Installation Time',
-    'Product',
-    'Package Sold',
-  ]; // Add other necessary columns
-  searchForm = new FormGroup({
-    nameInput: new FormControl(''), // Initialize your search input control
-  });
+  displayedColumns: string[] = [];
+
+  // New properties for search and pagination
+  searchQuery: string = '';
+  totalRecords: number = 0;
+  pageSize: number = 20;
+  currentPage: number = 0;
 
   constructor(
     private dialog: MatDialog,
     private createXfinitySaleGQL: CreateXfinitySaleGQL,
     private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
+    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL,
     private sharedDataService: XfinitySharedDataService,
     private saleStageService: SaleStageService
   ) {}
@@ -69,6 +65,14 @@ export class RecordSearch implements OnInit {
     this.sharedDataService.currentData.subscribe((data) => {
       this.dataSource = data;
     });
+
+    // Fetch initial data
+    this.getSalesByFilter(
+      {},
+      this.pageSize,
+      this.currentPage,
+      this.searchQuery
+    );
   }
 
   async onStatusChange(row: any, selectedStatus: SaleFlag): Promise<void> {
@@ -143,9 +147,7 @@ export class RecordSearch implements OnInit {
     return Object.values(enumType).includes(value);
   }
 
-  // Adjust the method signature if needed, based on the actual definitions of your types
   private transformRowToInput(row: any): CreateXfinitySaleMutationVariables {
-    // Assuming `row['Installation Date']` is in the format "Mar 22, 2023"
     const dateParts = row['Installation Date'].split(' ');
     const months = [
       'Jan',
@@ -162,13 +164,12 @@ export class RecordSearch implements OnInit {
       'Dec',
     ];
     const monthIndex = months.indexOf(dateParts[0]) + 1;
-    const day = dateParts[1].replace(',', ''); // Removes comma
+    const day = dateParts[1].replace(',', '');
     const year = dateParts[2];
     const formattedDate = `${year}-${monthIndex
       .toString()
       .padStart(2, '0')}-${day.padStart(2, '0')}`;
 
-    // Transform time to 24-hour format as before
     let [time, modifier] = row['Installation Time'].split(' ');
     let [hours, minutes] = time.split(':');
     if (modifier === 'PM' && hours !== '12') {
@@ -176,11 +177,11 @@ export class RecordSearch implements OnInit {
     } else if (modifier === 'AM' && hours === '12') {
       hours = '00';
     }
-    const formattedTime = `${hours}:${minutes}:00`; // Converts to HH:MM:SS format
+    const formattedTime = `${hours}:${minutes}:00`;
 
     const input: CreateXfinitySaleInput = {
       orderDate: row['Submission Date'] || null,
-      agentId: row['Agent Name'] || null, // This assumes the agent's ID is directly available; you might need to fetch or translate this
+      agentId: row['Agent Name'] || null,
       cx_firstName: row['First Name'] || null,
       cx_lastName: row['Last Name'] || null,
       orderNumber: row['Order Number'] || null,
@@ -191,12 +192,12 @@ export class RecordSearch implements OnInit {
           ? InstallationType.SelfInstallation
           : InstallationType.ProInstallation,
       streetAddress: row['Street Address'] || null,
-      streetAddressLine2: row['Street Address Line 2'] || null, // Provide default value if necessary
+      streetAddressLine2: row['Street Address Line 2'] || null,
       city: row['City'] || null,
       state: row['State / Province'] || UsState.Undetermined,
       zipcode: row['Postal / Zip Code'] || null,
       phoneNumber: row['Phone Number'] || null,
-      phoneNumber_second: '', // Assuming there's no second phone number in your JSON; adjust as necessary
+      phoneNumber_second: '',
       socialSecurityNumber: row['Social Security Number'] || null,
       email: row['Email'] || null,
       product: row['Product'] || null,
@@ -208,10 +209,111 @@ export class RecordSearch implements OnInit {
       TV: row['TV'] || XfinityTv.None,
       Phone: row['Phone'] || XfinityHomePhone.None,
       HMS: row['HMS'] || XfinityHomeSecurity.None,
-      // Assuming `SaleStatus` is a valid enum or string for the `saleStatus` field in your GraphQL schema
-      // saleStatus: row["Sale Status"],
     };
 
     return { input };
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getSalesByFilter(
+      {},
+      this.pageSize,
+      this.currentPage,
+      this.searchQuery
+    );
+  }
+
+  onSearch(): void {
+    this.currentPage = 0; // Reset to first page on new search
+    this.getSalesByFilter(
+      {},
+      this.pageSize,
+      this.currentPage,
+      this.searchQuery
+    );
+  }
+
+  async getSaleFlag(
+    saleId: string,
+    saleType: SaleType
+  ): Promise<SaleFlag | null> {
+    try {
+      const response = await this.saleStageService
+        .getSaleStage(saleId, saleType)
+        .toPromise();
+      const stage = response?.data?.getSaleFlag ?? null;
+
+      if (stage && Object.values(SaleFlag).includes(stage as SaleFlag)) {
+        return stage as SaleFlag;
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Error fetching sale stage:', error);
+      return null;
+    }
+  }
+
+  private getSalesByFilter(
+    filter: XfinitySaleFilterInputDto,
+    limit: number,
+    offset: number,
+    search?: string
+  ): void {
+    this.findSalesWithComplexFilterGQL
+      .watch({ filter, limit, offset, search })
+      .valueChanges.subscribe({
+        next: async (response) => {
+          const { sales, total } = response.data.findSalesWithComplexFilter;
+          const transformedData: TableData[] = await Promise.all(
+            sales.map(async (sale: XfinitySaleDto) => ({
+              ID: sale.id,
+              SaleFlag:
+                (await this.getSaleFlag(sale.id, SaleType.XfinitySale)) ||
+                SaleFlag.Unassigned,
+              'Order Date': sale.orderDate,
+              'Agent Name': sale.agentName,
+              'Customer First Name': sale.cx_firstName,
+              'Customer Last Name': sale.cx_lastName,
+              'Order Number': sale.orderNumber,
+              'Installation Date': sale.installationDateFormatted,
+              'Installation Time': sale.installationTime,
+              'Installation Type': sale.installation,
+              'Street Address': sale.streetAddress,
+              'Street Address Line 2': sale.streetAddressLine2 || '',
+              City: sale.city,
+              State: sale.state,
+              Zipcode: sale.zipcode,
+              'Phone Number': sale.phoneNumber,
+              'Second Phone Number': sale.phoneNumber_second || '',
+              'Social Security Number': sale.socialSecurityNumber || '',
+              Email: sale.email,
+              Product: sale.product,
+              'Package Sold': sale.packageSold,
+              'Comcast TPV Status': sale.comcastTpvStatus,
+              'Concert Order ID': sale.concertOrderId,
+              Internet: sale.Internet,
+              TV: sale.TV,
+              Phone: sale.Phone,
+              HMS: sale.HMS,
+            }))
+          );
+          this.dataSource = transformedData;
+          this.sharedDataService.updateData(this.dataSource);
+          console.log(transformedData);
+          if (transformedData.length > 0) {
+            this.displayedColumns = Object.keys(transformedData[0]);
+            this.sharedDataService.updateDisplayedColumns(
+              this.displayedColumns
+            );
+          }
+          this.totalRecords = total;
+        },
+        error: (error: string) => {
+          console.error('There was an error fetching the sales', error);
+        },
+      });
   }
 }

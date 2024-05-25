@@ -12,6 +12,7 @@ import { XfinityFilter } from 'src/app/components/standalone/xfinityFilter/xfini
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const COMPONETS = [
   comp.XfinityComponent,
@@ -37,6 +38,7 @@ const COMPONETS = [
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
+    MatPaginatorModule,
   ],
 })
 export class XfinityModule {}

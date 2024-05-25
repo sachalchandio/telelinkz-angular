@@ -150,47 +150,59 @@ export class XfinityFilter implements OnInit {
       }
 
       console.log(formValue);
-      this.getSalesByFilter(formValue);
+      // Set default pagination and search parameters
+      const limit = 20; // or any default value you prefer
+      const offset = 0;
+      const search = ''; // or any default value you prefer
+
+      this.getSalesByFilter(formValue, limit, offset, search);
     }
   }
 
-  private getSalesByFilter(filter: XfinitySaleFilterInputDto): void {
+  private getSalesByFilter(
+    filter: XfinitySaleFilterInputDto,
+    limit: number,
+    offset: number,
+    search?: string
+  ): void {
     this.findSalesWithComplexFilterGQL
-      .watch({ filter })
+      .watch({ filter, limit, offset, search })
       .valueChanges.subscribe({
         next: async (response) => {
           const transformedData: TableData[] = await Promise.all(
-            response.data.findSalesWithComplexFilter.map(async (sale) => ({
-              ID: sale.id,
-              SaleFlag:
-                (await this.getSaleFlag(sale.id, SaleType.XfinitySale)) ||
-                SaleFlag.Unassigned,
-              'Order Date': sale.orderDate,
-              'Agent Name': sale.agentName,
-              'Customer First Name': sale.cx_firstName,
-              'Customer Last Name': sale.cx_lastName,
-              'Order Number': sale.orderNumber,
-              'Installation Date': sale.installationDateFormatted,
-              'Installation Time': sale.installationTime,
-              'Installation Type': sale.installation,
-              'Street Address': sale.streetAddress,
-              'Street Address Line 2': sale.streetAddressLine2 || '',
-              City: sale.city,
-              State: sale.state,
-              Zipcode: sale.zipcode,
-              'Phone Number': sale.phoneNumber,
-              'Second Phone Number': sale.phoneNumber_second || '',
-              'Social Security Number': sale.socialSecurityNumber || '',
-              Email: sale.email,
-              Product: sale.product,
-              'Package Sold': sale.packageSold,
-              'Comcast TPV Status': sale.comcastTpvStatus,
-              'Concert Order ID': sale.concertOrderId,
-              Internet: sale.Internet,
-              TV: sale.TV,
-              Phone: sale.Phone,
-              HMS: sale.HMS,
-            }))
+            response.data.findSalesWithComplexFilter.sales.map(
+              async (sale: XfinitySaleDto) => ({
+                ID: sale.id,
+                SaleFlag:
+                  (await this.getSaleFlag(sale.id, SaleType.XfinitySale)) ||
+                  SaleFlag.Unassigned,
+                'Order Date': sale.orderDate,
+                'Agent Name': sale.agentName,
+                'Customer First Name': sale.cx_firstName,
+                'Customer Last Name': sale.cx_lastName,
+                'Order Number': sale.orderNumber,
+                'Installation Date': sale.installationDateFormatted,
+                'Installation Time': sale.installationTime,
+                'Installation Type': sale.installation,
+                'Street Address': sale.streetAddress,
+                'Street Address Line 2': sale.streetAddressLine2 || '',
+                City: sale.city,
+                State: sale.state,
+                Zipcode: sale.zipcode,
+                'Phone Number': sale.phoneNumber,
+                'Second Phone Number': sale.phoneNumber_second || '',
+                'Social Security Number': sale.socialSecurityNumber || '',
+                Email: sale.email,
+                Product: sale.product,
+                'Package Sold': sale.packageSold,
+                'Comcast TPV Status': sale.comcastTpvStatus,
+                'Concert Order ID': sale.concertOrderId,
+                Internet: sale.Internet,
+                TV: sale.TV,
+                Phone: sale.Phone,
+                HMS: sale.HMS,
+              })
+            )
           );
           // Assuming you have a way to set this transformed data to your table's dataSource.
           this.dataSource = transformedData; // Update your table's dataSource with the transformed data.

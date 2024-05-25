@@ -196,6 +196,12 @@ export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
 };
 
+export type PaginatedSales = {
+  __typename?: 'PaginatedSales';
+  sales: Array<XfinitySaleDto>;
+  total: Scalars['Int']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
   comment: Comment;
@@ -203,7 +209,7 @@ export type Query = {
   commentsBySale: Array<Comment>;
   currentUser: UserDto;
   findAllSalesByAgentName: Array<XfinitySaleDto>;
-  findSalesWithComplexFilter: Array<XfinitySaleDto>;
+  findSalesWithComplexFilter: PaginatedSales;
   getAllAgents: Array<UserDto>;
   getSaleFlag: SaleFlag;
   getXfinitySaleById: XfinitySale;
@@ -231,6 +237,9 @@ export type QueryFindAllSalesByAgentNameArgs = {
 
 export type QueryFindSalesWithComplexFilterArgs = {
   filter: XfinitySaleFilterInputDto;
+  limit: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -743,10 +752,13 @@ export type FindAllSalesByAgentNameQuery = { __typename?: 'Query', findAllSalesB
 
 export type FindSalesWithComplexFilterQueryVariables = Exact<{
   filter: XfinitySaleFilterInputDto;
+  limit: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type FindSalesWithComplexFilterQuery = { __typename?: 'Query', findSalesWithComplexFilter: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity, agentName: string }> };
+export type FindSalesWithComplexFilterQuery = { __typename?: 'Query', findSalesWithComplexFilter: { __typename?: 'PaginatedSales', total: number, sales: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> } };
 
 export type CommentsBySaleQueryVariables = Exact<{
   saleId: Scalars['ID']['input'];
@@ -1088,34 +1100,42 @@ export const FindAllSalesByAgentNameDocument = gql`
     }
   }
 export const FindSalesWithComplexFilterDocument = gql`
-    query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!) {
-  findSalesWithComplexFilter(filter: $filter) {
-    id
-    orderDate
-    cx_firstName
-    cx_lastName
-    orderNumber
-    installationDateFormatted
-    installationTime
-    installation
-    streetAddress
-    streetAddressLine2
-    city
-    state
-    zipcode
-    phoneNumber
-    phoneNumber_second
-    socialSecurityNumber
-    email
-    product
-    packageSold
-    comcastTpvStatus
-    concertOrderId
-    Internet
-    TV
-    Phone
-    HMS
-    agentName
+    query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!, $limit: Int!, $offset: Int!, $search: String) {
+  findSalesWithComplexFilter(
+    filter: $filter
+    limit: $limit
+    offset: $offset
+    search: $search
+  ) {
+    sales {
+      id
+      orderDate
+      agentName
+      cx_firstName
+      cx_lastName
+      orderNumber
+      installationDateFormatted
+      installationTime
+      installation
+      streetAddress
+      streetAddressLine2
+      city
+      state
+      zipcode
+      phoneNumber
+      phoneNumber_second
+      socialSecurityNumber
+      email
+      product
+      packageSold
+      comcastTpvStatus
+      concertOrderId
+      Internet
+      TV
+      Phone
+      HMS
+    }
+    total
   }
 }
     `;
