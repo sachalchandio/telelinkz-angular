@@ -6,15 +6,22 @@ const routes: Routes = [
   {
     path: '',
     component: comp.XfinityComponent,
-  },
-  {
-    path: 'new-sale',
-    component: comp.XfinityNewSale,
-  },
+    children: [
+      {
+        path: 'new-sale',
+        component: comp.XfinityNewSale,
+      },
 
-  {
-    path: 'filter',
-    component: comp.RecordSearch,
+      {
+        path: 'filter',
+        component: comp.RecordSearch,
+      },
+
+      {
+        path: 'sales-journey',
+        component: comp.SaleJourneyComponent,
+      },
+    ],
   },
 ];
 

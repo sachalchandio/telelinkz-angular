@@ -61,6 +61,18 @@ query findAllSalesByAgentName($agentName: String!) {
   }
 }
 
+query GetSaleHistory($saleId: String!) {
+  getSaleHistory(saleId: $saleId) {
+    stage
+    timestamp
+    user {
+      name
+    }
+    saleId
+    saleType
+  }
+}
+
 query FindSalesWithComplexFilter(
   $filter: XfinitySaleFilterInputDto!
   $limit: Int!

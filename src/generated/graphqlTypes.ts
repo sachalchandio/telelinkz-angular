@@ -128,10 +128,12 @@ export type Mutation = {
   __typename?: 'Mutation';
   createComment: Comment;
   createSaleStage: SaleStage;
+  createSaleStageHistory: SaleStageHistory;
   createXfinitySale: XfinitySale;
   registerUser: RegisterUserResponseDto;
   removeComment: Scalars['Boolean']['output'];
   removeSaleStage: Scalars['Boolean']['output'];
+  removeSaleStageHistory: Scalars['Boolean']['output'];
   seedUsers?: Maybe<Array<User>>;
   setSaleStage: SaleStage;
   updateComment: Comment;
@@ -147,6 +149,14 @@ export type MutationCreateCommentArgs = {
 
 export type MutationCreateSaleStageArgs = {
   createSaleStageInput: CreateSaleStageInput;
+  userId: Scalars['ID']['input'];
+};
+
+
+export type MutationCreateSaleStageHistoryArgs = {
+  saleId: Scalars['ID']['input'];
+  saleType: SaleType;
+  stage: SaleFlag;
   userId: Scalars['ID']['input'];
 };
 
@@ -167,6 +177,11 @@ export type MutationRemoveCommentArgs = {
 
 
 export type MutationRemoveSaleStageArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationRemoveSaleStageHistoryArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -212,9 +227,12 @@ export type Query = {
   findSalesWithComplexFilter: PaginatedSales;
   getAllAgents: Array<UserDto>;
   getSaleFlag: SaleFlag;
+  getSaleHistory: Array<SaleStageHistory>;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
   saleStage: SaleStage;
+  saleStageHistories: Array<SaleStageHistory>;
+  saleStageHistory: SaleStageHistory;
   saleStages: Array<SaleStage>;
 };
 
@@ -249,6 +267,11 @@ export type QueryGetSaleFlagArgs = {
 };
 
 
+export type QueryGetSaleHistoryArgs = {
+  saleId: Scalars['String']['input'];
+};
+
+
 export type QueryGetXfinitySaleByIdArgs = {
   id: Scalars['String']['input'];
 };
@@ -260,6 +283,11 @@ export type QueryLoginUserArgs = {
 
 
 export type QuerySaleStageArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QuerySaleStageHistoryArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -750,6 +778,13 @@ export type FindAllSalesByAgentNameQueryVariables = Exact<{
 
 export type FindAllSalesByAgentNameQuery = { __typename?: 'Query', findAllSalesByAgentName: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> };
 
+export type GetSaleHistoryQueryVariables = Exact<{
+  saleId: Scalars['String']['input'];
+}>;
+
+
+export type GetSaleHistoryQuery = { __typename?: 'Query', getSaleHistory: Array<{ __typename?: 'SaleStageHistory', stage: SaleFlag, timestamp: any, saleId: string, saleType: SaleType, user: { __typename?: 'User', name: string } }> };
+
 export type FindSalesWithComplexFilterQueryVariables = Exact<{
   filter: XfinitySaleFilterInputDto;
   limit: Scalars['Int']['input'];
@@ -1094,6 +1129,30 @@ export const FindAllSalesByAgentNameDocument = gql`
   })
   export class FindAllSalesByAgentNameGQL extends Apollo.Query<FindAllSalesByAgentNameQuery, FindAllSalesByAgentNameQueryVariables> {
     document = FindAllSalesByAgentNameDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetSaleHistoryDocument = gql`
+    query GetSaleHistory($saleId: String!) {
+  getSaleHistory(saleId: $saleId) {
+    stage
+    timestamp
+    user {
+      name
+    }
+    saleId
+    saleType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetSaleHistoryGQL extends Apollo.Query<GetSaleHistoryQuery, GetSaleHistoryQueryVariables> {
+    document = GetSaleHistoryDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

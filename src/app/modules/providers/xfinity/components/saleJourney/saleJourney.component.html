@@ -1,0 +1,8 @@
+<div class="sale-journey-container">
+  <h2>Sale Journey</h2>
+  <ul class="sale-history-list">
+    <li *ngFor="let entry of saleHistory">
+      {{ formatHistoryEntry(entry) }}
+    </li>
+  </ul>
+</div>

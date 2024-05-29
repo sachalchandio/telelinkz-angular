@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import * as XLSX from 'xlsx';
@@ -23,6 +23,7 @@ import {
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
+import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 
 interface TableData {
   [key: string]: string | number;
@@ -33,7 +34,7 @@ interface TableData {
   templateUrl: './recordSearch.component.html',
   styleUrls: ['./recordSearch.component.css'],
 })
-export class RecordSearch implements OnInit {
+export class RecordSearch implements OnInit, OnDestroy {
   agentNames: string[] = [];
   fetched_sales: XfinitySaleDto[] = [];
   sales: FindAllSalesByAgentNameQuery['findAllSalesByAgentName'] = [];
@@ -54,7 +55,8 @@ export class RecordSearch implements OnInit {
     private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
     private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL,
     private sharedDataService: XfinitySharedDataService,
-    private saleStageService: SaleStageService
+    private saleStageService: SaleStageService,
+    private tabStateService: TabStateService
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +68,8 @@ export class RecordSearch implements OnInit {
       this.dataSource = data;
     });
 
+    this.restoreTabState();
+
     // Fetch initial data
     this.getSalesByFilter(
       {},
@@ -75,11 +79,40 @@ export class RecordSearch implements OnInit {
     );
   }
 
-  async onStatusChange(row: any, selectedStatus: SaleFlag): Promise<void> {
-    console.log('Row updated:', row, 'Selected Status:', selectedStatus);
+  onIdClick(saleId: string): void {
+    this.tabStateService.openTab({
+      title: 'Sale Journey',
+      route: `xfinity/sales-journey?saleId=${saleId}`,
+      saleId: saleId,
+    });
+  }
 
-    // Example userId, replace with the actual user ID
-    const userId = '4a1b9056-4844-4964-8438-4c2be59e499c';
+  restoreTabState(): void {
+    if (this.tabStateService.hasState('xfinity/record-search')) {
+      const state = this.tabStateService.getState('xfinity/record-search');
+      this.searchQuery = state.searchQuery;
+      this.totalRecords = state.totalRecords;
+      this.pageSize = state.pageSize;
+      this.currentPage = state.currentPage;
+      this.displayedColumns = state.displayedColumns;
+      this.dataSource = state.dataSource;
+    }
+  }
+
+  saveTabState(): void {
+    const state = {
+      searchQuery: this.searchQuery,
+      totalRecords: this.totalRecords,
+      pageSize: this.pageSize,
+      currentPage: this.currentPage,
+      displayedColumns: this.displayedColumns,
+      dataSource: this.dataSource,
+    };
+    this.tabStateService.setState('xfinity/record-search', state);
+  }
+
+  async onStatusChange(row: any, selectedStatus: SaleFlag): Promise<void> {
+    const userId = '4a1b9056-4844-4964-8438-4c2be59e499c'; // Example userId
 
     try {
       const response = await this.saleStageService
@@ -87,6 +120,15 @@ export class RecordSearch implements OnInit {
         .toPromise();
       if (response?.data) {
         console.log('Sale stage set:', response.data);
+        // Update local state immediately
+        row.SaleFlag = selectedStatus;
+        // Refetch data to ensure consistency
+        this.getSalesByFilter(
+          {},
+          this.pageSize,
+          this.currentPage,
+          this.searchQuery
+        );
       } else {
         console.error('Error: Response data is undefined');
       }
@@ -235,6 +277,15 @@ export class RecordSearch implements OnInit {
     );
   }
 
+  private refreshData(): void {
+    this.getSalesByFilter(
+      {},
+      this.pageSize,
+      this.currentPage,
+      this.searchQuery
+    );
+  }
+
   async getSaleFlag(
     saleId: string,
     saleType: SaleType
@@ -315,5 +366,9 @@ export class RecordSearch implements OnInit {
           console.error('There was an error fetching the sales', error);
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.saveTabState();
   }
 }

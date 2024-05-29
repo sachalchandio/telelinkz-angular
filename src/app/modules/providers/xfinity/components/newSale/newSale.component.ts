@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import {
   CreateXfinitySaleMutation,
@@ -13,13 +13,14 @@ import {
   XfinityHomeSecurity,
   GetAllAgentsGQL,
 } from '../../../../../../generated/graphqlTypes';
+import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 
 @Component({
   selector: 'xfininty-new-sale',
   templateUrl: './newSale.component.html',
   styleUrls: ['./newSale.component.css'],
 })
-export class XfinityNewSale implements OnInit {
+export class XfinityNewSale implements OnInit, OnDestroy {
   agentNames: string[] = [];
 
   xfinitySaleInput = {
@@ -59,11 +60,19 @@ export class XfinityNewSale implements OnInit {
 
   constructor(
     private apollo: Apollo,
-    private getAllAgentsGQL: GetAllAgentsGQL
+    private getAllAgentsGQL: GetAllAgentsGQL,
+    private tabStateService: TabStateService
   ) {}
 
   ngOnInit() {
     this.getAgentNames();
+    this.restoreTabState();
+  }
+
+  restoreTabState(): void {
+    if (this.tabStateService.hasState('xfinity/new-sale')) {
+      this.xfinitySaleInput = this.tabStateService.getState('xfinity/new-sale');
+    }
   }
 
   getAgentNames(): void {
@@ -102,5 +111,13 @@ export class XfinityNewSale implements OnInit {
 
   formatDate(date: string): string {
     return new Date(date).toISOString().split('T')[0]; // Format as YYYY-MM-DD
+  }
+
+  saveTabState(): void {
+    this.tabStateService.setState('xfinity/new-sale', this.xfinitySaleInput);
+  }
+
+  ngOnDestroy(): void {
+    this.saveTabState();
   }
 }

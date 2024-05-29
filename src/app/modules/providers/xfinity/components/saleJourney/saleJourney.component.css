@@ -1,0 +1,25 @@
+.sale-journey-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.sale-journey-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sale-history-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sale-history-list li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
