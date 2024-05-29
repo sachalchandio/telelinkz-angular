@@ -80,11 +80,16 @@ export class RecordSearch implements OnInit, OnDestroy {
   }
 
   onIdClick(saleId: string): void {
-    this.tabStateService.openTab({
-      title: 'Sale Journey',
-      route: `xfinity/sales-journey?saleId=${saleId}`,
-      saleId: saleId,
-    });
+    console.log('Clicked Sale ID:', saleId); // Debugging statement
+    if (saleId) {
+      this.tabStateService.openTab({
+        title: 'Sale Journey',
+        route: 'xfinity/sales-journey',
+        queryParams: { saleId: saleId },
+      });
+    } else {
+      console.error('Sale ID is undefined');
+    }
   }
 
   restoreTabState(): void {

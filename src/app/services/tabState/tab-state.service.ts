@@ -25,7 +25,11 @@ export class TabStateService {
   }
 
   openTab(tab: any): void {
-    const existingTabIndex = this.tabs.findIndex((t) => t.route === tab.route);
+    const existingTabIndex = this.tabs.findIndex(
+      (t) =>
+        t.route === tab.route &&
+        JSON.stringify(t.queryParams) === JSON.stringify(tab.queryParams)
+    );
     if (existingTabIndex === -1) {
       this.tabs.push(tab);
       this.selectTab(this.tabs.length - 1);
@@ -36,6 +40,8 @@ export class TabStateService {
 
   selectTab(index: number): void {
     this.selectedIndex = index;
-    this.router.navigate([this.tabs[index].route]);
+    this.router.navigate([this.tabs[index].route], {
+      queryParams: this.tabs[index].queryParams,
+    });
   }
 }

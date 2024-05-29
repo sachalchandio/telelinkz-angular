@@ -26,7 +26,7 @@ export class XfinityComponent implements OnInit {
       title: 'Sales Journey',
       icon: 'filter_alt',
       route: 'xfinity/sales-journey',
-      label: 'Navigate to Xfinity Sale Filter',
+      label: 'Navigate to Sales Journey',
     },
     {
       title: 'Input New File',
@@ -61,7 +61,10 @@ export class XfinityComponent implements OnInit {
   ];
   selectedIndex: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private tabStateService: TabStateService
+  ) {}
 
   ngOnInit(): void {
     // Default to the first tab
@@ -82,6 +85,8 @@ export class XfinityComponent implements OnInit {
 
   selectTab(index: number): void {
     this.selectedIndex = index;
-    this.router.navigate([this.tabs[index].route]);
+    this.router.navigate([this.tabs[index].route], {
+      queryParams: this.tabs[index].queryParams,
+    });
   }
 }

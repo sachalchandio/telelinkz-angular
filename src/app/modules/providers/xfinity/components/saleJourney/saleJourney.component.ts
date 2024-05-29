@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
+import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 
 const GET_SALE_HISTORY = gql`
   query GetSaleHistory($saleId: String!) {
@@ -21,16 +22,21 @@ const GET_SALE_HISTORY = gql`
   templateUrl: './saleJourney.component.html',
   styleUrls: ['./saleJourney.component.css'],
 })
-export class SaleJourneyComponent implements OnInit {
+export class SaleJourneyComponent implements OnInit, OnDestroy {
   saleHistory: any[] = [];
   saleId: string | null = null;
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apollo: Apollo,
+    private tabStateService: TabStateService
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.saleId = params.get('saleId');
       if (this.saleId) {
+        this.restoreTabState();
         this.fetchSaleHistory();
       }
     });
@@ -46,6 +52,7 @@ export class SaleJourneyComponent implements OnInit {
       })
       .valueChanges.subscribe((result: any) => {
         this.saleHistory = result?.data?.getSaleHistory || [];
+        this.saveTabState();
       });
   }
 
@@ -64,5 +71,24 @@ export class SaleJourneyComponent implements OnInit {
   formatHistoryEntry(entry: any): string {
     const timestamp = this.formatTimestamp(entry.timestamp);
     return `API added a note - ${timestamp} Changing status to ${entry.stage} by ${entry.user.name}`;
+  }
+
+  saveTabState(): void {
+    this.tabStateService.setState(`sale-journey-${this.saleId}`, {
+      saleHistory: this.saleHistory,
+    });
+  }
+
+  restoreTabState(): void {
+    if (this.tabStateService.hasState(`sale-journey-${this.saleId}`)) {
+      const state = this.tabStateService.getState(
+        `sale-journey-${this.saleId}`
+      );
+      this.saleHistory = state.saleHistory;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.saveTabState();
   }
 }
