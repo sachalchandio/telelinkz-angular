@@ -1,8 +1,22 @@
 <div class="sale-journey-container">
   <h2>Sale Journey</h2>
-  <ul class="sale-history-list">
-    <li *ngFor="let entry of saleHistory">
-      {{ formatHistoryEntry(entry) }}
-    </li>
-  </ul>
+
+  <div class="sale-overview">
+    <h3>Sale Details</h3>
+    <div class="detail-grid">
+      <div class="detail-item" *ngFor="let key of objectKeys(saleDetails)">
+        <div class="detail-title">{{ key }}:</div>
+        <div class="detail-value">{{ saleDetails[key] }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sale-history">
+    <h3>History</h3>
+    <ul class="sale-history-list">
+      <li *ngFor="let entry of saleHistory">
+        {{ formatHistoryEntry(entry) }}
+      </li>
+    </ul>
+  </div>
 </div>

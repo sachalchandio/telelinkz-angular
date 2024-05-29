@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
 import { TabStateService } from 'src/app/services/tabState/tab-state.service';
@@ -24,6 +24,7 @@ const GET_SALE_HISTORY = gql`
 })
 export class SaleJourneyComponent implements OnInit, OnDestroy {
   saleHistory: any[] = [];
+  saleDetails: any;
   saleId: string | null = null;
 
   constructor(
@@ -35,7 +36,9 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.saleId = params.get('saleId');
-      if (this.saleId) {
+      const saleData = params.get('data');
+      if (this.saleId && saleData) {
+        this.saleDetails = JSON.parse(saleData);
         this.restoreTabState();
         this.fetchSaleHistory();
       }
@@ -90,5 +93,9 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.saveTabState();
+  }
+
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
   }
 }

@@ -79,13 +79,14 @@ export class RecordSearch implements OnInit, OnDestroy {
     );
   }
 
-  onIdClick(saleId: string): void {
+  onIdClick(element: TableData): void {
+    const saleId: string = element['ID'] as string;
     console.log('Clicked Sale ID:', saleId); // Debugging statement
     if (saleId) {
       this.tabStateService.openTab({
         title: 'Sale Journey',
         route: 'xfinity/sales-journey',
-        queryParams: { saleId: saleId },
+        queryParams: { saleId: saleId, data: JSON.stringify(element) },
       });
     } else {
       console.error('Sale ID is undefined');
