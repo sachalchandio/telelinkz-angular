@@ -1,0 +1,68 @@
+<form [formGroup]="auditForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="auditBy">Audit by*</label>
+    <select formControlName="auditBy" id="auditBy">
+      <option *ngFor="let auditor of auditors" [value]="auditor">
+        {{ auditor }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="auditType">Audit Type*</label>
+    <select formControlName="auditType" id="auditType">
+      <option *ngFor="let type of auditTypes" [value]="type">{{ type }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="callType">Call Type</label>
+    <select formControlName="callType" id="callType">
+      <option *ngFor="let type of callTypes" [value]="type">{{ type }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="agentName">Agent Name*</label>
+    <select formControlName="agentName" id="agentName">
+      <option *ngFor="let agent of agentNames" [value]="agent">
+        {{ agent }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="callDate">Call Date*</label>
+    <input type="date" formControlName="callDate" id="callDate" />
+  </div>
+  <div>
+    <label for="auditDate">Audit Date*</label>
+    <input type="date" formControlName="auditDate" id="auditDate" />
+  </div>
+  <div>
+    <label for="provider">Provider</label>
+    <select formControlName="provider" id="provider">
+      <option *ngFor="let provider of providers" [value]="provider">
+        {{ provider }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="phoneNumber">Phone Number*</label>
+    <input type="text" formControlName="phoneNumber" id="phoneNumber" />
+  </div>
+  <div>
+    <label for="callDuration">Call Duration*</label>
+    <input type="text" formControlName="callDuration" id="callDuration" />
+  </div>
+  <div>
+    <label for="callDisposition">Call Disposition*</label>
+    <input type="text" formControlName="callDisposition" id="callDisposition" />
+  </div>
+  <div>
+    <label for="customerAddress">Customer Address</label>
+    <input type="text" formControlName="customerAddress" id="customerAddress" />
+  </div>
+  <!-- Add other form fields similarly -->
+  <div>
+    <label for="findings">Findings</label>
+    <textarea formControlName="findings" id="findings"></textarea>
+  </div>
+  <button type="submit">Submit</button>
+</form>

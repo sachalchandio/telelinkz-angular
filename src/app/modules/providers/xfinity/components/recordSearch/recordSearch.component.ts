@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import * as XLSX from 'xlsx';
@@ -128,13 +134,9 @@ export class RecordSearch implements OnInit, OnDestroy {
         console.log('Sale stage set:', response.data);
         // Update local state immediately
         row.SaleFlag = selectedStatus;
-        // Refetch data to ensure consistency
-        this.getSalesByFilter(
-          {},
-          this.pageSize,
-          this.currentPage,
-          this.searchQuery
-        );
+        //
+        let saleFlag = this.getSaleFlag(row.ID, SaleType.XfinitySale);
+        console.log(saleFlag);
       } else {
         console.error('Error: Response data is undefined');
       }
@@ -320,7 +322,7 @@ export class RecordSearch implements OnInit, OnDestroy {
     search?: string
   ): void {
     this.findSalesWithComplexFilterGQL
-      .watch({ filter, limit, offset, search })
+      .watch({ filter, limit, offset, search }, { fetchPolicy: 'network-only' })
       .valueChanges.subscribe({
         next: async (response) => {
           const { sales, total } = response.data.findSalesWithComplexFilter;

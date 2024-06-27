@@ -20,6 +20,7 @@
         class="search-input"
         placeholder="Search"
         [(ngModel)]="searchQuery"
+        (keydown.enter)="onSearch()"
       />
       <button class="search-button" (click)="onSearch()">
         <i class="material-icons">search</i>

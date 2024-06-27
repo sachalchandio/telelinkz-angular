@@ -1,13 +1,15 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './xfinity.component.html',
-  styleUrls: ['./xfinity.component.css'],
+  selector: 'app-provider-cards',
+  standalone: true,
+  imports: [TabStateService],
+  templateUrl: './provider-cards.component.html',
+  styleUrl: './provider-cards.component.css',
 })
-export class XfinityComponent implements OnInit {
+export class ProviderCardsComponent implements OnInit {
   tabs: any[] = [{ title: 'Xfinity', route: 'xfinity' }];
   cards: any[] = [
     {
@@ -62,25 +64,14 @@ export class XfinityComponent implements OnInit {
   selectedIndex: number = this.tabStateService.selectedIndex;
 
   constructor(
-    private router: Router,
-    private tabStateService: TabStateService
-  ) {
-    // subscribe to tab changes
-  }
+    private tabStateService: TabStateService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // Default to the first tab if no tab is selected
     if (this.selectedIndex === 0) {
-      // navigate to the first tab
       this.router.navigate(['xfinity']);
     }
-  }
-
-  openTab(card: any): void {
-    this.tabStateService.openTab(card);
-  }
-
-  selectTab(index: number): void {
-    this.tabStateService.selectTab(index);
   }
 }

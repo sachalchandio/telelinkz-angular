@@ -25,15 +25,22 @@ export class TabStateService {
   }
 
   openTab(tab: any): void {
+    // Check if the tab is already open
     const existingTabIndex = this.tabs.findIndex(
       (t) =>
         t.route === tab.route &&
         JSON.stringify(t.queryParams) === JSON.stringify(tab.queryParams)
     );
+
+    // If the tab is not open, add it to the tabs array
     if (existingTabIndex === -1) {
       this.tabs.push(tab);
+      console.log(this.tabs);
       this.selectTab(this.tabs.length - 1);
-    } else {
+    }
+
+    // If the tab is open, select it
+    else {
       this.selectTab(existingTabIndex);
     }
   }
