@@ -4,8 +4,8 @@ import { AuditService } from './services/audtiForm.service';
 
 @Component({
   selector: 'app-audit-form',
-  templateUrl: './audit-form.component.html',
-  styleUrls: ['./audit-form.component.css'],
+  templateUrl: './QAForm.component.html',
+  styleUrls: ['./QAForm.component.css'],
 })
 export class AuditFormComponent implements OnInit {
   auditForm!: FormGroup;

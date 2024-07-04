@@ -19,6 +19,7 @@ const COMPONETS = [
   comp.RecordSearch,
   comp.XfinityNewSale,
   comp.SaleJourneyComponent,
+  comp.AuditFormComponent,
 ];
 
 @NgModule({

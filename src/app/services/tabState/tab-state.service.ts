@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TabStateService {
-  tabs: any[] = [{ title: 'Xfinity', route: 'xfinity' }];
-  selectedIndex: number = 0;
+  private tabsSubject = new BehaviorSubject<any[]>([
+    { title: 'Xfinity', route: 'xfinity' },
+  ]);
+  tabs$: Observable<any[]> = this.tabsSubject.asObservable();
+
+  private selectedIndexSubject = new BehaviorSubject<number>(0);
+  selectedIndex$: Observable<number> = this.selectedIndexSubject.asObservable();
 
   private state: { [key: string]: any } = {};
 
@@ -25,30 +31,28 @@ export class TabStateService {
   }
 
   openTab(tab: any): void {
-    // Check if the tab is already open
-    const existingTabIndex = this.tabs.findIndex(
+    const currentTabs = this.tabsSubject.value;
+    const existingTabIndex = currentTabs.findIndex(
       (t) =>
         t.route === tab.route &&
         JSON.stringify(t.queryParams) === JSON.stringify(tab.queryParams)
     );
 
-    // If the tab is not open, add it to the tabs array
     if (existingTabIndex === -1) {
-      this.tabs.push(tab);
-      console.log(this.tabs);
-      this.selectTab(this.tabs.length - 1);
-    }
-
-    // If the tab is open, select it
-    else {
+      this.tabsSubject.next([...currentTabs, tab]);
+      this.selectTab(currentTabs.length);
+    } else {
       this.selectTab(existingTabIndex);
     }
   }
 
   selectTab(index: number): void {
-    this.selectedIndex = index;
-    this.router.navigate([this.tabs[index].route], {
-      queryParams: this.tabs[index].queryParams,
-    });
+    this.selectedIndexSubject.next(index);
+    const currentTabs = this.tabsSubject.value;
+    if (index >= 0 && index < currentTabs.length) {
+      this.router.navigate([currentTabs[index].route], {
+        queryParams: currentTabs[index].queryParams,
+      });
+    }
   }
 }

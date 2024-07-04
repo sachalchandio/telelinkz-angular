@@ -90,7 +90,7 @@ export class RecordSearch implements OnInit, OnDestroy {
     console.log('Clicked Sale ID:', saleId); // Debugging statement
     if (saleId) {
       this.tabStateService.openTab({
-        title: 'Sale Journey',
+        title: 'Sales Journey',
         route: 'xfinity/sales-journey',
         queryParams: { saleId: saleId, data: JSON.stringify(element) },
       });

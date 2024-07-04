@@ -1,3 +1,11 @@
+.active {
+  display: flex;
+}
+
+.disabled {
+  display: none;
+}
+
 .dashbord_out_wrap {
   display: flex;
   align-items: center;
