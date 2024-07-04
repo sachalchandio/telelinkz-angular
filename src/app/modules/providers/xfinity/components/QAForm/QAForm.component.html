@@ -1,68 +1,272 @@
 <form [formGroup]="auditForm" (ngSubmit)="onSubmit()">
+  <h2>Agent Audit Form</h2>
+
   <div>
-    <label for="auditBy">Audit by*</label>
-    <select formControlName="auditBy" id="auditBy">
+    <label>Audit by *</label>
+    <select formControlName="auditBy" required>
       <option *ngFor="let auditor of auditors" [value]="auditor">
         {{ auditor }}
       </option>
     </select>
   </div>
+
   <div>
-    <label for="auditType">Audit Type*</label>
-    <select formControlName="auditType" id="auditType">
+    <label>Audit Type *</label>
+    <select formControlName="auditType" required>
       <option *ngFor="let type of auditTypes" [value]="type">{{ type }}</option>
     </select>
   </div>
+
   <div>
-    <label for="callType">Call Type</label>
-    <select formControlName="callType" id="callType">
+    <label>Call Type</label>
+    <select formControlName="callType">
       <option *ngFor="let type of callTypes" [value]="type">{{ type }}</option>
     </select>
   </div>
+
   <div>
-    <label for="agentName">Agent Name*</label>
-    <select formControlName="agentName" id="agentName">
-      <option *ngFor="let agent of agentNames" [value]="agent">
-        {{ agent }}
-      </option>
-    </select>
+    <label>Agent Name *</label>
+    <input
+      type="text"
+      formControlName="agentName"
+      readonly
+      class="readonly-input"
+    />
   </div>
+
   <div>
-    <label for="callDate">Call Date*</label>
-    <input type="date" formControlName="callDate" id="callDate" />
+    <label>Call Date *</label>
+    <input
+      type="date"
+      formControlName="callDate"
+      readonly
+      class="readonly-input"
+    />
   </div>
+
   <div>
-    <label for="auditDate">Audit Date*</label>
-    <input type="date" formControlName="auditDate" id="auditDate" />
+    <label>Audit Date *</label>
+    <input type="date" formControlName="auditDate" required />
   </div>
+
   <div>
-    <label for="provider">Provider</label>
-    <select formControlName="provider" id="provider">
+    <label>Provider</label>
+    <select formControlName="provider">
       <option *ngFor="let provider of providers" [value]="provider">
         {{ provider }}
       </option>
     </select>
   </div>
+
   <div>
-    <label for="phoneNumber">Phone Number*</label>
-    <input type="text" formControlName="phoneNumber" id="phoneNumber" />
+    <label>Phone Number *</label>
+    <input
+      type="tel"
+      formControlName="phoneNumber"
+      readonly
+      class="readonly-input"
+    />
   </div>
+
   <div>
-    <label for="callDuration">Call Duration*</label>
-    <input type="text" formControlName="callDuration" id="callDuration" />
+    <label>Call Duration *</label>
+    <input type="text" formControlName="callDuration" required />
   </div>
+
   <div>
-    <label for="callDisposition">Call Disposition*</label>
-    <input type="text" formControlName="callDisposition" id="callDisposition" />
+    <label>Call Disposition *</label>
+    <input type="text" formControlName="callDisposition" required />
   </div>
+
   <div>
-    <label for="customerAddress">Customer Address</label>
-    <input type="text" formControlName="customerAddress" id="customerAddress" />
+    <label>Customer Address</label>
+    <input
+      type="text"
+      formControlName="customerAddress"
+      readonly
+      class="readonly-input"
+    />
   </div>
-  <!-- Add other form fields similarly -->
+
   <div>
-    <label for="findings">Findings</label>
-    <textarea formControlName="findings" id="findings"></textarea>
+    <label>Findings</label>
+    <textarea formControlName="findings"></textarea>
   </div>
-  <button type="submit">Submit</button>
+
+  <h2>Sale Details</h2>
+
+  <div formGroupName="customerName">
+    <label>Customer Name</label>
+    <input
+      type="text"
+      formControlName="first"
+      placeholder="First Name"
+      readonly
+      class="readonly-input"
+    />
+    <input
+      type="text"
+      formControlName="last"
+      placeholder="Last Name"
+      readonly
+      class="readonly-input"
+    />
+  </div>
+
+  <div>
+    <label>Package Sold</label>
+    <select formControlName="packageSold" class="readonly-input">
+      <option *ngFor="let package of packagesSold" [value]="package">
+        {{ package }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Cable-TV Package</label>
+    <select formControlName="cabletvPackage">
+      <option *ngFor="let option of yesNoNaOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Phone Added</label>
+    <select formControlName="phoneAdded">
+      <option *ngFor="let option of yesNoNaOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <h2>Compliance</h2>
+
+  <div>
+    <label>Recorded Line Disclaimer</label>
+    <select formControlName="recordedLine">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Consent for Callback</label>
+    <select formControlName="consentForCallback">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Credit Check Consent</label>
+    <select formControlName="creditCheckConsent">
+      <option *ngFor="let option of yesNoNaOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>If Contract Then Mentioned ETF & Contract Term</label>
+    <select formControlName="contractTermMentioned">
+      <option *ngFor="let option of yesNoNaOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Any Falsifications</label>
+    <select formControlName="anyFalsifications">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <h2>Sales Quality</h2>
+
+  <div>
+    <label>Top Down Selling</label>
+    <select formControlName="topDownSelling">
+      <option *ngFor="let option of yesNoNaOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Customer Usage Probing</label>
+    <select formControlName="customerUsageProbing">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Package Details Explained Properly</label>
+    <select formControlName="packageDetailsExplained">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Payment Cart Total Mentioned Correctly</label>
+    <select formControlName="paymentCartTotalMentioned">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Any Up-selling</label>
+    <select formControlName="anyUpselling">
+      <option *ngFor="let option of upsellingOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Agent Energetic Behavior *</label>
+    <select formControlName="agentEnergeticBehavior" required>
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Dead Air More than Normal</label>
+    <select formControlName="deadAirMoreThanNormal">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Took too much time in Address Check & Qualification</label>
+    <select formControlName="tookTooMuchTimeInAddressCheck">
+      <option *ngFor="let option of yesNoOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <h2>Improvement Areas or Complete Call Findings</h2>
+
+  <div>
+    <label>Findings</label>
+    <textarea formControlName="improvementAreas"></textarea>
+  </div>
+
+  <button type="submit" [disabled]="!auditForm.valid">Submit</button>
 </form>

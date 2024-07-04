@@ -21,6 +21,10 @@ const routes: Routes = [
         path: 'sales-journey',
         component: comp.SaleJourneyComponent,
       },
+      {
+        path: 'audit-form',
+        component: comp.AuditFormComponent,
+      },
     ],
   },
 ];

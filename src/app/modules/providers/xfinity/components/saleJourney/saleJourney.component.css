@@ -1,16 +1,12 @@
-.sale-journey-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
+}
+
+h3 {
+  color: #444;
+  margin-bottom: 10px;
 }
 
 .sale-overview,
@@ -18,9 +14,55 @@ h2 {
   margin-bottom: 20px;
 }
 
-h3 {
-  color: #444;
-  margin-bottom: 10px;
+.someClass {
+  margin: 20px 0px 40px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dashboard {
+  max-width: 100%;
+}
+
+.audit-form-button {
+  background-color: initial;
+  background-image: linear-gradient(#8614f8 0, #760be0 100%);
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 40px;
+  margin-left: -4px;
+  outline: 0;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: bottom;
+  width: 160px;
+  text-decoration: none;
+}
+
+.audit-form-button:hover {
+  background-image: linear-gradient(#760be0 0, #8614f8 100%);
+  box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px;
+  text-decoration: none;
+}
+
+.sale-journey-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 10% 5%;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .detail-grid {
