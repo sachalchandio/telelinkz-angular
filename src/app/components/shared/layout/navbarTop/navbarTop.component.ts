@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/auth/auth.service';
@@ -7,8 +13,8 @@ import { AuthenticationService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'navbarTop',
-  templateUrl: './NavbarTop.component.html',
-  styleUrls: ['./NavbarTop.component.css'],
+  templateUrl: './navbarTop.component.html',
+  styleUrls: ['./navbarTop.component.css'],
 })
 export class NavbarTopComponent {
   providersOpen = true;
@@ -24,5 +30,4 @@ export class NavbarTopComponent {
   onRightButtonClick() {
     this.toggleRightSidebar.emit();
   }
-
 }

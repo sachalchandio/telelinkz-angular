@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import * as shared from './components/shared';
 import { GraphQLModule } from './graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 // import { UserRegModule } from './modules/UserReg/userReg.module';
@@ -35,28 +35,19 @@ const COMPONENTS = [
   ErrorMessageDialog,
 ];
 
-@NgModule({
-  exports: [ApolloModule],
-  declarations: [AppComponent, ...COMPONENTS],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    GraphQLModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    NgChartsModule,
-    UserfeedComponent,
-    SideBarLoginComponent,
-    // UserRegModule,
-    // LoginModule,
-  ],
-  providers: [AuthGuard, AuthenticationService],
-  bootstrap: [AppComponent],
-})
+@NgModule({ exports: [ApolloModule],
+    declarations: [AppComponent, ...COMPONENTS],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        GraphQLModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        NgChartsModule,
+        UserfeedComponent,
+        SideBarLoginComponent], providers: [AuthGuard, AuthenticationService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
