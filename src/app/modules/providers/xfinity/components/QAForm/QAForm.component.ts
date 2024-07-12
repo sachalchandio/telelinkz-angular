@@ -46,6 +46,7 @@ export class AuditFormComponent implements OnInit {
     'T-Mobile',
     'Alta Fiber',
   ];
+
   packagesSold = [
     '5 Gig',
     '2 Gig',

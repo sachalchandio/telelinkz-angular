@@ -1,0 +1,29 @@
+export interface Sale {
+  saleId: string;
+  saleFlag: string;
+  orderDate: string;
+  agentName: string;
+  customerFirstName: string;
+  customerLastName: string;
+  orderNumber: string;
+  installationDate: string;
+  installationTime: string;
+  installationType: string;
+  streetAddress: string;
+  streetAddressLine2: string;
+  city: string;
+  state: string;
+  zipcode: string;
+  phoneNumber: string;
+  secondPhoneNumber: string;
+  socialSecurityNumber: string;
+  email: string;
+  product: string;
+  packageSold: string;
+  comcastTpvStatus: string;
+  concertOrderId: string;
+  internet: string;
+  tv: string;
+  phone: string;
+  hms: string;
+}

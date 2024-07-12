@@ -21,6 +21,9 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/custom-theme.scss", "src/styles.css"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            },
             "scripts": [],
             "optimization": true,
             "outputHashing": "all",
