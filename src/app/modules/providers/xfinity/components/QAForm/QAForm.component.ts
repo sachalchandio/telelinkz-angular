@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectSaleDetails } from 'src/app/store/selectors/sale.selectors';
 import { AuditService } from './services/audtiForm.service';
 
 @Component({
@@ -23,50 +24,6 @@ export class AuditFormComponent implements OnInit {
   ];
   auditTypes = ['Non Sale', 'Sale'];
   callTypes = ['Sale Call', 'Potential Sale Call', 'CS Call', 'CS to Sale'];
-  providers = [
-    'Spectrum',
-    'Spectrum Mobile',
-    'Frontier',
-    'AT&T',
-    'AT&T Mobile',
-    'ViaSat',
-    'HughesNet',
-    'Optimum',
-    'WindStream',
-    'EarthLink',
-    'WoW',
-    'Vivint',
-    'Ziply',
-    'MetroNet',
-    'Fidium Fiber',
-    'Comcast - Xfinity',
-    'DIRECTV',
-    'BrightSpeed',
-    'Breezeline',
-    'T-Mobile',
-    'Alta Fiber',
-  ];
-
-  packagesSold = [
-    '5 Gig',
-    '2 Gig',
-    '1200 Mbps',
-    '1 Gig',
-    '500 Mbps',
-    '800 Mbps',
-    '400 Mbps',
-    '300 Mbps',
-    '200 Mbps',
-    '100 Mbps',
-    '75 Mbps',
-    '50 Mbps',
-    '30 Mbps',
-    '25 Mbps',
-    '18 Mbps',
-    '10 Mbps',
-    '5 Mbps or Less',
-    'Wireless',
-  ];
   yesNoOptions = ['Yes', 'No'];
   yesNoNaOptions = ['Yes', 'No', 'N/A'];
   upsellingOptions = [
@@ -80,16 +37,20 @@ export class AuditFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auditService: AuditService,
-    private route: ActivatedRoute
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params['data']) {
-        this.saleDetails = JSON.parse(params['data']);
+    this.store.select(selectSaleDetails).subscribe((details) => {
+      console.log('Selected sale details:', details); // Add this line
+      if (details) {
+        this.saleDetails = details;
+        this.initForm();
       }
     });
+  }
 
+  initForm(): void {
     this.auditForm = this.fb.group({
       auditBy: ['', Validators.required],
       auditType: ['Sale', Validators.required],
@@ -106,7 +67,7 @@ export class AuditFormComponent implements OnInit {
         Validators.required,
       ],
       auditDate: ['', Validators.required],
-      provider: ['Comcast - Xfinity', Validators.required],
+      provider: ['Xfinity', Validators.required],
       phoneNumber: [
         { value: this.saleDetails['Phone Number'] || '', disabled: true },
         Validators.required,

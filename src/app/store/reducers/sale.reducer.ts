@@ -1,34 +1,19 @@
-import { createReducer, on } from '@ngrx/store';
-import {
-  loadSales,
-  loadSalesSuccess,
-  loadSalesFailure,
-} from '../actions/sale.actions';
-import { Sale } from '../models/sale.model';
+import { createReducer, on, Action } from '@ngrx/store';
+import { setSaleDetails } from '../actions/sale.actions';
 
 export interface SaleState {
-  sales: Sale[];
-  loading: boolean;
-  error: any;
+  saleDetails: any;
 }
 
 export const initialState: SaleState = {
-  sales: [],
-  loading: false,
-  error: null,
+  saleDetails: null,
 };
 
-export const saleReducer = createReducer(
+const _saleReducer = createReducer(
   initialState,
-  on(loadSales, (state) => ({ ...state, loading: true })),
-  on(loadSalesSuccess, (state, { sales }) => ({
-    ...state,
-    loading: false,
-    sales,
-  })),
-  on(loadSalesFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error,
-  }))
+  on(setSaleDetails, (state, { saleDetails }) => ({ ...state, saleDetails }))
 );
+
+export function saleReducer(state: SaleState | undefined, action: Action) {
+  return _saleReducer(state, action);
+}

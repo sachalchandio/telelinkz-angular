@@ -51,11 +51,12 @@
 
   <div>
     <label>Provider</label>
-    <select formControlName="provider">
-      <option *ngFor="let provider of providers" [value]="provider">
-        {{ provider }}
-      </option>
-    </select>
+    <input
+      type="text"
+      formControlName="provider"
+      readonly
+      class="readonly-input"
+    />
   </div>
 
   <div>
@@ -114,12 +115,13 @@
   </div>
 
   <div>
-    <label>Package Sold</label>
-    <select formControlName="packageSold" class="readonly-input">
-      <option *ngFor="let package of packagesSold" [value]="package">
-        {{ package }}
-      </option>
-    </select>
+    <input
+      type="text"
+      formControlName="packageSold"
+      placeholder="Last Name"
+      readonly
+      class="readonly-input"
+    />
   </div>
 
   <div>
