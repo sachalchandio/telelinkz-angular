@@ -34,12 +34,16 @@ export class AuditFormComponent implements OnInit {
     'Not Applicable',
   ];
 
+  // Constructor to inject the required services
   constructor(
     private fb: FormBuilder,
     private auditService: AuditService,
     private store: Store
   ) {}
 
+  // Add the following ngOnInit method to subscribe to the sale details from the store and
+  // initialize the audit form with the sale details when available in the store (saleDetails)
+  // object from the store using the initForm method
   ngOnInit(): void {
     this.store.select(selectSaleDetails).subscribe((details) => {
       console.log('Selected sale details:', details); // Add this line
@@ -50,6 +54,8 @@ export class AuditFormComponent implements OnInit {
     });
   }
 
+  // Add the following method to initialize the audit form with the sale details and set the initial values for the form controls based on the
+  // sale details object received from the store (saleDetails) and the audit form structure defined in the template
   initForm(): void {
     this.auditForm = this.fb.group({
       auditBy: ['', Validators.required],
@@ -115,27 +121,55 @@ export class AuditFormComponent implements OnInit {
     this.auditForm.get('packageSold')?.disable();
   }
 
+  // Add the following method to format the date to 'YYYY-MM-DD' format
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toISOString().split('T')[0];
   }
 
+  // Add the following method to get the full address of the customer from the sale details object
+  // and return it as a string value (e.g., '123 Main St, City, State Zipcode')
   getFullAddress(): string {
     return `${this.saleDetails['Street Address']}, ${this.saleDetails['City']}, ${this.saleDetails['State']} ${this.saleDetails['Zipcode']}`;
   }
 
+  // InOrder to update the audit form, we need to add the following method to update the audit form data to the server
+  // using the audit service and handle the response accordingly (e.g., show a success message, navigate back to the sales journey)
+  // onUpdateSubmit(): void {
+  //   console.log(this.auditForm.value);
+  //   if (this.auditForm.valid) {
+  //     const formData = {
+  //       ...this.auditForm.getRawValue(), // use getRawValue() to include disabled fields
+  //       id: this.saleDetails['ID'],
+  //     };
+  //     this.auditService.updateAudit(formData).subscribe(
+  //       (response) => {
+  //         console.log('Audit updated successfully', response);
+  //         // Handle success (e.g., show a success message, navigate back to the sales journey)
+  //       },
+  //       (error) => {
+  //         console.error('Error updating audit', error);
+  //         // Handle error (e.g., show an error message)
+  //       }
+  //     );
+  //   }
+  // }
+
+  // Add the following method to submit the audit form data to the server using the audit service and handle the response accordingly
+  // (e.g., show a success message, navigate back to the sales journey)
   onSubmit(): void {
+    console.log(this.auditForm.value);
     if (this.auditForm.valid) {
       const formData = {
         ...this.auditForm.value,
         saleId: this.saleDetails['ID'],
       };
       this.auditService.submitAudit(formData).subscribe(
-        (response: Response) => {
+        (response) => {
           console.log('Audit submitted successfully', response);
           // Handle success (e.g., show a success message, navigate back to the sales journey)
         },
-        (error: Error) => {
+        (error) => {
           console.error('Error submitting audit', error);
           // Handle error (e.g., show an error message)
         }

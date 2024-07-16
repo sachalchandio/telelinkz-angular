@@ -140,13 +140,29 @@ mutation CreateAuditForm($CreateAuditFormInput: CreateAuditFormInput!) {
   createAuditForm(CreateAuditFormInput: $CreateAuditFormInput) {
     id
     auditDate
-    score
-    comments
-    auditorName
-    auditCategory
-    totalQuestions
-    correctAnswers
-    isPassed
+    auditBy
+    auditType
+    callType
+    provider
+    callDuration
+    callDisposition
+    findings
+    cabletvPackage
+    phoneAdded
+    recordedLine
+    consentForCallback
+    creditCheckConsent
+    contractTermMentioned
+    anyFalsifications
+    topDownSelling
+    customerUsageProbing
+    packageDetailsExplained
+    paymentCartTotalMentioned
+    anyUpselling
+    agentEnergeticBehavior
+    deadAirMoreThanNormal
+    tookTooMuchTimeInAddressCheck
+    improvementAreas
     sale {
       id
     }
@@ -157,13 +173,29 @@ mutation UpdateAuditForm($UpdateAuditFormInput: UpdateAuditFormInput!) {
   updateAuditForm(UpdateAuditFormInput: $UpdateAuditFormInput) {
     id
     auditDate
-    score
-    comments
-    auditorName
-    auditCategory
-    totalQuestions
-    correctAnswers
-    isPassed
+    auditBy
+    auditType
+    callType
+    provider
+    callDuration
+    callDisposition
+    findings
+    cabletvPackage
+    phoneAdded
+    recordedLine
+    consentForCallback
+    creditCheckConsent
+    contractTermMentioned
+    anyFalsifications
+    topDownSelling
+    customerUsageProbing
+    packageDetailsExplained
+    paymentCartTotalMentioned
+    anyUpselling
+    agentEnergeticBehavior
+    deadAirMoreThanNormal
+    tookTooMuchTimeInAddressCheck
+    improvementAreas
     sale {
       id
     }

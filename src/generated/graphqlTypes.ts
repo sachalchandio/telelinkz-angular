@@ -28,19 +28,35 @@ export enum AccountStatus {
 
 export type AuditForm = {
   __typename?: 'AuditForm';
-  auditCategory?: Maybe<Scalars['String']['output']>;
+  agentEnergeticBehavior?: Maybe<Scalars['String']['output']>;
+  anyFalsifications?: Maybe<Scalars['String']['output']>;
+  anyUpselling?: Maybe<Scalars['String']['output']>;
+  auditBy: Scalars['String']['output'];
   auditDate: Scalars['String']['output'];
-  auditorName?: Maybe<Scalars['String']['output']>;
-  comments: Scalars['String']['output'];
-  correctAnswers?: Maybe<Scalars['Int']['output']>;
+  auditType: Scalars['String']['output'];
+  cabletvPackage?: Maybe<Scalars['String']['output']>;
+  callDisposition: Scalars['String']['output'];
+  callDuration: Scalars['String']['output'];
+  callType?: Maybe<Scalars['String']['output']>;
+  consentForCallback?: Maybe<Scalars['String']['output']>;
+  contractTermMentioned?: Maybe<Scalars['String']['output']>;
   /** Created at Date */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  creditCheckConsent?: Maybe<Scalars['String']['output']>;
+  customerUsageProbing?: Maybe<Scalars['String']['output']>;
+  deadAirMoreThanNormal?: Maybe<Scalars['String']['output']>;
+  findings?: Maybe<Scalars['String']['output']>;
   /** Primary ID */
   id: Scalars['ID']['output'];
-  isPassed?: Maybe<Scalars['Boolean']['output']>;
+  improvementAreas?: Maybe<Scalars['String']['output']>;
+  packageDetailsExplained?: Maybe<Scalars['String']['output']>;
+  paymentCartTotalMentioned?: Maybe<Scalars['String']['output']>;
+  phoneAdded?: Maybe<Scalars['String']['output']>;
+  provider: Scalars['String']['output'];
+  recordedLine?: Maybe<Scalars['String']['output']>;
   sale: XfinitySale;
-  score: Scalars['Int']['output'];
-  totalQuestions?: Maybe<Scalars['Int']['output']>;
+  tookTooMuchTimeInAddressCheck?: Maybe<Scalars['String']['output']>;
+  topDownSelling?: Maybe<Scalars['String']['output']>;
   /** Updated at Date */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -73,15 +89,31 @@ export enum CommentStatus {
 }
 
 export type CreateAuditFormInput = {
-  auditCategory?: InputMaybe<Scalars['String']['input']>;
+  agentEnergeticBehavior?: InputMaybe<Scalars['String']['input']>;
+  anyFalsifications?: InputMaybe<Scalars['String']['input']>;
+  anyUpselling?: InputMaybe<Scalars['String']['input']>;
+  auditBy: Scalars['String']['input'];
   auditDate: Scalars['String']['input'];
-  auditorName?: InputMaybe<Scalars['String']['input']>;
-  comments: Scalars['String']['input'];
-  correctAnswers?: InputMaybe<Scalars['Int']['input']>;
-  isPassed?: InputMaybe<Scalars['Boolean']['input']>;
+  auditType: Scalars['String']['input'];
+  cabletvPackage?: InputMaybe<Scalars['String']['input']>;
+  callDisposition: Scalars['String']['input'];
+  callDuration: Scalars['String']['input'];
+  callType?: InputMaybe<Scalars['String']['input']>;
+  consentForCallback?: InputMaybe<Scalars['String']['input']>;
+  contractTermMentioned?: InputMaybe<Scalars['String']['input']>;
+  creditCheckConsent?: InputMaybe<Scalars['String']['input']>;
+  customerUsageProbing?: InputMaybe<Scalars['String']['input']>;
+  deadAirMoreThanNormal?: InputMaybe<Scalars['String']['input']>;
+  findings?: InputMaybe<Scalars['String']['input']>;
+  improvementAreas?: InputMaybe<Scalars['String']['input']>;
+  packageDetailsExplained?: InputMaybe<Scalars['String']['input']>;
+  paymentCartTotalMentioned?: InputMaybe<Scalars['String']['input']>;
+  phoneAdded?: InputMaybe<Scalars['String']['input']>;
+  provider: Scalars['String']['input'];
+  recordedLine?: InputMaybe<Scalars['String']['input']>;
   saleId: Scalars['String']['input'];
-  score: Scalars['Int']['input'];
-  totalQuestions?: InputMaybe<Scalars['Int']['input']>;
+  tookTooMuchTimeInAddressCheck?: InputMaybe<Scalars['String']['input']>;
+  topDownSelling?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateCommentInput = {
@@ -517,16 +549,32 @@ export enum UsState {
 }
 
 export type UpdateAuditFormInput = {
-  auditCategory?: InputMaybe<Scalars['String']['input']>;
+  agentEnergeticBehavior?: InputMaybe<Scalars['String']['input']>;
+  anyFalsifications?: InputMaybe<Scalars['String']['input']>;
+  anyUpselling?: InputMaybe<Scalars['String']['input']>;
+  auditBy?: InputMaybe<Scalars['String']['input']>;
   auditDate?: InputMaybe<Scalars['String']['input']>;
-  auditorName?: InputMaybe<Scalars['String']['input']>;
-  comments?: InputMaybe<Scalars['String']['input']>;
-  correctAnswers?: InputMaybe<Scalars['Int']['input']>;
+  auditType?: InputMaybe<Scalars['String']['input']>;
+  cabletvPackage?: InputMaybe<Scalars['String']['input']>;
+  callDisposition?: InputMaybe<Scalars['String']['input']>;
+  callDuration?: InputMaybe<Scalars['String']['input']>;
+  callType?: InputMaybe<Scalars['String']['input']>;
+  consentForCallback?: InputMaybe<Scalars['String']['input']>;
+  contractTermMentioned?: InputMaybe<Scalars['String']['input']>;
+  creditCheckConsent?: InputMaybe<Scalars['String']['input']>;
+  customerUsageProbing?: InputMaybe<Scalars['String']['input']>;
+  deadAirMoreThanNormal?: InputMaybe<Scalars['String']['input']>;
+  findings?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
-  isPassed?: InputMaybe<Scalars['Boolean']['input']>;
+  improvementAreas?: InputMaybe<Scalars['String']['input']>;
+  packageDetailsExplained?: InputMaybe<Scalars['String']['input']>;
+  paymentCartTotalMentioned?: InputMaybe<Scalars['String']['input']>;
+  phoneAdded?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  recordedLine?: InputMaybe<Scalars['String']['input']>;
   saleId?: InputMaybe<Scalars['String']['input']>;
-  score?: InputMaybe<Scalars['Int']['input']>;
-  totalQuestions?: InputMaybe<Scalars['Int']['input']>;
+  tookTooMuchTimeInAddressCheck?: InputMaybe<Scalars['String']['input']>;
+  topDownSelling?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateCommentInput = {
@@ -818,14 +866,14 @@ export type CreateAuditFormMutationVariables = Exact<{
 }>;
 
 
-export type CreateAuditFormMutation = { __typename?: 'Mutation', createAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, score: number, comments: string, auditorName?: string | null, auditCategory?: string | null, totalQuestions?: number | null, correctAnswers?: number | null, isPassed?: boolean | null, sale: { __typename?: 'XfinitySale', id: string } } };
+export type CreateAuditFormMutation = { __typename?: 'Mutation', createAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, auditBy: string, auditType: string, callType?: string | null, provider: string, callDuration: string, callDisposition: string, findings?: string | null, cabletvPackage?: string | null, phoneAdded?: string | null, recordedLine?: string | null, consentForCallback?: string | null, creditCheckConsent?: string | null, contractTermMentioned?: string | null, anyFalsifications?: string | null, topDownSelling?: string | null, customerUsageProbing?: string | null, packageDetailsExplained?: string | null, paymentCartTotalMentioned?: string | null, anyUpselling?: string | null, agentEnergeticBehavior?: string | null, deadAirMoreThanNormal?: string | null, tookTooMuchTimeInAddressCheck?: string | null, improvementAreas?: string | null, sale: { __typename?: 'XfinitySale', id: string } } };
 
 export type UpdateAuditFormMutationVariables = Exact<{
   UpdateAuditFormInput: UpdateAuditFormInput;
 }>;
 
 
-export type UpdateAuditFormMutation = { __typename?: 'Mutation', updateAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, score: number, comments: string, auditorName?: string | null, auditCategory?: string | null, totalQuestions?: number | null, correctAnswers?: number | null, isPassed?: boolean | null, sale: { __typename?: 'XfinitySale', id: string } } };
+export type UpdateAuditFormMutation = { __typename?: 'Mutation', updateAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, auditBy: string, auditType: string, callType?: string | null, provider: string, callDuration: string, callDisposition: string, findings?: string | null, cabletvPackage?: string | null, phoneAdded?: string | null, recordedLine?: string | null, consentForCallback?: string | null, creditCheckConsent?: string | null, contractTermMentioned?: string | null, anyFalsifications?: string | null, topDownSelling?: string | null, customerUsageProbing?: string | null, packageDetailsExplained?: string | null, paymentCartTotalMentioned?: string | null, anyUpselling?: string | null, agentEnergeticBehavior?: string | null, deadAirMoreThanNormal?: string | null, tookTooMuchTimeInAddressCheck?: string | null, improvementAreas?: string | null, sale: { __typename?: 'XfinitySale', id: string } } };
 
 export type RemoveAuditFormMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -1107,13 +1155,29 @@ export const CreateAuditFormDocument = gql`
   createAuditForm(CreateAuditFormInput: $CreateAuditFormInput) {
     id
     auditDate
-    score
-    comments
-    auditorName
-    auditCategory
-    totalQuestions
-    correctAnswers
-    isPassed
+    auditBy
+    auditType
+    callType
+    provider
+    callDuration
+    callDisposition
+    findings
+    cabletvPackage
+    phoneAdded
+    recordedLine
+    consentForCallback
+    creditCheckConsent
+    contractTermMentioned
+    anyFalsifications
+    topDownSelling
+    customerUsageProbing
+    packageDetailsExplained
+    paymentCartTotalMentioned
+    anyUpselling
+    agentEnergeticBehavior
+    deadAirMoreThanNormal
+    tookTooMuchTimeInAddressCheck
+    improvementAreas
     sale {
       id
     }
@@ -1136,13 +1200,29 @@ export const UpdateAuditFormDocument = gql`
   updateAuditForm(UpdateAuditFormInput: $UpdateAuditFormInput) {
     id
     auditDate
-    score
-    comments
-    auditorName
-    auditCategory
-    totalQuestions
-    correctAnswers
-    isPassed
+    auditBy
+    auditType
+    callType
+    provider
+    callDuration
+    callDisposition
+    findings
+    cabletvPackage
+    phoneAdded
+    recordedLine
+    consentForCallback
+    creditCheckConsent
+    contractTermMentioned
+    anyFalsifications
+    topDownSelling
+    customerUsageProbing
+    packageDetailsExplained
+    paymentCartTotalMentioned
+    anyUpselling
+    agentEnergeticBehavior
+    deadAirMoreThanNormal
+    tookTooMuchTimeInAddressCheck
+    improvementAreas
     sale {
       id
     }
