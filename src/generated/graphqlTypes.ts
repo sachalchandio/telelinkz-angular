@@ -26,6 +26,25 @@ export enum AccountStatus {
   Unverified = 'UNVERIFIED'
 }
 
+export type AuditForm = {
+  __typename?: 'AuditForm';
+  auditCategory?: Maybe<Scalars['String']['output']>;
+  auditDate: Scalars['String']['output'];
+  auditorName?: Maybe<Scalars['String']['output']>;
+  comments: Scalars['String']['output'];
+  correctAnswers?: Maybe<Scalars['Int']['output']>;
+  /** Created at Date */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Primary ID */
+  id: Scalars['ID']['output'];
+  isPassed?: Maybe<Scalars['Boolean']['output']>;
+  sale: XfinitySale;
+  score: Scalars['Int']['output'];
+  totalQuestions?: Maybe<Scalars['Int']['output']>;
+  /** Updated at Date */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
 export type Comment = {
   __typename?: 'Comment';
   /** Created at Date */
@@ -52,6 +71,18 @@ export enum CommentStatus {
   Resolved = 'RESOLVED',
   Unresolved = 'UNRESOLVED'
 }
+
+export type CreateAuditFormInput = {
+  auditCategory?: InputMaybe<Scalars['String']['input']>;
+  auditDate: Scalars['String']['input'];
+  auditorName?: InputMaybe<Scalars['String']['input']>;
+  comments: Scalars['String']['input'];
+  correctAnswers?: InputMaybe<Scalars['Int']['input']>;
+  isPassed?: InputMaybe<Scalars['Boolean']['input']>;
+  saleId: Scalars['String']['input'];
+  score: Scalars['Int']['input'];
+  totalQuestions?: InputMaybe<Scalars['Int']['input']>;
+};
 
 export type CreateCommentInput = {
   fieldName: SaleField;
@@ -126,19 +157,27 @@ export type LoginUserResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAuditForm: AuditForm;
   createComment: Comment;
   createSaleStage: SaleStage;
   createSaleStageHistory: SaleStageHistory;
   createXfinitySale: XfinitySale;
   registerUser: RegisterUserResponseDto;
+  removeAuditForm: Scalars['Boolean']['output'];
   removeComment: Scalars['Boolean']['output'];
   removeSaleStage: Scalars['Boolean']['output'];
   removeSaleStageHistory: Scalars['Boolean']['output'];
   seedUsers?: Maybe<Array<User>>;
   setSaleStage: SaleStage;
+  updateAuditForm: AuditForm;
   updateComment: Comment;
   updateSaleStage: SaleStage;
   updateUser: UserDto;
+};
+
+
+export type MutationCreateAuditFormArgs = {
+  CreateAuditFormInput: CreateAuditFormInput;
 };
 
 
@@ -171,6 +210,11 @@ export type MutationRegisterUserArgs = {
 };
 
 
+export type MutationRemoveAuditFormArgs = {
+  id: Scalars['String']['input'];
+};
+
+
 export type MutationRemoveCommentArgs = {
   id: Scalars['String']['input'];
 };
@@ -191,6 +235,11 @@ export type MutationSetSaleStageArgs = {
   saleType: SaleType;
   stage: SaleFlag;
   userId: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateAuditFormArgs = {
+  UpdateAuditFormInput: UpdateAuditFormInput;
 };
 
 
@@ -219,6 +268,8 @@ export type PaginatedSales = {
 
 export type Query = {
   __typename?: 'Query';
+  auditForm: AuditForm;
+  auditForms: Array<AuditForm>;
   comment: Comment;
   comments: Array<Comment>;
   commentsBySale: Array<Comment>;
@@ -234,6 +285,11 @@ export type Query = {
   saleStageHistories: Array<SaleStageHistory>;
   saleStageHistory: SaleStageHistory;
   saleStages: Array<SaleStage>;
+};
+
+
+export type QueryAuditFormArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -460,6 +516,19 @@ export enum UsState {
   Wy = 'WY'
 }
 
+export type UpdateAuditFormInput = {
+  auditCategory?: InputMaybe<Scalars['String']['input']>;
+  auditDate?: InputMaybe<Scalars['String']['input']>;
+  auditorName?: InputMaybe<Scalars['String']['input']>;
+  comments?: InputMaybe<Scalars['String']['input']>;
+  correctAnswers?: InputMaybe<Scalars['Int']['input']>;
+  id: Scalars['String']['input'];
+  isPassed?: InputMaybe<Scalars['Boolean']['input']>;
+  saleId?: InputMaybe<Scalars['String']['input']>;
+  score?: InputMaybe<Scalars['Int']['input']>;
+  totalQuestions?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type UpdateCommentInput = {
   fieldName?: InputMaybe<SaleField>;
   parentCommentId?: InputMaybe<Scalars['ID']['input']>;
@@ -565,6 +634,7 @@ export type XfinitySale = {
   TV: Scalars['String']['output'];
   /** The agent responsible for the sale */
   agent: User;
+  auditForms?: Maybe<Array<AuditForm>>;
   /** City of the installation address */
   city: Scalars['String']['output'];
   /** Comcast TPV status of the sale */
@@ -742,6 +812,13 @@ export type UpdateSaleStageMutationVariables = Exact<{
 
 
 export type UpdateSaleStageMutation = { __typename?: 'Mutation', updateSaleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
+
+export type RemoveAuditFormMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type RemoveAuditFormMutation = { __typename?: 'Mutation', removeAuditForm: boolean };
 
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1006,6 +1083,22 @@ export const UpdateSaleStageDocument = gql`
   })
   export class UpdateSaleStageGQL extends Apollo.Mutation<UpdateSaleStageMutation, UpdateSaleStageMutationVariables> {
     document = UpdateSaleStageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RemoveAuditFormDocument = gql`
+    mutation RemoveAuditForm($id: String!) {
+  removeAuditForm(id: $id)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RemoveAuditFormGQL extends Apollo.Mutation<RemoveAuditFormMutation, RemoveAuditFormMutationVariables> {
+    document = RemoveAuditFormDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "generate": "graphql-codegen",
+    "generate": "node generate.js",
     "postbuild": "ng serve & node lighthouse.js && exit"
   },
   "private": true,
