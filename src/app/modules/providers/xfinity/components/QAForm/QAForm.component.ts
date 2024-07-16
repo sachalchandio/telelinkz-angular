@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectSaleDetails } from 'src/app/store/selectors/sale.selectors';
 import { AuditService } from './services/audtiForm.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateAuditFormInput } from 'src/generated/graphqlTypes';
 
 @Component({
   selector: 'app-audit-form',
@@ -38,7 +40,8 @@ export class AuditFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auditService: AuditService,
-    private store: Store
+    private store: Store,
+    private snackBar: MatSnackBar // Inject MatSnackBar service to show a snack bar message
   ) {}
 
   // Add the following ngOnInit method to subscribe to the sale details from the store and
@@ -160,18 +163,98 @@ export class AuditFormComponent implements OnInit {
   onSubmit(): void {
     console.log(this.auditForm.value);
     if (this.auditForm.valid) {
+      // Filter out any fields not defined in CreateAuditFormInput
+      const allowedFields: (keyof CreateAuditFormInput)[] = [
+        'auditBy',
+        'auditType',
+        'callType',
+        'auditDate',
+        'provider',
+        'callDuration',
+        'callDisposition',
+        'findings',
+        'cabletvPackage',
+        'phoneAdded',
+        'recordedLine',
+        'consentForCallback',
+        'creditCheckConsent',
+        'contractTermMentioned',
+        'anyFalsifications',
+        'topDownSelling',
+        'customerUsageProbing',
+        'packageDetailsExplained',
+        'paymentCartTotalMentioned',
+        'anyUpselling',
+        'agentEnergeticBehavior',
+        'deadAirMoreThanNormal',
+        'tookTooMuchTimeInAddressCheck',
+        'improvementAreas',
+        'saleId',
+      ];
+
       const formData = {
-        ...this.auditForm.value,
+        ...this.auditForm.getRawValue(), // use getRawValue() to include disabled fields
         saleId: this.saleDetails['ID'],
       };
-      this.auditService.submitAudit(formData).subscribe(
+
+      const filteredFormData: CreateAuditFormInput = allowedFields.reduce(
+        (obj, key) => {
+          obj[key] = formData[key];
+          return obj;
+        },
+        {} as CreateAuditFormInput
+      );
+
+      this.auditService.submitAudit(filteredFormData).subscribe(
         (response) => {
           console.log('Audit submitted successfully', response);
-          // Handle success (e.g., show a success message, navigate back to the sales journey)
+          // Show success message
+          this.snackBar.open('Audit submitted successfully', 'Close', {
+            duration: 3000,
+          });
+          // Clear form except the disabled fields
+          this.auditForm.reset({
+            auditBy: '',
+            auditType: 'Sale',
+            callType: '',
+            auditDate: '',
+            callDuration: '',
+            callDisposition: '',
+            findings: '',
+            cabletvPackage: '',
+            phoneAdded: '',
+            recordedLine: '',
+            consentForCallback: '',
+            creditCheckConsent: '',
+            contractTermMentioned: '',
+            anyFalsifications: '',
+            topDownSelling: '',
+            customerUsageProbing: '',
+            packageDetailsExplained: '',
+            paymentCartTotalMentioned: '',
+            anyUpselling: '',
+            agentEnergeticBehavior: '',
+            deadAirMoreThanNormal: '',
+            tookTooMuchTimeInAddressCheck: '',
+            improvementAreas: '',
+            agentName: this.saleDetails['Agent Name'],
+            callDate: this.formatDate(this.saleDetails['Order Date']),
+            provider: 'Xfinity',
+            phoneNumber: this.saleDetails['Phone Number'],
+            customerAddress: this.getFullAddress(),
+            customerName: {
+              first: this.saleDetails['Customer First Name'],
+              last: this.saleDetails['Customer Last Name'],
+            },
+            packageSold: this.saleDetails['Package Sold'],
+          });
         },
         (error) => {
           console.error('Error submitting audit', error);
           // Handle error (e.g., show an error message)
+          this.snackBar.open('Error submitting audit', 'Close', {
+            duration: 3000,
+          });
         }
       );
     }

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { MutationResult } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
   AuditForm,
   CreateAuditFormGQL,
   CreateAuditFormInput,
+  CreateAuditFormMutation,
   UpdateAuditFormGQL,
 } from 'src/generated/graphqlTypes';
 
@@ -16,10 +18,16 @@ export class AuditService {
     private updateAuditFormGQL: UpdateAuditFormGQL
   ) {}
 
+  // submitAudit(
+  //   formData: CreateAuditFormInput
+  // ): Observable<{ createAuditForm: AuditForm }> {
+  //   return this.createAuditFormGQL.mutate({ createAuditFormInput: formData });
+  // }
+
   submitAudit(
     formData: CreateAuditFormInput
-  ): Observable<{ createAuditForm: AuditForm }> {
-    return this.createAuditFormGQL.mutate({ createAuditFormInput: formData });
+  ): Observable<MutationResult<CreateAuditFormMutation>> {
+    return this.createAuditFormGQL.mutate({ CreateAuditFormInput: formData });
   }
 
   // updateAudit(formData: UpdateAuditFormInput): Observable<{ updateAuditForm: AuditForm }> {

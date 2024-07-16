@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const COMPONETS = [
   comp.XfinityComponent,
@@ -41,6 +42,7 @@ const COMPONETS = [
     MatSelectModule,
     MatOptionModule,
     MatPaginatorModule,
+    MatSnackBarModule,
   ],
 })
 export class XfinityModule {}
