@@ -813,6 +813,20 @@ export type UpdateSaleStageMutationVariables = Exact<{
 
 export type UpdateSaleStageMutation = { __typename?: 'Mutation', updateSaleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
 
+export type CreateAuditFormMutationVariables = Exact<{
+  CreateAuditFormInput: CreateAuditFormInput;
+}>;
+
+
+export type CreateAuditFormMutation = { __typename?: 'Mutation', createAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, score: number, comments: string, auditorName?: string | null, auditCategory?: string | null, totalQuestions?: number | null, correctAnswers?: number | null, isPassed?: boolean | null, sale: { __typename?: 'XfinitySale', id: string } } };
+
+export type UpdateAuditFormMutationVariables = Exact<{
+  UpdateAuditFormInput: UpdateAuditFormInput;
+}>;
+
+
+export type UpdateAuditFormMutation = { __typename?: 'Mutation', updateAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, score: number, comments: string, auditorName?: string | null, auditCategory?: string | null, totalQuestions?: number | null, correctAnswers?: number | null, isPassed?: boolean | null, sale: { __typename?: 'XfinitySale', id: string } } };
+
 export type RemoveAuditFormMutationVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
@@ -1083,6 +1097,64 @@ export const UpdateSaleStageDocument = gql`
   })
   export class UpdateSaleStageGQL extends Apollo.Mutation<UpdateSaleStageMutation, UpdateSaleStageMutationVariables> {
     document = UpdateSaleStageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateAuditFormDocument = gql`
+    mutation CreateAuditForm($CreateAuditFormInput: CreateAuditFormInput!) {
+  createAuditForm(CreateAuditFormInput: $CreateAuditFormInput) {
+    id
+    auditDate
+    score
+    comments
+    auditorName
+    auditCategory
+    totalQuestions
+    correctAnswers
+    isPassed
+    sale {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateAuditFormGQL extends Apollo.Mutation<CreateAuditFormMutation, CreateAuditFormMutationVariables> {
+    document = CreateAuditFormDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateAuditFormDocument = gql`
+    mutation UpdateAuditForm($UpdateAuditFormInput: UpdateAuditFormInput!) {
+  updateAuditForm(UpdateAuditFormInput: $UpdateAuditFormInput) {
+    id
+    auditDate
+    score
+    comments
+    auditorName
+    auditCategory
+    totalQuestions
+    correctAnswers
+    isPassed
+    sale {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateAuditFormGQL extends Apollo.Mutation<UpdateAuditFormMutation, UpdateAuditFormMutationVariables> {
+    document = UpdateAuditFormDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

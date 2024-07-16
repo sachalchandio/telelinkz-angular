@@ -136,40 +136,40 @@ mutation UpdateSaleStage(
   }
 }
 
+mutation CreateAuditForm($CreateAuditFormInput: CreateAuditFormInput!) {
+  createAuditForm(CreateAuditFormInput: $CreateAuditFormInput) {
+    id
+    auditDate
+    score
+    comments
+    auditorName
+    auditCategory
+    totalQuestions
+    correctAnswers
+    isPassed
+    sale {
+      id
+    }
+  }
+}
+
+mutation UpdateAuditForm($UpdateAuditFormInput: UpdateAuditFormInput!) {
+  updateAuditForm(UpdateAuditFormInput: $UpdateAuditFormInput) {
+    id
+    auditDate
+    score
+    comments
+    auditorName
+    auditCategory
+    totalQuestions
+    correctAnswers
+    isPassed
+    sale {
+      id
+    }
+  }
+}
+
 mutation RemoveAuditForm($id: String!) {
   removeAuditForm(id: $id)
-}
-
-mutation CreateAuditForm($input: CreateAuditFormInput!) {
-  createAuditForm(input: $input) {
-    id
-    auditDate
-    score
-    comments
-    auditorName
-    auditCategory
-    totalQuestions
-    correctAnswers
-    isPassed
-    sale {
-      id
-    }
-  }
-}
-
-mutation UpdateAuditForm($input: UpdateAuditFormInput!) {
-  updateAuditForm(input: $input) {
-    id
-    auditDate
-    score
-    comments
-    auditorName
-    auditCategory
-    totalQuestions
-    correctAnswers
-    isPassed
-    sale {
-      id
-    }
-  }
 }
