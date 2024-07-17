@@ -1,21 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Apollo, gql } from 'apollo-angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { Store } from '@ngrx/store';
+import { setSaleDetails } from 'src/app/store/actions/sale.actions';
 import { TabStateService } from 'src/app/services/tabState/tab-state.service';
-
-const GET_SALE_HISTORY = gql`
-  query GetSaleHistory($saleId: String!) {
-    getSaleHistory(saleId: $saleId) {
-      stage
-      timestamp
-      user {
-        name
-      }
-      saleId
-      saleType
-    }
-  }
-`;
+import { GetSaleHistoryDocument } from 'src/generated/graphqlTypes';
 
 @Component({
   selector: 'app-sale-journey',
@@ -30,6 +19,8 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private apollo: Apollo,
+    private router: Router,
+    private store: Store,
     private tabStateService: TabStateService
   ) {}
 
@@ -39,6 +30,7 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
       const saleData = params.get('data');
       if (this.saleId && saleData) {
         this.saleDetails = JSON.parse(saleData);
+        this.store.dispatch(setSaleDetails({ saleDetails: this.saleDetails }));
         this.restoreTabState();
         this.fetchSaleHistory();
       }
@@ -48,7 +40,7 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
   fetchSaleHistory(): void {
     this.apollo
       .watchQuery({
-        query: GET_SALE_HISTORY,
+        query: GetSaleHistoryDocument,
         variables: {
           saleId: this.saleId,
         },
@@ -97,5 +89,13 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
 
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
+  }
+
+  navigateToAuditForm(): void {
+    console.log('Dispatching sale details:', this.saleDetails); // Add this line
+    this.store.dispatch(setSaleDetails({ saleDetails: this.saleDetails }));
+    this.router.navigate(['/xfinity/audit-form'], {
+      queryParams: { data: JSON.stringify(this.saleDetails) },
+    });
   }
 }

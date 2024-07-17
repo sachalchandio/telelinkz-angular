@@ -26,6 +26,41 @@ export enum AccountStatus {
   Unverified = 'UNVERIFIED'
 }
 
+export type AuditForm = {
+  __typename?: 'AuditForm';
+  agentEnergeticBehavior?: Maybe<Scalars['String']['output']>;
+  anyFalsifications?: Maybe<Scalars['String']['output']>;
+  anyUpselling?: Maybe<Scalars['String']['output']>;
+  auditBy: Scalars['String']['output'];
+  auditDate: Scalars['String']['output'];
+  auditType: Scalars['String']['output'];
+  cabletvPackage?: Maybe<Scalars['String']['output']>;
+  callDisposition: Scalars['String']['output'];
+  callDuration: Scalars['String']['output'];
+  callType?: Maybe<Scalars['String']['output']>;
+  consentForCallback?: Maybe<Scalars['String']['output']>;
+  contractTermMentioned?: Maybe<Scalars['String']['output']>;
+  /** Created at Date */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  creditCheckConsent?: Maybe<Scalars['String']['output']>;
+  customerUsageProbing?: Maybe<Scalars['String']['output']>;
+  deadAirMoreThanNormal?: Maybe<Scalars['String']['output']>;
+  findings?: Maybe<Scalars['String']['output']>;
+  /** Primary ID */
+  id: Scalars['ID']['output'];
+  improvementAreas?: Maybe<Scalars['String']['output']>;
+  packageDetailsExplained?: Maybe<Scalars['String']['output']>;
+  paymentCartTotalMentioned?: Maybe<Scalars['String']['output']>;
+  phoneAdded?: Maybe<Scalars['String']['output']>;
+  provider: Scalars['String']['output'];
+  recordedLine?: Maybe<Scalars['String']['output']>;
+  sale: XfinitySale;
+  tookTooMuchTimeInAddressCheck?: Maybe<Scalars['String']['output']>;
+  topDownSelling?: Maybe<Scalars['String']['output']>;
+  /** Updated at Date */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
 export type Comment = {
   __typename?: 'Comment';
   /** Created at Date */
@@ -52,6 +87,34 @@ export enum CommentStatus {
   Resolved = 'RESOLVED',
   Unresolved = 'UNRESOLVED'
 }
+
+export type CreateAuditFormInput = {
+  agentEnergeticBehavior?: InputMaybe<Scalars['String']['input']>;
+  anyFalsifications?: InputMaybe<Scalars['String']['input']>;
+  anyUpselling?: InputMaybe<Scalars['String']['input']>;
+  auditBy: Scalars['String']['input'];
+  auditDate: Scalars['String']['input'];
+  auditType: Scalars['String']['input'];
+  cabletvPackage?: InputMaybe<Scalars['String']['input']>;
+  callDisposition: Scalars['String']['input'];
+  callDuration: Scalars['String']['input'];
+  callType?: InputMaybe<Scalars['String']['input']>;
+  consentForCallback?: InputMaybe<Scalars['String']['input']>;
+  contractTermMentioned?: InputMaybe<Scalars['String']['input']>;
+  creditCheckConsent?: InputMaybe<Scalars['String']['input']>;
+  customerUsageProbing?: InputMaybe<Scalars['String']['input']>;
+  deadAirMoreThanNormal?: InputMaybe<Scalars['String']['input']>;
+  findings?: InputMaybe<Scalars['String']['input']>;
+  improvementAreas?: InputMaybe<Scalars['String']['input']>;
+  packageDetailsExplained?: InputMaybe<Scalars['String']['input']>;
+  paymentCartTotalMentioned?: InputMaybe<Scalars['String']['input']>;
+  phoneAdded?: InputMaybe<Scalars['String']['input']>;
+  provider: Scalars['String']['input'];
+  recordedLine?: InputMaybe<Scalars['String']['input']>;
+  saleId: Scalars['String']['input'];
+  tookTooMuchTimeInAddressCheck?: InputMaybe<Scalars['String']['input']>;
+  topDownSelling?: InputMaybe<Scalars['String']['input']>;
+};
 
 export type CreateCommentInput = {
   fieldName: SaleField;
@@ -126,19 +189,27 @@ export type LoginUserResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAuditForm: AuditForm;
   createComment: Comment;
   createSaleStage: SaleStage;
   createSaleStageHistory: SaleStageHistory;
   createXfinitySale: XfinitySale;
   registerUser: RegisterUserResponseDto;
+  removeAuditForm: Scalars['Boolean']['output'];
   removeComment: Scalars['Boolean']['output'];
   removeSaleStage: Scalars['Boolean']['output'];
   removeSaleStageHistory: Scalars['Boolean']['output'];
   seedUsers?: Maybe<Array<User>>;
   setSaleStage: SaleStage;
+  updateAuditForm: AuditForm;
   updateComment: Comment;
   updateSaleStage: SaleStage;
   updateUser: UserDto;
+};
+
+
+export type MutationCreateAuditFormArgs = {
+  CreateAuditFormInput: CreateAuditFormInput;
 };
 
 
@@ -171,6 +242,11 @@ export type MutationRegisterUserArgs = {
 };
 
 
+export type MutationRemoveAuditFormArgs = {
+  id: Scalars['String']['input'];
+};
+
+
 export type MutationRemoveCommentArgs = {
   id: Scalars['String']['input'];
 };
@@ -191,6 +267,11 @@ export type MutationSetSaleStageArgs = {
   saleType: SaleType;
   stage: SaleFlag;
   userId: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateAuditFormArgs = {
+  UpdateAuditFormInput: UpdateAuditFormInput;
 };
 
 
@@ -219,6 +300,8 @@ export type PaginatedSales = {
 
 export type Query = {
   __typename?: 'Query';
+  auditForm: AuditForm;
+  auditForms: Array<AuditForm>;
   comment: Comment;
   comments: Array<Comment>;
   commentsBySale: Array<Comment>;
@@ -234,6 +317,11 @@ export type Query = {
   saleStageHistories: Array<SaleStageHistory>;
   saleStageHistory: SaleStageHistory;
   saleStages: Array<SaleStage>;
+};
+
+
+export type QueryAuditFormArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -460,6 +548,35 @@ export enum UsState {
   Wy = 'WY'
 }
 
+export type UpdateAuditFormInput = {
+  agentEnergeticBehavior?: InputMaybe<Scalars['String']['input']>;
+  anyFalsifications?: InputMaybe<Scalars['String']['input']>;
+  anyUpselling?: InputMaybe<Scalars['String']['input']>;
+  auditBy?: InputMaybe<Scalars['String']['input']>;
+  auditDate?: InputMaybe<Scalars['String']['input']>;
+  auditType?: InputMaybe<Scalars['String']['input']>;
+  cabletvPackage?: InputMaybe<Scalars['String']['input']>;
+  callDisposition?: InputMaybe<Scalars['String']['input']>;
+  callDuration?: InputMaybe<Scalars['String']['input']>;
+  callType?: InputMaybe<Scalars['String']['input']>;
+  consentForCallback?: InputMaybe<Scalars['String']['input']>;
+  contractTermMentioned?: InputMaybe<Scalars['String']['input']>;
+  creditCheckConsent?: InputMaybe<Scalars['String']['input']>;
+  customerUsageProbing?: InputMaybe<Scalars['String']['input']>;
+  deadAirMoreThanNormal?: InputMaybe<Scalars['String']['input']>;
+  findings?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['String']['input'];
+  improvementAreas?: InputMaybe<Scalars['String']['input']>;
+  packageDetailsExplained?: InputMaybe<Scalars['String']['input']>;
+  paymentCartTotalMentioned?: InputMaybe<Scalars['String']['input']>;
+  phoneAdded?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  recordedLine?: InputMaybe<Scalars['String']['input']>;
+  saleId?: InputMaybe<Scalars['String']['input']>;
+  tookTooMuchTimeInAddressCheck?: InputMaybe<Scalars['String']['input']>;
+  topDownSelling?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateCommentInput = {
   fieldName?: InputMaybe<SaleField>;
   parentCommentId?: InputMaybe<Scalars['ID']['input']>;
@@ -565,6 +682,7 @@ export type XfinitySale = {
   TV: Scalars['String']['output'];
   /** The agent responsible for the sale */
   agent: User;
+  auditForms?: Maybe<Array<AuditForm>>;
   /** City of the installation address */
   city: Scalars['String']['output'];
   /** Comcast TPV status of the sale */
@@ -742,6 +860,27 @@ export type UpdateSaleStageMutationVariables = Exact<{
 
 
 export type UpdateSaleStageMutation = { __typename?: 'Mutation', updateSaleStage: { __typename?: 'SaleStage', id: string, stage: string, saleId: string, saleType: SaleType } };
+
+export type CreateAuditFormMutationVariables = Exact<{
+  CreateAuditFormInput: CreateAuditFormInput;
+}>;
+
+
+export type CreateAuditFormMutation = { __typename?: 'Mutation', createAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, auditBy: string, auditType: string, callType?: string | null, provider: string, callDuration: string, callDisposition: string, findings?: string | null, cabletvPackage?: string | null, phoneAdded?: string | null, recordedLine?: string | null, consentForCallback?: string | null, creditCheckConsent?: string | null, contractTermMentioned?: string | null, anyFalsifications?: string | null, topDownSelling?: string | null, customerUsageProbing?: string | null, packageDetailsExplained?: string | null, paymentCartTotalMentioned?: string | null, anyUpselling?: string | null, agentEnergeticBehavior?: string | null, deadAirMoreThanNormal?: string | null, tookTooMuchTimeInAddressCheck?: string | null, improvementAreas?: string | null, sale: { __typename?: 'XfinitySale', id: string } } };
+
+export type UpdateAuditFormMutationVariables = Exact<{
+  UpdateAuditFormInput: UpdateAuditFormInput;
+}>;
+
+
+export type UpdateAuditFormMutation = { __typename?: 'Mutation', updateAuditForm: { __typename?: 'AuditForm', id: string, auditDate: string, auditBy: string, auditType: string, callType?: string | null, provider: string, callDuration: string, callDisposition: string, findings?: string | null, cabletvPackage?: string | null, phoneAdded?: string | null, recordedLine?: string | null, consentForCallback?: string | null, creditCheckConsent?: string | null, contractTermMentioned?: string | null, anyFalsifications?: string | null, topDownSelling?: string | null, customerUsageProbing?: string | null, packageDetailsExplained?: string | null, paymentCartTotalMentioned?: string | null, anyUpselling?: string | null, agentEnergeticBehavior?: string | null, deadAirMoreThanNormal?: string | null, tookTooMuchTimeInAddressCheck?: string | null, improvementAreas?: string | null, sale: { __typename?: 'XfinitySale', id: string } } };
+
+export type RemoveAuditFormMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type RemoveAuditFormMutation = { __typename?: 'Mutation', removeAuditForm: boolean };
 
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1006,6 +1145,112 @@ export const UpdateSaleStageDocument = gql`
   })
   export class UpdateSaleStageGQL extends Apollo.Mutation<UpdateSaleStageMutation, UpdateSaleStageMutationVariables> {
     document = UpdateSaleStageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateAuditFormDocument = gql`
+    mutation CreateAuditForm($CreateAuditFormInput: CreateAuditFormInput!) {
+  createAuditForm(CreateAuditFormInput: $CreateAuditFormInput) {
+    id
+    auditDate
+    auditBy
+    auditType
+    callType
+    provider
+    callDuration
+    callDisposition
+    findings
+    cabletvPackage
+    phoneAdded
+    recordedLine
+    consentForCallback
+    creditCheckConsent
+    contractTermMentioned
+    anyFalsifications
+    topDownSelling
+    customerUsageProbing
+    packageDetailsExplained
+    paymentCartTotalMentioned
+    anyUpselling
+    agentEnergeticBehavior
+    deadAirMoreThanNormal
+    tookTooMuchTimeInAddressCheck
+    improvementAreas
+    sale {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateAuditFormGQL extends Apollo.Mutation<CreateAuditFormMutation, CreateAuditFormMutationVariables> {
+    document = CreateAuditFormDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateAuditFormDocument = gql`
+    mutation UpdateAuditForm($UpdateAuditFormInput: UpdateAuditFormInput!) {
+  updateAuditForm(UpdateAuditFormInput: $UpdateAuditFormInput) {
+    id
+    auditDate
+    auditBy
+    auditType
+    callType
+    provider
+    callDuration
+    callDisposition
+    findings
+    cabletvPackage
+    phoneAdded
+    recordedLine
+    consentForCallback
+    creditCheckConsent
+    contractTermMentioned
+    anyFalsifications
+    topDownSelling
+    customerUsageProbing
+    packageDetailsExplained
+    paymentCartTotalMentioned
+    anyUpselling
+    agentEnergeticBehavior
+    deadAirMoreThanNormal
+    tookTooMuchTimeInAddressCheck
+    improvementAreas
+    sale {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateAuditFormGQL extends Apollo.Mutation<UpdateAuditFormMutation, UpdateAuditFormMutationVariables> {
+    document = UpdateAuditFormDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RemoveAuditFormDocument = gql`
+    mutation RemoveAuditForm($id: String!) {
+  removeAuditForm(id: $id)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RemoveAuditFormGQL extends Apollo.Mutation<RemoveAuditFormMutation, RemoveAuditFormMutationVariables> {
+    document = RemoveAuditFormDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

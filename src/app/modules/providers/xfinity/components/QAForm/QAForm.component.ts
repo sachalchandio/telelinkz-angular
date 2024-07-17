@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectSaleDetails } from 'src/app/store/selectors/sale.selectors';
 import { AuditService } from './services/audtiForm.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateAuditFormInput } from 'src/generated/graphqlTypes';
 
 @Component({
   selector: 'app-audit-form',
@@ -23,49 +26,6 @@ export class AuditFormComponent implements OnInit {
   ];
   auditTypes = ['Non Sale', 'Sale'];
   callTypes = ['Sale Call', 'Potential Sale Call', 'CS Call', 'CS to Sale'];
-  providers = [
-    'Spectrum',
-    'Spectrum Mobile',
-    'Frontier',
-    'AT&T',
-    'AT&T Mobile',
-    'ViaSat',
-    'HughesNet',
-    'Optimum',
-    'WindStream',
-    'EarthLink',
-    'WoW',
-    'Vivint',
-    'Ziply',
-    'MetroNet',
-    'Fidium Fiber',
-    'Comcast - Xfinity',
-    'DIRECTV',
-    'BrightSpeed',
-    'Breezeline',
-    'T-Mobile',
-    'Alta Fiber',
-  ];
-  packagesSold = [
-    '5 Gig',
-    '2 Gig',
-    '1200 Mbps',
-    '1 Gig',
-    '500 Mbps',
-    '800 Mbps',
-    '400 Mbps',
-    '300 Mbps',
-    '200 Mbps',
-    '100 Mbps',
-    '75 Mbps',
-    '50 Mbps',
-    '30 Mbps',
-    '25 Mbps',
-    '18 Mbps',
-    '10 Mbps',
-    '5 Mbps or Less',
-    'Wireless',
-  ];
   yesNoOptions = ['Yes', 'No'];
   yesNoNaOptions = ['Yes', 'No', 'N/A'];
   upsellingOptions = [
@@ -76,19 +36,30 @@ export class AuditFormComponent implements OnInit {
     'Not Applicable',
   ];
 
+  // Constructor to inject the required services
   constructor(
     private fb: FormBuilder,
     private auditService: AuditService,
-    private route: ActivatedRoute
+    private store: Store,
+    private snackBar: MatSnackBar // Inject MatSnackBar service to show a snack bar message
   ) {}
 
+  // Add the following ngOnInit method to subscribe to the sale details from the store and
+  // initialize the audit form with the sale details when available in the store (saleDetails)
+  // object from the store using the initForm method
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params['data']) {
-        this.saleDetails = JSON.parse(params['data']);
+    this.store.select(selectSaleDetails).subscribe((details) => {
+      console.log('Selected sale details:', details); // Add this line
+      if (details) {
+        this.saleDetails = details;
+        this.initForm();
       }
     });
+  }
 
+  // Add the following method to initialize the audit form with the sale details and set the initial values for the form controls based on the
+  // sale details object received from the store (saleDetails) and the audit form structure defined in the template
+  initForm(): void {
     this.auditForm = this.fb.group({
       auditBy: ['', Validators.required],
       auditType: ['Sale', Validators.required],
@@ -105,7 +76,7 @@ export class AuditFormComponent implements OnInit {
         Validators.required,
       ],
       auditDate: ['', Validators.required],
-      provider: ['Comcast - Xfinity', Validators.required],
+      provider: ['Xfinity', Validators.required],
       phoneNumber: [
         { value: this.saleDetails['Phone Number'] || '', disabled: true },
         Validators.required,
@@ -153,29 +124,137 @@ export class AuditFormComponent implements OnInit {
     this.auditForm.get('packageSold')?.disable();
   }
 
+  // Add the following method to format the date to 'YYYY-MM-DD' format
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toISOString().split('T')[0];
   }
 
+  // Add the following method to get the full address of the customer from the sale details object
+  // and return it as a string value (e.g., '123 Main St, City, State Zipcode')
   getFullAddress(): string {
     return `${this.saleDetails['Street Address']}, ${this.saleDetails['City']}, ${this.saleDetails['State']} ${this.saleDetails['Zipcode']}`;
   }
 
+  // InOrder to update the audit form, we need to add the following method to update the audit form data to the server
+  // using the audit service and handle the response accordingly (e.g., show a success message, navigate back to the sales journey)
+  // onUpdateSubmit(): void {
+  //   console.log(this.auditForm.value);
+  //   if (this.auditForm.valid) {
+  //     const formData = {
+  //       ...this.auditForm.getRawValue(), // use getRawValue() to include disabled fields
+  //       id: this.saleDetails['ID'],
+  //     };
+  //     this.auditService.updateAudit(formData).subscribe(
+  //       (response) => {
+  //         console.log('Audit updated successfully', response);
+  //         // Handle success (e.g., show a success message, navigate back to the sales journey)
+  //       },
+  //       (error) => {
+  //         console.error('Error updating audit', error);
+  //         // Handle error (e.g., show an error message)
+  //       }
+  //     );
+  //   }
+  // }
+
+  // Add the following method to submit the audit form data to the server using the audit service and handle the response accordingly
+  // (e.g., show a success message, navigate back to the sales journey)
   onSubmit(): void {
+    console.log(this.auditForm.value);
     if (this.auditForm.valid) {
+      // Filter out any fields not defined in CreateAuditFormInput
+      const allowedFields: (keyof CreateAuditFormInput)[] = [
+        'auditBy',
+        'auditType',
+        'callType',
+        'auditDate',
+        'provider',
+        'callDuration',
+        'callDisposition',
+        'findings',
+        'cabletvPackage',
+        'phoneAdded',
+        'recordedLine',
+        'consentForCallback',
+        'creditCheckConsent',
+        'contractTermMentioned',
+        'anyFalsifications',
+        'topDownSelling',
+        'customerUsageProbing',
+        'packageDetailsExplained',
+        'paymentCartTotalMentioned',
+        'anyUpselling',
+        'agentEnergeticBehavior',
+        'deadAirMoreThanNormal',
+        'tookTooMuchTimeInAddressCheck',
+        'improvementAreas',
+        'saleId',
+      ];
+
       const formData = {
-        ...this.auditForm.value,
+        ...this.auditForm.getRawValue(), // use getRawValue() to include disabled fields
         saleId: this.saleDetails['ID'],
       };
-      this.auditService.submitAudit(formData).subscribe(
-        (response: Response) => {
-          console.log('Audit submitted successfully', response);
-          // Handle success (e.g., show a success message, navigate back to the sales journey)
+
+      const filteredFormData: CreateAuditFormInput = allowedFields.reduce(
+        (obj, key) => {
+          obj[key] = formData[key];
+          return obj;
         },
-        (error: Error) => {
+        {} as CreateAuditFormInput
+      );
+
+      this.auditService.submitAudit(filteredFormData).subscribe(
+        (response) => {
+          console.log('Audit submitted successfully', response);
+          // Show success message
+          this.snackBar.open('Audit submitted successfully', 'Close', {
+            duration: 3000,
+          });
+          // Clear form except the disabled fields
+          this.auditForm.reset({
+            auditBy: '',
+            auditType: 'Sale',
+            callType: '',
+            auditDate: '',
+            callDuration: '',
+            callDisposition: '',
+            findings: '',
+            cabletvPackage: '',
+            phoneAdded: '',
+            recordedLine: '',
+            consentForCallback: '',
+            creditCheckConsent: '',
+            contractTermMentioned: '',
+            anyFalsifications: '',
+            topDownSelling: '',
+            customerUsageProbing: '',
+            packageDetailsExplained: '',
+            paymentCartTotalMentioned: '',
+            anyUpselling: '',
+            agentEnergeticBehavior: '',
+            deadAirMoreThanNormal: '',
+            tookTooMuchTimeInAddressCheck: '',
+            improvementAreas: '',
+            agentName: this.saleDetails['Agent Name'],
+            callDate: this.formatDate(this.saleDetails['Order Date']),
+            provider: 'Xfinity',
+            phoneNumber: this.saleDetails['Phone Number'],
+            customerAddress: this.getFullAddress(),
+            customerName: {
+              first: this.saleDetails['Customer First Name'],
+              last: this.saleDetails['Customer Last Name'],
+            },
+            packageSold: this.saleDetails['Package Sold'],
+          });
+        },
+        (error) => {
           console.error('Error submitting audit', error);
           // Handle error (e.g., show an error message)
+          this.snackBar.open('Error submitting audit', 'Close', {
+            duration: 3000,
+          });
         }
       );
     }

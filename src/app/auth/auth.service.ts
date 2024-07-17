@@ -1,9 +1,11 @@
+// auth.service.ts
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthenticationService {
   private tokenKey = 'accessToken';
-  private loginDataKey = 'loginData';
 
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
@@ -15,7 +17,6 @@ export class AuthenticationService {
 
   clearToken(): void {
     localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.loginDataKey);
   }
 
   isAuthenticated(): boolean {
@@ -24,6 +25,5 @@ export class AuthenticationService {
 
   logout(): void {
     this.clearToken();
-    localStorage.clear();
   }
 }
