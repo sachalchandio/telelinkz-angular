@@ -96,7 +96,7 @@ export class LoginComponent implements OnDestroy {
                 });
 
                 this.dialog.closeAll();
-                this.router.navigate(['/cv-upload']);
+                this.router.navigate(['/']);
               }
             }
           },

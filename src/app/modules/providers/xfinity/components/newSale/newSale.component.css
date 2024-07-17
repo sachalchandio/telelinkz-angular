@@ -79,15 +79,15 @@
 }
 .form-group input:focus-visible,
 .form-group select:focus-visible {
-  border-color: #fff;
-  background-color: #ffac0b;
+  /* border-color: #fff;
+  background-color: #ffac0b; */
   outline: none;
-  color: #ffffff;
+  /* color: #ffffff; */
 }
-.form-group input:focus-visible + i,
+/* .form-group input:focus-visible + i,
 .form-group select:focus-visible + i {
   color: #fff;
-}
+} */
 
 .form-group select {
   width: 96%;
@@ -123,12 +123,12 @@ button[type="submit"]:hover {
   height: 16px;
   background: #b5b5b5;
 }
-.form-group input:focus-visible ~ i {
+/* .form-group input:focus-visible ~ i {
   color: #fff;
 }
 .form-group:focus-visible ~ i {
   color: #fff;
-}
+} */
 .dashboard_inner_header {
   min-height: 115px;
   background-position: center;
