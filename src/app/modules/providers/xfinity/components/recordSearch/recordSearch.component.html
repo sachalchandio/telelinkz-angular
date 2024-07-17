@@ -18,7 +18,7 @@
       <input
         type="text"
         class="search-input"
-        placeholder="Search"
+        placeholder="Customer Name"
         [(ngModel)]="searchQuery"
         (keydown.enter)="onSearch()"
       />
@@ -54,12 +54,17 @@
               </mat-form-field>
             </div>
           </ng-container>
+
           <ng-container *ngIf="column === 'ID'">
             <a (click)="onIdClick(element)" class="sale-id-link">
               {{ element[column] }}
             </a>
           </ng-container>
-          <ng-container *ngIf="column !== 'SaleFlag' && column !== 'saleId'">
+          <ng-container
+            *ngIf="
+              column !== 'SaleFlag' && column !== 'saleId' && column !== 'ID'
+            "
+          >
             {{ element[column] }}
           </ng-container>
         </td>

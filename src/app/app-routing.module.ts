@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -14,6 +15,7 @@ const routes: Routes = [
           import('./modules/homepage/homepage.module').then(
             (m) => m.HomepageModule
           ),
+        canActivate: [AuthGuard],
       },
       {
         path: 'xfinity',
@@ -21,11 +23,7 @@ const routes: Routes = [
           import('./modules/providers/xfinity/xfinity.module').then(
             (m) => m.XfinityModule
           ),
-      },
-      {
-        path: 'login',
-        loadChildren: () =>
-          import('./modules/login/login.module').then((m) => m.LoginModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'register',
@@ -35,6 +33,11 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./modules/login/login.module').then((m) => m.LoginModule),
   },
 ];
 

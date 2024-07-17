@@ -1,19 +1,22 @@
+// auth.guard.ts
 import { Injectable } from '@angular/core';
 import {
+  CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
+  Router,
 } from '@angular/router';
-import { AuthenticationService } from './auth.service';
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../modules/login/components';
+import { AuthenticationService } from './auth.service';
 
-@Injectable()
-export class AuthGuard {
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthenticationService,
-    private dialog: MatDialog
+    private router: Router
   ) {}
 
   canActivate(
@@ -27,12 +30,10 @@ export class AuthGuard {
     if (this.authService.isAuthenticated()) {
       return true;
     } else {
-      const dialogRef = this.dialog.open(LoginComponent, {
-        data: {
-          returnUrl: state.url, // Pass the current URL as data to the dialog
-        },
+      // Redirect to login page
+      return this.router.createUrlTree(['/login'], {
+        queryParams: { returnUrl: state.url },
       });
-      return false;
     }
   }
 }
