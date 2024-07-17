@@ -1,30 +1,33 @@
-<form [formGroup]="auditForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="auditForm" (ngSubmit)="onSubmit()" class="audit-form">
   <h2>Agent Audit Form</h2>
 
-  <div>
+  <div class="form-group">
     <label>Audit by *</label>
     <select formControlName="auditBy" required>
       <option *ngFor="let auditor of auditors" [value]="auditor">
         {{ auditor }}
       </option>
     </select>
+    <i class="material-icons">person</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Audit Type *</label>
     <select formControlName="auditType" required>
       <option *ngFor="let type of auditTypes" [value]="type">{{ type }}</option>
     </select>
+    <i class="material-icons">assignment</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Call Type</label>
     <select formControlName="callType">
       <option *ngFor="let type of callTypes" [value]="type">{{ type }}</option>
     </select>
+    <i class="material-icons">phone</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Agent Name *</label>
     <input
       type="text"
@@ -32,9 +35,10 @@
       readonly
       class="readonly-input"
     />
+    <i class="material-icons">person</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Call Date *</label>
     <input
       type="date"
@@ -42,14 +46,16 @@
       readonly
       class="readonly-input"
     />
+    <i class="material-icons">calendar_month</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Audit Date *</label>
     <input type="date" formControlName="auditDate" required />
+    <i class="material-icons">calendar_month</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Provider</label>
     <input
       type="text"
@@ -57,9 +63,10 @@
       readonly
       class="readonly-input"
     />
+    <i class="material-icons">close</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Phone Number *</label>
     <input
       type="tel"
@@ -67,19 +74,22 @@
       readonly
       class="readonly-input"
     />
+    <i class="material-icons">phone</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Call Duration *</label>
     <input type="text" formControlName="callDuration" required />
+    <i class="material-icons">phone</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Call Disposition *</label>
     <input type="text" formControlName="callDisposition" required />
+    <i class="material-icons">phone</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Customer Address</label>
     <input
       type="text"
@@ -87,16 +97,17 @@
       readonly
       class="readonly-input"
     />
+    <i class="material-icons">location_city</i>
   </div>
 
-  <div>
+  <div class="form-group full-width-grp">
     <label>Findings</label>
     <textarea formControlName="findings"></textarea>
   </div>
 
   <h2>Sale Details</h2>
 
-  <div formGroupName="customerName">
+  <div formGroupName="customerName" class="form-group">
     <label>Customer Name</label>
     <input
       type="text"
@@ -105,16 +116,21 @@
       readonly
       class="readonly-input"
     />
+    <i class="material-icons">person</i>
+   
+  </div>
+  <div class="form-group">
     <input
-      type="text"
-      formControlName="last"
-      placeholder="Last Name"
-      readonly
-      class="readonly-input"
-    />
+    type="text"
+    formControlName="last"
+    placeholder="Last Name"
+    readonly
+    class="readonly-input"
+  />
+  <i class="material-icons">person</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <input
       type="text"
       formControlName="packageSold"
@@ -124,148 +140,163 @@
     />
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Cable-TV Package</label>
     <select formControlName="cabletvPackage">
       <option *ngFor="let option of yesNoNaOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons">tv</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Phone Added</label>
     <select formControlName="phoneAdded">
       <option *ngFor="let option of yesNoNaOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons">phone</i>
   </div>
 
   <h2>Compliance</h2>
 
-  <div>
+  <div class="form-group">
     <label>Recorded Line Disclaimer</label>
     <select formControlName="recordedLine">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
+      <i class="material-icons">speaker_notes_off</i>
     </select>
   </div>
 
-  <div>
+  <div class="form-group"> 
     <label>Consent for Callback</label>
     <select formControlName="consentForCallback">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons">check_circle</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Credit Check Consent</label>
     <select formControlName="creditCheckConsent">
       <option *ngFor="let option of yesNoNaOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons">verified_user</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>If Contract Then Mentioned ETF & Contract Term</label>
     <select formControlName="contractTermMentioned">
       <option *ngFor="let option of yesNoNaOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons">gavel</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Any Falsifications</label>
     <select formControlName="anyFalsifications">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+
   </div>
 
   <h2>Sales Quality</h2>
 
-  <div>
+  <div class="form-group">
     <label>Top Down Selling</label>
     <select formControlName="topDownSelling">
       <option *ngFor="let option of yesNoNaOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">report_problem</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Customer Usage Probing</label>
     <select formControlName="customerUsageProbing">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons">person</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Package Details Explained Properly</label>
     <select formControlName="packageDetailsExplained">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">local_shipping</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Payment Cart Total Mentioned Correctly</label>
     <select formControlName="paymentCartTotalMentioned">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">shopping_cart</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Any Up-selling</label>
     <select formControlName="anyUpselling">
       <option *ngFor="let option of upsellingOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">trending_up</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Agent Energetic Behavior *</label>
     <select formControlName="agentEnergeticBehavior" required>
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">flash_on</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Dead Air More than Normal</label>
     <select formControlName="deadAirMoreThanNormal">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">mic_off</i>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Took too much time in Address Check & Qualification</label>
     <select formControlName="tookTooMuchTimeInAddressCheck">
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">hourglass_empty</i>
   </div>
 
   <h2>Improvement Areas or Complete Call Findings</h2>
 
-  <div>
+  <div class="form-group full-width-grp">
     <label>Findings</label>
     <textarea formControlName="improvementAreas"></textarea>
   </div>

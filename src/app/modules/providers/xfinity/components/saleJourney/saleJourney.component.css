@@ -58,8 +58,8 @@ h3 {
 
 .sale-journey-container {
   padding: 20px;
-  max-width: 800px;
-  margin: 10% 5%;
+  max-width: 76%;
+  margin: 0 auto;
   background: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -67,7 +67,7 @@ h3 {
 
 .detail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 10px;
 }
 
@@ -80,11 +80,16 @@ h3 {
 
 .detail-title {
   font-weight: bold;
-  color: #555;
+  color: #000;
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 
 .detail-value {
   color: #777;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .sale-history-list {

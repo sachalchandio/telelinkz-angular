@@ -180,6 +180,9 @@ table tr:nth-child(odd) {
 table tr td {
   min-width: 200px;
 }
+table tr td a{
+  display: inline-block;
+}
 table tr th {
   background-color: #880ef5;
   color: #fff;
