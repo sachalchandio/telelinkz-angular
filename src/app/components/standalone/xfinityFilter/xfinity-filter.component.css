@@ -70,14 +70,22 @@
 
 button[type="submit"] {
   padding: 10px 20px;
-  /* background-color: #007bff; */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 21px;
-  background-color: #0e72fe;
+  margin-left: auto;
+  background: #271368;
+  width: 150px;
+  min-height: 42px;
+  font-size: 19px;
+  margin-left: auto;
   font-family: "Poppins", sans-serif;
+}
+.full-w-btn{
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
 }
 
 button[type="submit"]:hover {

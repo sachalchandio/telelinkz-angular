@@ -202,18 +202,16 @@ h1.new_sale {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 21px;
-  margin-left: auto;
-  background: linear-gradient(
-    90deg,
-    rgba(39, 19, 104, 1) 22%,
-    rgba(107, 27, 222, 1) 47%,
-    rgba(118, 0, 149, 1) 100%
-  );
+  background: #271368;
   width: 150px;
   min-height: 42px;
   font-size: 19px;
-  margin-left: auto;
+  font-family: "Poppins", sans-serif;
+}
+.form-btn-group {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
 @media screen and (max-width: 1600px) {
   .form-group input {
