@@ -1,12 +1,21 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserType } from 'src/generated/graphqlTypes';
+import { selectUserType } from '../store/selectors/user.selectors';
+import { AppState } from '../store/models/app.model';
+import { select, Store } from '@ngrx/store';
+import { setUserType } from '../store/actions/user.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
+  userType$: Observable<UserType | null>;
   private tokenKey = 'accessToken';
-  private userTypeKey = 'userType';
+
+  constructor(private store: Store<AppState>) {
+    this.userType$ = this.store.pipe(select(selectUserType));
+  }
 
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
@@ -20,12 +29,12 @@ export class AuthenticationService {
     localStorage.removeItem(this.tokenKey);
   }
 
-  getUserType(): string | null {
-    return localStorage.getItem(this.userTypeKey);
+  getUserType(): Observable<UserType | null> {
+    return this.userType$;
   }
 
-  setUserType(userType: string): void {
-    localStorage.setItem(this.userTypeKey, userType);
+  setUserType(userType: UserType): void {
+    this.store.dispatch(setUserType({ userType }));
   }
 
   isAuthenticated(): boolean {

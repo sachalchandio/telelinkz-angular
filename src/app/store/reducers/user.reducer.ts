@@ -1,9 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { setUserType, clearUserType } from '../actions/user.actions';
-
-export interface UserState {
-  userType: string | null;
-}
+import { UserState } from '../models/userState.model';
 
 export const initialState: UserState = {
   userType: null,

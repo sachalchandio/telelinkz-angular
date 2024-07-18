@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
+import { UserType } from 'src/generated/graphqlTypes';
 
 export const setUserType = createAction(
-  '[User] Set User Type',
-  props<{ userType: string }>()
+  '[User] Set UserType',
+  props<{ userType: UserType }>()
 );
 
-export const clearUserType = createAction('[User] Clear User Type');
+export const clearUserType = createAction('[User] Clear UserType');

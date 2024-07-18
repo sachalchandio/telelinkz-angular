@@ -76,9 +76,7 @@ export class LoginComponent implements OnDestroy {
                     accessToken: this.accessToken,
                     name: data.loginUser.name,
                     email: data.loginUser.email,
-                    userType: data.loginUser.userType,
                     profileImageURL: data.loginUser.profileImageURL,
-                    dateOfBirth: data.loginUser.dateOfBirth,
                   };
                   // Store Certain Data for later use
                   localStorage.setItem('loginData', JSON.stringify(loginData));
@@ -87,7 +85,7 @@ export class LoginComponent implements OnDestroy {
                   // Instead of Storing userType in localStorage, dispatch an action to set the userType in the store
                   // Dispatch action to set the user type
                   this.store.dispatch(
-                    setUserType({ userType: loginData.userType || '' })
+                    setUserType({ userType: data.loginUser.userType! })
                   );
                   //localStorage.setItem('userType', loginData.userType || '');
 
@@ -100,15 +98,18 @@ export class LoginComponent implements OnDestroy {
                       JSON.parse(storedLoginData).name || ''
                     );
                   }
+                  // Redirect the user to the home page after successful login
+                  this.router.navigate(['/']).then((navigated) => {
+                    if (!navigated) {
+                      console.error('Navigation to / failed!');
+                    }
+                  });
                 }
                 //Display a snackbar message and redirect the user
                 this.snackBar.open('Login Successful', 'Close', {
-                  duration: 3000,
+                  duration: 3500,
                   panelClass: ['custom-snackbar'],
                 });
-
-                this.dialog.closeAll();
-                this.router.navigate(['/']);
               }
             }
           },
@@ -127,6 +128,7 @@ export class LoginComponent implements OnDestroy {
           },
         });
 
+      // Add the subscription to the subscription list to be unsubscribed later when the subscription is no longer needed
       this.subscription.add(loginSubscription);
     } else {
       // Handle form validation failure
