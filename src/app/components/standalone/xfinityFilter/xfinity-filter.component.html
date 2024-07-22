@@ -12,54 +12,100 @@
   class="filter-form"
 >
   <div class="form-group">
-    <!-- <label for="id">ID</label> -->
-
-    <input formControlName="id" placeholder="ID" />
+    <label for="id">ID</label>
+    <input id="id" formControlName="id" placeholder="ID" />
     <i class="material-icons">input</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="createdAt" placeholder="Created At" type="date" />
+    <label for="startDate">Start Date</label>
+    <input
+      id="startDate"
+      formControlName="startDate"
+      placeholder="Start Date"
+      type="date"
+    />
     <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="updatedAt" placeholder="Updated At" type="date" />
+    <label for="endDate">End Date</label>
+    <input
+      id="endDate"
+      formControlName="endDate"
+      placeholder="End Date"
+      type="date"
+    />
     <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="startDate" placeholder="Start Date" type="date" />
+    <label for="createdAt">Created At</label>
+    <input
+      id="createdAt"
+      formControlName="createdAt"
+      placeholder="Created At"
+      type="date"
+    />
     <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="endDate" placeholder="End Date" type="date" />
+    <label for="updatedAt">Updated At</label>
+    <input
+      id="updatedAt"
+      formControlName="updatedAt"
+      placeholder="Updated At"
+      type="date"
+    />
     <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="orderDate" placeholder="Order Date" type="date" />
+    <label for="orderDate">Order Date</label>
+    <input
+      id="orderDate"
+      formControlName="orderDate"
+      placeholder="Order Date"
+      type="date"
+    />
     <i class="material-icons">calendar_month</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="cx_firstName" placeholder="Customer First Name" />
+    <label for="cx_firstName">Customer First Name</label>
+    <input
+      id="cx_firstName"
+      formControlName="cx_firstName"
+      placeholder="Customer First Name"
+    />
     <i class="material-icons">person</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="cx_lastName" placeholder="Customer Last Name" />
+    <label for="cx_lastName">Customer Last Name</label>
+    <input
+      id="cx_lastName"
+      formControlName="cx_lastName"
+      placeholder="Customer Last Name"
+    />
     <i class="material-icons">person</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="orderNumber" placeholder="Order Number" />
+    <label for="orderNumber">Order Number</label>
+    <input
+      id="orderNumber"
+      formControlName="orderNumber"
+      placeholder="Order Number"
+    />
     <i class="material-icons">assignment</i>
   </div>
 
   <div class="form-group">
+    <label for="installationDate">Installation Date</label>
     <input
+      id="installationDate"
       formControlName="installationDate"
       placeholder="Installation Date"
       type="date"
@@ -68,17 +114,29 @@
   </div>
 
   <div class="form-group">
-    <input formControlName="installationTime" placeholder="08:00:00" />
+    <label for="installationTime">Installation Time</label>
+    <input
+      id="installationTime"
+      formControlName="installationTime"
+      placeholder="08:00:00"
+    />
     <i class="material-icons">schedule</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="streetAddress" placeholder="Street Address" />
+    <label for="streetAddress">Street Address</label>
+    <input
+      id="streetAddress"
+      formControlName="streetAddress"
+      placeholder="Street Address"
+    />
     <i class="material-icons">location_on</i>
   </div>
 
   <div class="form-group">
+    <label for="streetAddressLine2">Street Address Line 2</label>
     <input
+      id="streetAddressLine2"
       formControlName="streetAddressLine2"
       placeholder="Street Address Line 2"
     />
@@ -86,23 +144,31 @@
   </div>
 
   <div class="form-group">
-    <!-- City Icon -->
-    <input formControlName="city" placeholder="City" />
+    <label for="city">City</label>
+    <input id="city" formControlName="city" placeholder="City" />
     <i class="material-icons">location_city</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="zipcode" placeholder="Zipcode" />
+    <label for="zipcode">Zipcode</label>
+    <input id="zipcode" formControlName="zipcode" placeholder="Zipcode" />
     <i class="material-icons">local_post_office</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="phoneNumber" placeholder="Phone Number" />
+    <label for="phoneNumber">Phone Number</label>
+    <input
+      id="phoneNumber"
+      formControlName="phoneNumber"
+      placeholder="Phone Number"
+    />
     <i class="material-icons">phone</i>
   </div>
 
   <div class="form-group">
+    <label for="phoneNumber_second">Second Phone Number</label>
     <input
+      id="phoneNumber_second"
       formControlName="phoneNumber_second"
       placeholder="Second Phone Number"
     />
@@ -110,7 +176,9 @@
   </div>
 
   <div class="form-group">
+    <label for="socialSecurityNumber">Social Security Number</label>
     <input
+      id="socialSecurityNumber"
       formControlName="socialSecurityNumber"
       placeholder="Social Security Number"
     />
@@ -118,27 +186,40 @@
   </div>
 
   <div class="form-group">
-    <input formControlName="email" placeholder="Email" />
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" placeholder="Email" />
     <i class="material-icons">email</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="product" placeholder="Product" />
+    <label for="product">Product</label>
+    <input id="product" formControlName="product" placeholder="Product" />
     <i class="material-icons">local_offer</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="packageSold" placeholder="Package Sold" />
+    <label for="packageSold">Package Sold</label>
+    <input
+      id="packageSold"
+      formControlName="packageSold"
+      placeholder="Package Sold"
+    />
     <i class="material-icons">done</i>
   </div>
 
   <div class="form-group">
-    <input formControlName="concertOrderId" placeholder="Concert Order ID" />
+    <label for="concertOrderId">Concert Order ID</label>
+    <input
+      id="concertOrderId"
+      formControlName="concertOrderId"
+      placeholder="Concert Order ID"
+    />
     <i class="material-icons">event</i>
   </div>
 
   <div class="form-group">
-    <select formControlName="installation">
+    <label for="installation">Installation Status</label>
+    <select id="installation" formControlName="installation">
       <option value="">Select Installation Status</option>
       <option *ngFor="let status of saleStatuses" [value]="status">
         {{ status }}
@@ -148,7 +229,8 @@
   </div>
 
   <div class="form-group">
-    <select formControlName="state">
+    <label for="state">State</label>
+    <select id="state" formControlName="state">
       <option value="">Select State</option>
       <option *ngFor="let state of USStates" [value]="state">
         {{ state }}
@@ -158,7 +240,8 @@
   </div>
 
   <div class="form-group">
-    <select formControlName="comcastTpvStatus">
+    <label for="comcastTpvStatus">TPV Status</label>
+    <select id="comcastTpvStatus" formControlName="comcastTpvStatus">
       <option value="">Select TPV Status</option>
       <option *ngFor="let status of TpvStatuses" [value]="status">
         {{ status }}
@@ -168,7 +251,8 @@
   </div>
 
   <div class="form-group">
-    <select formControlName="Internet">
+    <label for="Internet">Internet Package</label>
+    <select id="Internet" formControlName="Internet">
       <option value="">Select Internet Package</option>
       <option *ngFor="let package of InternetPackages" [value]="package">
         {{ package }}
@@ -178,17 +262,17 @@
   </div>
 
   <div class="form-group">
-    <select formControlName="TV">
+    <label for="TV">TV Package</label>
+    <select id="TV" formControlName="TV">
       <option value="">Select TV Package</option>
-      <option *ngFor="let tv of TVPackages" [value]="tv">
-        {{ tv }}
-      </option>
+      <option *ngFor="let tv of TVPackages" [value]="tv">{{ tv }}</option>
     </select>
     <i class="material-icons">tv</i>
   </div>
 
   <div class="form-group">
-    <select formControlName="Phone">
+    <label for="Phone">Phone Option</label>
+    <select id="Phone" formControlName="Phone">
       <option value="">Select Phone Option</option>
       <option *ngFor="let phone of PhonePackages" [value]="phone">
         {{ phone }}
@@ -198,21 +282,19 @@
   </div>
 
   <div class="form-group">
-    <select formControlName="HMS">
+    <label for="HMS">Home Security Option</label>
+    <select id="HMS" formControlName="HMS">
       <option value="">Select Home Security Option</option>
-      <option *ngFor="let hms of HMSPackages" [value]="hms">
-        {{ hms }}
-      </option>
+      <option *ngFor="let hms of HMSPackages" [value]="hms">{{ hms }}</option>
     </select>
     <i class="material-icons">phone_android</i>
   </div>
 
   <div class="form-group">
-    <select formControlName="agentName">
-      <option value="">Select an Agent</option>
-      <option *ngFor="let name of agentNames" [value]="name">
-        {{ name }}
-      </option>
+    <label for="agentName">Agent Name</label>
+    <select id="agentName" formControlName="agentName">
+      <option value="" *ngIf="!agentNames">Select an Agent</option>
+      <option *ngFor="let name of agentNames" [value]="name">{{ name }}</option>
     </select>
     <i class="material-icons">person</i>
   </div>

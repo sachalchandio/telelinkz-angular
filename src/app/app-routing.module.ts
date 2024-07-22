@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './components/shared';
 import { AuthGuard } from './auth/auth.guard';
+import { UserType } from 'src/generated/graphqlTypes';
 
 const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
     canActivate: [AuthGuard],
+    // data: { expectedUserType: UserType.Admin }, // Only Admins can access the main route
     children: [
       {
         path: '',
@@ -16,6 +18,7 @@ const routes: Routes = [
             (m) => m.HomepageModule
           ),
         canActivate: [AuthGuard],
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access the homepage
       },
       {
         path: 'xfinity',
@@ -24,6 +27,7 @@ const routes: Routes = [
             (m) => m.XfinityModule
           ),
         canActivate: [AuthGuard],
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
       },
       {
         path: 'register',
@@ -42,10 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),
-    RouterModule.forChild(routes),
-  ],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

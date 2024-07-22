@@ -1,8 +1,9 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { setSaleDetails } from '../actions/sale.actions';
+import { Sale } from '../models/sale.model';
 
 export interface SaleState {
-  saleDetails: any;
+  saleDetails: Sale | null;
 }
 
 export const initialState: SaleState = {
