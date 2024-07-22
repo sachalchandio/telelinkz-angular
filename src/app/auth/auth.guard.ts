@@ -15,7 +15,7 @@ import { selectUserType } from '../store/selectors/user.selectors';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private store: Store) {}
+  constructor(private router: Router, private user ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,10 +26,8 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const expectedUserType = route.data['expectedUserType'];
-    return this.store.select(selectUserType).pipe(
-      take(1),
+    return .getUserType().pipe(
       map((userType) => {
-        //&& userType === expectedUserType
         if (userType) {
           return true;
         } else {

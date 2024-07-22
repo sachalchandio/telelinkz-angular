@@ -117,27 +117,27 @@
       class="readonly-input"
     />
     <i class="material-icons">person</i>
-   
   </div>
-  <div class="form-group">
+  <div formGroupName="customerName" class="form-group">
     <input
-    type="text"
-    formControlName="last"
-    placeholder="Last Name"
-    readonly
-    class="readonly-input"
-  />
-  <i class="material-icons">person</i>
+      type="text"
+      formControlName="last"
+      placeholder="Last Name"
+      readonly
+      class="readonly-input"
+    />
+    <i class="material-icons">person</i>
   </div>
 
   <div class="form-group">
     <input
       type="text"
       formControlName="packageSold"
-      placeholder="Last Name"
+      placeholder="Package Sold"
       readonly
       class="readonly-input"
     />
+    <i class="material-icons"> shopping_cart </i>
   </div>
 
   <div class="form-group">
@@ -172,7 +172,7 @@
     </select>
   </div>
 
-  <div class="form-group"> 
+  <div class="form-group">
     <label>Consent for Callback</label>
     <select formControlName="consentForCallback">
       <option *ngFor="let option of yesNoOptions" [value]="option">
@@ -209,7 +209,7 @@
         {{ option }}
       </option>
     </select>
-
+    <i class="material-icons icon-style">report_problem</i>
   </div>
 
   <h2>Sales Quality</h2>

@@ -15,15 +15,18 @@ export class AuditFormComponent implements OnInit {
   auditForm!: FormGroup;
   saleDetails: any = {};
 
-  auditors = [
-    'Adnan',
-    'Kashaf',
-    'Ahmad - US',
-    'Zunair',
-    'Tahreema',
-    'Umair',
-    'Shoaib',
-  ];
+  // auditors = [
+  //   'Adnan',
+  //   'Kashaf',
+  //   'Ahmad - US',
+  //   'Zunair',
+  //   'Tahreema',
+  //   'Umair',
+  //   'Shoaib',
+  // ];
+
+  auditor: string = '';
+
   auditTypes = ['Non Sale', 'Sale'];
   callTypes = ['Sale Call', 'Potential Sale Call', 'CS Call', 'CS to Sale'];
   yesNoOptions = ['Yes', 'No'];
