@@ -19,13 +19,13 @@ import {
   XfinityHomePhone,
   XfinityHomeSecurity,
   XfinityTv,
-  FindAllSalesByAgentNameGQL,
-  FindAllSalesByAgentNameQuery,
+  FindAllSalesByAgentNameXfinityGQL,
+  FindAllSalesByAgentNameXfinityQuery,
   XfinitySaleDto,
   SaleFlag,
   SaleType,
   XfinitySaleFilterInputDto,
-  FindSalesWithComplexFilterGQL,
+  FindSalesWithComplexFilterXfinityGQL,
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
@@ -43,7 +43,8 @@ interface TableData {
 export class RecordSearch implements OnInit, OnDestroy {
   agentNames: string[] = [];
   fetched_sales: XfinitySaleDto[] = [];
-  sales: FindAllSalesByAgentNameQuery['findAllSalesByAgentName'] = [];
+  sales: FindAllSalesByAgentNameXfinityQuery['findAllSalesByAgentNameXfinity'] =
+    [];
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   saleFlags = Object.values(SaleFlag);
@@ -58,8 +59,8 @@ export class RecordSearch implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog,
     private createXfinitySaleGQL: CreateXfinitySaleGQL,
-    private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameGQL,
-    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL,
+    private findAllSalesByAgentNameGQL: FindAllSalesByAgentNameXfinityGQL,
+    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterXfinityGQL,
     private sharedDataService: XfinitySharedDataService,
     private saleStageService: SaleStageService,
     private tabStateService: TabStateService
@@ -325,7 +326,8 @@ export class RecordSearch implements OnInit, OnDestroy {
       .watch({ filter, limit, offset, search }, { fetchPolicy: 'network-only' })
       .valueChanges.subscribe({
         next: async (response) => {
-          const { sales, total } = response.data.findSalesWithComplexFilter;
+          const { sales, total } =
+            response.data.findSalesWithComplexFilterXfinity;
           const transformedData: TableData[] = await Promise.all(
             sales.map(async (sale: XfinitySaleDto) => ({
               ID: sale.id,

@@ -13,6 +13,8 @@ import { LoginUserGQL, LoginUserQuery } from 'src/generated/graphqlTypes';
 import { MatDialog } from '@angular/material/dialog';
 // import { UserRegComponent } from 'src/app/modules/UserReg/components/';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { setUserType } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-login-modal',
@@ -32,7 +34,8 @@ export class LoginComponent implements OnDestroy {
     private loginUserGQL: LoginUserGQL,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +50,8 @@ export class LoginComponent implements OnDestroy {
     });
   }
 
+  // Function to login the user and store the access token in localStorage
+  // if rememberMe is true or in the store if rememberMe is false or not set at all (default)
   loginUser() {
     if (this.loginForm.valid) {
       const input = this.loginForm.value;
@@ -71,14 +76,23 @@ export class LoginComponent implements OnDestroy {
                     accessToken: this.accessToken,
                     name: data.loginUser.name,
                     email: data.loginUser.email,
-                    userType: data.loginUser.userType,
                     profileImageURL: data.loginUser.profileImageURL,
-                    dateOfBirth: data.loginUser.dateOfBirth,
                   };
                   // Store Certain Data for later use
                   localStorage.setItem('loginData', JSON.stringify(loginData));
                   localStorage.setItem('email', loginData.email || '');
-                  localStorage.setItem('userType', loginData.userType || '');
+
+                  // Instead of Storing userType in localStorage, dispatch an action to set the userType in the store
+                  // Dispatch action to set the user type
+                  if (data?.loginUser) {
+                    this.accessToken = data.loginUser.accessToken;
+                    if (this.accessToken) {
+                      this.store.dispatch(
+                        setUserType({ userType: data.loginUser.userType! })
+                      );
+                    }
+                  }
+
                   // Retrieve the loginData from localStorage
                   const storedLoginData = localStorage.getItem('loginData');
 
@@ -88,15 +102,18 @@ export class LoginComponent implements OnDestroy {
                       JSON.parse(storedLoginData).name || ''
                     );
                   }
+                  // Redirect the user to the home page after successful login
+                  this.router.navigate(['/']).then((navigated) => {
+                    if (!navigated) {
+                      console.error('Navigation to / failed!');
+                    }
+                  });
                 }
                 //Display a snackbar message and redirect the user
                 this.snackBar.open('Login Successful', 'Close', {
-                  duration: 3000,
+                  duration: 3500,
                   panelClass: ['custom-snackbar'],
                 });
-
-                this.dialog.closeAll();
-                this.router.navigate(['/']);
               }
             }
           },
@@ -115,6 +132,7 @@ export class LoginComponent implements OnDestroy {
           },
         });
 
+      // Add the subscription to the subscription list to be unsubscribed later when the subscription is no longer needed
       this.subscription.add(loginSubscription);
     } else {
       // Handle form validation failure

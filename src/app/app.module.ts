@@ -1,6 +1,6 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule } from 'apollo-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import * as shared from './components/shared';
@@ -27,9 +27,9 @@ import {
   UserfeedComponent,
 } from './modules/user-info/components';
 import { StoreModule } from '@ngrx/store';
-import { saleReducer } from './store/reducers/sale.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { SaleEffects } from './store/effects/sale.effects';
+import { appReducers } from './store/app.reducers';
 
 class GlobalErrorHandler implements ErrorHandler {
   handleError(error: any): void {
@@ -64,7 +64,7 @@ const COMPONENTS = [
     MatToolbarModule,
     NgChartsModule,
     UserfeedComponent,
-    StoreModule.forRoot({ sale: saleReducer }),
+    StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([SaleEffects]),
     SideBarLoginComponent,
   ],
