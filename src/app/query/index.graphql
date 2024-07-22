@@ -30,8 +30,8 @@ query GetSaleFlag($saleId: ID!, $saleType: SaleType!) {
   getSaleFlag(saleId: $saleId, saleType: $saleType)
 }
 
-query findAllSalesByAgentName($agentName: String!) {
-  findAllSalesByAgentName(agentName: $agentName) {
+query findAllSalesByAgentNameXfinity($agentName: String!) {
+  findAllSalesByAgentNameXfinity(agentName: $agentName) {
     id
     orderDate
     agentName
@@ -73,13 +73,13 @@ query GetSaleHistory($saleId: String!) {
   }
 }
 
-query FindSalesWithComplexFilter(
+query FindSalesWithComplexFilterXfinity(
   $filter: XfinitySaleFilterInputDto!
   $limit: Int!
   $offset: Int!
   $search: String
 ) {
-  findSalesWithComplexFilter(
+  findSalesWithComplexFilterXfinity(
     filter: $filter
     limit: $limit
     offset: $offset

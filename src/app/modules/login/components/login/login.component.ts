@@ -84,10 +84,14 @@ export class LoginComponent implements OnDestroy {
 
                   // Instead of Storing userType in localStorage, dispatch an action to set the userType in the store
                   // Dispatch action to set the user type
-                  this.store.dispatch(
-                    setUserType({ userType: data.loginUser.userType! })
-                  );
-                  //localStorage.setItem('userType', loginData.userType || '');
+                  if (data?.loginUser) {
+                    this.accessToken = data.loginUser.accessToken;
+                    if (this.accessToken) {
+                      this.store.dispatch(
+                        setUserType({ userType: data.loginUser.userType! })
+                      );
+                    }
+                  }
 
                   // Retrieve the loginData from localStorage
                   const storedLoginData = localStorage.getItem('loginData');

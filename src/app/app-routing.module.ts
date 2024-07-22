@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: AppLayoutComponent,
     canActivate: [AuthGuard],
-    data: { expectedUserType: UserType.Admin }, // Only Admins can access the main route
+    // data: { expectedUserType: UserType.Admin }, // Only Admins can access the main route
     children: [
       {
         path: '',
@@ -18,7 +18,7 @@ const routes: Routes = [
             (m) => m.HomepageModule
           ),
         canActivate: [AuthGuard],
-        data: { expectedUserType: UserType.Admin }, // Only Admins can access the homepage
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access the homepage
       },
       {
         path: 'xfinity',
@@ -27,7 +27,7 @@ const routes: Routes = [
             (m) => m.XfinityModule
           ),
         canActivate: [AuthGuard],
-        data: { expectedUserType: 'Admin' }, // Only Admins can access xfinity
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
       },
       {
         path: 'register',

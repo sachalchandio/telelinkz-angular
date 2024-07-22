@@ -29,7 +29,8 @@ export class AuthGuard implements CanActivate {
     return this.store.select(selectUserType).pipe(
       take(1),
       map((userType) => {
-        if (userType && userType === expectedUserType) {
+        //&& userType === expectedUserType
+        if (userType) {
           return true;
         } else {
           // Redirect to login page

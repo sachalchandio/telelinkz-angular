@@ -26,6 +26,30 @@ export enum AccountStatus {
   Unverified = 'UNVERIFIED'
 }
 
+/** List of available Atnt Internet packages */
+export enum AtntInternet {
+  AtntCopper_5 = 'ATNT_COPPER_5',
+  AtntCopper_10 = 'ATNT_COPPER_10',
+  AtntCopper_15 = 'ATNT_COPPER_15',
+  AtntCopper_50 = 'ATNT_COPPER_50',
+  AtntCopper_75 = 'ATNT_COPPER_75',
+  AtntCopperBasic = 'ATNT_COPPER_BASIC',
+  AtntFiber_100 = 'ATNT_FIBER_100',
+  AtntFiber_300 = 'ATNT_FIBER_300',
+  AtntFiber_500 = 'ATNT_FIBER_500',
+  AtntFiber_1000 = 'ATNT_FIBER_1000',
+  AtntFiber_2000 = 'ATNT_FIBER_2000',
+  AtntFiber_5000 = 'ATNT_FIBER_5000',
+  None = 'NONE'
+}
+
+/** Atnt Home Phone options  */
+export enum AtntPhone {
+  CompleteChoiceEnhanced = 'COMPLETE_CHOICE_ENHANCED',
+  None = 'NONE',
+  TraditionalHomephone = 'TRADITIONAL_HOMEPHONE'
+}
+
 export type AuditForm = {
   __typename?: 'AuditForm';
   agentEnergeticBehavior?: Maybe<Scalars['String']['output']>;
@@ -132,6 +156,36 @@ export type CreateSaleStageInput = {
   stage: SaleFlag;
 };
 
+export type CreateSpectrumSaleInput = {
+  Internet: SpectrumInternet;
+  Phone: SpectrumPhone;
+  TV: SpectrumTv;
+  VoiceMobile: SpectrumMobile;
+  accountNumber: Scalars['String']['input'];
+  agentId: Scalars['String']['input'];
+  city: Scalars['String']['input'];
+  confirmationNumber: Scalars['String']['input'];
+  cx_firstName: Scalars['String']['input'];
+  cx_lastName: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  installation: InstallationType;
+  installationDate: Scalars['String']['input'];
+  installationTime: Scalars['String']['input'];
+  mobileOrderNumber?: InputMaybe<Scalars['String']['input']>;
+  orderDate: Scalars['String']['input'];
+  orderNumber: Scalars['String']['input'];
+  packageSold: Scalars['String']['input'];
+  phoneNumber: Scalars['String']['input'];
+  phoneNumber_second?: InputMaybe<Scalars['String']['input']>;
+  product: Scalars['String']['input'];
+  socialSecurityNumber?: InputMaybe<Scalars['String']['input']>;
+  state: UsState;
+  streetAddress: Scalars['String']['input'];
+  streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
+  workOrderNumber: Scalars['String']['input'];
+  zipcode: Scalars['String']['input'];
+};
+
 export type CreateXfinitySaleInput = {
   HMS: XfinityHomeSecurity;
   Internet: XfinityInternet;
@@ -193,6 +247,7 @@ export type Mutation = {
   createComment: Comment;
   createSaleStage: SaleStage;
   createSaleStageHistory: SaleStageHistory;
+  createSpectrumSale: SpectrumSale;
   createXfinitySale: XfinitySale;
   registerUser: RegisterUserResponseDto;
   removeAuditForm: Scalars['Boolean']['output'];
@@ -229,6 +284,11 @@ export type MutationCreateSaleStageHistoryArgs = {
   saleType: SaleType;
   stage: SaleFlag;
   userId: Scalars['ID']['input'];
+};
+
+
+export type MutationCreateSpectrumSaleArgs = {
+  input: CreateSpectrumSaleInput;
 };
 
 
@@ -292,12 +352,6 @@ export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
 };
 
-export type PaginatedSales = {
-  __typename?: 'PaginatedSales';
-  sales: Array<XfinitySaleDto>;
-  total: Scalars['Int']['output'];
-};
-
 export type Query = {
   __typename?: 'Query';
   auditForm: AuditForm;
@@ -306,11 +360,14 @@ export type Query = {
   comments: Array<Comment>;
   commentsBySale: Array<Comment>;
   currentUser: UserDto;
-  findAllSalesByAgentName: Array<XfinitySaleDto>;
-  findSalesWithComplexFilter: PaginatedSales;
+  findAllSalesByAgentNameSpectrum: Array<SpectrumSaleDto>;
+  findAllSalesByAgentNameXfinity: Array<XfinitySaleDto>;
+  findSalesWithComplexFilterSpectrum: SpectrumPaginatedSales;
+  findSalesWithComplexFilterXfinity: XfinityPaginatedSales;
   getAllAgents: Array<UserDto>;
   getSaleFlag: SaleFlag;
   getSaleHistory: Array<SaleStageHistory>;
+  getSpectrumSaleById: SpectrumSale;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
   saleStage: SaleStage;
@@ -336,12 +393,25 @@ export type QueryCommentsBySaleArgs = {
 };
 
 
-export type QueryFindAllSalesByAgentNameArgs = {
+export type QueryFindAllSalesByAgentNameSpectrumArgs = {
   agentName: Scalars['String']['input'];
 };
 
 
-export type QueryFindSalesWithComplexFilterArgs = {
+export type QueryFindAllSalesByAgentNameXfinityArgs = {
+  agentName: Scalars['String']['input'];
+};
+
+
+export type QueryFindSalesWithComplexFilterSpectrumArgs = {
+  filter: SpectrumSaleFilterInputDto;
+  limit: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFindSalesWithComplexFilterXfinityArgs = {
   filter: XfinitySaleFilterInputDto;
   limit: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
@@ -357,6 +427,11 @@ export type QueryGetSaleFlagArgs = {
 
 export type QueryGetSaleHistoryArgs = {
   saleId: Scalars['String']['input'];
+};
+
+
+export type QueryGetSpectrumSaleByIdArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -481,8 +556,212 @@ export type SaleStageHistory = {
 
 /** Which provider does the sale belong to */
 export enum SaleType {
+  AdtBusinessSale = 'ADT_BUSINESS_SALE',
+  AltafiberSale = 'ALTAFIBER_SALE',
+  AstoundBusinessSale = 'ASTOUND_BUSINESS_SALE',
+  AtntSale = 'ATNT_SALE',
+  BreezelineSale = 'BREEZELINE_SALE',
+  BreezlineBusinessSale = 'BREEZLINE_BUSINESS_SALE',
+  BrightspeedBusinessSale = 'BRIGHTSPEED_BUSINESS_SALE',
+  BrightspeedSale = 'BRIGHTSPEED_SALE',
+  ComcastSale = 'COMCAST_SALE',
+  CoxBusinessSale = 'COX_BUSINESS_SALE',
+  CoxSale = 'COX_SALE',
+  DirecttvSale = 'DIRECTTV_SALE',
+  DirectvBusinessSale = 'DIRECTV_BUSINESS_SALE',
+  EarthlinkSale = 'EARTHLINK_SALE',
+  FidiumSale = 'FIDIUM_SALE',
+  FrontierBusinessSale = 'FRONTIER_BUSINESS_SALE',
+  FrontierSale = 'FRONTIER_SALE',
+  HughesnetSale = 'HUGHESNET_SALE',
+  MediacomBusinessSale = 'MEDIACOM_BUSINESS_SALE',
+  MediacomSale = 'MEDIACOM_SALE',
+  MetronetSale = 'METRONET_SALE',
+  OptimumBusinessSale = 'OPTIMUM_BUSINESS_SALE',
+  OptimumSale = 'OPTIMUM_SALE',
+  SpectrumBusinessSale = 'SPECTRUM_BUSINESS_SALE',
   SpectrumSale = 'SPECTRUM_SALE',
-  XfinitySale = 'XFINITY_SALE'
+  TidioLeads = 'TIDIO_LEADS',
+  TmobileBusinessSale = 'TMOBILE_BUSINESS_SALE',
+  TmobileSale = 'TMOBILE_SALE',
+  VerizonBusinessSale = 'VERIZON_BUSINESS_SALE',
+  VerizonSale = 'VERIZON_SALE',
+  ViasatSale = 'VIASAT_SALE',
+  VivintSale = 'VIVINT_SALE',
+  WindstreamBusinessSale = 'WINDSTREAM_BUSINESS_SALE',
+  WindstreamSale = 'WINDSTREAM_SALE',
+  WowBusinessSale = 'WOW_BUSINESS_SALE',
+  WowSale = 'WOW_SALE',
+  XfinityBusinessSale = 'XFINITY_BUSINESS_SALE',
+  XfinitySale = 'XFINITY_SALE',
+  ZiplySale = 'ZIPLY_SALE'
+}
+
+/** List of available Spectrum Internet packages */
+export enum SpectrumInternet {
+  None = 'NONE',
+  SpectrumInternet_100Mbps = 'SPECTRUM_INTERNET_100_MBPS',
+  SpectrumInternet_200Mbps = 'SPECTRUM_INTERNET_200_MBPS',
+  SpectrumInternet_300Mbps = 'SPECTRUM_INTERNET_300_MBPS',
+  SpectrumInternet_400Mbps = 'SPECTRUM_INTERNET_400_MBPS',
+  SpectrumInternet_500Mbps = 'SPECTRUM_INTERNET_500_MBPS',
+  SpectrumInternetGig = 'SPECTRUM_INTERNET_GIG'
+}
+
+/** List of available Spectrum Mobile packages */
+export enum SpectrumMobile {
+  None = 'NONE',
+  SpectrumMobile = 'SPECTRUM_MOBILE'
+}
+
+export type SpectrumPaginatedSales = {
+  __typename?: 'SpectrumPaginatedSales';
+  sales: Array<SpectrumSaleDto>;
+  total: Scalars['Int']['output'];
+};
+
+/** List of available Spectrum Phone packages */
+export enum SpectrumPhone {
+  None = 'NONE',
+  SpectrumVoiceBasic = 'SPECTRUM_VOICE_BASIC',
+  SpectrumVoiceEnhanced = 'SPECTRUM_VOICE_ENHANCED',
+  SpectrumVoicePremium = 'SPECTRUM_VOICE_PREMIUM'
+}
+
+export type SpectrumSale = {
+  __typename?: 'SpectrumSale';
+  /** Spectrum Internet Package */
+  Internet?: Maybe<Scalars['String']['output']>;
+  /** Spectrum TV Package */
+  Phone?: Maybe<Scalars['String']['output']>;
+  /** Spectrum TV Package */
+  TV?: Maybe<Scalars['String']['output']>;
+  /** Spectrum Voice/Mobile Package */
+  VoiceMobile?: Maybe<Scalars['String']['output']>;
+  /** Specturm Account Number */
+  accountNumber: Scalars['String']['output'];
+  /** The agent responsible for the sale */
+  agent: User;
+  auditForms?: Maybe<Array<AuditForm>>;
+  /** City of the installation address */
+  city: Scalars['String']['output'];
+  comments?: Maybe<Array<Comment>>;
+  /** Confirmation Number */
+  confirmationNumber: Scalars['String']['output'];
+  /** Created at Date */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** The customer's first name */
+  cx_firstName: Scalars['String']['output'];
+  /** The customer's last name */
+  cx_lastName: Scalars['String']['output'];
+  /** Email address associated with the sale */
+  email: Scalars['String']['output'];
+  /** Primary ID */
+  id: Scalars['ID']['output'];
+  /** Type of installation */
+  installation: Scalars['String']['output'];
+  /** The date when the installation is scheduled */
+  installationDate: Scalars['DateTime']['output'];
+  /** The time when the installation is scheduled */
+  installationTime: Scalars['String']['output'];
+  /** Mobile Order Number */
+  mobileOrderNumber?: Maybe<Scalars['String']['output']>;
+  /** The date and time when the customer called and purchased services */
+  orderDate: Scalars['DateTime']['output'];
+  /** The unique order number associated with the sale */
+  orderNumber: Scalars['String']['output'];
+  /** Package sold with the sale */
+  packageSold: Scalars['String']['output'];
+  /** Phone number associated with the sale */
+  phoneNumber: Scalars['String']['output'];
+  /** Second Phone number associated with the sale */
+  phoneNumber_second?: Maybe<Scalars['String']['output']>;
+  /** Product associated with the sale */
+  product: Scalars['String']['output'];
+  /** Social Security Number associated with the sale */
+  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
+  /** History of stage changes */
+  stageHistory?: Maybe<Array<SaleStageHistory>>;
+  /** State of the installation address */
+  state: Scalars['String']['output'];
+  /** Street address for the installation */
+  streetAddress: Scalars['String']['output'];
+  /** Secondary line for street address (if applicable) */
+  streetAddressLine2?: Maybe<Scalars['String']['output']>;
+  /** Updated at Date */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Specturm Work Order Number */
+  workOrderNumber: Scalars['String']['output'];
+  /** Postal or Zip code of the installation address */
+  zipcode: Scalars['String']['output'];
+};
+
+export type SpectrumSaleDto = {
+  __typename?: 'SpectrumSaleDTO';
+  Internet: AtntInternet;
+  Phone: AtntPhone;
+  accountNumber: Scalars['String']['output'];
+  agentName: Scalars['String']['output'];
+  attTpvStatus: TpvStatus;
+  city: Scalars['String']['output'];
+  concertOrderId: Scalars['String']['output'];
+  customerType: Scalars['String']['output'];
+  cx_firstName: Scalars['String']['output'];
+  cx_lastName: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  installationDateFormatted: Scalars['String']['output'];
+  installationTime: Scalars['String']['output'];
+  orderDate: Scalars['DateTime']['output'];
+  orderID: Scalars['String']['output'];
+  orderNumber: Scalars['String']['output'];
+  packageSold: Scalars['String']['output'];
+  phoneNumber: Scalars['String']['output'];
+  phoneNumber_second?: Maybe<Scalars['String']['output']>;
+  product: Scalars['String']['output'];
+  saraPlusAT_TUserID: Scalars['String']['output'];
+  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
+  state: UsState;
+  streetAddress: Scalars['String']['output'];
+  streetAddressLine2?: Maybe<Scalars['String']['output']>;
+  zipcode: Scalars['String']['output'];
+};
+
+export type SpectrumSaleFilterInputDto = {
+  Internet?: InputMaybe<SpectrumInternet>;
+  Phone?: InputMaybe<SpectrumPhone>;
+  TV?: InputMaybe<SpectrumTv>;
+  VoiceMobile?: InputMaybe<SpectrumMobile>;
+  accountNumber?: InputMaybe<Scalars['String']['input']>;
+  agentId?: InputMaybe<Scalars['String']['input']>;
+  agentName?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  cx_firstName?: InputMaybe<Scalars['String']['input']>;
+  cx_lastName?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  endDate?: InputMaybe<Scalars['String']['input']>;
+  installationDate?: InputMaybe<Scalars['String']['input']>;
+  installationTime?: InputMaybe<Scalars['String']['input']>;
+  orderDate?: InputMaybe<Scalars['String']['input']>;
+  orderID?: InputMaybe<Scalars['String']['input']>;
+  orderNumber?: InputMaybe<Scalars['String']['input']>;
+  packageSold?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  product?: InputMaybe<Scalars['String']['input']>;
+  spectrumTpvStatus?: InputMaybe<TpvStatus>;
+  startDate?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<UsState>;
+  streetAddress?: InputMaybe<Scalars['String']['input']>;
+  zipcode?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** List of available Spectrum TV packages */
+export enum SpectrumTv {
+  None = 'NONE',
+  SpectrumTvGold = 'SPECTRUM_TV_GOLD',
+  SpectrumTvSelect = 'SPECTRUM_TV_SELECT',
+  SpectrumTvSilver = 'SPECTRUM_TV_SILVER',
+  SpectrumTvStreaming = 'SPECTRUM_TV_STREAMING'
 }
 
 /** TPV Status to confirm if it was completed successfully */
@@ -490,6 +769,7 @@ export enum TpvStatus {
   Complete = 'COMPLETE',
   Error = 'ERROR',
   Incomplete = 'INCOMPLETE',
+  NotApplicable = 'NOT_APPLICABLE',
   Pending = 'PENDING'
 }
 
@@ -669,6 +949,12 @@ export enum XfinityInternet {
   None = 'NONE',
   Superfast_800 = 'SUPERFAST_800'
 }
+
+export type XfinityPaginatedSales = {
+  __typename?: 'XfinityPaginatedSales';
+  sales: Array<XfinitySaleDto>;
+  total: Scalars['Int']['output'];
+};
 
 export type XfinitySale = {
   __typename?: 'XfinitySale';
@@ -910,12 +1196,12 @@ export type GetSaleFlagQueryVariables = Exact<{
 
 export type GetSaleFlagQuery = { __typename?: 'Query', getSaleFlag: SaleFlag };
 
-export type FindAllSalesByAgentNameQueryVariables = Exact<{
+export type FindAllSalesByAgentNameXfinityQueryVariables = Exact<{
   agentName: Scalars['String']['input'];
 }>;
 
 
-export type FindAllSalesByAgentNameQuery = { __typename?: 'Query', findAllSalesByAgentName: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> };
+export type FindAllSalesByAgentNameXfinityQuery = { __typename?: 'Query', findAllSalesByAgentNameXfinity: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> };
 
 export type GetSaleHistoryQueryVariables = Exact<{
   saleId: Scalars['String']['input'];
@@ -924,7 +1210,7 @@ export type GetSaleHistoryQueryVariables = Exact<{
 
 export type GetSaleHistoryQuery = { __typename?: 'Query', getSaleHistory: Array<{ __typename?: 'SaleStageHistory', stage: SaleFlag, timestamp: any, saleId: string, saleType: SaleType, user: { __typename?: 'User', name: string } }> };
 
-export type FindSalesWithComplexFilterQueryVariables = Exact<{
+export type FindSalesWithComplexFilterXfinityQueryVariables = Exact<{
   filter: XfinitySaleFilterInputDto;
   limit: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
@@ -932,7 +1218,7 @@ export type FindSalesWithComplexFilterQueryVariables = Exact<{
 }>;
 
 
-export type FindSalesWithComplexFilterQuery = { __typename?: 'Query', findSalesWithComplexFilter: { __typename?: 'PaginatedSales', total: number, sales: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> } };
+export type FindSalesWithComplexFilterXfinityQuery = { __typename?: 'Query', findSalesWithComplexFilterXfinity: { __typename?: 'XfinityPaginatedSales', total: number, sales: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> } };
 
 export type CommentsBySaleQueryVariables = Exact<{
   saleId: Scalars['ID']['input'];
@@ -1336,9 +1622,9 @@ export const GetSaleFlagDocument = gql`
       super(apollo);
     }
   }
-export const FindAllSalesByAgentNameDocument = gql`
-    query findAllSalesByAgentName($agentName: String!) {
-  findAllSalesByAgentName(agentName: $agentName) {
+export const FindAllSalesByAgentNameXfinityDocument = gql`
+    query findAllSalesByAgentNameXfinity($agentName: String!) {
+  findAllSalesByAgentNameXfinity(agentName: $agentName) {
     id
     orderDate
     agentName
@@ -1372,8 +1658,8 @@ export const FindAllSalesByAgentNameDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class FindAllSalesByAgentNameGQL extends Apollo.Query<FindAllSalesByAgentNameQuery, FindAllSalesByAgentNameQueryVariables> {
-    document = FindAllSalesByAgentNameDocument;
+  export class FindAllSalesByAgentNameXfinityGQL extends Apollo.Query<FindAllSalesByAgentNameXfinityQuery, FindAllSalesByAgentNameXfinityQueryVariables> {
+    document = FindAllSalesByAgentNameXfinityDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1403,9 +1689,9 @@ export const GetSaleHistoryDocument = gql`
       super(apollo);
     }
   }
-export const FindSalesWithComplexFilterDocument = gql`
-    query FindSalesWithComplexFilter($filter: XfinitySaleFilterInputDto!, $limit: Int!, $offset: Int!, $search: String) {
-  findSalesWithComplexFilter(
+export const FindSalesWithComplexFilterXfinityDocument = gql`
+    query FindSalesWithComplexFilterXfinity($filter: XfinitySaleFilterInputDto!, $limit: Int!, $offset: Int!, $search: String) {
+  findSalesWithComplexFilterXfinity(
     filter: $filter
     limit: $limit
     offset: $offset
@@ -1447,8 +1733,8 @@ export const FindSalesWithComplexFilterDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class FindSalesWithComplexFilterGQL extends Apollo.Query<FindSalesWithComplexFilterQuery, FindSalesWithComplexFilterQueryVariables> {
-    document = FindSalesWithComplexFilterDocument;
+  export class FindSalesWithComplexFilterXfinityGQL extends Apollo.Query<FindSalesWithComplexFilterXfinityQuery, FindSalesWithComplexFilterXfinityQueryVariables> {
+    document = FindSalesWithComplexFilterXfinityDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

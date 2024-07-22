@@ -9,7 +9,7 @@ import {
 import {
   XfinitySaleDto,
   XfinitySaleFilterInputDto,
-  FindSalesWithComplexFilterGQL,
+  FindSalesWithComplexFilterXfinityGQL,
   XfinityHomeSecurity,
   XfinityHomePhone,
   XfinityTv,
@@ -84,7 +84,7 @@ export class XfinityFilter implements OnInit {
   });
 
   constructor(
-    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterGQL,
+    private findSalesWithComplexFilterGQL: FindSalesWithComplexFilterXfinityGQL,
     private xfinityDataService: XfinitySharedDataService,
     private getAllAgentsGQL: GetAllAgentsGQL,
     private saleStageService: SaleStageService // Ensure this is injected correctly
@@ -170,7 +170,7 @@ export class XfinityFilter implements OnInit {
       .valueChanges.subscribe({
         next: async (response) => {
           const transformedData: TableData[] = await Promise.all(
-            response.data.findSalesWithComplexFilter.sales.map(
+            response.data.findSalesWithComplexFilterXfinity.sales.map(
               async (sale: XfinitySaleDto) => ({
                 ID: sale.id,
                 SaleFlag:
