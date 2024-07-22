@@ -79,15 +79,15 @@
 }
 .form-group input:focus-visible,
 .form-group select:focus-visible {
-  border-color: #fff;
-  background-color: #ffac0b;
+  /* border-color: #fff;
+  background-color: #ffac0b; */
   outline: none;
-  color: #ffffff;
+  /* color: #ffffff; */
 }
-.form-group input:focus-visible + i,
+/* .form-group input:focus-visible + i,
 .form-group select:focus-visible + i {
   color: #fff;
-}
+} */
 
 .form-group select {
   width: 96%;
@@ -123,12 +123,12 @@ button[type="submit"]:hover {
   height: 16px;
   background: #b5b5b5;
 }
-.form-group input:focus-visible ~ i {
+/* .form-group input:focus-visible ~ i {
   color: #fff;
 }
 .form-group:focus-visible ~ i {
   color: #fff;
-}
+} */
 .dashboard_inner_header {
   min-height: 115px;
   background-position: center;
@@ -202,18 +202,16 @@ h1.new_sale {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 21px;
-  margin-left: auto;
-  background: linear-gradient(
-    90deg,
-    rgba(39, 19, 104, 1) 22%,
-    rgba(107, 27, 222, 1) 47%,
-    rgba(118, 0, 149, 1) 100%
-  );
+  background: #271368;
   width: 150px;
   min-height: 42px;
   font-size: 19px;
-  margin-left: auto;
+  font-family: "Poppins", sans-serif;
+}
+.form-btn-group {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
 @media screen and (max-width: 1600px) {
   .form-group input {

@@ -103,6 +103,7 @@
   <div class="form-group full-width-grp">
     <label>Findings</label>
     <textarea formControlName="findings"></textarea>
+    <i class="material-icons icon-style">message</i>
   </div>
 
   <h2>Sale Details</h2>
@@ -168,8 +169,8 @@
       <option *ngFor="let option of yesNoOptions" [value]="option">
         {{ option }}
       </option>
-      <i class="material-icons">speaker_notes_off</i>
     </select>
+    <i class="material-icons">speaker_notes_off</i>
   </div>
 
   <div class="form-group"> 
@@ -209,6 +210,7 @@
         {{ option }}
       </option>
     </select>
+    <i class="material-icons icon-style">report_problem</i>
 
   </div>
 
@@ -299,6 +301,7 @@
   <div class="form-group full-width-grp">
     <label>Findings</label>
     <textarea formControlName="improvementAreas"></textarea>
+    <i class="material-icons icon-style">message</i>
   </div>
 
   <button type="submit" [disabled]="!auditForm.valid">Submit</button>
