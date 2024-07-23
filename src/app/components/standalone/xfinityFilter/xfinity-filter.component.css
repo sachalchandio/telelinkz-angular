@@ -112,10 +112,6 @@ button[type="submit"]:hover {
 .form-group:focus-visible ~ i {
   color: #fff;
 } */
-::-webkit-inner-spin-button,
-::-webkit-calendar-picker-indicator {
-    font-size: 1.2em; /* Increase the size of the icon */
-}
 .dashboard_inner_header{
   min-height: 115px;
   background-position: center;

@@ -45,13 +45,12 @@ textarea {
   padding: 13px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 10px;
   color: #757575;
   padding-left: 38px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   background-color: transparent;
-  cursor: pointer;
 }
 .form-group label{
   margin-bottom: 5px;
@@ -106,12 +105,4 @@ button:not(:disabled):hover {
   width: 1px;
   height: 16px;
   background: #b5b5b5;
-}
-input:disabled {
-  background-color: #00000010;
-  color: #0000004f;
-}
-::-webkit-inner-spin-button,
-::-webkit-calendar-picker-indicator {
-    font-size: 1.2em; /* Increase the size of the icon */
 }
