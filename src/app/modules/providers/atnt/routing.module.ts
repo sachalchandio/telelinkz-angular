@@ -5,7 +5,7 @@ import * as comp from './components';
 const routes: Routes = [
   {
     path: '',
-    component: comp.DashboardAtntComponent,
+    component: comp.AtntDashboardComponent,
     children: [
       {
         path: 'new-sale',

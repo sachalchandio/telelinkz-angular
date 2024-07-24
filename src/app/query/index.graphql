@@ -139,3 +139,111 @@ query CommentsBySale($saleId: ID!, $saleType: String!) {
     }
   }
 }
+
+query FindAllSalesByAgentNameATNT($agentName: String!) {
+  findAllSalesByAgentNameATNT(agentName: $agentName) {
+    id
+    orderDate
+    agentName
+    cx_firstName
+    cx_lastName
+    orderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDateFormatted
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    email
+    product
+    packageSold
+    attTpvStatus
+    Internet
+    Phone
+  }
+}
+
+query FindSalesWithComplexFilterATNT(
+  $filter: AtntSaleFilterInputDto!
+  $limit: Int!
+  $offset: Int!
+  $search: String
+) {
+  findSalesWithComplexFilterATNT(
+    filter: $filter
+    limit: $limit
+    offset: $offset
+    search: $search
+  ) {
+    sales {
+      id
+      orderDate
+      agentName
+      cx_firstName
+      cx_lastName
+      orderID
+      accountNumber
+      customerType
+      saraPlusAT_TUserID
+      orderNumber
+      installationDateFormatted
+      installationTime
+      installation
+      streetAddress
+      streetAddressLine2
+      city
+      state
+      zipcode
+      phoneNumber
+      phoneNumber_second
+      email
+      product
+      packageSold
+      attTpvStatus
+      Internet
+      Phone
+    }
+    total
+  }
+}
+
+query GetAtntSaleById($id: String!) {
+  getAtntSaleById(id: $id) {
+    id
+    orderDate
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    orderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    email
+    product
+    packageSold
+    attTpvStatus
+    Internet
+    Phone
+  }
+}

@@ -90,7 +90,7 @@ export class RecordSearch implements OnInit, OnDestroy {
     const saleId: string = element['ID'] as string;
     console.log('Clicked Sale ID:', saleId); // Debugging statement
     if (saleId) {
-      this.tabStateService.openTab({
+      this.tabStateService.openTab('xfinity', {
         title: 'Sales Journey',
         route: 'xfinity/sales-journey',
         queryParams: { saleId: saleId, data: JSON.stringify(element) },
@@ -101,8 +101,11 @@ export class RecordSearch implements OnInit, OnDestroy {
   }
 
   restoreTabState(): void {
-    if (this.tabStateService.hasState('xfinity/record-search')) {
-      const state = this.tabStateService.getState('xfinity/record-search');
+    if (this.tabStateService.hasState('xfinity', 'xfinity/record-search')) {
+      const state = this.tabStateService.getState(
+        'xfinity',
+        'xfinity/record-search'
+      );
       this.searchQuery = state.searchQuery;
       this.totalRecords = state.totalRecords;
       this.pageSize = state.pageSize;
@@ -121,7 +124,7 @@ export class RecordSearch implements OnInit, OnDestroy {
       displayedColumns: this.displayedColumns,
       dataSource: this.dataSource,
     };
-    this.tabStateService.setState('xfinity/record-search', state);
+    this.tabStateService.setState('xfinity', 'xfinity/record-search', state);
   }
 
   async onStatusChange(row: any, selectedStatus: SaleFlag): Promise<void> {

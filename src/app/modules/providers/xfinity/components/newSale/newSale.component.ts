@@ -70,8 +70,11 @@ export class XfinityNewSale implements OnInit, OnDestroy {
   }
 
   restoreTabState(): void {
-    if (this.tabStateService.hasState('xfinity/new-sale')) {
-      this.xfinitySaleInput = this.tabStateService.getState('xfinity/new-sale');
+    if (this.tabStateService.hasState('xfinity', 'xfinity/new-sale')) {
+      this.xfinitySaleInput = this.tabStateService.getState(
+        'xfinity',
+        'xfinity/new-sale'
+      );
     }
   }
 
@@ -114,7 +117,11 @@ export class XfinityNewSale implements OnInit, OnDestroy {
   }
 
   saveTabState(): void {
-    this.tabStateService.setState('xfinity/new-sale', this.xfinitySaleInput);
+    this.tabStateService.setState(
+      'xfinity',
+      'xfinity/new-sale',
+      this.xfinitySaleInput
+    );
   }
 
   ngOnDestroy(): void {

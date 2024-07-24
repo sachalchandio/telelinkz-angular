@@ -19,6 +19,12 @@ export type Scalars = {
   DateTime: { input: any; output: any; }
 };
 
+export type AtntPaginatedSales = {
+  __typename?: 'ATNTPaginatedSales';
+  sales: Array<AtntSaleDto>;
+  total: Scalars['Int']['output'];
+};
+
 export enum AccountStatus {
   Active = 'ACTIVE',
   Deleted = 'DELETED',
@@ -26,11 +32,22 @@ export enum AccountStatus {
   Unverified = 'UNVERIFIED'
 }
 
+/** The type of customer risk level */
+export enum AtntCustomerType {
+  HighRisk = 'HIGH_RISK',
+  LowRisk = 'LOW_RISK',
+  MediumRisk = 'MEDIUM_RISK',
+  Ncvc = 'NCVC',
+  UnknownRisk = 'UNKNOWN_RISK'
+}
+
 /** List of available Atnt Internet packages */
 export enum AtntInternet {
   AtntCopper_5 = 'ATNT_COPPER_5',
   AtntCopper_10 = 'ATNT_COPPER_10',
   AtntCopper_15 = 'ATNT_COPPER_15',
+  AtntCopper_18 = 'ATNT_COPPER_18',
+  AtntCopper_25 = 'ATNT_COPPER_25',
   AtntCopper_50 = 'ATNT_COPPER_50',
   AtntCopper_75 = 'ATNT_COPPER_75',
   AtntCopperBasic = 'ATNT_COPPER_BASIC',
@@ -49,6 +66,132 @@ export enum AtntPhone {
   None = 'NONE',
   TraditionalHomephone = 'TRADITIONAL_HOMEPHONE'
 }
+
+export type AtntSale = {
+  __typename?: 'AtntSale';
+  /** AT&T Internet Package */
+  Internet: Scalars['String']['output'];
+  /** AT&T Phone Package */
+  Phone: Scalars['String']['output'];
+  /** Account Number */
+  accountNumber: Scalars['String']['output'];
+  /** The agent responsible for the sale */
+  agent: User;
+  /** AT&T TPV Status */
+  attTpvStatus: Scalars['String']['output'];
+  auditForms?: Maybe<Array<AuditForm>>;
+  /** City of the installation address */
+  city: Scalars['String']['output'];
+  comments?: Maybe<Array<Comment>>;
+  /** Created at Date */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** AT&T Customer Type */
+  customerType: Scalars['String']['output'];
+  /** The customer's first name */
+  cx_firstName: Scalars['String']['output'];
+  /** The customer's last name */
+  cx_lastName: Scalars['String']['output'];
+  /** Email address associated with the sale */
+  email: Scalars['String']['output'];
+  /** Primary ID */
+  id: Scalars['ID']['output'];
+  /** Type of installation */
+  installation: Scalars['String']['output'];
+  /** The date when the installation is scheduled */
+  installationDate: Scalars['DateTime']['output'];
+  /** The time when the installation is scheduled */
+  installationTime: Scalars['String']['output'];
+  /** The date and time when the customer called and purchased services */
+  orderDate: Scalars['DateTime']['output'];
+  /** orderID */
+  orderID: Scalars['String']['output'];
+  /** The unique order number associated with the sale */
+  orderNumber: Scalars['String']['output'];
+  /** Package sold with the sale */
+  packageSold: Scalars['String']['output'];
+  /** Phone number associated with the sale */
+  phoneNumber: Scalars['String']['output'];
+  /** Second Phone number associated with the sale */
+  phoneNumber_second?: Maybe<Scalars['String']['output']>;
+  /** Product associated with the sale */
+  product: Scalars['String']['output'];
+  /** Sara Plus AT & T User ID */
+  saraPlusAT_TUserID: Scalars['String']['output'];
+  /** Social Security Number associated with the sale */
+  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
+  /** History of stage changes */
+  stageHistory?: Maybe<Array<SaleStageHistory>>;
+  /** State of the installation address */
+  state: Scalars['String']['output'];
+  /** Street address for the installation */
+  streetAddress: Scalars['String']['output'];
+  /** Secondary line for street address (if applicable) */
+  streetAddressLine2?: Maybe<Scalars['String']['output']>;
+  /** Updated at Date */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Postal or Zip code of the installation address */
+  zipcode: Scalars['String']['output'];
+};
+
+export type AtntSaleDto = {
+  __typename?: 'AtntSaleDTO';
+  Internet: AtntInternet;
+  Phone: AtntPhone;
+  accountNumber: Scalars['String']['output'];
+  agentName: Scalars['String']['output'];
+  attTpvStatus: TpvStatus;
+  city: Scalars['String']['output'];
+  concertOrderId: Scalars['String']['output'];
+  customerType: AtntCustomerType;
+  cx_firstName: Scalars['String']['output'];
+  cx_lastName: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  installation: InstallationType;
+  installationDateFormatted: Scalars['String']['output'];
+  installationTime: Scalars['String']['output'];
+  orderDate: Scalars['DateTime']['output'];
+  orderID: Scalars['String']['output'];
+  orderNumber: Scalars['String']['output'];
+  packageSold: Scalars['String']['output'];
+  phoneNumber: Scalars['String']['output'];
+  phoneNumber_second?: Maybe<Scalars['String']['output']>;
+  product: Scalars['String']['output'];
+  saraPlusAT_TUserID: SaraPlusAt_TUserId;
+  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
+  state: UsState;
+  streetAddress: Scalars['String']['output'];
+  streetAddressLine2?: Maybe<Scalars['String']['output']>;
+  zipcode: Scalars['String']['output'];
+};
+
+export type AtntSaleFilterInputDto = {
+  Internet?: InputMaybe<AtntInternet>;
+  Phone?: InputMaybe<AtntPhone>;
+  accountNumber?: InputMaybe<Scalars['String']['input']>;
+  agentId?: InputMaybe<Scalars['String']['input']>;
+  agentName?: InputMaybe<Scalars['String']['input']>;
+  attTpvStatus?: InputMaybe<TpvStatus>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  customerType?: InputMaybe<AtntCustomerType>;
+  cx_firstName?: InputMaybe<Scalars['String']['input']>;
+  cx_lastName?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  endDate?: InputMaybe<Scalars['String']['input']>;
+  installationDate?: InputMaybe<Scalars['String']['input']>;
+  installationTime?: InputMaybe<Scalars['String']['input']>;
+  orderDate?: InputMaybe<Scalars['String']['input']>;
+  orderID?: InputMaybe<Scalars['String']['input']>;
+  orderNumber?: InputMaybe<Scalars['String']['input']>;
+  packageSold?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  product?: InputMaybe<Scalars['String']['input']>;
+  saraPlusAT_TUserID?: InputMaybe<SaraPlusAt_TUserId>;
+  startDate?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<UsState>;
+  streetAddress?: InputMaybe<Scalars['String']['input']>;
+  zipcode?: InputMaybe<Scalars['String']['input']>;
+};
 
 export type AuditForm = {
   __typename?: 'AuditForm';
@@ -112,6 +255,34 @@ export enum CommentStatus {
   Unresolved = 'UNRESOLVED'
 }
 
+export type CreateAtntSaleInput = {
+  Internet: AtntInternet;
+  Phone: AtntPhone;
+  accountNumber: Scalars['String']['input'];
+  agentId: Scalars['String']['input'];
+  attTpvStatus: TpvStatus;
+  city: Scalars['String']['input'];
+  customerType: AtntCustomerType;
+  cx_firstName: Scalars['String']['input'];
+  cx_lastName: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  installation: InstallationType;
+  installationDateFormatted: Scalars['String']['input'];
+  installationTime: Scalars['String']['input'];
+  orderDate: Scalars['String']['input'];
+  orderID: Scalars['String']['input'];
+  orderNumber: Scalars['String']['input'];
+  packageSold: Scalars['String']['input'];
+  phoneNumber: Scalars['String']['input'];
+  phoneNumber_second?: InputMaybe<Scalars['String']['input']>;
+  product: Scalars['String']['input'];
+  saraPlusAT_TUserID: SaraPlusAt_TUserId;
+  state: UsState;
+  streetAddress: Scalars['String']['input'];
+  streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
+  zipcode: Scalars['String']['input'];
+};
+
 export type CreateAuditFormInput = {
   agentEnergeticBehavior?: InputMaybe<Scalars['String']['input']>;
   anyFalsifications?: InputMaybe<Scalars['String']['input']>;
@@ -154,36 +325,6 @@ export type CreateSaleStageInput = {
   saleId: Scalars['ID']['input'];
   saleType: SaleType;
   stage: SaleFlag;
-};
-
-export type CreateSpectrumSaleInput = {
-  Internet: SpectrumInternet;
-  Phone: SpectrumPhone;
-  TV: SpectrumTv;
-  VoiceMobile: SpectrumMobile;
-  accountNumber: Scalars['String']['input'];
-  agentId: Scalars['String']['input'];
-  city: Scalars['String']['input'];
-  confirmationNumber: Scalars['String']['input'];
-  cx_firstName: Scalars['String']['input'];
-  cx_lastName: Scalars['String']['input'];
-  email: Scalars['String']['input'];
-  installation: InstallationType;
-  installationDate: Scalars['String']['input'];
-  installationTime: Scalars['String']['input'];
-  mobileOrderNumber?: InputMaybe<Scalars['String']['input']>;
-  orderDate: Scalars['String']['input'];
-  orderNumber: Scalars['String']['input'];
-  packageSold: Scalars['String']['input'];
-  phoneNumber: Scalars['String']['input'];
-  phoneNumber_second?: InputMaybe<Scalars['String']['input']>;
-  product: Scalars['String']['input'];
-  socialSecurityNumber?: InputMaybe<Scalars['String']['input']>;
-  state: UsState;
-  streetAddress: Scalars['String']['input'];
-  streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
-  workOrderNumber: Scalars['String']['input'];
-  zipcode: Scalars['String']['input'];
 };
 
 export type CreateXfinitySaleInput = {
@@ -243,11 +384,11 @@ export type LoginUserResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAtntSale: AtntSale;
   createAuditForm: AuditForm;
   createComment: Comment;
   createSaleStage: SaleStage;
   createSaleStageHistory: SaleStageHistory;
-  createSpectrumSale: SpectrumSale;
   createXfinitySale: XfinitySale;
   registerUser: RegisterUserResponseDto;
   removeAuditForm: Scalars['Boolean']['output'];
@@ -260,6 +401,11 @@ export type Mutation = {
   updateComment: Comment;
   updateSaleStage: SaleStage;
   updateUser: UserDto;
+};
+
+
+export type MutationCreateAtntSaleArgs = {
+  input: CreateAtntSaleInput;
 };
 
 
@@ -284,11 +430,6 @@ export type MutationCreateSaleStageHistoryArgs = {
   saleType: SaleType;
   stage: SaleFlag;
   userId: Scalars['ID']['input'];
-};
-
-
-export type MutationCreateSpectrumSaleArgs = {
-  input: CreateSpectrumSaleInput;
 };
 
 
@@ -360,14 +501,14 @@ export type Query = {
   comments: Array<Comment>;
   commentsBySale: Array<Comment>;
   currentUser: UserDto;
-  findAllSalesByAgentNameSpectrum: Array<SpectrumSaleDto>;
+  findAllSalesByAgentNameATNT: Array<AtntSaleDto>;
   findAllSalesByAgentNameXfinity: Array<XfinitySaleDto>;
-  findSalesWithComplexFilterSpectrum: SpectrumPaginatedSales;
+  findSalesWithComplexFilterATNT: AtntPaginatedSales;
   findSalesWithComplexFilterXfinity: XfinityPaginatedSales;
   getAllAgents: Array<UserDto>;
+  getAtntSaleById: AtntSale;
   getSaleFlag: SaleFlag;
   getSaleHistory: Array<SaleStageHistory>;
-  getSpectrumSaleById: SpectrumSale;
   getXfinitySaleById: XfinitySale;
   loginUser: LoginUserResponse;
   saleStage: SaleStage;
@@ -393,7 +534,7 @@ export type QueryCommentsBySaleArgs = {
 };
 
 
-export type QueryFindAllSalesByAgentNameSpectrumArgs = {
+export type QueryFindAllSalesByAgentNameAtntArgs = {
   agentName: Scalars['String']['input'];
 };
 
@@ -403,8 +544,8 @@ export type QueryFindAllSalesByAgentNameXfinityArgs = {
 };
 
 
-export type QueryFindSalesWithComplexFilterSpectrumArgs = {
-  filter: SpectrumSaleFilterInputDto;
+export type QueryFindSalesWithComplexFilterAtntArgs = {
+  filter: AtntSaleFilterInputDto;
   limit: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
   search?: InputMaybe<Scalars['String']['input']>;
@@ -419,6 +560,11 @@ export type QueryFindSalesWithComplexFilterXfinityArgs = {
 };
 
 
+export type QueryGetAtntSaleByIdArgs = {
+  id: Scalars['String']['input'];
+};
+
+
 export type QueryGetSaleFlagArgs = {
   saleId: Scalars['ID']['input'];
   saleType: SaleType;
@@ -427,11 +573,6 @@ export type QueryGetSaleFlagArgs = {
 
 export type QueryGetSaleHistoryArgs = {
   saleId: Scalars['String']['input'];
-};
-
-
-export type QueryGetSpectrumSaleByIdArgs = {
-  id: Scalars['String']['input'];
 };
 
 
@@ -597,171 +738,12 @@ export enum SaleType {
   ZiplySale = 'ZIPLY_SALE'
 }
 
-/** List of available Spectrum Internet packages */
-export enum SpectrumInternet {
+/** The ID of the Sara Plus user */
+export enum SaraPlusAt_TUserId {
   None = 'NONE',
-  SpectrumInternet_100Mbps = 'SPECTRUM_INTERNET_100_MBPS',
-  SpectrumInternet_200Mbps = 'SPECTRUM_INTERNET_200_MBPS',
-  SpectrumInternet_300Mbps = 'SPECTRUM_INTERNET_300_MBPS',
-  SpectrumInternet_400Mbps = 'SPECTRUM_INTERNET_400_MBPS',
-  SpectrumInternet_500Mbps = 'SPECTRUM_INTERNET_500_MBPS',
-  SpectrumInternetGig = 'SPECTRUM_INTERNET_GIG'
-}
-
-/** List of available Spectrum Mobile packages */
-export enum SpectrumMobile {
-  None = 'NONE',
-  SpectrumMobile = 'SPECTRUM_MOBILE'
-}
-
-export type SpectrumPaginatedSales = {
-  __typename?: 'SpectrumPaginatedSales';
-  sales: Array<SpectrumSaleDto>;
-  total: Scalars['Int']['output'];
-};
-
-/** List of available Spectrum Phone packages */
-export enum SpectrumPhone {
-  None = 'NONE',
-  SpectrumVoiceBasic = 'SPECTRUM_VOICE_BASIC',
-  SpectrumVoiceEnhanced = 'SPECTRUM_VOICE_ENHANCED',
-  SpectrumVoicePremium = 'SPECTRUM_VOICE_PREMIUM'
-}
-
-export type SpectrumSale = {
-  __typename?: 'SpectrumSale';
-  /** Spectrum Internet Package */
-  Internet?: Maybe<Scalars['String']['output']>;
-  /** Spectrum TV Package */
-  Phone?: Maybe<Scalars['String']['output']>;
-  /** Spectrum TV Package */
-  TV?: Maybe<Scalars['String']['output']>;
-  /** Spectrum Voice/Mobile Package */
-  VoiceMobile?: Maybe<Scalars['String']['output']>;
-  /** Specturm Account Number */
-  accountNumber: Scalars['String']['output'];
-  /** The agent responsible for the sale */
-  agent: User;
-  auditForms?: Maybe<Array<AuditForm>>;
-  /** City of the installation address */
-  city: Scalars['String']['output'];
-  comments?: Maybe<Array<Comment>>;
-  /** Confirmation Number */
-  confirmationNumber: Scalars['String']['output'];
-  /** Created at Date */
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** The customer's first name */
-  cx_firstName: Scalars['String']['output'];
-  /** The customer's last name */
-  cx_lastName: Scalars['String']['output'];
-  /** Email address associated with the sale */
-  email: Scalars['String']['output'];
-  /** Primary ID */
-  id: Scalars['ID']['output'];
-  /** Type of installation */
-  installation: Scalars['String']['output'];
-  /** The date when the installation is scheduled */
-  installationDate: Scalars['DateTime']['output'];
-  /** The time when the installation is scheduled */
-  installationTime: Scalars['String']['output'];
-  /** Mobile Order Number */
-  mobileOrderNumber?: Maybe<Scalars['String']['output']>;
-  /** The date and time when the customer called and purchased services */
-  orderDate: Scalars['DateTime']['output'];
-  /** The unique order number associated with the sale */
-  orderNumber: Scalars['String']['output'];
-  /** Package sold with the sale */
-  packageSold: Scalars['String']['output'];
-  /** Phone number associated with the sale */
-  phoneNumber: Scalars['String']['output'];
-  /** Second Phone number associated with the sale */
-  phoneNumber_second?: Maybe<Scalars['String']['output']>;
-  /** Product associated with the sale */
-  product: Scalars['String']['output'];
-  /** Social Security Number associated with the sale */
-  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
-  /** History of stage changes */
-  stageHistory?: Maybe<Array<SaleStageHistory>>;
-  /** State of the installation address */
-  state: Scalars['String']['output'];
-  /** Street address for the installation */
-  streetAddress: Scalars['String']['output'];
-  /** Secondary line for street address (if applicable) */
-  streetAddressLine2?: Maybe<Scalars['String']['output']>;
-  /** Updated at Date */
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Specturm Work Order Number */
-  workOrderNumber: Scalars['String']['output'];
-  /** Postal or Zip code of the installation address */
-  zipcode: Scalars['String']['output'];
-};
-
-export type SpectrumSaleDto = {
-  __typename?: 'SpectrumSaleDTO';
-  Internet: AtntInternet;
-  Phone: AtntPhone;
-  accountNumber: Scalars['String']['output'];
-  agentName: Scalars['String']['output'];
-  attTpvStatus: TpvStatus;
-  city: Scalars['String']['output'];
-  concertOrderId: Scalars['String']['output'];
-  customerType: Scalars['String']['output'];
-  cx_firstName: Scalars['String']['output'];
-  cx_lastName: Scalars['String']['output'];
-  email: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  installationDateFormatted: Scalars['String']['output'];
-  installationTime: Scalars['String']['output'];
-  orderDate: Scalars['DateTime']['output'];
-  orderID: Scalars['String']['output'];
-  orderNumber: Scalars['String']['output'];
-  packageSold: Scalars['String']['output'];
-  phoneNumber: Scalars['String']['output'];
-  phoneNumber_second?: Maybe<Scalars['String']['output']>;
-  product: Scalars['String']['output'];
-  saraPlusAT_TUserID: Scalars['String']['output'];
-  socialSecurityNumber?: Maybe<Scalars['String']['output']>;
-  state: UsState;
-  streetAddress: Scalars['String']['output'];
-  streetAddressLine2?: Maybe<Scalars['String']['output']>;
-  zipcode: Scalars['String']['output'];
-};
-
-export type SpectrumSaleFilterInputDto = {
-  Internet?: InputMaybe<SpectrumInternet>;
-  Phone?: InputMaybe<SpectrumPhone>;
-  TV?: InputMaybe<SpectrumTv>;
-  VoiceMobile?: InputMaybe<SpectrumMobile>;
-  accountNumber?: InputMaybe<Scalars['String']['input']>;
-  agentId?: InputMaybe<Scalars['String']['input']>;
-  agentName?: InputMaybe<Scalars['String']['input']>;
-  city?: InputMaybe<Scalars['String']['input']>;
-  cx_firstName?: InputMaybe<Scalars['String']['input']>;
-  cx_lastName?: InputMaybe<Scalars['String']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
-  endDate?: InputMaybe<Scalars['String']['input']>;
-  installationDate?: InputMaybe<Scalars['String']['input']>;
-  installationTime?: InputMaybe<Scalars['String']['input']>;
-  orderDate?: InputMaybe<Scalars['String']['input']>;
-  orderID?: InputMaybe<Scalars['String']['input']>;
-  orderNumber?: InputMaybe<Scalars['String']['input']>;
-  packageSold?: InputMaybe<Scalars['String']['input']>;
-  phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  product?: InputMaybe<Scalars['String']['input']>;
-  spectrumTpvStatus?: InputMaybe<TpvStatus>;
-  startDate?: InputMaybe<Scalars['String']['input']>;
-  state?: InputMaybe<UsState>;
-  streetAddress?: InputMaybe<Scalars['String']['input']>;
-  zipcode?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** List of available Spectrum TV packages */
-export enum SpectrumTv {
-  None = 'NONE',
-  SpectrumTvGold = 'SPECTRUM_TV_GOLD',
-  SpectrumTvSelect = 'SPECTRUM_TV_SELECT',
-  SpectrumTvSilver = 'SPECTRUM_TV_SILVER',
-  SpectrumTvStreaming = 'SPECTRUM_TV_STREAMING'
+  SaraPlus_1 = 'SARA_PLUS_1',
+  SaraPlus_2 = 'SARA_PLUS_2',
+  SaraPlus_3 = 'SARA_PLUS_3'
 }
 
 /** TPV Status to confirm if it was completed successfully */
@@ -1168,6 +1150,13 @@ export type RemoveAuditFormMutationVariables = Exact<{
 
 export type RemoveAuditFormMutation = { __typename?: 'Mutation', removeAuditForm: boolean };
 
+export type CreateAtntSaleMutationVariables = Exact<{
+  input: CreateAtntSaleInput;
+}>;
+
+
+export type CreateAtntSaleMutation = { __typename?: 'Mutation', createAtntSale: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
+
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -1227,6 +1216,30 @@ export type CommentsBySaleQueryVariables = Exact<{
 
 
 export type CommentsBySaleQuery = { __typename?: 'Query', commentsBySale: Array<{ __typename?: 'Comment', id: string, text: string, fieldName: SaleField, status: CommentStatus, saleId: string, saleType: SaleType, user: { __typename?: 'User', id: string, name: string }, parentComment?: { __typename?: 'Comment', id: string, text: string } | null, replies?: Array<{ __typename?: 'Comment', id: string, text: string }> | null }> };
+
+export type FindAllSalesByAgentNameAtntQueryVariables = Exact<{
+  agentName: Scalars['String']['input'];
+}>;
+
+
+export type FindAllSalesByAgentNameAtntQuery = { __typename?: 'Query', findAllSalesByAgentNameATNT: Array<{ __typename?: 'AtntSaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: AtntCustomerType, saraPlusAT_TUserID: SaraPlusAt_TUserId, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: InstallationType, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: TpvStatus, Internet: AtntInternet, Phone: AtntPhone }> };
+
+export type FindSalesWithComplexFilterAtntQueryVariables = Exact<{
+  filter: AtntSaleFilterInputDto;
+  limit: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type FindSalesWithComplexFilterAtntQuery = { __typename?: 'Query', findSalesWithComplexFilterATNT: { __typename?: 'ATNTPaginatedSales', total: number, sales: Array<{ __typename?: 'AtntSaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: AtntCustomerType, saraPlusAT_TUserID: SaraPlusAt_TUserId, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: InstallationType, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: TpvStatus, Internet: AtntInternet, Phone: AtntPhone }> } };
+
+export type GetAtntSaleByIdQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetAtntSaleByIdQuery = { __typename?: 'Query', getAtntSaleById: { __typename?: 'AtntSale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: string, Internet: string, Phone: string, agent: { __typename?: 'User', id: string } } };
 
 export const CreateXfinitySaleDocument = gql`
     mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
@@ -1542,6 +1555,52 @@ export const RemoveAuditFormDocument = gql`
       super(apollo);
     }
   }
+export const CreateAtntSaleDocument = gql`
+    mutation CreateAtntSale($input: CreateAtntSaleInput!) {
+  createAtntSale(input: $input) {
+    id
+    orderDate
+    state
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    orderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    attTpvStatus
+    Internet
+    Phone
+    streetAddress
+    streetAddressLine2
+    city
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateAtntSaleGQL extends Apollo.Mutation<CreateAtntSaleMutation, CreateAtntSaleMutationVariables> {
+    document = CreateAtntSaleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginUserDocument = gql`
     query LoginUser($email: String!, $password: String!) {
   loginUser(loginUserInput: {email: $email, password: $password}) {
@@ -1770,6 +1829,145 @@ export const CommentsBySaleDocument = gql`
   })
   export class CommentsBySaleGQL extends Apollo.Query<CommentsBySaleQuery, CommentsBySaleQueryVariables> {
     document = CommentsBySaleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindAllSalesByAgentNameAtntDocument = gql`
+    query FindAllSalesByAgentNameATNT($agentName: String!) {
+  findAllSalesByAgentNameATNT(agentName: $agentName) {
+    id
+    orderDate
+    agentName
+    cx_firstName
+    cx_lastName
+    orderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDateFormatted
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    email
+    product
+    packageSold
+    attTpvStatus
+    Internet
+    Phone
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class FindAllSalesByAgentNameAtntGQL extends Apollo.Query<FindAllSalesByAgentNameAtntQuery, FindAllSalesByAgentNameAtntQueryVariables> {
+    document = FindAllSalesByAgentNameAtntDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindSalesWithComplexFilterAtntDocument = gql`
+    query FindSalesWithComplexFilterATNT($filter: AtntSaleFilterInputDto!, $limit: Int!, $offset: Int!, $search: String) {
+  findSalesWithComplexFilterATNT(
+    filter: $filter
+    limit: $limit
+    offset: $offset
+    search: $search
+  ) {
+    sales {
+      id
+      orderDate
+      agentName
+      cx_firstName
+      cx_lastName
+      orderID
+      accountNumber
+      customerType
+      saraPlusAT_TUserID
+      orderNumber
+      installationDateFormatted
+      installationTime
+      installation
+      streetAddress
+      streetAddressLine2
+      city
+      state
+      zipcode
+      phoneNumber
+      phoneNumber_second
+      email
+      product
+      packageSold
+      attTpvStatus
+      Internet
+      Phone
+    }
+    total
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class FindSalesWithComplexFilterAtntGQL extends Apollo.Query<FindSalesWithComplexFilterAtntQuery, FindSalesWithComplexFilterAtntQueryVariables> {
+    document = FindSalesWithComplexFilterAtntDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetAtntSaleByIdDocument = gql`
+    query GetAtntSaleById($id: String!) {
+  getAtntSaleById(id: $id) {
+    id
+    orderDate
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    orderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    streetAddress
+    streetAddressLine2
+    city
+    state
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    email
+    product
+    packageSold
+    attTpvStatus
+    Internet
+    Phone
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetAtntSaleByIdGQL extends Apollo.Query<GetAtntSaleByIdQuery, GetAtntSaleByIdQueryVariables> {
+    document = GetAtntSaleByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

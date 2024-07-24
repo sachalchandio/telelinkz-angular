@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TabStateService } from 'src/app/services/tabState/tab-state.service';
+import { Tab } from 'src/app/services/tabState/tab-types';
+import { Card } from '../../../types/common-types';
 
 @Component({
-  selector: 'app-dashboard-atnt',
+  selector: 'app-homepage',
   templateUrl: './dashboard-atnt.component.html',
-  styleUrl: './dashboard-atnt.component.css',
+  styleUrls: ['./dashboard-atnt.component.css'],
 })
-export class DashboardAtntComponent {
-  tabs: any[] = [];
-  cards: any[] = [
+export class AtntDashboardComponent implements OnInit, OnDestroy {
+  tabs: Tab[] = [];
+  cards: Card[] = [
     {
       title: 'New Sale',
       icon: 'add_shopping_cart',
@@ -18,17 +20,11 @@ export class DashboardAtntComponent {
       label: 'Navigate to New Sale',
     },
     {
-      title: 'atnt Sale Filter',
+      title: 'AT&T Sale Filter',
       icon: 'filter_alt',
       route: 'atnt/filter',
-      label: 'Navigate to atnt Sale Filter',
+      label: 'Navigate to AT&T Sale Filter',
     },
-    // {
-    //   title: 'Sales Journey',
-    //   icon: 'filter_alt',
-    //   route: 'atnt/sales-journey',
-    //   label: 'Navigate to Sales Journey',
-    // },
     {
       title: 'Input New File',
       icon: 'insert_drive_file',
@@ -42,16 +38,16 @@ export class DashboardAtntComponent {
       label: 'Navigate to Agent Review',
     },
     {
-      title: 'atnt Statistics',
+      title: 'AT&T Statistics',
       icon: 'bar_chart',
       route: 'atnt/statistics',
-      label: 'Navigate to atnt Statistics',
+      label: 'Navigate to AT&T Statistics',
     },
     {
-      title: 'atnt Insights',
+      title: 'AT&T Insights',
       icon: 'insights',
       route: 'atnt/insights',
-      label: 'Navigate to atnt Insights',
+      label: 'Navigate to AT&T Insights',
     },
     {
       title: 'Unfinished Leads',
@@ -70,13 +66,13 @@ export class DashboardAtntComponent {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.tabStateService.tabs$.subscribe((tabs) => {
+      this.tabStateService.tabs$['atnt'].subscribe((tabs) => {
         this.tabs = tabs;
       })
     );
 
     this.subscription.add(
-      this.tabStateService.selectedIndex$.subscribe((index) => {
+      this.tabStateService.selectedIndex$['atnt'].subscribe((index) => {
         this.selectedIndex = index;
       })
     );
@@ -89,7 +85,7 @@ export class DashboardAtntComponent {
   }
 
   openTab(card: any): void {
-    this.tabStateService.openTab({
+    this.tabStateService.openTab('atnt', {
       title: card.title,
       route: card.route,
       queryParams: {}, // Add any necessary query params here
@@ -97,7 +93,7 @@ export class DashboardAtntComponent {
   }
 
   selectTab(index: number): void {
-    this.tabStateService.selectTab(index);
+    this.tabStateService.selectTab('atnt', index);
   }
 
   ngOnDestroy(): void {

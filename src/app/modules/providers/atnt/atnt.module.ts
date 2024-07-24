@@ -16,7 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const COMPONETS = [
-  comp.DashboardAtntComponent,
+  comp.AtntDashboardComponent,
   comp.NewSaleAtntComponent,
   comp.RecordSearchAtntComponent,
   comp.SaleJourneyAtntComponent,
