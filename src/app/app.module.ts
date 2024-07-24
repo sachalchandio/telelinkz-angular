@@ -30,6 +30,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SaleEffects } from './store/effects/sale.effects';
 import { appReducers } from './store/app.reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment.myenv';
 
 class GlobalErrorHandler implements ErrorHandler {
   handleError(error: any): void {
@@ -67,6 +69,11 @@ const COMPONENTS = [
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([SaleEffects]),
     SideBarLoginComponent,
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25,
+    //   // logOnly: environment.PRODUCTION,
+    //   trace: true,
+    // }),
   ],
   providers: [
     AuthGuard,

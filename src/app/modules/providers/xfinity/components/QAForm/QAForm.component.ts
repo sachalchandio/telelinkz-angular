@@ -4,7 +4,9 @@ import { Store } from '@ngrx/store';
 import { selectSaleDetails } from 'src/app/store/selectors/sale.selectors';
 import { AuditService } from './services/audtiForm.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CreateAuditFormInput } from 'src/generated/graphqlTypes';
+import { CreateAuditFormInput, UserType } from 'src/generated/graphqlTypes';
+import { UsernameService } from 'src/app/services/loginInfo/username.service';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-audit-form',
@@ -43,6 +45,7 @@ export class AuditFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auditService: AuditService,
+    private userService: UsernameService,
     private store: Store,
     private snackBar: MatSnackBar // Inject MatSnackBar service to show a snack bar message
   ) {}
@@ -51,11 +54,14 @@ export class AuditFormComponent implements OnInit {
   // initialize the audit form with the sale details when available in the store (saleDetails)
   // object from the store using the initForm method
   ngOnInit(): void {
+    // Subscribe to the sale details from the store
     this.store.select(selectSaleDetails).subscribe((details) => {
       console.log('Selected sale details:', details); // Add this line
       if (details) {
         this.saleDetails = details;
         this.initForm();
+        // Assign the auditor based on the user type
+        this.assignAuditor();
       }
     });
   }
@@ -137,6 +143,22 @@ export class AuditFormComponent implements OnInit {
   // and return it as a string value (e.g., '123 Main St, City, State Zipcode')
   getFullAddress(): string {
     return `${this.saleDetails['Street Address']}, ${this.saleDetails['City']}, ${this.saleDetails['State']} ${this.saleDetails['Zipcode']}`;
+  }
+
+  // Add the following method to assign the auditor based on the user type (QA)
+  assignAuditor(): void {
+    let auditorName: string = '';
+    this.userService.username$.subscribe((username) => {
+      auditorName = username;
+    });
+
+    this.userService.getUserType().subscribe((userType) => {
+      if (userType === UserType.Qa) {
+        this.auditForm.get('auditBy')?.setValue(auditorName);
+      } else {
+        this.auditForm.get('auditBy')?.setValue('');
+      }
+    });
   }
 
   // InOrder to update the audit form, we need to add the following method to update the audit form data to the server

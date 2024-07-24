@@ -3,11 +3,13 @@
 
   <div class="form-group">
     <label>Audit by *</label>
-    <select formControlName="auditBy" required>
-      <option *ngFor="let auditor of auditors" [value]="auditor">
-        {{ auditor }}
-      </option>
-    </select>
+    <input
+      type="text"
+      formControlName="auditBy"
+      placeholder="{{ auditor }}"
+      class="readonly-input"
+      readonly
+    />
     <i class="material-icons">person</i>
   </div>
 

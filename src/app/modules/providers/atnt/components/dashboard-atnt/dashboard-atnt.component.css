@@ -1,3 +1,11 @@
+.active {
+  display: flex;
+}
+
+.disabled {
+  display: none;
+}
+
 .dashbord_out_wrap {
   display: flex;
   align-items: center;
@@ -13,6 +21,11 @@
   position: relative;
   margin-top: 70px;
   max-width: 76%;
+  width: 100%;
+}
+.tab-content_placeholder {
+  width: 100%;
+  max-width: 100%;
 }
 .card {
   background-color: #ffffff;
@@ -109,31 +122,45 @@
 
 .tabs {
   display: flex;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.625rem;
 }
 
 .tabs button {
-  margin-right: 5px;
-  padding: 10px 20px;
+  margin-right: 0.3125rem;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  background-color: #f1f1f1;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  outline: none;
-  transition: background-color 0.3s;
+  text-align: center;
+  padding: 0.7375rem 1.875rem;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
 }
 
 .tabs button:hover {
-  background-color: #ddd;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
 }
 
 .tabs button.selected {
-  font-weight: bold;
+  box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
+  font-weight: 600;
+  position: relative;
+  border-bottom: 3px solid #731dc0;
+}
+.ng-star-inserted.selected::before {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  width: 20px;
+  height: 20px;
   background-color: #fff;
-  border-color: #ccc #ccc #fff #ccc;
+  border-bottom: 2px solid #731dc0;
+  transform: rotate(45deg);
+  border-right: 2px solid #731dc0;
 }
 
 .cards {

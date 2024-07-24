@@ -1,0 +1,19 @@
+.central-image {
+  text-align: center;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.central-image img {
+  width: 30%;
+  height: auto;
+}
+
+.infoText {
+  margin-top: 20px;
+  font-size: 15px;
+  max-width: 55%;
+}

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProviderCardsComponent } from './provider-cards.component';
+import { DashboardAtntComponent } from './dashboard-atnt.component';
 
-describe('ProviderCardsComponent', () => {
-  let component: ProviderCardsComponent;
-  let fixture: ComponentFixture<ProviderCardsComponent>;
+describe('DashboardAtntComponent', () => {
+  let component: DashboardAtntComponent;
+  let fixture: ComponentFixture<DashboardAtntComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProviderCardsComponent]
+      imports: [DashboardAtntComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(ProviderCardsComponent);
+
+    fixture = TestBed.createComponent(DashboardAtntComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
