@@ -75,11 +75,11 @@ export class XfinityComponent implements OnInit, OnDestroy {
       })
     );
 
-    // Default to the first tab if no tab is selected
-    if (this.selectedIndex === 0) {
-      // navigate to the first tab
-      this.router.navigate(['xfinity']);
-    }
+    // Update selected index based on current route
+    this.tabStateService.updateSelectedIndexBasedOnRoute(
+      'xfinity',
+      this.router.url
+    );
   }
 
   openTab(card: any): void {

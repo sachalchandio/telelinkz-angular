@@ -83,19 +83,11 @@ export class AtntDashboardComponent implements OnInit, OnDestroy {
       })
     );
 
-    // Default to the first tab if no tab is selected
-    if (this.selectedIndex === 0) {
-      // navigate to the first tab
-      this.router.navigate(['atnt']);
-    }
-
-    this.getCurrentUrl();
-    this.routeSubscription.add(
-      this.router.events
-        .pipe(filter((event) => event instanceof NavigationEnd))
-        .subscribe(() => {
-          this.getCurrentUrl();
-        })
+    // Update selected index based on route on component initialization and
+    // update the current url on route change event
+    this.tabStateService.updateSelectedIndexBasedOnRoute(
+      'atnt',
+      this.router.url
     );
   }
 

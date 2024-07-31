@@ -13,7 +13,7 @@ export class TabStateService {
     xfinity: new BehaviorSubject<Tab[]>([
       { title: 'Xfinity', route: 'xfinity' },
     ]),
-    atnt: new BehaviorSubject<any[]>([{ title: 'AT&T', route: 'atnt' }]),
+    atnt: new BehaviorSubject<Tab[]>([{ title: 'AT&T', route: 'atnt' }]),
   };
 
   // observable that emits the current tabs array whenever it changes (when a new tab is opened or a tab is closed)
@@ -69,6 +69,16 @@ export class TabStateService {
       this.selectTab(module, currentTabs.length);
     } else {
       this.selectTab(module, existingTabIndex);
+    }
+  }
+
+  // close a tab at the specified index and navigate to the tab at the new selected
+  // index if necessary (if the closed tab was the currently selected tab)
+  updateSelectedIndexBasedOnRoute(module: string, route: string): void {
+    const currentTabs = this.tabsSubject[module].value;
+    const index = currentTabs.findIndex((tab) => route.includes(tab.route));
+    if (index !== -1) {
+      this.selectTab(module, index);
     }
   }
 

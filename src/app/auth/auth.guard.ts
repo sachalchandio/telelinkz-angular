@@ -7,7 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { selectUserType } from '../store/selectors/user.selectors';
 import { UsernameService } from '../services/loginInfo/username.service';
@@ -29,20 +29,18 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // const expectedUserType = route.data['expectedUserType'];
-    // return this.userService.getUserType().pipe(
-    //   map((userType) => {
-    //     if (userType) {
-    //       console.log('User Type:', userType);
-    //       return true;
-    //     } else {
-    //       // Redirect to login page
-    //       return this.router.createUrlTree(['/unauthorized'], {
-    //         queryParams: { returnUrl: state.url },
-    //       });
-    //     }
-    //   })
-    // );
-    return true;
+    const expectedUserType = route.data['expectedUserType'];
+
+    return this.userService.getUserType().pipe(
+      map((userType) => {
+        if (userType === expectedUserType) {
+          return true;
+        } else {
+          return this.router.createUrlTree(['/unauthorized'], {
+            queryParams: { returnUrl: state.url },
+          });
+        }
+      })
+    );
   }
 }
