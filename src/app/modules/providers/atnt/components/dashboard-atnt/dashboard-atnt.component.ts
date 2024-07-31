@@ -1,15 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 import { Tab } from 'src/app/services/tabState/tab-types';
 import { Card } from '../../../types/common-types';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './dashboard-atnt.component.html',
   styleUrls: ['./dashboard-atnt.component.css'],
 })
+
+// This is the main component for xfininty all other components are using
+// being routed through router outlet in this component
 export class AtntDashboardComponent implements OnInit, OnDestroy {
   tabs: Tab[] = [];
   cards: Card[] = [
@@ -57,7 +61,9 @@ export class AtntDashboardComponent implements OnInit, OnDestroy {
     },
   ];
   selectedIndex: number = 0;
-  private subscription: Subscription = new Subscription();
+  private tabSubscription: Subscription = new Subscription();
+  private routeSubscription: Subscription = new Subscription();
+  currentUrl: string = '';
 
   constructor(
     private router: Router,
@@ -65,13 +71,13 @@ export class AtntDashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
+    this.tabSubscription.add(
       this.tabStateService.tabs$['atnt'].subscribe((tabs) => {
         this.tabs = tabs;
       })
     );
 
-    this.subscription.add(
+    this.tabSubscription.add(
       this.tabStateService.selectedIndex$['atnt'].subscribe((index) => {
         this.selectedIndex = index;
       })
@@ -82,6 +88,15 @@ export class AtntDashboardComponent implements OnInit, OnDestroy {
       // navigate to the first tab
       this.router.navigate(['atnt']);
     }
+
+    this.getCurrentUrl();
+    this.routeSubscription.add(
+      this.router.events
+        .pipe(filter((event) => event instanceof NavigationEnd))
+        .subscribe(() => {
+          this.getCurrentUrl();
+        })
+    );
   }
 
   openTab(card: any): void {
@@ -96,7 +111,16 @@ export class AtntDashboardComponent implements OnInit, OnDestroy {
     this.tabStateService.selectTab('atnt', index);
   }
 
+  getCurrentUrl(): void {
+    this.currentUrl = this.router.url;
+    // it return something like -> /atnt/new-sale capitalize this
+    // this.currentUrl = this.currentUrl.split('/')[1];
+    this.currentUrl = this.currentUrl.toUpperCase().slice(1);
+    console.log(this.currentUrl);
+  }
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.tabSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 }
