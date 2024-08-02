@@ -4,7 +4,7 @@ import { AppLayoutComponent } from './components/shared';
 import { AuthGuard } from './auth/auth.guard';
 import { TabGuard } from './guards/tab.guard';
 import { UserType } from 'src/generated/graphqlTypes';
-import { TabResolver } from './navigation/tabResolver';
+import { TabResolver } from './navigation/tabResolver.service';
 
 const routes: Routes = [
   {

@@ -7,8 +7,6 @@ import { Tab } from './tab-types';
   providedIn: 'root',
 })
 export class TabStateService {
-  // private subject to store the tabs array in the service
-  // and emit the new tabs array whenever it changes (when a new tab is opened or a tab is closed)
   private tabsSubject: { [key: string]: BehaviorSubject<Tab[]> } = {
     xfinity: new BehaviorSubject<Tab[]>([
       { title: 'Xfinity', route: 'xfinity' },
@@ -16,13 +14,11 @@ export class TabStateService {
     atnt: new BehaviorSubject<Tab[]>([{ title: 'AT&T', route: 'atnt' }]),
   };
 
-  // observable that emits the current tabs array whenever it changes (when a new tab is opened or a tab is closed)
   tabs$: { [key: string]: Observable<Tab[]> } = {
     xfinity: this.tabsSubject['xfinity'].asObservable(),
     atnt: this.tabsSubject['atnt'].asObservable(),
   };
 
-  // observable that emits the index of the currently selected tab whenever it changes
   private selectedIndexSubject: { [key: string]: BehaviorSubject<number> } = {
     xfinity: new BehaviorSubject<number>(0),
     atnt: new BehaviorSubject<number>(0),
@@ -32,7 +28,6 @@ export class TabStateService {
     atnt: this.selectedIndexSubject['atnt'].asObservable(),
   };
 
-  // private state object to store the state of each tab
   private state: { [key: string]: { [key: string]: any } } = {
     xfinity: {},
     atnt: {},
@@ -40,22 +35,18 @@ export class TabStateService {
 
   constructor(private router: Router) {}
 
-  // set the state of a tab
   setState(module: string, tab: string, state: any): void {
     this.state[module][tab] = state;
   }
 
-  // get the state of a tab
   getState(module: string, tab: string): any {
     return this.state[module][tab];
   }
 
-  // check if a tab has state stored in the service or not
   hasState(module: string, tab: string): boolean {
     return this.state[module].hasOwnProperty(tab);
   }
 
-  // open a tab
   openTab(module: string, tab: any): void {
     const currentTabs = this.tabsSubject[module].value;
     const existingTabIndex = currentTabs.findIndex(
@@ -72,25 +63,23 @@ export class TabStateService {
     }
   }
 
-  // close a tab at the specified index and navigate to the tab at the new selected
-  // index if necessary (if the closed tab was the currently selected tab)
   updateSelectedIndexBasedOnRoute(module: string, route: string): void {
     const currentTabs = this.tabsSubject[module].value;
     const index = currentTabs.findIndex((tab) => route.includes(tab.route));
-    if (index !== -1) {
+    if (index !== -1 && this.selectedIndexSubject[module].value !== index) {
       this.selectTab(module, index);
     }
   }
 
-  // remove the tab at the specified index from the tabs array and navigate to the
-  // tab at the new selected index if necessary (if the closed tab was the currently selected tab)
   selectTab(module: string, index: number): void {
-    this.selectedIndexSubject[module].next(index);
-    const currentTabs = this.tabsSubject[module].value;
-    if (index >= 0 && index < currentTabs.length) {
-      this.router.navigate([currentTabs[index].route], {
-        queryParams: currentTabs[index].queryParams,
-      });
+    if (this.selectedIndexSubject[module].value !== index) {
+      this.selectedIndexSubject[module].next(index);
+      const currentTabs = this.tabsSubject[module].value;
+      if (index >= 0 && index < currentTabs.length) {
+        this.router.navigate([currentTabs[index].route], {
+          queryParams: currentTabs[index].queryParams,
+        });
+      }
     }
   }
 }

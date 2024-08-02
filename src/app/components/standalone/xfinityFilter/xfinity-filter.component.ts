@@ -21,6 +21,7 @@ import {
   UserType,
   SaleFlag,
   SaleType,
+  XfinitySale,
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
@@ -28,6 +29,11 @@ import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
 export interface TableData {
   [key: string]: string | number;
 }
+
+type XfinitySaleFormDto = Omit<
+  XfinitySaleDto,
+  '__typename' | 'installationDateFormatted'
+>;
 
 @Component({
   standalone: true,
