@@ -147,7 +147,7 @@ query FindAllSalesByAgentNameATNT($agentName: String!) {
     agentName
     cx_firstName
     cx_lastName
-    orderID
+    concertOrderID
     accountNumber
     customerType
     saraPlusAT_TUserID
@@ -189,7 +189,7 @@ query FindSalesWithComplexFilterATNT(
       agentName
       cx_firstName
       cx_lastName
-      orderID
+      concertOrderID
       accountNumber
       customerType
       saraPlusAT_TUserID
@@ -224,7 +224,7 @@ query GetAtntSaleById($id: String!) {
     }
     cx_firstName
     cx_lastName
-    orderID
+    concertOrderID
     accountNumber
     customerType
     saraPlusAT_TUserID

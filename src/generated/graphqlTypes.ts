@@ -57,6 +57,7 @@ export enum AtntInternet {
   AtntFiber_1000 = 'ATNT_FIBER_1000',
   AtntFiber_2000 = 'ATNT_FIBER_2000',
   AtntFiber_5000 = 'ATNT_FIBER_5000',
+  AtntUndetermined = 'ATNT_UNDETERMINED',
   None = 'NONE'
 }
 
@@ -83,6 +84,8 @@ export type AtntSale = {
   /** City of the installation address */
   city: Scalars['String']['output'];
   comments?: Maybe<Array<Comment>>;
+  /** concertOrderID */
+  concertOrderID: Scalars['String']['output'];
   /** Created at Date */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** AT&T Customer Type */
@@ -103,8 +106,6 @@ export type AtntSale = {
   installationTime: Scalars['String']['output'];
   /** The date and time when the customer called and purchased services */
   orderDate: Scalars['DateTime']['output'];
-  /** orderID */
-  orderID: Scalars['String']['output'];
   /** The unique order number associated with the sale */
   orderNumber: Scalars['String']['output'];
   /** Package sold with the sale */
@@ -141,6 +142,7 @@ export type AtntSaleDto = {
   agentName: Scalars['String']['output'];
   attTpvStatus: TpvStatus;
   city: Scalars['String']['output'];
+  concertOrderID: Scalars['String']['output'];
   concertOrderId: Scalars['String']['output'];
   customerType: AtntCustomerType;
   cx_firstName: Scalars['String']['output'];
@@ -151,7 +153,6 @@ export type AtntSaleDto = {
   installationDateFormatted: Scalars['String']['output'];
   installationTime: Scalars['String']['output'];
   orderDate: Scalars['DateTime']['output'];
-  orderID: Scalars['String']['output'];
   orderNumber: Scalars['String']['output'];
   packageSold: Scalars['String']['output'];
   phoneNumber: Scalars['String']['output'];
@@ -259,9 +260,10 @@ export type CreateAtntSaleInput = {
   Internet: AtntInternet;
   Phone: AtntPhone;
   accountNumber: Scalars['String']['input'];
-  agentId: Scalars['String']['input'];
+  agentName: Scalars['String']['input'];
   attTpvStatus: TpvStatus;
   city: Scalars['String']['input'];
+  concertOrderId: Scalars['String']['input'];
   customerType: AtntCustomerType;
   cx_firstName: Scalars['String']['input'];
   cx_lastName: Scalars['String']['input'];
@@ -270,13 +272,13 @@ export type CreateAtntSaleInput = {
   installationDateFormatted: Scalars['String']['input'];
   installationTime: Scalars['String']['input'];
   orderDate: Scalars['String']['input'];
-  orderID: Scalars['String']['input'];
   orderNumber: Scalars['String']['input'];
   packageSold: Scalars['String']['input'];
   phoneNumber: Scalars['String']['input'];
   phoneNumber_second?: InputMaybe<Scalars['String']['input']>;
   product: Scalars['String']['input'];
   saraPlusAT_TUserID: SaraPlusAt_TUserId;
+  socialSecurityNumber: Scalars['String']['input'];
   state: UsState;
   streetAddress: Scalars['String']['input'];
   streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
@@ -1155,7 +1157,7 @@ export type CreateAtntSaleMutationVariables = Exact<{
 }>;
 
 
-export type CreateAtntSaleMutation = { __typename?: 'Mutation', createAtntSale: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
+export type CreateAtntSaleMutation = { __typename?: 'Mutation', createAtntSale: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
 
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1222,7 +1224,7 @@ export type FindAllSalesByAgentNameAtntQueryVariables = Exact<{
 }>;
 
 
-export type FindAllSalesByAgentNameAtntQuery = { __typename?: 'Query', findAllSalesByAgentNameATNT: Array<{ __typename?: 'AtntSaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: AtntCustomerType, saraPlusAT_TUserID: SaraPlusAt_TUserId, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: InstallationType, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: TpvStatus, Internet: AtntInternet, Phone: AtntPhone }> };
+export type FindAllSalesByAgentNameAtntQuery = { __typename?: 'Query', findAllSalesByAgentNameATNT: Array<{ __typename?: 'AtntSaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: AtntCustomerType, saraPlusAT_TUserID: SaraPlusAt_TUserId, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: InstallationType, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: TpvStatus, Internet: AtntInternet, Phone: AtntPhone }> };
 
 export type FindSalesWithComplexFilterAtntQueryVariables = Exact<{
   filter: AtntSaleFilterInputDto;
@@ -1232,14 +1234,14 @@ export type FindSalesWithComplexFilterAtntQueryVariables = Exact<{
 }>;
 
 
-export type FindSalesWithComplexFilterAtntQuery = { __typename?: 'Query', findSalesWithComplexFilterATNT: { __typename?: 'ATNTPaginatedSales', total: number, sales: Array<{ __typename?: 'AtntSaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: AtntCustomerType, saraPlusAT_TUserID: SaraPlusAt_TUserId, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: InstallationType, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: TpvStatus, Internet: AtntInternet, Phone: AtntPhone }> } };
+export type FindSalesWithComplexFilterAtntQuery = { __typename?: 'Query', findSalesWithComplexFilterATNT: { __typename?: 'ATNTPaginatedSales', total: number, sales: Array<{ __typename?: 'AtntSaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: AtntCustomerType, saraPlusAT_TUserID: SaraPlusAt_TUserId, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: InstallationType, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: TpvStatus, Internet: AtntInternet, Phone: AtntPhone }> } };
 
 export type GetAtntSaleByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type GetAtntSaleByIdQuery = { __typename?: 'Query', getAtntSaleById: { __typename?: 'AtntSale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: string, Internet: string, Phone: string, agent: { __typename?: 'User', id: string } } };
+export type GetAtntSaleByIdQuery = { __typename?: 'Query', getAtntSaleById: { __typename?: 'AtntSale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: string, Internet: string, Phone: string, agent: { __typename?: 'User', id: string } } };
 
 export const CreateXfinitySaleDocument = gql`
     mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
@@ -1566,7 +1568,7 @@ export const CreateAtntSaleDocument = gql`
     }
     cx_firstName
     cx_lastName
-    orderID
+    concertOrderID
     accountNumber
     customerType
     saraPlusAT_TUserID
@@ -1842,7 +1844,7 @@ export const FindAllSalesByAgentNameAtntDocument = gql`
     agentName
     cx_firstName
     cx_lastName
-    orderID
+    concertOrderID
     accountNumber
     customerType
     saraPlusAT_TUserID
@@ -1891,7 +1893,7 @@ export const FindSalesWithComplexFilterAtntDocument = gql`
       agentName
       cx_firstName
       cx_lastName
-      orderID
+      concertOrderID
       accountNumber
       customerType
       saraPlusAT_TUserID
@@ -1938,7 +1940,7 @@ export const GetAtntSaleByIdDocument = gql`
     }
     cx_firstName
     cx_lastName
-    orderID
+    concertOrderID
     accountNumber
     customerType
     saraPlusAT_TUserID

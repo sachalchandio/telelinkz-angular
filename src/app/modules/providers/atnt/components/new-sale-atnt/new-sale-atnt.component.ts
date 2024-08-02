@@ -6,6 +6,7 @@ import {
   AtntPhone,
   AtntSaleDto,
   CreateAtntSaleDocument,
+  CreateAtntSaleInput,
   CreateAtntSaleMutation,
   CreateAtntSaleMutationVariables,
   GetAllAgentsGQL,
@@ -24,11 +25,12 @@ import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 export class NewSaleAtntComponent implements OnInit, OnDestroy {
   agentNames: string[] = [];
 
-  atntSaleInput: AtntSaleDto = {
+  atntSaleInput: CreateAtntSaleInput = {
     cx_firstName: '',
     cx_lastName: '',
     orderNumber: '',
     concertOrderId: '',
+    accountNumber: '',
     installationDateFormatted: '',
     installationTime: '',
     orderDate: '',
@@ -44,14 +46,11 @@ export class NewSaleAtntComponent implements OnInit, OnDestroy {
     Internet: AtntInternet.None,
     Phone: AtntPhone.None,
     attTpvStatus: TpvStatus.Incomplete,
-    orderID: '',
     customerType: AtntCustomerType.UnknownRisk,
-    accountNumber: '',
-    agentName: '',
-    id: '',
-    packageSold: '',
-    product: '',
+    packageSold: 'NA',
+    product: 'NA',
     saraPlusAT_TUserID: SaraPlusAt_TUserId.None,
+    agentName: '',
   };
 
   installationTypes = Object.values(InstallationType);
@@ -95,7 +94,7 @@ export class NewSaleAtntComponent implements OnInit, OnDestroy {
     const variables: CreateAtntSaleMutationVariables = {
       input: {
         ...this.atntSaleInput,
-        agentId: localStorage.getItem('agent') || '',
+        agentName: localStorage.getItem('agent') || '',
       },
     };
 
