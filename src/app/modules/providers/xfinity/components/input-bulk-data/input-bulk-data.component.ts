@@ -40,7 +40,7 @@ export class InputBulkDataComponent {
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
-      // Convert sheet to json, assuming the first row is headers
+      // Convert sheet to JSON, assuming the first row is headers
       const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
       if (data.length > 0) {
         const headers = data[0] as string[]; // Cast first row as string[] for headers
@@ -61,9 +61,12 @@ export class InputBulkDataComponent {
   }
 
   async sendRowsToBackend(jsonData: any[]): Promise<void> {
+    console.log(' This is JSON Data ', jsonData);
     for (const row of jsonData) {
+      console.log('this is row', row);
       try {
         const input = this.transformRowToInput(row); // Make sure this returns the correct input structure
+        console.log('this is input', input);
         const result = await this.createXfinitySaleGQL
           .mutate(input)
           .toPromise();
@@ -82,69 +85,120 @@ export class InputBulkDataComponent {
   }
 
   private transformRowToInput(row: any): CreateXfinitySaleMutationVariables {
-    const dateParts = row['Installation Date'].split(' ');
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    const monthIndex = months.indexOf(dateParts[0]) + 1;
-    const day = dateParts[1].replace(',', '');
-    const year = dateParts[2];
-    const formattedDate = `${year}-${monthIndex
-      .toString()
-      .padStart(2, '0')}-${day.padStart(2, '0')}`;
-
-    let [time, modifier] = row['Installation Time'].split(' ');
-    let [hours, minutes] = time.split(':');
-    if (modifier === 'PM' && hours !== '12') {
-      hours = (parseInt(hours, 10) + 12).toString();
-    } else if (modifier === 'AM' && hours === '12') {
-      hours = '00';
-    }
-    const formattedTime = `${hours}:${minutes}:00`;
+    const formattedDate = this.formatDate(row['installationDate']);
+    const formattedTime = this.formatTime(row['installationTime']);
 
     const input: CreateXfinitySaleInput = {
-      orderDate: row['Submission Date'] || null,
-      agentId: row['Agent Name'] || null,
-      cx_firstName: row['First Name'] || null,
-      cx_lastName: row['Last Name'] || null,
-      orderNumber: row['Order Number'] || null,
+      orderDate: this.formatDate(row['orderDate']),
+      agentId: row['agentId'] || null,
+      cx_firstName: row['cx_firstName'] || null,
+      cx_lastName: row['cx_lastName'] || null,
+      orderNumber: row['orderNumber'] || null,
       installationDate: formattedDate || '1971-01-01',
       installationTime: formattedTime || '00:00:00',
       installation:
-        row['Installation'] === 'Self Install'
+        row['installation'] === 'SELF_INSTALLATION'
           ? InstallationType.SelfInstallation
           : InstallationType.ProInstallation,
-      streetAddress: row['Street Address'] || null,
-      streetAddressLine2: row['Street Address Line 2'] || null,
-      city: row['City'] || null,
-      state: row['State / Province'] || UsState.Undetermined,
-      zipcode: row['Postal / Zip Code'] || null,
-      phoneNumber: row['Phone Number'] || null,
-      phoneNumber_second: '',
-      socialSecurityNumber: row['Social Security Number'] || null,
-      email: row['Email'] || null,
-      product: row['Product'] || null,
-      packageSold: row['Package Sold'] || null,
-      comcastTpvStatus:
-        row['Comcast TPV Status'].toUpperCase() || TpvStatus.Pending,
-      concertOrderID: row['Concert Order ID'] || null,
-      Internet: row['Internet'] || XfinityInternet.None,
-      TV: row['TV'] || XfinityTv.None,
-      Phone: row['Phone'] || XfinityHomePhone.None,
-      HMS: row['HMS'] || XfinityHomeSecurity.None,
+      streetAddress: row['streetAddress'] || null,
+      streetAddressLine2: row['streetAddressLine2'] || null,
+      city: row['city'] || null,
+      state: this.isEnumValue(UsState, row['state'])
+        ? row['state']
+        : UsState.Undetermined,
+      zipcode: row['zipcode'] || null,
+      phoneNumber: row['phoneNumber'] || null,
+      phoneNumber_second: row['phoneNumber_second'] || '',
+      socialSecurityNumber: row['socialSecurityNumber'] || null,
+      email: row['email'] || null,
+      product: row['product'] || null,
+      packageSold: row['packageSold'] || null,
+      comcastTpvStatus: this.isEnumValue(
+        TpvStatus,
+        row['comcastTpvStatus'].toUpperCase()
+      )
+        ? row['comcastTpvStatus'].toUpperCase()
+        : TpvStatus.Pending,
+      concertOrderID: row['concertOrderID'] || null,
+      Internet: this.isEnumValue(XfinityInternet, row['Internet'])
+        ? row['Internet']
+        : XfinityInternet.None,
+      TV: this.isEnumValue(XfinityTv, row['TV']) ? row['TV'] : XfinityTv.None,
+      Phone: this.isEnumValue(XfinityHomePhone, row['Phone'])
+        ? row['Phone']
+        : XfinityHomePhone.None,
+      HMS: this.isEnumValue(XfinityHomeSecurity, row['HMS'])
+        ? row['HMS']
+        : XfinityHomeSecurity.None,
     };
 
     return { input };
+  }
+
+  private formatDate(date: any): string {
+    if (typeof date === 'string') {
+      const parts = date.split(' ');
+      const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+      const monthIndex = months.indexOf(parts[0]) + 1;
+      const day = parts[1].replace(',', '');
+      const year = parts[2];
+      return `${year}-${String(monthIndex).padStart(2, '0')}-${String(
+        day
+      ).padStart(2, '0')}`;
+    } else if (typeof date === 'number') {
+      // Assuming date is an Excel serial number
+      const excelDate = new Date(Math.round((date - 25569) * 86400 * 1000));
+      const year = excelDate.getFullYear();
+      const month = (excelDate.getMonth() + 1).toString().padStart(2, '0');
+      const day = excelDate.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    } else {
+      return ''; // Handle other cases if necessary
+    }
+  }
+
+  private formatTime(time: any): string {
+    if (typeof time === 'string') {
+      let [hour, minute] = time.split(':').map(Number); // Convert both hour and minute to numbers
+      let modifier = 'AM';
+
+      if (hour >= 12) {
+        modifier = 'PM';
+        if (hour > 12) {
+          hour = hour - 12;
+        }
+      }
+
+      if (hour === 0) {
+        hour = 12;
+      }
+
+      return `${hour}:${minute.toString().padStart(2, '0')} ${modifier}`;
+    } else if (typeof time === 'number') {
+      // Assuming time is a decimal representing a fraction of the day
+      const totalMinutes = Math.round(time * 1440);
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const hourFormatted = hours % 12 === 0 ? 12 : hours % 12;
+      const modifier = hours >= 12 ? 'PM' : 'AM';
+      return `${hourFormatted}:${minutes
+        .toString()
+        .padStart(2, '0')} ${modifier}`;
+    } else {
+      return ''; // Handle other cases if necessary
+    }
   }
 }
