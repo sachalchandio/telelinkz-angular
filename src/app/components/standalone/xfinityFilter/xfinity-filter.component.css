@@ -52,35 +52,39 @@
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
-.form-group input:focus-visible,
+.form-group select{
+  cursor: pointer;
+}
+/* .form-group input:focus-visible,
 .form-group select:focus-visible{
   border-color: #fff;
-  background-color: #ffac0b;
+  background-color: #ececec;
   outline: none;
   color: #ffffff;
 }
 .form-group input:focus-visible + i,
 .form-group select:focus-visible + i{
   color: #fff;
-} 
+}  */
 
 .form-group select {
   width: 96%;
 }
 
-button[type="submit"] {
+button {
   padding: 10px 20px;
-  /* background-color: #007bff; */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 21px;
-  margin-left: auto;
-  background-color: #0e72fe;
+  background: linear-gradient(90deg, #271368 22%, #6b1bde 47%, #760095 100%);
+  width: 150px;
+  min-height: 42px;
+  font-size: 19px;
 }
 
-button[type="submit"]:hover {
+button:hover {
   background-color: #0056b3;
   height: auto;
 }
@@ -98,12 +102,12 @@ button[type="submit"]:hover {
   height: 16px;
   background: #b5b5b5;
 }
-.form-group input:focus-visible ~ i {
+/* .form-group input:focus-visible ~ i {
   color: #fff;
 }
 .form-group:focus-visible ~ i {
   color: #fff;
-}
+} */
 .dashboard_inner_header{
   min-height: 115px;
   background-position: center;
