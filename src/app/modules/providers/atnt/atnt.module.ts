@@ -20,6 +20,7 @@ const COMPONETS = [
   comp.NewSaleAtntComponent,
   comp.RecordSearchAtntComponent,
   comp.SaleJourneyAtntComponent,
+  comp.InputBulkDataComponent,
 ];
 
 @NgModule({
