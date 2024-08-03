@@ -50,7 +50,7 @@ export class NewSaleAtntComponent implements OnInit, OnDestroy {
     packageSold: 'NA',
     product: 'NA',
     saraPlusAT_TUserID: SaraPlusAt_TUserId.None,
-    agentName: '',
+    agentName: localStorage.getItem('agent')!,
   };
 
   installationTypes = Object.values(InstallationType);

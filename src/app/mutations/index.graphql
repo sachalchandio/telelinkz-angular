@@ -23,7 +23,7 @@ mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
     product
     packageSold
     comcastTpvStatus
-    concertOrderId
+    concertOrderID
     Internet
     TV
     Phone

@@ -202,7 +202,7 @@ export class XfinityFilter implements OnInit {
                 Product: sale.product,
                 'Package Sold': sale.packageSold,
                 'Comcast TPV Status': sale.comcastTpvStatus,
-                'Concert Order ID': sale.concertOrderId,
+                'Concert Order ID': sale.concertOrderID,
                 Internet: sale.Internet,
                 TV: sale.TV,
                 Phone: sale.Phone,

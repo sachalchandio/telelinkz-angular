@@ -143,7 +143,6 @@ export type AtntSaleDto = {
   attTpvStatus: TpvStatus;
   city: Scalars['String']['output'];
   concertOrderID: Scalars['String']['output'];
-  concertOrderId: Scalars['String']['output'];
   customerType: AtntCustomerType;
   cx_firstName: Scalars['String']['output'];
   cx_lastName: Scalars['String']['output'];
@@ -337,7 +336,7 @@ export type CreateXfinitySaleInput = {
   agentId: Scalars['String']['input'];
   city: Scalars['String']['input'];
   comcastTpvStatus: TpvStatus;
-  concertOrderId: Scalars['String']['input'];
+  concertOrderID: Scalars['String']['input'];
   cx_firstName: Scalars['String']['input'];
   cx_lastName: Scalars['String']['input'];
   email: Scalars['String']['input'];
@@ -959,7 +958,7 @@ export type XfinitySale = {
   comcastTpvStatus: Scalars['String']['output'];
   comments?: Maybe<Array<Comment>>;
   /** The unique concert order ID associated with the sale */
-  concertOrderId: Scalars['String']['output'];
+  concertOrderID: Scalars['String']['output'];
   /** Created at Date */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** The customer's first name */
@@ -1013,7 +1012,7 @@ export type XfinitySaleDto = {
   agentName: Scalars['String']['output'];
   city: Scalars['String']['output'];
   comcastTpvStatus: TpvStatus;
-  concertOrderId: Scalars['String']['output'];
+  concertOrderID: Scalars['String']['output'];
   cx_firstName: Scalars['String']['output'];
   cx_lastName: Scalars['String']['output'];
   email: Scalars['String']['output'];
@@ -1042,7 +1041,7 @@ export type XfinitySaleFilterInputDto = {
   agentName?: InputMaybe<Scalars['String']['input']>;
   city?: InputMaybe<Scalars['String']['input']>;
   comcastTpvStatus?: InputMaybe<TpvStatus>;
-  concertOrderId?: InputMaybe<Scalars['String']['input']>;
+  concertOrderID?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['String']['input']>;
   cx_firstName?: InputMaybe<Scalars['String']['input']>;
   cx_lastName?: InputMaybe<Scalars['String']['input']>;
@@ -1080,7 +1079,7 @@ export type CreateXfinitySaleMutationVariables = Exact<{
 }>;
 
 
-export type CreateXfinitySaleMutation = { __typename?: 'Mutation', createXfinitySale: { __typename?: 'XfinitySale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: string, concertOrderId: string, Internet: string, TV: string, Phone: string, HMS: string, agent: { __typename?: 'User', id: string } } };
+export type CreateXfinitySaleMutation = { __typename?: 'Mutation', createXfinitySale: { __typename?: 'XfinitySale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: string, concertOrderID: string, Internet: string, TV: string, Phone: string, HMS: string, agent: { __typename?: 'User', id: string } } };
 
 export type RegisterUserMutationVariables = Exact<{
   input: RegisterUserInput;
@@ -1192,7 +1191,7 @@ export type FindAllSalesByAgentNameXfinityQueryVariables = Exact<{
 }>;
 
 
-export type FindAllSalesByAgentNameXfinityQuery = { __typename?: 'Query', findAllSalesByAgentNameXfinity: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> };
+export type FindAllSalesByAgentNameXfinityQuery = { __typename?: 'Query', findAllSalesByAgentNameXfinity: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderID: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> };
 
 export type GetSaleHistoryQueryVariables = Exact<{
   saleId: Scalars['String']['input'];
@@ -1209,7 +1208,7 @@ export type FindSalesWithComplexFilterXfinityQueryVariables = Exact<{
 }>;
 
 
-export type FindSalesWithComplexFilterXfinityQuery = { __typename?: 'Query', findSalesWithComplexFilterXfinity: { __typename?: 'XfinityPaginatedSales', total: number, sales: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderId: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> } };
+export type FindSalesWithComplexFilterXfinityQuery = { __typename?: 'Query', findSalesWithComplexFilterXfinity: { __typename?: 'XfinityPaginatedSales', total: number, sales: Array<{ __typename?: 'XfinitySaleDTO', id: string, orderDate: any, agentName: string, cx_firstName: string, cx_lastName: string, orderNumber: string, installationDateFormatted: string, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: UsState, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, comcastTpvStatus: TpvStatus, concertOrderID: string, Internet: XfinityInternet, TV: XfinityTv, Phone: XfinityHomePhone, HMS: XfinityHomeSecurity }> } };
 
 export type CommentsBySaleQueryVariables = Exact<{
   saleId: Scalars['ID']['input'];
@@ -1269,7 +1268,7 @@ export const CreateXfinitySaleDocument = gql`
     product
     packageSold
     comcastTpvStatus
-    concertOrderId
+    concertOrderID
     Internet
     TV
     Phone
@@ -1707,7 +1706,7 @@ export const FindAllSalesByAgentNameXfinityDocument = gql`
     product
     packageSold
     comcastTpvStatus
-    concertOrderId
+    concertOrderID
     Internet
     TV
     Phone
@@ -1780,7 +1779,7 @@ export const FindSalesWithComplexFilterXfinityDocument = gql`
       product
       packageSold
       comcastTpvStatus
-      concertOrderId
+      concertOrderID
       Internet
       TV
       Phone
