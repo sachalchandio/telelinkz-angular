@@ -10,11 +10,42 @@ import {
   XfinityHomePhone,
   XfinityHomeSecurity,
   XfinityInternet,
+  XfinitySaleDto,
+  XfinitySaleFilterInputDto,
   XfinityTv,
 } from 'src/generated/graphqlTypes';
 
 interface TableData {
   [key: string]: string | number;
+}
+
+interface ExcelRowXfinitySale {
+  'Submission Date': string;
+  'Agent Name': string;
+  'First Name': string;
+  'Last Name': string;
+  'Concert Order ID': string;
+  'Order Number': string;
+  'Order Date': string;
+  'Installation Time': string;
+  'Installation Date': string;
+  Installation: string;
+  'Street Address': string;
+  City: string;
+  'State / Province': string;
+  'Postal / Zip Code': string;
+  'Phone Number': string;
+  'Social Security Number': string | null;
+  Email: string;
+  Internet: string;
+  TV: string;
+  Phone: string;
+  HMS: string;
+  'Package Sold': string;
+  'Comcast TPV Status': string;
+  'Sale Status': string;
+  Product: string;
+  'Street Address Line 2': string;
 }
 
 @Component({
@@ -28,6 +59,13 @@ export class InputBulkDataComponent {
   displayedColumns: string[] = [];
 
   constructor(private createXfinitySaleGQL: CreateXfinitySaleGQL) {}
+
+  private isEnumValue<T extends Record<string, unknown>>(
+    enumType: T,
+    value: any
+  ): value is T[keyof T] {
+    return Object.values(enumType).includes(value);
+  }
 
   onFileChange(event: any) {
     const target: DataTransfer = <DataTransfer>event.target;
@@ -77,49 +115,41 @@ export class InputBulkDataComponent {
     }
   }
 
-  private isEnumValue<T extends Record<string, unknown>>(
-    enumType: T,
-    value: any
-  ): value is T[keyof T] {
-    return Object.values(enumType).includes(value);
-  }
+  private transformRowToInput(
+    row: ExcelRowXfinitySale
+  ): CreateXfinitySaleMutationVariables {
+    console.log('this is row before transformation', row);
 
-  private transformRowToInput(row: any): CreateXfinitySaleMutationVariables {
-    const formattedDate = this.formatDate(row['installationDate']);
-    const formattedTime = this.formatTime(row['installationTime']);
-
+    const formattedTime = this.formatTime(row['Installation Time']);
     const input: CreateXfinitySaleInput = {
-      orderDate: this.formatDate(row['orderDate']),
-      agentId: row['agentId'] || null,
-      cx_firstName: row['cx_firstName'] || null,
-      cx_lastName: row['cx_lastName'] || null,
-      orderNumber: row['orderNumber'] || null,
-      installationDate: formattedDate || '1971-01-01',
+      orderDate: row['Order Date'],
+      agentId: row['Agent Name'],
+      cx_firstName: row['First Name'],
+      cx_lastName: row['Last Name'],
+      orderNumber: row['Order Number'],
+      installationDate: row['Installation Date'] || '1971-01-01',
       installationTime: formattedTime || '00:00:00',
       installation:
-        row['installation'] === 'SELF_INSTALLATION'
+        row['Installation'] === 'SELF_INSTALLATION'
           ? InstallationType.SelfInstallation
           : InstallationType.ProInstallation,
-      streetAddress: row['streetAddress'] || null,
-      streetAddressLine2: row['streetAddressLine2'] || null,
-      city: row['city'] || null,
-      state: this.isEnumValue(UsState, row['state'])
-        ? row['state']
+      streetAddress: row['Street Address'],
+      streetAddressLine2: row['Street Address Line 2'] || null,
+      city: row['City'],
+      state: this.isEnumValue(UsState, row['State / Province'])
+        ? row['State / Province']
         : UsState.Undetermined,
-      zipcode: row['zipcode'] || null,
-      phoneNumber: row['phoneNumber'] || null,
-      phoneNumber_second: row['phoneNumber_second'] || '',
-      socialSecurityNumber: row['socialSecurityNumber'] || null,
-      email: row['email'] || null,
-      product: row['product'] || null,
-      packageSold: row['packageSold'] || null,
-      comcastTpvStatus: this.isEnumValue(
-        TpvStatus,
-        row['comcastTpvStatus'].toUpperCase()
-      )
-        ? row['comcastTpvStatus'].toUpperCase()
+      zipcode: row['Postal / Zip Code'],
+      phoneNumber: row['Phone Number'],
+      phoneNumber_second: '',
+      socialSecurityNumber: row['Social Security Number'] || null,
+      email: row['Email'],
+      product: row['Product'],
+      packageSold: row['Package Sold'],
+      comcastTpvStatus: this.isEnumValue(TpvStatus, row['Comcast TPV Status'])
+        ? row['Comcast TPV Status']
         : TpvStatus.Pending,
-      concertOrderID: row['concertOrderID'] || null,
+      concertOrderID: row['Comcast TPV Status'],
       Internet: this.isEnumValue(XfinityInternet, row['Internet'])
         ? row['Internet']
         : XfinityInternet.None,
@@ -132,43 +162,44 @@ export class InputBulkDataComponent {
         : XfinityHomeSecurity.None,
     };
 
+    console.log('this is row after transformation', input);
     return { input };
   }
 
-  private formatDate(date: any): string {
-    if (typeof date === 'string') {
-      const parts = date.split(' ');
-      const months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      const monthIndex = months.indexOf(parts[0]) + 1;
-      const day = parts[1].replace(',', '');
-      const year = parts[2];
-      return `${year}-${String(monthIndex).padStart(2, '0')}-${String(
-        day
-      ).padStart(2, '0')}`;
-    } else if (typeof date === 'number') {
-      // Assuming date is an Excel serial number
-      const excelDate = new Date(Math.round((date - 25569) * 86400 * 1000));
-      const year = excelDate.getFullYear();
-      const month = (excelDate.getMonth() + 1).toString().padStart(2, '0');
-      const day = excelDate.getDate().toString().padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    } else {
-      return ''; // Handle other cases if necessary
-    }
-  }
+  // private formatDate(date: any): string {
+  //   if (typeof date === 'string') {
+  //     const parts = date.split(' ');
+  //     const months = [
+  //       'Jan',
+  //       'Feb',
+  //       'Mar',
+  //       'Apr',
+  //       'May',
+  //       'Jun',
+  //       'Jul',
+  //       'Aug',
+  //       'Sep',
+  //       'Oct',
+  //       'Nov',
+  //       'Dec',
+  //     ];
+  //     const monthIndex = months.indexOf(parts[0]) + 1;
+  //     const day = parts[1].replace(',', '');
+  //     const year = parts[2];
+  //     return `${year}-${String(monthIndex).padStart(2, '0')}-${String(
+  //       day
+  //     ).padStart(2, '0')}`;
+  //   } else if (typeof date === 'number') {
+  //     // Assuming date is an Excel serial number
+  //     const excelDate = new Date(Math.round((date - 25569) * 86400 * 1000));
+  //     const year = excelDate.getFullYear();
+  //     const month = (excelDate.getMonth() + 1).toString().padStart(2, '0');
+  //     const day = excelDate.getDate().toString().padStart(2, '0');
+  //     return `${year}-${month}-${day}`;
+  //   } else {
+  //     return ''; // Handle other cases if necessary
+  //   }
+  // }
 
   private formatTime(time: any): string {
     if (typeof time === 'string') {
