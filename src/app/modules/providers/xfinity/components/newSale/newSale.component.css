@@ -215,6 +215,10 @@ h1.new_sale {
   font-size: 19px;
   margin-left: auto;
 }
+::-webkit-inner-spin-button,
+::-webkit-calendar-picker-indicator {
+    font-size: 1.2em; /* Increase the size of the icon */
+}
 @media screen and (max-width: 1600px) {
   .form-group input {
     width: 77%;

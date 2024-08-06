@@ -118,6 +118,10 @@
   bottom: -75px;
   width: 200px;
 }
+::-webkit-inner-spin-button,
+::-webkit-calendar-picker-indicator {
+    font-size: 1.2em; /* Increase the size of the icon */
+}
 @keyframes bg {
   0% {
     background-position-x: 0;
