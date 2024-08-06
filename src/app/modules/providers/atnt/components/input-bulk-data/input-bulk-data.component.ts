@@ -10,6 +10,7 @@ import {
   InstallationType,
   SaleFlag,
   SaraPlusAt_TUserId,
+  TpvStatus,
   UsState,
 } from 'src/generated/graphqlTypes';
 import { descriptiveToEnumMap } from '../../utils/mappingEnum';
@@ -170,6 +171,8 @@ export class AtntInputBulkDataComponent {
         ? row['Customer Type']
         : AtntCustomerType.UnknownRisk,
       order_id: String(row['Order ID']),
+      attTpvStatus: TpvStatus.Complete,
+      packageDetails: row['Package Details'],
     };
 
     console.log('this is row after transformation', input);
