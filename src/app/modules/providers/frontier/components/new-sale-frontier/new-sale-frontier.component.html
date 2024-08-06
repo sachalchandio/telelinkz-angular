@@ -1,0 +1,258 @@
+<div class="new_sale_wraper">
+  <form (ngSubmit)="onSubmit()" #atntSaleForm="ngForm" class="my_form">
+    <div class="form-group">
+      <label for="cxFirstName">Customer First Name</label>
+      <input
+        type="text"
+        id="cxFirstName"
+        required
+        [(ngModel)]="atntSaleInput.cx_firstName"
+        name="cx_firstName"
+        placeholder="First Name"
+      />
+      <i class="material-icons">person</i>
+    </div>
+    <div class="form-group">
+      <label for="cxLastName">Customer Last Name</label>
+      <input
+        type="text"
+        id="cxLastName"
+        required
+        [(ngModel)]="atntSaleInput.cx_lastName"
+        name="cx_lastName"
+        placeholder="Last Name"
+      />
+      <i class="material-icons">person</i>
+    </div>
+    <div class="form-group">
+      <label for="orderNumber">Order Number</label>
+      <input
+        type="text"
+        id="orderNumber"
+        required
+        [(ngModel)]="atntSaleInput.orderNumber"
+        name="orderNumber"
+        placeholder="Order Number"
+      />
+      <i class="material-icons">assignment</i>
+    </div>
+    <div class="form-group">
+      <label for="accountNumber">Account Number</label>
+      <input
+        type="text"
+        id="accountNumber"
+        required
+        [(ngModel)]="atntSaleInput.accountNumber"
+        name="accountNumber"
+        placeholder="Account Number"
+      />
+      <i class="material-icons">assignment</i>
+    </div>
+    <div class="form-group">
+      <label for="concertOrderId">Concert Order ID</label>
+      <input
+        type="text"
+        id="concertOrderId"
+        required
+        [(ngModel)]="atntSaleInput.concertOrderId"
+        name="concertOrderId"
+        placeholder="Concert OrderId"
+      />
+      <i class="material-icons">event</i>
+    </div>
+    <div class="form-group">
+      <label for="installationDate">Installation Date</label>
+      <input
+        type="date"
+        id="installationDate"
+        required
+        [(ngModel)]="atntSaleInput.installationDateFormatted"
+        name="installationDate"
+        placeholder="Installation Date"
+      />
+      <i class="material-icons">calendar_month</i>
+    </div>
+    <div class="form-group">
+      <label for="installationTime">Installation Time</label>
+      <input
+        type="time"
+        id="installationTime"
+        required
+        [(ngModel)]="atntSaleInput.installationTime"
+        name="installationTime"
+        placeholder="Installation Time"
+      />
+      <i class="material-icons">schedule</i>
+    </div>
+    <div class="form-group">
+      <label for="orderDate">Order Date</label>
+      <input
+        type="date"
+        id="orderDate"
+        required
+        [(ngModel)]="atntSaleInput.orderDate"
+        name="orderDate"
+        placeholder="Order Date"
+      />
+      <i class="material-icons">calendar_month</i>
+    </div>
+    <div class="form-group">
+      <label for="installation">Installation Type</label>
+      <select
+        id="installation"
+        required
+        [(ngModel)]="atntSaleInput.installation"
+        name="installation"
+      >
+        <option *ngFor="let type of installationTypes" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+      <i class="material-icons">install_desktop</i>
+    </div>
+    <div class="form-group">
+      <label for="streetAddress">Street Address</label>
+      <input
+        type="text"
+        id="streetAddress"
+        required
+        [(ngModel)]="atntSaleInput.streetAddress"
+        name="streetAddress"
+        placeholder="Street Address"
+      />
+      <i class="material-icons">location_on</i>
+    </div>
+    <div class="form-group">
+      <label for="streetAddressLine2">Street Address Line 2</label>
+      <input
+        type="text"
+        id="streetAddressLine2"
+        [(ngModel)]="atntSaleInput.streetAddressLine2"
+        name="streetAddressLine2"
+        placeholder="Street Address Line 2"
+      />
+      <i class="material-icons">location_on</i>
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input
+        type="text"
+        id="city"
+        required
+        [(ngModel)]="atntSaleInput.city"
+        name="city"
+        placeholder="City"
+      />
+      <i class="material-icons">location_on</i>
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <select
+        id="state"
+        required
+        [(ngModel)]="atntSaleInput.state"
+        name="state"
+      >
+        <option *ngFor="let state of states" [value]="state" required>
+          {{ state }}
+        </option>
+      </select>
+      <i class="material-icons">location_on</i>
+    </div>
+    <div class="form-group">
+      <label for="zipcode">Zipcode</label>
+      <input
+        type="text"
+        id="zipcode"
+        required
+        [(ngModel)]="atntSaleInput.zipcode"
+        name="zipcode"
+        placeholder="Zipcode"
+      />
+      <i class="material-icons">local_post_office</i>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input
+        type="text"
+        id="phoneNumber"
+        required
+        [(ngModel)]="atntSaleInput.phoneNumber"
+        name="phoneNumber"
+        placeholder="Phone Number"
+      />
+      <i class="material-icons">phone_android</i>
+    </div>
+    <div class="form-group">
+      <label for="socialSecurityNumber">Social Security Number</label>
+      <input
+        type="text"
+        id="socialSecurityNumber"
+        [(ngModel)]="atntSaleInput.socialSecurityNumber"
+        name="socialSecurityNumber"
+        placeholder="Social Security Number"
+        required
+      />
+      <i class="material-icons">security</i>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        required
+        [(ngModel)]="atntSaleInput.email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+      <i class="material-icons">email</i>
+    </div>
+    <div class="form-group">
+      <label for="internet">Internet Type</label>
+      <select
+        id="internet"
+        required
+        [(ngModel)]="atntSaleInput.Internet"
+        name="Internet"
+        placeholder=" Internet Type"
+      >
+        <option *ngFor="let internet of internetTypes" [value]="internet">
+          {{ internet }}
+        </option>
+      </select>
+      <i class="material-icons">wifi</i>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Type</label>
+      <select
+        id="phone"
+        required
+        [(ngModel)]="atntSaleInput.Phone"
+        name="Phone"
+      >
+        <option *ngFor="let phone of phoneTypes" [value]="phone">
+          {{ phone }}
+        </option>
+      </select>
+      <i class="material-icons">phone</i>
+    </div>
+    <div class="form-group">
+      <label for="attTpvStatus">AT&T TPV Status</label>
+      <select
+        id="attTpvStatus"
+        required
+        [(ngModel)]="atntSaleInput.attTpvStatus"
+        name="attTpvStatus"
+      >
+        <option *ngFor="let status of tpvStatuses" [value]="status">
+          {{ status }}
+        </option>
+      </select>
+      <i class="material-icons">build</i>
+    </div>
+    <div class="form-btn-group">
+      <button class="xf_btns" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

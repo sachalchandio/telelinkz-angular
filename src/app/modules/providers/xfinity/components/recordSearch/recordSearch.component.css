@@ -3,20 +3,27 @@ main {
   font-family: "Open Sans", sans-serif;
 }
 main[_ngcontent-ng-c2913988393] {
+  /* display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center; */
   max-height: 97vh;
   overflow-y: scroll;
   overflow-x: hidden;
   padding-top: 15px;
 }
 .full_vh {
+  /* height: 100vh; */
+  /* overflow-y: auto; */
   padding: 0px 20px;
 }
 .table-container {
-  width: 78vw;
-  overflow-x: auto;
-  max-width: 100%;
-  overflow-y: auto;
-  max-height: 80vh; 
+  width: 78vw; /* or any specific width */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Ensure the container does not overflow its parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 500px; /* Example fixed height */
+  /* min-height: 400px; */
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(56, 65, 74, 0.15);
@@ -152,7 +159,7 @@ table {
   /* background: #00a0ea; */
   background-repeat: no-repeat;
 }
-.table-container table thead {
+table thead {
   position: sticky;
   top: 0;
 }
@@ -164,7 +171,7 @@ table tr {
 table tr td {
   font-size: 12px;
   padding: 0 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
   /* color: #fff; */
 }
 table tr:nth-child(odd) {
@@ -179,9 +186,6 @@ table tr td a{
 table tr th {
   background-color: #880ef5;
   color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
 th.mat-header-cell,
 td.mat-cell {
@@ -191,8 +195,20 @@ thead {
   position: sticky;
   top: 0;
 }
+/* .mat-elevation-z8 {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  } */
+
 .fileInput {
   height: 150px;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 20px;
+  align-items: center;
+  margin-bottom: 20px; */
   display: none;
 }
 

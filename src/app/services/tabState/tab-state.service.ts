@@ -12,25 +12,30 @@ export class TabStateService {
       { title: 'Xfinity', route: 'xfinity' },
     ]),
     atnt: new BehaviorSubject<Tab[]>([{ title: 'AT&T', route: 'atnt' }]),
+    frontier: new BehaviorSubject<Tab[]>([{ title: 'Frontier', route: 'frontier' }]),
   };
 
   tabs$: { [key: string]: Observable<Tab[]> } = {
     xfinity: this.tabsSubject['xfinity'].asObservable(),
     atnt: this.tabsSubject['atnt'].asObservable(),
+    frontier: this.tabsSubject['frontier'].asObservable(),
   };
 
   private selectedIndexSubject: { [key: string]: BehaviorSubject<number> } = {
     xfinity: new BehaviorSubject<number>(0),
     atnt: new BehaviorSubject<number>(0),
+    frontier: new BehaviorSubject<number>(0),
   };
   selectedIndex$: { [key: string]: Observable<number> } = {
     xfinity: this.selectedIndexSubject['xfinity'].asObservable(),
     atnt: this.selectedIndexSubject['atnt'].asObservable(),
+    frontier: this.selectedIndexSubject['frontier'].asObservable(),
   };
 
   private state: { [key: string]: { [key: string]: any } } = {
     xfinity: {},
     atnt: {},
+    frontier: {},
   };
 
   constructor(private router: Router) {}

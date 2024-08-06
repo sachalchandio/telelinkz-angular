@@ -30,7 +30,7 @@
 .rightsidebar{
   position: fixed;
   top: 0;
-  right: -360px;
+  right: -340px;
   height: 100vh;
   z-index: 1;
   transition: 0.5s;
@@ -42,5 +42,3 @@
   position: relative;
   z-index: 3;
 }
-
-

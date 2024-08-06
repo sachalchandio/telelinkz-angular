@@ -23,5 +23,10 @@ export class TabResolver implements Resolve<void> {
       console.log('Updating atnt tab');
       this.tabStateService.updateSelectedIndexBasedOnRoute('atnt', url);
     }
+    else if (url.startsWith('/frontier')) {
+      console.log('Updating frontier tab');
+      this.tabStateService.updateSelectedIndexBasedOnRoute('frontier', url);
+    }
+
   }
 }
