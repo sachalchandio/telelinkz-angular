@@ -312,6 +312,10 @@ export type CreateAuditFormInput = {
   topDownSelling?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type CreateBatchAtntSaleInput = {
+  sales: Array<CreateAtntSaleInput>;
+};
+
 export type CreateCommentInput = {
   fieldName: SaleField;
   parentCommentId?: InputMaybe<Scalars['ID']['input']>;
@@ -386,7 +390,7 @@ export type LoginUserResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAtntSale: AtntSale;
-  createAtntSaleBulk: AtntSale;
+  createAtntSaleBulk: Array<AtntSale>;
   createAuditForm: AuditForm;
   createComment: Comment;
   createSaleStage: SaleStage;
@@ -412,7 +416,7 @@ export type MutationCreateAtntSaleArgs = {
 
 
 export type MutationCreateAtntSaleBulkArgs = {
-  input: CreateAtntSaleInput;
+  input: CreateBatchAtntSaleInput;
 };
 
 
@@ -748,9 +752,12 @@ export enum SaleType {
 /** The ID of the Sara Plus user */
 export enum SaraPlusAt_TUserId {
   None = 'NONE',
+  NotAllowed = 'NOT_ALLOWED',
   SaraPlus_1 = 'SARA_PLUS_1',
   SaraPlus_2 = 'SARA_PLUS_2',
-  SaraPlus_3 = 'SARA_PLUS_3'
+  SaraPlus_3 = 'SARA_PLUS_3',
+  SaraPlus_4 = 'SARA_PLUS_4',
+  SaraPlus_5 = 'SARA_PLUS_5'
 }
 
 /** TPV Status to confirm if it was completed successfully */
@@ -1165,11 +1172,11 @@ export type CreateAtntSaleMutationVariables = Exact<{
 export type CreateAtntSaleMutation = { __typename?: 'Mutation', createAtntSale: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
 
 export type CreateAtntSaleBulkMutationVariables = Exact<{
-  input: CreateAtntSaleInput;
+  input: CreateBatchAtntSaleInput;
 }>;
 
 
-export type CreateAtntSaleBulkMutation = { __typename?: 'Mutation', createAtntSaleBulk: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
+export type CreateAtntSaleBulkMutation = { __typename?: 'Mutation', createAtntSaleBulk: Array<{ __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } }> };
 
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1616,7 +1623,7 @@ export const CreateAtntSaleDocument = gql`
     }
   }
 export const CreateAtntSaleBulkDocument = gql`
-    mutation CreateAtntSaleBulk($input: CreateAtntSaleInput!) {
+    mutation CreateAtntSaleBulk($input: CreateBatchAtntSaleInput!) {
   createAtntSaleBulk(input: $input) {
     id
     orderDate

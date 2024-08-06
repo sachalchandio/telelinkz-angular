@@ -10,8 +10,6 @@ import {
   XfinityHomePhone,
   XfinityHomeSecurity,
   XfinityInternet,
-  XfinitySaleDto,
-  XfinitySaleFilterInputDto,
   XfinityTv,
 } from 'src/generated/graphqlTypes';
 
@@ -49,7 +47,7 @@ interface ExcelRowXfinitySale {
 }
 
 @Component({
-  selector: 'app-input-bulk-data',
+  selector: 'xfinity-input-bulk-data',
   templateUrl: './input-bulk-data.component.html',
   styleUrl: './input-bulk-data.component.css',
 })

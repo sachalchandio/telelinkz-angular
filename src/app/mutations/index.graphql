@@ -240,7 +240,7 @@ mutation CreateAtntSale($input: CreateAtntSaleInput!) {
   }
 }
 
-mutation CreateAtntSaleBulk($input: CreateAtntSaleInput!) {
+mutation CreateAtntSaleBulk($input: CreateBatchAtntSaleInput!) {
   createAtntSaleBulk(input: $input) {
     id
     orderDate
