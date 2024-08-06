@@ -58,18 +58,7 @@ const routes: Routes = [
         // canActivate: [TabGuard],
         // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
       },
-      {
-        path: 'consolidated',
-        loadChildren: () =>
-          import('./modules/providers/consolidated/consolidated.module').then(
-            (m) => m.ConsolidatedModule
-          ),
-        resolve: {
-          data: TabResolver,
-        },
-        // canActivate: [TabGuard],
-        // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
-      },
+      
       {
         path: 'register',
         loadChildren: () =>
