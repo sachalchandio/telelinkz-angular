@@ -12,6 +12,7 @@ import {
   SaraPlusAt_TUserId,
   UsState,
 } from 'src/generated/graphqlTypes';
+import { descriptiveToEnumMap } from '../../utils/mappingEnum';
 
 interface TableData {
   [key: string]: string | number;
@@ -113,8 +114,12 @@ export class AtntInputBulkDataComponent {
   private transformRowToInput(
     row: ExcelRowAtntSale
   ): CreateAtntSaleMutationVariables {
-    console.log('this is row before transformation', row);
+    // console.log('this is row before transformation', row);
     const formattedTime = this.formatTime(row['Installation Time']);
+    const descriptiveValue = row['SaraPlus AT&T User ID'];
+    const saraplus_agent_enumValue =
+      descriptiveToEnumMap[descriptiveValue] || SaraPlusAt_TUserId.None;
+
     const input: CreateAtntSaleInput = {
       submissionDate: this.formatDate(
         String(row['Submission Date']),
@@ -151,11 +156,12 @@ export class AtntInputBulkDataComponent {
       Phone: this.isEnumValue(AtntPhone, row['Phone'])
         ? row['Phone']
         : AtntPhone.None,
+
       saraPlusAT_TUserID: this.isEnumValue(
         SaraPlusAt_TUserId,
-        row['SaraPlus AT&T User ID']
+        saraplus_agent_enumValue
       )
-        ? row['SaraPlus AT&T User ID']
+        ? saraplus_agent_enumValue
         : SaraPlusAt_TUserId.None,
       saleStatus: this.isEnumValue(SaleFlag, row['Sale Status'])
         ? row['Sale Status']
