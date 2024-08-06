@@ -4,7 +4,7 @@ import {
   AtntCustomerType,
   AtntInternet,
   AtntPhone,
-  CreateAtntSaleGQL,
+  CreateAtntSaleBulkGQL,
   CreateAtntSaleInput,
   CreateAtntSaleMutationVariables,
   InstallationType,
@@ -20,21 +20,21 @@ interface TableData {
 interface ExcelRowAtntSale {
   'Submission Date': string;
   'Agent Name': string;
-  'Phone Number': string;
+  'Phone Number': string | number;
   'First Name': string;
   'Last Name': string;
   'Order ID': string;
   'Order Number': string;
-  'Account Number': string;
-  'Order Date': string;
+  'Account Number': string | number;
+  'Order Date': string | number;
   'Installation Type': string;
-  'Installation Date': string;
-  'Installation Time': string;
+  'Installation Date': string | number;
+  'Installation Time': string | number;
   'Street Address': string;
   'Street Address Line 2': string;
   City: string;
   'State / Province': string;
-  'Postal / Zip Code': string;
+  'Postal / Zip Code': string | number;
   'Package Details': string;
   Internet: string;
   Phone: string;
@@ -48,14 +48,14 @@ interface ExcelRowAtntSale {
 @Component({
   selector: 'app-atnt-input-bulk-data',
   templateUrl: './input-bulk-data.component.html',
-  styleUrl: './input-bulk-data.component.css',
+  styleUrls: ['./input-bulk-data.component.css'],
 })
 export class AtntInputBulkDataComponent {
   jsonData: TableData[] = [];
   dataSource = this.jsonData;
   displayedColumns: string[] = [];
 
-  constructor(private createAtntSaleGQL: CreateAtntSaleGQL) {}
+  constructor(private createAtntSaleGQL: CreateAtntSaleBulkGQL) {}
 
   private isEnumValue<T extends Record<string, unknown>>(
     enumType: T,
@@ -103,7 +103,7 @@ export class AtntInputBulkDataComponent {
         const input = this.transformRowToInput(row); // Make sure this returns the correct input structure
         console.log('this is input', input);
         const result = await this.createAtntSaleGQL.mutate(input).toPromise();
-        console.log(result?.data?.createAtntSale); // Access the mutation result here
+        console.log(result?.data?.createAtntSaleBulk); // Access the mutation result here
       } catch (error) {
         console.error('Error processing row:', row, error);
       }
@@ -121,12 +121,15 @@ export class AtntInputBulkDataComponent {
         'MM/DD/YYYY'
       ),
       accountNumber: String(row['Account Number']),
-      orderDate: this.formatDate(String(row['Order Date']), 'MMM DD, YYYY'),
+      orderDate: this.formatDate(Number(row['Order Date']), 'MMM DD, YYYY'),
       agentName: row['Agent Name'],
       cx_firstName: row['First Name'],
       cx_lastName: row['Last Name'],
       orderNumber: row['Order Number'],
-      installationDateFormatted: row['Installation Date'] || '1971-01-01',
+      installationDateFormatted: this.formatDate(
+        Number(row['Installation Date']),
+        'MM/DD/YYYY'
+      ),
       installationTime: formattedTime || '00:00:00',
       installation:
         row['Installation Type'] === 'Self Install'
@@ -154,17 +157,13 @@ export class AtntInputBulkDataComponent {
       )
         ? row['SaraPlus AT&T User ID']
         : SaraPlusAt_TUserId.None,
-      saleStatus: this.isEnumValue(SaleFlag, row['SaraPlus AT&T User ID'])
-        ? row['SaraPlus AT&T User ID']
+      saleStatus: this.isEnumValue(SaleFlag, row['Sale Status'])
+        ? row['Sale Status']
         : SaleFlag.PendingInstall,
-
-      customerType: this.isEnumValue(
-        AtntCustomerType,
-        row['SaraPlus AT&T User ID']
-      )
-        ? row['SaraPlus AT&T User ID']
+      customerType: this.isEnumValue(AtntCustomerType, row['Customer Type'])
+        ? row['Customer Type']
         : AtntCustomerType.UnknownRisk,
-      order_id: row['Order ID'],
+      order_id: String(row['Order ID']),
     };
 
     console.log('this is row after transformation', input);
@@ -172,7 +171,7 @@ export class AtntInputBulkDataComponent {
   }
 
   // Helper function to format dates
-  formatDate(
+  private formatDate(
     date: string | number,
     inputFormat: 'MM/DD/YYYY' | 'MMM DD, YYYY'
   ): string {
@@ -180,16 +179,10 @@ export class AtntInputBulkDataComponent {
       const excelDate = new Date(Math.round((date - 25569) * 86400 * 1000));
       return excelDate.toISOString().split('T')[0];
     } else if (typeof date === 'string') {
-      const [part1, part2, part3] = date.split(/[- /,]/);
+      const [month, day, year] = date.split(/[/ ,]/);
       if (inputFormat === 'MM/DD/YYYY') {
-        const month = part1;
-        const day = part2;
-        const year = part3;
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
       } else if (inputFormat === 'MMM DD, YYYY') {
-        const month = part1 as keyof typeof months;
-        const day = part2;
-        const year = part3;
         const months: Record<string, string> = {
           Jan: '01',
           Feb: '02',
@@ -204,13 +197,17 @@ export class AtntInputBulkDataComponent {
           Nov: '11',
           Dec: '12',
         };
-        return `${year}-${months[month]}-${day.padStart(2, '0')}`;
+        const monthNumeric = months[month];
+        if (monthNumeric === undefined) {
+          throw new Error(`Invalid month: ${month}`);
+        }
+        return `${year}-${monthNumeric}-${day.padStart(2, '0')}`;
       }
     }
     return date.toString();
   }
 
-  private formatTime(time: any): string {
+  private formatTime(time: string | number): string {
     if (typeof time === 'string') {
       let [hour, minute] = time.split(':').map(Number); // Convert both hour and minute to numbers
       let modifier = 'AM';
@@ -218,7 +215,7 @@ export class AtntInputBulkDataComponent {
       if (hour >= 12) {
         modifier = 'PM';
         if (hour > 12) {
-          hour = hour - 12;
+          hour -= 12;
         }
       }
 
