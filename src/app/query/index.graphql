@@ -53,7 +53,7 @@ query findAllSalesByAgentNameXfinity($agentName: String!) {
     product
     packageSold
     comcastTpvStatus
-    concertOrderId
+    concertOrderID
     Internet
     TV
     Phone
@@ -107,7 +107,7 @@ query FindSalesWithComplexFilterXfinity(
       product
       packageSold
       comcastTpvStatus
-      concertOrderId
+      concertOrderID
       Internet
       TV
       Phone

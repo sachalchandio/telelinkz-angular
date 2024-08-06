@@ -1,5 +1,6 @@
 <div class="new_sale_wraper">
   <form (ngSubmit)="onSubmit()" #xfinitySaleForm="ngForm" class="my_form">
+    
     <!-- <div class="form-group">
       <select formControlName="agentName" required>
         <option value="">Select an Agent</option>
@@ -52,7 +53,7 @@
         type="text"
         id="concertOrderId"
         required
-        [(ngModel)]="xfinitySaleInput.concertOrderId"
+        [(ngModel)]="xfinitySaleInput.concertOrderID"
         name="concertOrderId"
         placeholder="Concert OrderId"
       />
@@ -178,6 +179,18 @@
         [(ngModel)]="xfinitySaleInput.phoneNumber"
         name="phoneNumber"
         placeholder="Phone Number"
+      />
+      <i class="material-icons">phone_androidt</i>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber_second">Phone Number Second</label>
+      <input
+        type="text"
+        id="phoneNumber_second"
+        required
+        [(ngModel)]="xfinitySaleInput.phoneNumber_second"
+        name="phoneNumber_second"
+        placeholder="Second Phone Number"
       />
       <i class="material-icons">phone_androidt</i>
     </div>

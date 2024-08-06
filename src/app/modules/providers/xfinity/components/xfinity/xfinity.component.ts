@@ -26,7 +26,7 @@ export class XfinityComponent implements OnInit, OnDestroy {
     {
       title: 'Input New File',
       icon: 'insert_drive_file',
-      route: 'xfinity/input-new-file',
+      route: 'xfinity/input-data',
       label: 'Navigate to Input New File',
     },
     {

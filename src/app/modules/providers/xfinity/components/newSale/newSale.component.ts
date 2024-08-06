@@ -12,6 +12,7 @@ import {
   XfinityHomePhone,
   XfinityHomeSecurity,
   GetAllAgentsGQL,
+  CreateXfinitySaleInput,
 } from '../../../../../../generated/graphqlTypes';
 import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 
@@ -23,12 +24,11 @@ import { TabStateService } from 'src/app/services/tabState/tab-state.service';
 export class XfinityNewSale implements OnInit, OnDestroy {
   agentNames: string[] = [];
 
-  xfinitySaleInput = {
-    // agentId: '',
+  xfinitySaleInput: CreateXfinitySaleInput = {
     cx_firstName: '',
     cx_lastName: '',
     orderNumber: '',
-    concertOrderId: '',
+    concertOrderID: '',
     installationDate: '',
     installationTime: '',
     orderDate: '',
@@ -41,13 +41,15 @@ export class XfinityNewSale implements OnInit, OnDestroy {
     phoneNumber: '',
     socialSecurityNumber: '',
     email: '',
-    product: '',
-    packageSold: '',
+    product: 'NA',
+    packageSold: 'NA',
     comcastTpvStatus: TpvStatus.Incomplete,
     Internet: XfinityInternet.None,
     TV: XfinityTv.None,
     Phone: XfinityHomePhone.None,
     HMS: XfinityHomeSecurity.None,
+    agentId: localStorage.getItem('agent')!,
+    phoneNumber_second: '',
   };
 
   installationTypes = Object.values(InstallationType);

@@ -48,7 +48,6 @@ img{
 }
 .all-welcome-back {
   display: flex;
-  max-width: 1080px;
   margin: 0 auto;
   /* box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12); */
   border: 1px solid #dbe0e5;
@@ -70,7 +69,6 @@ img{
 }
 .innov8ivs-image > img{
   height: 100%;
-  filter: blur(2px);
 }
 .innov8ivs-login {
   padding: 35px 0px;
@@ -85,7 +83,7 @@ img{
 
 .welcome-heading p a {
   text-decoration: none;
-  color: #ff6200;
+  color: #0e72fe;
   font-weight: 500;
 }
 
@@ -185,7 +183,7 @@ img{
 .all-form-login {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 80%;
   margin: 0 auto;
   row-gap: 38px;
   margin-top: 35px;
@@ -239,7 +237,7 @@ img{
 }
 /* Change the color of the label when the checkbox is checked */
 .toggle-checkbox:checked + .toggle-label {
-  background-color: #ff6200;
+  background-color: #03234d;
 }
 
 .remember-me span {
@@ -257,10 +255,10 @@ img{
 
 .recovered-pass a {
   text-decoration: none;
-  color: #d93f21;
+  color: #0e72fe;
   font-size: 14px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 14.5px;
 }
 
@@ -284,6 +282,16 @@ img{
 .innov8ivs-image {
   position: relative;
 }
+.innov8ivs-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0b0b0b63;
+  z-index: 1;
+}
 .hore-top-developer {
   width: 82.1%;
   height: 270px;
@@ -296,6 +304,7 @@ img{
   bottom: 49px;
   left: 36px;
   right: 0;
+  z-index: 2;
 }
 
 .hore-top-developer a {
@@ -308,7 +317,7 @@ img{
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background: #ff6200;
+  background: #03234d;
   width: 238px;
   height: 45px;
   column-gap: 11px;
@@ -329,15 +338,10 @@ img{
   overflow-y: hidden;
 }
 .welcome-back {
-  max-width: 1000px;
+  max-width: 63%;
   margin: auto;
   vertical-align: middle;
-}
-.welcome-back {
-  max-width: 1000px;
-  margin: auto;
-  vertical-align: middle;
-  padding-top: 68px;
+  padding-top: 40px;
   align-items: stretch;
 }
 @media only screen and (max-width: 1600px) {
