@@ -45,17 +45,23 @@
 }
 .card:hover {
   transform: translateY(-10px);
- 
 }
 .card i.material-icons {
   font-size: 40px; /* Larger icon for better visibility */
-  color: #0e5298; /* Adding a splash of color */
+  color: #7314da; /* Adding a splash of color */
   margin-bottom: 10px;
+}
+.cards .card:hover {
+  background-color: #7314da;
+}
+.card:hover i.material-icons,
+.card:hover p {
+  color: #fff;
 }
 
 .card p {
   font-size: 14px; /* Larger text for readability */
-  color: #0e5298;
+  color: #331679;
   font-weight: 700;
 }
 .vh_main {
@@ -85,9 +91,9 @@
   background: linear-gradient(
     to right,
     #1e5799 0%,
-    #009fd8 19%,
+    #33167a 19%,
     #5449eb 60%,
-    #0057b8 83%,
+    #8700a3 83%,
     #1e5799 100%
   );
   background-size: var(--bgWidth) 100%;
@@ -111,6 +117,10 @@
   bottom: -75px;
   width: 200px;
 }
+::-webkit-inner-spin-button,
+::-webkit-calendar-picker-indicator {
+  font-size: 1.2em; /* Increase the size of the icon */
+}
 @keyframes bg {
   0% {
     background-position-x: 0;
@@ -124,10 +134,14 @@
 .tabs {
   display: flex;
   margin-bottom: 0.625rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .tabs button {
-  margin-right: 0.3125rem;
   background-color: #ffffff;
   border: none;
   border-radius: 0.25rem;
@@ -150,7 +164,7 @@
   box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
   font-weight: 600;
   position: relative;
-  border-bottom: 3px solid #0e5298;
+  border-bottom: 3px solid #731dc0;
 }
 .ng-star-inserted.selected::before {
   content: "";
@@ -159,9 +173,9 @@
   width: 20px;
   height: 20px;
   background-color: #fff;
-  border-bottom: 2px solid #0e5298;
+  border-bottom: 2px solid #731dc0;
   transform: rotate(45deg);
-  border-right: 2px solid #0e5298;
+  border-right: 2px solid #731dc0;
 }
 
 .cards {
@@ -177,12 +191,6 @@
 
 .cards .card:hover {
   transform: scale(1.05);
-  background-color: #0e5298;
-
-}
-.card:hover i.material-icons,
-.card:hover p{
-  color: #fff;
 }
 
 .tab-content {
@@ -196,5 +204,8 @@
 @media screen and (max-width: 1500px) {
   .card {
     min-height: 110px; /* Ensuring cards are uniformly sized */
+  }
+  .dashboard {
+    max-width: 85%;
   }
 }

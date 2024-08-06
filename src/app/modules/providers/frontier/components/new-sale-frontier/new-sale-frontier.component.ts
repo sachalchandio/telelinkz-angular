@@ -4,13 +4,13 @@ import {
   AtntCustomerType,
   AtntInternet,
   AtntPhone,
-  AtntSaleDto,
   CreateAtntSaleDocument,
   CreateAtntSaleInput,
   CreateAtntSaleMutation,
   CreateAtntSaleMutationVariables,
   GetAllAgentsGQL,
   InstallationType,
+  SaleFlag,
   SaraPlusAt_TUserId,
   TpvStatus,
   UsState,
@@ -26,10 +26,11 @@ export class NewSaleFrontierComponent implements OnInit, OnDestroy {
   agentNames: string[] = [];
 
   atntSaleInput: CreateAtntSaleInput = {
+    submissionDate: new Date().toISOString(),
     cx_firstName: '',
     cx_lastName: '',
     orderNumber: '',
-    concertOrderId: '',
+    order_id: '',
     accountNumber: '',
     installationDateFormatted: '',
     installationTime: '',
@@ -41,16 +42,16 @@ export class NewSaleFrontierComponent implements OnInit, OnDestroy {
     state: UsState.Undetermined,
     zipcode: '',
     phoneNumber: '',
-    socialSecurityNumber: '',
-    email: '',
+    Email: '',
     Internet: AtntInternet.None,
     Phone: AtntPhone.None,
     attTpvStatus: TpvStatus.Incomplete,
     customerType: AtntCustomerType.UnknownRisk,
-    packageSold: 'NA',
     product: 'NA',
     saraPlusAT_TUserID: SaraPlusAt_TUserId.None,
-    agentName: '',
+    agentName: localStorage.getItem('agent')!,
+    // implement it
+    saleStatus: SaleFlag.Unassigned,
   };
 
   installationTypes = Object.values(InstallationType);
@@ -58,6 +59,7 @@ export class NewSaleFrontierComponent implements OnInit, OnDestroy {
   internetTypes = Object.values(AtntInternet);
   phoneTypes = Object.values(AtntPhone);
   tpvStatuses = Object.values(TpvStatus);
+  saleStatuses = Object.values(SaleFlag);
 
   constructor(
     private apollo: Apollo,
@@ -68,14 +70,13 @@ export class NewSaleFrontierComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getAgentNames();
     this.restoreTabState();
-    console.log('component started');
   }
 
   restoreTabState(): void {
-    if (this.tabStateService.hasState('frontier', 'frontier/new-sale')) {
+    if (this.tabStateService.hasState('atnt', 'atnt/new-sale')) {
       this.atntSaleInput = this.tabStateService.getState(
-        'frontier',
-        'frontier/new-sale'
+        'atnt',
+        'atnt/new-sale'
       );
     }
   }

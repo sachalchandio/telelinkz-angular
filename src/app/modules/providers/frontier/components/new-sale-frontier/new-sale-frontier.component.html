@@ -49,14 +49,14 @@
       <i class="material-icons">assignment</i>
     </div>
     <div class="form-group">
-      <label for="concertOrderId">Concert Order ID</label>
+      <label for="order_id">Concert Order ID</label>
       <input
         type="text"
-        id="concertOrderId"
+        id="order_id"
         required
-        [(ngModel)]="atntSaleInput.concertOrderId"
-        name="concertOrderId"
-        placeholder="Concert OrderId"
+        [(ngModel)]="atntSaleInput.order_id"
+        name="order_id"
+        placeholder="Order Id"
       />
       <i class="material-icons">event</i>
     </div>
@@ -184,24 +184,12 @@
       <i class="material-icons">phone_android</i>
     </div>
     <div class="form-group">
-      <label for="socialSecurityNumber">Social Security Number</label>
-      <input
-        type="text"
-        id="socialSecurityNumber"
-        [(ngModel)]="atntSaleInput.socialSecurityNumber"
-        name="socialSecurityNumber"
-        placeholder="Social Security Number"
-        required
-      />
-      <i class="material-icons">security</i>
-    </div>
-    <div class="form-group">
       <label for="email">Email</label>
       <input
         type="email"
         id="email"
         required
-        [(ngModel)]="atntSaleInput.email"
+        [(ngModel)]="atntSaleInput.Email"
         name="email"
         placeholder="Email"
         required
@@ -223,6 +211,7 @@
       </select>
       <i class="material-icons">wifi</i>
     </div>
+
     <div class="form-group">
       <label for="phone">Phone Type</label>
       <select
@@ -251,6 +240,23 @@
       </select>
       <i class="material-icons">build</i>
     </div>
+
+    <div class="form-group">
+      <label for="saleStatus">Sale Status</label>
+      <select
+        id="saleStatus"
+        required
+        [(ngModel)]="atntSaleInput.saleStatus"
+        name="saleStatus"
+        placeholder=" Sale Status"
+      >
+        <option *ngFor="let status of saleStatuses" [value]="status">
+          {{ status }}
+        </option>
+      </select>
+      <i class="material-icons">wifi</i>
+    </div>
+
     <div class="form-btn-group">
       <button class="xf_btns" type="submit">Submit</button>
     </div>
