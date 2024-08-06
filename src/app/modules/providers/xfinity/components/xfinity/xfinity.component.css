@@ -51,6 +51,14 @@
   color: #7314da; /* Adding a splash of color */
   margin-bottom: 10px;
 }
+.cards .card:hover {
+  background-color: #7314da;
+
+}
+.card:hover i.material-icons,
+.card:hover p{
+  color: #fff;
+}
 
 .card p {
   font-size: 14px; /* Larger text for readability */

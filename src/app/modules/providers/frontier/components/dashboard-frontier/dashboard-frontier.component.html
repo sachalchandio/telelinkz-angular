@@ -1,0 +1,51 @@
+<main class="vh_main">
+  <div class="dashbord_out_wrap">
+    <div class="dashboard">
+      <div class="dashboard_inner_header">
+        <div class="dns_inner_img">
+          <img
+            src="../../../../../../assets/images/frontier-inner-header-logo.png"
+            alt=""
+          />
+        </div>
+
+        <div>{{ currentUrl }}</div>
+
+        <div class="dns_inner_img dsi_half_right">
+          <img
+            src="../../../../../../assets/images/frontier-inner-header-vector.png"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button
+          *ngFor="let tab of tabs; let i = index"
+          (click)="selectTab(i)"
+          [class.selected]="i === selectedIndex"
+        >
+          {{ tab.title }}
+        </button>
+      </div>
+
+      <div class="cards" *ngIf="selectedIndex === 0">
+        <div
+          *ngFor="let card of cards"
+          (click)="openTab(card)"
+          role="link"
+          tabindex="0"
+          class="card transarent_cards"
+          [attr.aria-label]="card.label"
+        >
+          <i class="material-icons">{{ card.icon }}</i>
+          <p>{{ card.title }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content_placeholder">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

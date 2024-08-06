@@ -45,17 +45,21 @@
 }
 .card:hover {
   transform: translateY(-10px);
- 
-}
-.card i.material-icons {
-  font-size: 40px; /* Larger icon for better visibility */
-  color: #0e5298; /* Adding a splash of color */
-  margin-bottom: 10px;
+  background-color: #bd0c0c;
 }
 
+.card i.material-icons {
+  font-size: 40px; /* Larger icon for better visibility */
+  color: #bd0c0c; /* Adding a splash of color */
+  margin-bottom: 10px;
+}
+.card:hover i.material-icons,
+.card:hover p{
+  color: #fff;
+}
 .card p {
   font-size: 14px; /* Larger text for readability */
-  color: #0e5298;
+  color: #bd0c0c;
   font-weight: 700;
 }
 .vh_main {
@@ -84,11 +88,11 @@
   height: 100px;
   background: linear-gradient(
     to right,
-    #1e5799 0%,
-    #009fd8 19%,
-    #5449eb 60%,
-    #0057b8 83%,
-    #1e5799 100%
+    #ff0808 0%,
+    #690808 19%,
+    #eb6161 60%,
+    #c62121 83%,
+    #ff0808 100%
   );
   background-size: var(--bgWidth) 100%;
   animation: bg 10s linear infinite;
@@ -150,7 +154,7 @@
   box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
   font-weight: 600;
   position: relative;
-  border-bottom: 3px solid #0e5298;
+  border-bottom: 3px solid #ff0808;
 }
 .ng-star-inserted.selected::before {
   content: "";
@@ -159,9 +163,9 @@
   width: 20px;
   height: 20px;
   background-color: #fff;
-  border-bottom: 2px solid #0e5298;
+  border-bottom: 2px solid #ff0808;
   transform: rotate(45deg);
-  border-right: 2px solid #0e5298;
+  border-right: 2px solid #ff0808;
 }
 
 .cards {
@@ -177,12 +181,6 @@
 
 .cards .card:hover {
   transform: scale(1.05);
-  background-color: #0e5298;
-
-}
-.card:hover i.material-icons,
-.card:hover p{
-  color: #fff;
 }
 
 .tab-content {
