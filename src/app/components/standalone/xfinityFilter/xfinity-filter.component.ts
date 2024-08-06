@@ -21,6 +21,7 @@ import {
   UserType,
   SaleFlag,
   SaleType,
+  XfinitySale,
 } from 'src/generated/graphqlTypes';
 import { XfinitySharedDataService } from 'src/app/services/xfinityData/shared-data.service';
 import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
@@ -28,6 +29,11 @@ import { SaleStageService } from 'src/app/services/saleStage/saleStage.service';
 export interface TableData {
   [key: string]: string | number;
 }
+
+type XfinitySaleFormDto = Omit<
+  XfinitySaleDto,
+  '__typename' | 'installationDateFormatted'
+>;
 
 @Component({
   standalone: true,
@@ -196,7 +202,7 @@ export class XfinityFilter implements OnInit {
                 Product: sale.product,
                 'Package Sold': sale.packageSold,
                 'Comcast TPV Status': sale.comcastTpvStatus,
-                'Concert Order ID': sale.concertOrderId,
+                'Concert Order ID': sale.concertOrderID,
                 Internet: sale.Internet,
                 TV: sale.TV,
                 Phone: sale.Phone,

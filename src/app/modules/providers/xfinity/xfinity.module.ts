@@ -21,6 +21,7 @@ const COMPONETS = [
   comp.XfinityNewSale,
   comp.SaleJourneyComponent,
   comp.AuditFormComponent,
+  comp.InputBulkDataComponent,
 ];
 
 @NgModule({

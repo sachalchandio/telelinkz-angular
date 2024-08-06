@@ -15,6 +15,7 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
   saleHistory: any[] = [];
   saleDetails: any;
   saleId: string | null = null;
+  moduleName: string = 'xfinity'; // Assume this component is for the Xfinity module
 
   constructor(
     private route: ActivatedRoute,
@@ -69,15 +70,25 @@ export class SaleJourneyComponent implements OnInit, OnDestroy {
   }
 
   saveTabState(): void {
-    this.tabStateService.setState(`sale-journey-${this.saleId}`, {
-      saleHistory: this.saleHistory,
-    });
+    this.tabStateService.setState(
+      'xfinity',
+      `${this.moduleName}-sale-journey-${this.saleId}`,
+      {
+        saleHistory: this.saleHistory,
+      }
+    );
   }
 
   restoreTabState(): void {
-    if (this.tabStateService.hasState(`sale-journey-${this.saleId}`)) {
+    if (
+      this.tabStateService.hasState(
+        'xfinity',
+        `${this.moduleName}-sale-journey-${this.saleId}`
+      )
+    ) {
       const state = this.tabStateService.getState(
-        `sale-journey-${this.saleId}`
+        'xfinity',
+        `${this.moduleName}-sale-journey-${this.saleId}`
       );
       this.saleHistory = state.saleHistory;
     }

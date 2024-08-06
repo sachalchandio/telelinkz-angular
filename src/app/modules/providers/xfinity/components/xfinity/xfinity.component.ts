@@ -23,16 +23,10 @@ export class XfinityComponent implements OnInit, OnDestroy {
       route: 'xfinity/filter',
       label: 'Navigate to Xfinity Sale Filter',
     },
-    // {
-    //   title: 'Sales Journey',
-    //   icon: 'filter_alt',
-    //   route: 'xfinity/sales-journey',
-    //   label: 'Navigate to Sales Journey',
-    // },
     {
       title: 'Input New File',
       icon: 'insert_drive_file',
-      route: 'xfinity/input-new-file',
+      route: 'xfinity/input-data',
       label: 'Navigate to Input New File',
     },
     {
@@ -70,26 +64,26 @@ export class XfinityComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.tabStateService.tabs$.subscribe((tabs) => {
+      this.tabStateService.tabs$['xfinity'].subscribe((tabs) => {
         this.tabs = tabs;
       })
     );
 
     this.subscription.add(
-      this.tabStateService.selectedIndex$.subscribe((index) => {
+      this.tabStateService.selectedIndex$['xfinity'].subscribe((index) => {
         this.selectedIndex = index;
       })
     );
 
-    // Default to the first tab if no tab is selected
-    if (this.selectedIndex === 0) {
-      // navigate to the first tab
-      this.router.navigate(['xfinity']);
-    }
+    // Update selected index based on current route
+    this.tabStateService.updateSelectedIndexBasedOnRoute(
+      'xfinity',
+      this.router.url
+    );
   }
 
   openTab(card: any): void {
-    this.tabStateService.openTab({
+    this.tabStateService.openTab('xfinity', {
       title: card.title,
       route: card.route,
       queryParams: {}, // Add any necessary query params here
@@ -97,7 +91,7 @@ export class XfinityComponent implements OnInit, OnDestroy {
   }
 
   selectTab(index: number): void {
-    this.tabStateService.selectTab(index);
+    this.tabStateService.selectTab('xfinity', index);
   }
 
   ngOnDestroy(): void {

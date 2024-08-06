@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="file-input">
+    <div class="file-input-description">
+      <p>Input an Excel File to Import Records</p>
+    </div>
+    <label for="file-upload" class="custom-file-upload"
+      ><mat-icon class="file-icon">folder</mat-icon>
+      Choose File
+    </label>
+    <input id="file-upload" type="file" (change)="onFileChange($event)" />
+  </div>
+</div>

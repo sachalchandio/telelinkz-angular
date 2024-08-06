@@ -25,6 +25,10 @@ const routes: Routes = [
         path: 'audit-form',
         component: comp.AuditFormComponent,
       },
+      {
+        path: 'input-data',
+        component: comp.InputBulkDataComponent,
+      },
     ],
   },
 ];

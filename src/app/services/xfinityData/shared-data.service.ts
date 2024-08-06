@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TableData } from 'src/app/components/standalone/xfinityFilter/xfinity-filter.component';
-import { XfinitySaleFilterInputDto } from 'src/generated/graphqlTypes';
 
 @Injectable({
   providedIn: 'root',

@@ -1,37 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Tab } from './tab-types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TabStateService {
-  private tabsSubject = new BehaviorSubject<any[]>([
-    { title: 'Xfinity', route: 'xfinity' },
-  ]);
-  tabs$: Observable<any[]> = this.tabsSubject.asObservable();
+  private tabsSubject: { [key: string]: BehaviorSubject<Tab[]> } = {
+    xfinity: new BehaviorSubject<Tab[]>([
+      { title: 'Xfinity', route: 'xfinity' },
+    ]),
+    atnt: new BehaviorSubject<Tab[]>([{ title: 'AT&T', route: 'atnt' }]),
+  };
 
-  private selectedIndexSubject = new BehaviorSubject<number>(0);
-  selectedIndex$: Observable<number> = this.selectedIndexSubject.asObservable();
+  tabs$: { [key: string]: Observable<Tab[]> } = {
+    xfinity: this.tabsSubject['xfinity'].asObservable(),
+    atnt: this.tabsSubject['atnt'].asObservable(),
+  };
 
-  private state: { [key: string]: any } = {};
+  private selectedIndexSubject: { [key: string]: BehaviorSubject<number> } = {
+    xfinity: new BehaviorSubject<number>(0),
+    atnt: new BehaviorSubject<number>(0),
+  };
+  selectedIndex$: { [key: string]: Observable<number> } = {
+    xfinity: this.selectedIndexSubject['xfinity'].asObservable(),
+    atnt: this.selectedIndexSubject['atnt'].asObservable(),
+  };
+
+  private state: { [key: string]: { [key: string]: any } } = {
+    xfinity: {},
+    atnt: {},
+  };
 
   constructor(private router: Router) {}
 
-  setState(tab: string, state: any): void {
-    this.state[tab] = state;
+  setState(module: string, tab: string, state: any): void {
+    this.state[module][tab] = state;
   }
 
-  getState(tab: string): any {
-    return this.state[tab];
+  getState(module: string, tab: string): any {
+    return this.state[module][tab];
   }
 
-  hasState(tab: string): boolean {
-    return this.state.hasOwnProperty(tab);
+  hasState(module: string, tab: string): boolean {
+    return this.state[module].hasOwnProperty(tab);
   }
 
-  openTab(tab: any): void {
-    const currentTabs = this.tabsSubject.value;
+  openTab(module: string, tab: any): void {
+    const currentTabs = this.tabsSubject[module].value;
     const existingTabIndex = currentTabs.findIndex(
       (t) =>
         t.route === tab.route &&
@@ -39,20 +56,30 @@ export class TabStateService {
     );
 
     if (existingTabIndex === -1) {
-      this.tabsSubject.next([...currentTabs, tab]);
-      this.selectTab(currentTabs.length);
+      this.tabsSubject[module].next([...currentTabs, tab]);
+      this.selectTab(module, currentTabs.length);
     } else {
-      this.selectTab(existingTabIndex);
+      this.selectTab(module, existingTabIndex);
     }
   }
 
-  selectTab(index: number): void {
-    this.selectedIndexSubject.next(index);
-    const currentTabs = this.tabsSubject.value;
-    if (index >= 0 && index < currentTabs.length) {
-      this.router.navigate([currentTabs[index].route], {
-        queryParams: currentTabs[index].queryParams,
-      });
+  updateSelectedIndexBasedOnRoute(module: string, route: string): void {
+    const currentTabs = this.tabsSubject[module].value;
+    const index = currentTabs.findIndex((tab) => route.includes(tab.route));
+    if (index !== -1 && this.selectedIndexSubject[module].value !== index) {
+      this.selectTab(module, index);
+    }
+  }
+
+  selectTab(module: string, index: number): void {
+    if (this.selectedIndexSubject[module].value !== index) {
+      this.selectedIndexSubject[module].next(index);
+      const currentTabs = this.tabsSubject[module].value;
+      if (index >= 0 && index < currentTabs.length) {
+        this.router.navigate([currentTabs[index].route], {
+          queryParams: currentTabs[index].queryParams,
+        });
+      }
     }
   }
 }

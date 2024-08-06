@@ -23,7 +23,7 @@ mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
     product
     packageSold
     comcastTpvStatus
-    concertOrderId
+    concertOrderID
     Internet
     TV
     Phone
@@ -204,4 +204,72 @@ mutation UpdateAuditForm($UpdateAuditFormInput: UpdateAuditFormInput!) {
 
 mutation RemoveAuditForm($id: String!) {
   removeAuditForm(id: $id)
+}
+
+mutation CreateAtntSale($input: CreateAtntSaleInput!) {
+  createAtntSale(input: $input) {
+    id
+    orderDate
+    state
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    concertOrderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    attTpvStatus
+    Internet
+    Phone
+    streetAddress
+    streetAddressLine2
+    city
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+  }
+}
+
+mutation CreateAtntSaleBulk($input: CreateBatchAtntSaleInput!) {
+  createAtntSaleBulk(input: $input) {
+    id
+    orderDate
+    state
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    concertOrderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    attTpvStatus
+    Internet
+    Phone
+    streetAddress
+    streetAddressLine2
+    city
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+  }
 }

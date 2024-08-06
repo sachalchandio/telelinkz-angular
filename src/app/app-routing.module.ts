@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './components/shared';
 import { AuthGuard } from './auth/auth.guard';
+import { TabGuard } from './guards/tab.guard';
 import { UserType } from 'src/generated/graphqlTypes';
+import { TabResolver } from './navigation/tabResolver.service';
 
 const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     // data: { expectedUserType: UserType.Admin }, // Only Admins can access the main route
     children: [
       {
@@ -17,7 +19,7 @@ const routes: Routes = [
           import('./modules/homepage/homepage.module').then(
             (m) => m.HomepageModule
           ),
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         // data: { expectedUserType: UserType.Admin }, // Only Admins can access the homepage
       },
       {
@@ -26,7 +28,22 @@ const routes: Routes = [
           import('./modules/providers/xfinity/xfinity.module').then(
             (m) => m.XfinityModule
           ),
-        canActivate: [AuthGuard],
+        resolve: {
+          data: TabResolver,
+        },
+        // canActivate: [TabGuard],
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
+      },
+      {
+        path: 'atnt',
+        loadChildren: () =>
+          import('./modules/providers/atnt/atnt.module').then(
+            (m) => m.ATNTModule
+          ),
+        resolve: {
+          data: TabResolver,
+        },
+        // canActivate: [TabGuard],
         // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
       },
       {
@@ -34,6 +51,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/UserReg/userReg.module').then(
             (m) => m.UserRegModule
+          ),
+      },
+      {
+        path: 'unauthorized',
+        loadComponent: () =>
+          import('./components/standalone/unauthorized/unauth.component').then(
+            (m) => m.UnauthComponent
           ),
       },
     ],
