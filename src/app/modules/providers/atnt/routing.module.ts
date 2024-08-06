@@ -21,6 +21,10 @@ const routes: Routes = [
         path: 'sales-journey',
         component: comp.SaleJourneyAtntComponent,
       },
+      {
+        path: 'input-new-file',
+        component: comp.AtntInputBulkDataComponent,
+      },
       // {
       //   path: 'audit-form',
       //   component: comp.AuditFormComponent,

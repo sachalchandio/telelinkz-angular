@@ -256,31 +256,31 @@ export enum CommentStatus {
 }
 
 export type CreateAtntSaleInput = {
+  Email?: InputMaybe<Scalars['String']['input']>;
   Internet: AtntInternet;
   Phone: AtntPhone;
   accountNumber: Scalars['String']['input'];
   agentName: Scalars['String']['input'];
-  attTpvStatus: TpvStatus;
+  attTpvStatus?: InputMaybe<TpvStatus>;
   city: Scalars['String']['input'];
-  concertOrderId: Scalars['String']['input'];
   customerType: AtntCustomerType;
   cx_firstName: Scalars['String']['input'];
   cx_lastName: Scalars['String']['input'];
-  email: Scalars['String']['input'];
   installation: InstallationType;
   installationDateFormatted: Scalars['String']['input'];
   installationTime: Scalars['String']['input'];
   orderDate: Scalars['String']['input'];
   orderNumber: Scalars['String']['input'];
-  packageSold: Scalars['String']['input'];
+  order_id: Scalars['String']['input'];
+  packageDetails?: InputMaybe<Scalars['String']['input']>;
   phoneNumber: Scalars['String']['input'];
-  phoneNumber_second?: InputMaybe<Scalars['String']['input']>;
-  product: Scalars['String']['input'];
+  product?: InputMaybe<Scalars['String']['input']>;
+  saleStatus: SaleFlag;
   saraPlusAT_TUserID: SaraPlusAt_TUserId;
-  socialSecurityNumber: Scalars['String']['input'];
   state: UsState;
   streetAddress: Scalars['String']['input'];
   streetAddressLine2?: InputMaybe<Scalars['String']['input']>;
+  submissionDate: Scalars['String']['input'];
   zipcode: Scalars['String']['input'];
 };
 
@@ -386,6 +386,7 @@ export type LoginUserResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAtntSale: AtntSale;
+  createAtntSaleBulk: AtntSale;
   createAuditForm: AuditForm;
   createComment: Comment;
   createSaleStage: SaleStage;
@@ -406,6 +407,11 @@ export type Mutation = {
 
 
 export type MutationCreateAtntSaleArgs = {
+  input: CreateAtntSaleInput;
+};
+
+
+export type MutationCreateAtntSaleBulkArgs = {
   input: CreateAtntSaleInput;
 };
 
@@ -1158,6 +1164,13 @@ export type CreateAtntSaleMutationVariables = Exact<{
 
 export type CreateAtntSaleMutation = { __typename?: 'Mutation', createAtntSale: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
 
+export type CreateAtntSaleBulkMutationVariables = Exact<{
+  input: CreateAtntSaleInput;
+}>;
+
+
+export type CreateAtntSaleBulkMutation = { __typename?: 'Mutation', createAtntSaleBulk: { __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } } };
+
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -1597,6 +1610,52 @@ export const CreateAtntSaleDocument = gql`
   })
   export class CreateAtntSaleGQL extends Apollo.Mutation<CreateAtntSaleMutation, CreateAtntSaleMutationVariables> {
     document = CreateAtntSaleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateAtntSaleBulkDocument = gql`
+    mutation CreateAtntSaleBulk($input: CreateAtntSaleInput!) {
+  createAtntSaleBulk(input: $input) {
+    id
+    orderDate
+    state
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    concertOrderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    attTpvStatus
+    Internet
+    Phone
+    streetAddress
+    streetAddressLine2
+    city
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateAtntSaleBulkGQL extends Apollo.Mutation<CreateAtntSaleBulkMutation, CreateAtntSaleBulkMutationVariables> {
+    document = CreateAtntSaleBulkDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

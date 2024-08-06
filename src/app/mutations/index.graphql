@@ -239,3 +239,37 @@ mutation CreateAtntSale($input: CreateAtntSaleInput!) {
     packageSold
   }
 }
+
+mutation CreateAtntSaleBulk($input: CreateAtntSaleInput!) {
+  createAtntSaleBulk(input: $input) {
+    id
+    orderDate
+    state
+    agent {
+      id
+    }
+    cx_firstName
+    cx_lastName
+    concertOrderID
+    accountNumber
+    customerType
+    saraPlusAT_TUserID
+    orderNumber
+    installationDate
+    installationTime
+    installation
+    attTpvStatus
+    Internet
+    Phone
+    streetAddress
+    streetAddressLine2
+    city
+    zipcode
+    phoneNumber
+    phoneNumber_second
+    socialSecurityNumber
+    email
+    product
+    packageSold
+  }
+}
