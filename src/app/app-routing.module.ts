@@ -58,6 +58,30 @@ const routes: Routes = [
         // canActivate: [TabGuard],
         // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
       },
+      {
+        path: 'earthlink',
+        loadChildren: () =>
+          import('./modules/providers/earthlink/earthlink.module').then(
+            (m) => m.EarthlinkModule
+          ),
+        resolve: {
+          data: TabResolver,
+        },
+        // canActivate: [TabGuard],
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
+      },
+      {
+        path: 'kinetic',
+        loadChildren: () =>
+          import('./modules/providers/kinetic/kinetic.module').then(
+            (m) => m.kineticModule
+          ),
+        resolve: {
+          data: TabResolver,
+        },
+        // canActivate: [TabGuard],
+        // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
+      },
       
       {
         path: 'register',
