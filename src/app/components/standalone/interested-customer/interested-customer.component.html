@@ -9,10 +9,21 @@
     Please correct the errors below and resubmit the form.
   </h2>
 </div>
-<div>
+<div class="creat-alead-outer">
   <div class="dashboard">
     <div class="dashboard_inner_header">
-      <h2 class="inner-header-heading">Create Lead</h2>
+      <div class="dns_inner_img">
+        <img
+          src="../../../../../../assets/images/xfinty_page_logo.png"
+          alt=""
+        />
+      </div>
+      <div class="dns_inner_img dsi_half_right">
+        <img
+          src="../../../../../../assets/images/create-a-lead-header.png"
+          alt=""
+        />
+      </div>
     </div>
     <div class="new_sale_wrapper">
       <form
@@ -215,7 +226,7 @@
         </div>
 
         <div
-          class="form-group"
+          class="form-group form-group-full-width"
           [ngClass]="{ 'has-error': submitted && f['zipCode'].invalid }"
         >
           <label for="zipCode">Zip Code <span class="req-stars">*</span></label>
