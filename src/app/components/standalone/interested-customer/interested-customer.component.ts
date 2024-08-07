@@ -1,117 +1,75 @@
-import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { InterestedCustomerService } from './interested-customer.service';
+import {
+  // InterestedCustomer,
+  Provider,
+  CreateInterestedCustomerInput,
+} from '../../../../generated/graphqlTypes';
 import { CommonModule } from '@angular/common';
-
-interface InterestedCustomerInput {
-  name: string;
-  phoneNumber: string;
-  email: string;
-  interestedProducts: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  comments: string;
-  cx_firstName: string;
-  cx_lastName: string;
-  addressLine2: string;
-  SSN: string;
-  DOB: string;
-  callbackDate: Date | string;
-  callbackTime: Date | string;
-}
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-interested-customer',
-  standalone: true,
   imports: [CommonModule, FormsModule],
+  standalone: true,
+  selector: 'app-interested-customer',
   templateUrl: './interested-customer.component.html',
   styleUrls: ['./interested-customer.component.css'],
 })
-export class InterestedCustomerComponent {
-  interestedCustomerInput: InterestedCustomerInput = {
-    name: '',
+export class InterestedCustomerComponent implements OnInit {
+  interestedCustomer: CreateInterestedCustomerInput = {
+    firstName: '',
+    lastName: '',
+    ssn: '',
+    dob: '',
+    callbackDate: '',
+    callbackTime: '',
     phoneNumber: '',
     email: '',
-    interestedProducts: '',
+    provider: Provider.Adt,
     address: '',
     city: '',
     state: '',
     zipCode: '',
     comments: '',
-    cx_firstName: '',
-    cx_lastName: '',
-    addressLine2: '',
-    SSN: '',
-    DOB: '',
-    callbackDate: '',
-    callbackTime: '',
   };
+  providers = Object.values(Provider);
+  submitted = false;
 
-  states: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
+  constructor(private interestedCustomerService: InterestedCustomerService) {}
 
-  constructor() {}
+  ngOnInit(): void {}
 
-  onSubmit(form: NgForm): void {
-    if (form.valid) {
-      console.log(
-        'Interested customer created successfully:',
-        this.interestedCustomerInput
-      );
-      // Handle form submission, e.g., call an API to save the lead
-    } else {
-      console.error('Form is invalid');
-    }
+  onSubmit(): void {
+    this.interestedCustomerService
+      .createInterestedCustomer(this.interestedCustomer)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.submitted = true;
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
+  newCustomer(): void {
+    this.submitted = false;
+    this.interestedCustomer = {
+      firstName: '',
+      lastName: '',
+      ssn: '',
+      dob: '',
+      callbackDate: '',
+      callbackTime: '',
+      phoneNumber: '',
+      email: '',
+      provider: Provider.Adt,
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      comments: '',
+    };
   }
 }

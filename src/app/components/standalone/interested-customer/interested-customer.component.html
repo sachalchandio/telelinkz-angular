@@ -1,92 +1,107 @@
-<div>
-  
-
+<div *ngIf="submitted">
+  <h2>Lead created successfully!</h2>
+  <button (click)="newCustomer()">Add Another Lead</button>
+</div>
+<div *ngIf="!submitted">
   <div class="dashboard">
     <div class="dashboard_inner_header">
-      <h2 class="inner-header-heading">
-        Create Lead
-      </h2>
+      <h2 class="inner-header-heading">Create Lead</h2>
     </div>
     <div class="new_sale_wrapper">
-      <form (ngSubmit)="onSubmit(leadForm)" #leadForm="ngForm" class="my_form">
-       <div class="form-group">
-      <label for="cx_firstName"
-        >Customer's First Name<span class="req-stars">*</span></label
-      >
-      <input
-        type="text"
-        id="cx_firstName"
-        required
-        [(ngModel)]="interestedCustomerInput.cx_firstName"
-        name="cx_firstName"
-        placeholder="Michael"
-        #cx_firstName="ngModel"
-      />
-      <i class="material-icons">person</i>
-    </div>
-
-    <div class="form-group">
-      <label for="cx_lastName">Customer's Last Name</label>
-      <input
-        type="text"
-        id="cx_lastName"
-        required
-        [(ngModel)]="interestedCustomerInput.cx_lastName"
-        name="cx_lastName"
-        placeholder="Hosier"
-        #cx_lastName="ngModel"
-      />
-      <i class="material-icons">person</i>
-    </div>
-    
+      <form (ngSubmit)="onSubmit()" #leadForm="ngForm" class="my_form">
         <div class="form-group">
-      <label for="SSN">SSN</label>
-      <input
-        type="text"
-        id="SSN"
-        required
-        [(ngModel)]="interestedCustomerInput.SSN"
-        name="SSN"
-        placeholder="SSN"
-        #city="ngModel"
-      />
-      <i class="material-icons">card</i>
-    </div>
-        
-         <div class="form-group">
-      <label for="DOB">Date of Birth</label>
-      <input
-        type="date"
-        id="DOB"
-        required
-        [(ngModel)]="interestedCustomerInput.DOB"
-        name="DOB"
-        placeholder="Date of Birth"
-        #dob="ngModel"
-      />
-      <i class="material-icons">calendar_today</i>
-    </div>
+          <label for="firstName"
+            >Customer's First Name<span class="req-stars">*</span></label
+          >
+          <input
+            type="text"
+            id="firstName"
+            required
+            [(ngModel)]="interestedCustomer.firstName"
+            name="firstName"
+            placeholder="Michael"
+            #firstName="ngModel"
+          />
+          <i class="material-icons">person</i>
+        </div>
 
-    <div class="form-group">
-      <label for="callbackDate">CallBack Date</label>
-      <input
-        type="date"
-        id="callbackDate"
-        required
-        [(ngModel)]="interestedCustomerInput.callbackDate"
-        name="callbackDate"
-        #dob="ngModel"
-      />
-      <i class="material-icons">calendar_today</i>
-    </div>
-        
         <div class="form-group">
-          <label for="phoneNumber">Phone Number <span class="req-stars">*</span></label>
+          <label for="lastName">Customer's Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            required
+            [(ngModel)]="interestedCustomer.lastName"
+            name="lastName"
+            placeholder="Hosier"
+            #lastName="ngModel"
+          />
+          <i class="material-icons">person</i>
+        </div>
+
+        <div class="form-group">
+          <label for="ssn">SSN</label>
+          <input
+            type="text"
+            id="ssn"
+            required
+            [(ngModel)]="interestedCustomer.ssn"
+            name="ssn"
+            placeholder="SSN"
+            #ssn="ngModel"
+          />
+          <i class="material-icons">card</i>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            required
+            [(ngModel)]="interestedCustomer.dob"
+            name="dob"
+            placeholder="Date of Birth"
+            #dob="ngModel"
+          />
+          <i class="material-icons">calendar_today</i>
+        </div>
+
+        <div class="form-group">
+          <label for="callbackDate">CallBack Date</label>
+          <input
+            type="date"
+            id="callbackDate"
+            required
+            [(ngModel)]="interestedCustomer.callbackDate"
+            name="callbackDate"
+            #callbackDate="ngModel"
+          />
+          <i class="material-icons">calendar_today</i>
+        </div>
+
+        <div class="form-group">
+          <label for="callbackTime">CallBack Time</label>
+          <input
+            type="time"
+            id="callbackTime"
+            required
+            [(ngModel)]="interestedCustomer.callbackTime"
+            name="callbackTime"
+            #callbackTime="ngModel"
+          />
+          <i class="material-icons">calendar_today</i>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber"
+            >Phone Number <span class="req-stars">*</span></label
+          >
           <input
             type="tel"
             id="phoneNumber"
             required
-            [(ngModel)]="interestedCustomerInput.phoneNumber"
+            [(ngModel)]="interestedCustomer.phoneNumber"
             name="phoneNumber"
             placeholder="Phone Number"
             #phoneNumber="ngModel"
@@ -101,14 +116,14 @@
             Phone Number is required.
           </div>
         </div>
-    
+
         <div class="form-group">
           <label for="email">Email <span class="req-stars">*</span></label>
           <input
             type="email"
             id="email"
             required
-            [(ngModel)]="interestedCustomerInput.email"
+            [(ngModel)]="interestedCustomer.email"
             name="email"
             placeholder="Email"
             #email="ngModel"
@@ -121,37 +136,32 @@
             Valid Email is required.
           </div>
         </div>
-    
+
         <div class="form-group">
-          <label for="interestedProducts">Interested Products <span class="req-stars">*</span></label>
-          <input
-            type="text"
-            id="interestedProducts"
-            required
-            [(ngModel)]="interestedCustomerInput.interestedProducts"
-            name="interestedProducts"
-            placeholder="Interested Products"
-            #interestedProducts="ngModel"
-          />
-          <i class="material-icons">shopping_cart</i>
-          <div
-            *ngIf="
-              interestedProducts.invalid &&
-              (interestedProducts.dirty || interestedProducts.touched)
-            "
-            class="error"
+          <label for="provider"
+            >Provider <span class="req-stars">*</span></label
           >
-            Interested Products are required.
-          </div>
+          <select
+            id="provider"
+            required
+            [(ngModel)]="interestedCustomer.provider"
+            name="provider"
+            #provider="ngModel"
+          >
+            <option *ngFor="let provider of providers" [value]="provider">
+              {{ provider }}
+            </option>
+          </select>
+          <i class="material-icons">shopping_cart</i>
         </div>
-    
+
         <div class="form-group">
           <label for="address">Address <span class="req-stars">*</span></label>
           <input
             type="text"
             id="address"
             required
-            [(ngModel)]="interestedCustomerInput.address"
+            [(ngModel)]="interestedCustomer.address"
             name="address"
             placeholder="Address"
             #address="ngModel"
@@ -164,37 +174,38 @@
             Address is required.
           </div>
         </div>
-    
+
         <div class="form-group">
           <label for="city">City <span class="req-stars">*</span></label>
           <input
             type="text"
             id="city"
             required
-            [(ngModel)]="interestedCustomerInput.city"
+            [(ngModel)]="interestedCustomer.city"
             name="city"
             placeholder="City"
             #city="ngModel"
           />
           <i class="material-icons">location_city</i>
-          <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error">
+          <div
+            *ngIf="city.invalid && (city.dirty || city.touched)"
+            class="error"
+          >
             City is required.
           </div>
         </div>
-    
+
         <div class="form-group">
           <label for="state">State <span class="req-stars">*</span></label>
-          <select
+          <input
+            type="text"
             id="state"
             required
-            [(ngModel)]="interestedCustomerInput.state"
+            [(ngModel)]="interestedCustomer.state"
             name="state"
+            placeholder="State"
             #state="ngModel"
-          >
-            <option *ngFor="let state of states" [value]="state">
-              {{ state }}
-            </option>
-          </select>
+          />
           <i class="material-icons">map</i>
           <div
             *ngIf="state.invalid && (state.dirty || state.touched)"
@@ -203,14 +214,14 @@
             State is required.
           </div>
         </div>
-    
+
         <div class="form-group">
           <label for="zipCode">Zip Code <span class="req-stars">*</span></label>
           <input
             type="text"
             id="zipCode"
             required
-            [(ngModel)]="interestedCustomerInput.zipCode"
+            [(ngModel)]="interestedCustomer.zipCode"
             name="zipCode"
             placeholder="Zip Code"
             #zipCode="ngModel"
@@ -223,19 +234,21 @@
             Zip Code is required.
           </div>
         </div>
-    
+
         <div class="form-group form-group-full-width">
-          <label for="comments">Comments <span class="req-stars">*</span></label>
+          <label for="comments"
+            >Comments <span class="req-stars">*</span></label
+          >
           <textarea
             id="comments"
-            [(ngModel)]="interestedCustomerInput.comments"
+            [(ngModel)]="interestedCustomer.comments"
             name="comments"
             placeholder="Comments"
             #comments="ngModel"
           ></textarea>
           <i class="material-icons">comment</i>
         </div>
-    
+
         <div class="form-group form-group-full-width">
           <button class="form-button" type="submit">Submit</button>
         </div>

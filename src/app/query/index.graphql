@@ -247,3 +247,43 @@ query GetAtntSaleById($id: String!) {
     Phone
   }
 }
+
+query InterestedCustomers {
+  interestedCustomers {
+    id
+    firstName
+    lastName
+    ssn
+    dob
+    callbackDate
+    callbackTime
+    phoneNumber
+    email
+    provider
+    address
+    city
+    state
+    zipCode
+    comments
+  }
+}
+
+query InterestedCustomer($id: Int!) {
+  interestedCustomer(id: $id) {
+    id
+    firstName
+    lastName
+    ssn
+    dob
+    callbackDate
+    callbackTime
+    phoneNumber
+    email
+    provider
+    address
+    city
+    state
+    zipCode
+    comments
+  }
+}
