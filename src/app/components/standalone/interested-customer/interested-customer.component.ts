@@ -1,117 +1,85 @@
-import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { InterestedCustomerService } from './interested-customer.service';
+import {
+  Provider,
+  CreateInterestedCustomerInput,
+} from '../../../../generated/graphqlTypes';
 import { CommonModule } from '@angular/common';
-
-interface InterestedCustomerInput {
-  name: string;
-  phoneNumber: string;
-  email: string;
-  interestedProducts: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  comments: string;
-  cx_firstName: string;
-  cx_lastName: string;
-  addressLine2: string;
-  SSN: string;
-  DOB: string;
-  callbackDate: Date | string;
-  callbackTime: Date | string;
-}
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-interested-customer',
+  imports: [CommonModule, ReactiveFormsModule, MatSnackBarModule],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  selector: 'app-interested-customer',
   templateUrl: './interested-customer.component.html',
   styleUrls: ['./interested-customer.component.css'],
 })
-export class InterestedCustomerComponent {
-  interestedCustomerInput: InterestedCustomerInput = {
-    name: '',
-    phoneNumber: '',
-    email: '',
-    interestedProducts: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    comments: '',
-    cx_firstName: '',
-    cx_lastName: '',
-    addressLine2: '',
-    SSN: '',
-    DOB: '',
-    callbackDate: '',
-    callbackTime: '',
-  };
+export class InterestedCustomerComponent implements OnInit {
+  interestedCustomerForm: FormGroup;
+  providers = Object.values(Provider);
+  submitted = false;
 
-  states: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
+  constructor(
+    private interestedCustomerService: InterestedCustomerService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
+  ) {
+    this.interestedCustomerForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      ssn: ['', Validators.required],
+      dob: ['', Validators.required],
+      callbackDate: ['', Validators.required],
+      callbackTime: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      provider: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipCode: ['', Validators.required],
+      comments: ['', Validators.required],
+    });
+  }
 
-  constructor() {}
+  ngOnInit(): void {}
 
-  onSubmit(form: NgForm): void {
-    if (form.valid) {
-      console.log(
-        'Interested customer created successfully:',
-        this.interestedCustomerInput
-      );
-      // Handle form submission, e.g., call an API to save the lead
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.interestedCustomerForm.valid) {
+      const interestedCustomer: CreateInterestedCustomerInput =
+        this.interestedCustomerForm.value;
+      this.interestedCustomerService
+        .createInterestedCustomer(interestedCustomer)
+        .subscribe({
+          next: (data) => {
+            this.snackBar.open('Lead created successfully!', 'Close', {
+              duration: 3000,
+            });
+            this.submitted = false;
+            this.interestedCustomerForm.reset();
+          },
+          error: (err) => {
+            this.snackBar.open(`Error: ${err.message}`, 'Close', {
+              duration: 3000,
+            });
+            console.error(err);
+          },
+        });
     } else {
-      console.error('Form is invalid');
+      this.snackBar.open('Please fill all required fields', 'Close', {
+        duration: 3000,
+      });
     }
+  }
+
+  get f() {
+    return this.interestedCustomerForm.controls;
   }
 }

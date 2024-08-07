@@ -326,6 +326,37 @@ export type CreateCommentInput = {
   userId: Scalars['ID']['input'];
 };
 
+export type CreateInterestedCustomerInput = {
+  /** Address of the customer */
+  address: Scalars['String']['input'];
+  /** Callback date for the customer */
+  callbackDate: Scalars['String']['input'];
+  /** Callback time for the customer */
+  callbackTime: Scalars['String']['input'];
+  /** City of the customer */
+  city: Scalars['String']['input'];
+  /** Additional comments */
+  comments: Scalars['String']['input'];
+  /** Date of birth of the customer */
+  dob: Scalars['String']['input'];
+  /** Email address of the customer */
+  email: Scalars['String']['input'];
+  /** First name of the customer */
+  firstName: Scalars['String']['input'];
+  /** Last name of the customer */
+  lastName: Scalars['String']['input'];
+  /** Phone number of the customer */
+  phoneNumber: Scalars['String']['input'];
+  /** Provider selected by the customer */
+  provider: Provider;
+  /** Social Security Number of the customer */
+  ssn: Scalars['String']['input'];
+  /** State of the customer */
+  state: Scalars['String']['input'];
+  /** Zip code of the customer */
+  zipCode: Scalars['String']['input'];
+};
+
 export type CreateSaleStageInput = {
   saleId: Scalars['ID']['input'];
   saleType: SaleType;
@@ -368,6 +399,40 @@ export enum InstallationType {
   Undetermined = 'UNDETERMINED'
 }
 
+export type InterestedCustomer = {
+  __typename?: 'InterestedCustomer';
+  /** Address of the customer */
+  address: Scalars['String']['output'];
+  /** Callback date for the customer */
+  callbackDate: Scalars['String']['output'];
+  /** Callback time for the customer */
+  callbackTime: Scalars['String']['output'];
+  /** City of the customer */
+  city: Scalars['String']['output'];
+  /** Additional comments */
+  comments: Scalars['String']['output'];
+  /** Date of birth of the customer */
+  dob: Scalars['String']['output'];
+  /** Email address of the customer */
+  email: Scalars['String']['output'];
+  /** First name of the customer */
+  firstName: Scalars['String']['output'];
+  /** Unique identifier for the interested customer */
+  id: Scalars['Int']['output'];
+  /** Last name of the customer */
+  lastName: Scalars['String']['output'];
+  /** Phone number of the customer */
+  phoneNumber: Scalars['String']['output'];
+  /** Provider selected by the customer */
+  provider: Provider;
+  /** Social Security Number of the customer */
+  ssn: Scalars['String']['output'];
+  /** State of the customer */
+  state: Scalars['String']['output'];
+  /** Zip code of the customer */
+  zipCode: Scalars['String']['output'];
+};
+
 export type LoginUserInput = {
   /** User email */
   email: Scalars['String']['input'];
@@ -393,6 +458,7 @@ export type Mutation = {
   createAtntSaleBulk: Array<AtntSale>;
   createAuditForm: AuditForm;
   createComment: Comment;
+  createInterestedCustomer: InterestedCustomer;
   createSaleStage: SaleStage;
   createSaleStageHistory: SaleStageHistory;
   createXfinitySale: XfinitySale;
@@ -427,6 +493,11 @@ export type MutationCreateAuditFormArgs = {
 
 export type MutationCreateCommentArgs = {
   createCommentInput: CreateCommentInput;
+};
+
+
+export type MutationCreateInterestedCustomerArgs = {
+  createInterestedCustomerInput: CreateInterestedCustomerInput;
 };
 
 
@@ -504,6 +575,48 @@ export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
 };
 
+export enum Provider {
+  Adt = 'ADT',
+  Att = 'ATT',
+  AltaFiber = 'AltaFiber',
+  AstoundBusiness = 'Astound_Business',
+  Breezeline = 'Breezeline',
+  BreezelineBusiness = 'Breezeline_Business',
+  BrightSpeedBusiness = 'BrightSpeed_Business',
+  Brightspeed = 'Brightspeed',
+  ComcastBusiness = 'Comcast_Business',
+  ComcastXfinity = 'Comcast_Xfinity',
+  Cox = 'Cox',
+  CoxBusiness = 'Cox_Business',
+  CreditCheckFailed = 'Credit_Check_Failed',
+  Directv = 'DIRECTV',
+  DirecTvBusiness = 'DirecTV_Business',
+  Earthlink = 'Earthlink',
+  FidiumConsolidated = 'Fidium_Consolidated',
+  Frontier = 'Frontier',
+  FrontierBusiness = 'Frontier_Business',
+  HughesNet = 'HughesNet',
+  Mediacom = 'Mediacom',
+  MediacomBusiness = 'Mediacom_Business',
+  MetroNet = 'MetroNet',
+  OptimumBusiness = 'Optimum_Business',
+  OptimumSuddenlink = 'Optimum_Suddenlink',
+  Spectrum = 'Spectrum',
+  SpectrumBusiness = 'Spectrum_Business',
+  TMobile = 'T_Mobile',
+  TMobileBusiness = 'T_Mobile_Business',
+  TidioLeadsTracking = 'Tidio_Leads_Tracking',
+  VerizonBusiness = 'Verizon_Business',
+  VerizonWireless = 'Verizon_Wireless',
+  Viasat = 'Viasat',
+  Vivint = 'Vivint',
+  Wow = 'WOW',
+  WowBusiness = 'WOW_Business',
+  WindStream = 'WindStream',
+  WindstreamBusiness = 'Windstream_Business',
+  ZiplyFiber = 'Ziply_Fiber'
+}
+
 export type Query = {
   __typename?: 'Query';
   auditForm: AuditForm;
@@ -521,6 +634,8 @@ export type Query = {
   getSaleFlag: SaleFlag;
   getSaleHistory: Array<SaleStageHistory>;
   getXfinitySaleById: XfinitySale;
+  interestedCustomer: InterestedCustomer;
+  interestedCustomers: Array<InterestedCustomer>;
   loginUser: LoginUserResponse;
   saleStage: SaleStage;
   saleStageHistories: Array<SaleStageHistory>;
@@ -589,6 +704,11 @@ export type QueryGetSaleHistoryArgs = {
 
 export type QueryGetXfinitySaleByIdArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type QueryInterestedCustomerArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -1178,6 +1298,13 @@ export type CreateAtntSaleBulkMutationVariables = Exact<{
 
 export type CreateAtntSaleBulkMutation = { __typename?: 'Mutation', createAtntSaleBulk: Array<{ __typename?: 'AtntSale', id: string, orderDate: any, state: string, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, attTpvStatus: string, Internet: string, Phone: string, streetAddress: string, streetAddressLine2?: string | null, city: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, socialSecurityNumber?: string | null, email: string, product: string, packageSold: string, agent: { __typename?: 'User', id: string } }> };
 
+export type CreateInterestedCustomerMutationVariables = Exact<{
+  input: CreateInterestedCustomerInput;
+}>;
+
+
+export type CreateInterestedCustomerMutation = { __typename?: 'Mutation', createInterestedCustomer: { __typename?: 'InterestedCustomer', id: number, firstName: string, lastName: string, ssn: string, dob: string, callbackDate: string, callbackTime: string, phoneNumber: string, email: string, provider: Provider, address: string, city: string, state: string, zipCode: string, comments: string } };
+
 export type LoginUserQueryVariables = Exact<{
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -1261,6 +1388,18 @@ export type GetAtntSaleByIdQueryVariables = Exact<{
 
 
 export type GetAtntSaleByIdQuery = { __typename?: 'Query', getAtntSaleById: { __typename?: 'AtntSale', id: string, orderDate: any, cx_firstName: string, cx_lastName: string, concertOrderID: string, accountNumber: string, customerType: string, saraPlusAT_TUserID: string, orderNumber: string, installationDate: any, installationTime: string, installation: string, streetAddress: string, streetAddressLine2?: string | null, city: string, state: string, zipcode: string, phoneNumber: string, phoneNumber_second?: string | null, email: string, product: string, packageSold: string, attTpvStatus: string, Internet: string, Phone: string, agent: { __typename?: 'User', id: string } } };
+
+export type InterestedCustomersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type InterestedCustomersQuery = { __typename?: 'Query', interestedCustomers: Array<{ __typename?: 'InterestedCustomer', id: number, firstName: string, lastName: string, ssn: string, dob: string, callbackDate: string, callbackTime: string, phoneNumber: string, email: string, provider: Provider, address: string, city: string, state: string, zipCode: string, comments: string }> };
+
+export type InterestedCustomerQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type InterestedCustomerQuery = { __typename?: 'Query', interestedCustomer: { __typename?: 'InterestedCustomer', id: number, firstName: string, lastName: string, ssn: string, dob: string, callbackDate: string, callbackTime: string, phoneNumber: string, email: string, provider: Provider, address: string, city: string, state: string, zipCode: string, comments: string } };
 
 export const CreateXfinitySaleDocument = gql`
     mutation CreateXfinitySale($input: CreateXfinitySaleInput!) {
@@ -1668,6 +1807,38 @@ export const CreateAtntSaleBulkDocument = gql`
       super(apollo);
     }
   }
+export const CreateInterestedCustomerDocument = gql`
+    mutation CreateInterestedCustomer($input: CreateInterestedCustomerInput!) {
+  createInterestedCustomer(createInterestedCustomerInput: $input) {
+    id
+    firstName
+    lastName
+    ssn
+    dob
+    callbackDate
+    callbackTime
+    phoneNumber
+    email
+    provider
+    address
+    city
+    state
+    zipCode
+    comments
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateInterestedCustomerGQL extends Apollo.Mutation<CreateInterestedCustomerMutation, CreateInterestedCustomerMutationVariables> {
+    document = CreateInterestedCustomerDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginUserDocument = gql`
     query LoginUser($email: String!, $password: String!) {
   loginUser(loginUserInput: {email: $email, password: $password}) {
@@ -2035,6 +2206,70 @@ export const GetAtntSaleByIdDocument = gql`
   })
   export class GetAtntSaleByIdGQL extends Apollo.Query<GetAtntSaleByIdQuery, GetAtntSaleByIdQueryVariables> {
     document = GetAtntSaleByIdDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const InterestedCustomersDocument = gql`
+    query InterestedCustomers {
+  interestedCustomers {
+    id
+    firstName
+    lastName
+    ssn
+    dob
+    callbackDate
+    callbackTime
+    phoneNumber
+    email
+    provider
+    address
+    city
+    state
+    zipCode
+    comments
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InterestedCustomersGQL extends Apollo.Query<InterestedCustomersQuery, InterestedCustomersQueryVariables> {
+    document = InterestedCustomersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const InterestedCustomerDocument = gql`
+    query InterestedCustomer($id: Int!) {
+  interestedCustomer(id: $id) {
+    id
+    firstName
+    lastName
+    ssn
+    dob
+    callbackDate
+    callbackTime
+    phoneNumber
+    email
+    provider
+    address
+    city
+    state
+    zipCode
+    comments
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InterestedCustomerGQL extends Apollo.Query<InterestedCustomerQuery, InterestedCustomerQueryVariables> {
+    document = InterestedCustomerDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
