@@ -1,0 +1,191 @@
+<div>
+  
+
+  <div class="dashboard">
+    <div class="dashboard_inner_header">
+      <h2 class="inner-header-heading">
+        Create Lead
+      </h2>
+    </div>
+    <div class="new_sale_wrapper">
+      <form (ngSubmit)="onSubmit(leadForm)" #leadForm="ngForm" class="my_form">
+        <div class="form-group">
+          <label for="name">Name <span class="req-stars">*</span></label>
+          <input
+            type="text"
+            id="name"
+            required
+            [(ngModel)]="interestedCustomerInput.name"
+            name="name"
+            placeholder="Name"
+            #name="ngModel"
+          />
+          <i class="material-icons">person</i>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+            Name is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number <span class="req-stars">*</span></label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            required
+            [(ngModel)]="interestedCustomerInput.phoneNumber"
+            name="phoneNumber"
+            placeholder="Phone Number"
+            #phoneNumber="ngModel"
+          />
+          <i class="material-icons">phone</i>
+          <div
+            *ngIf="
+              phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)
+            "
+            class="error"
+          >
+            Phone Number is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="email">Email <span class="req-stars">*</span></label>
+          <input
+            type="email"
+            id="email"
+            required
+            [(ngModel)]="interestedCustomerInput.email"
+            name="email"
+            placeholder="Email"
+            #email="ngModel"
+          />
+          <i class="material-icons">email</i>
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="error"
+          >
+            Valid Email is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="interestedProducts">Interested Products <span class="req-stars">*</span></label>
+          <input
+            type="text"
+            id="interestedProducts"
+            required
+            [(ngModel)]="interestedCustomerInput.interestedProducts"
+            name="interestedProducts"
+            placeholder="Interested Products"
+            #interestedProducts="ngModel"
+          />
+          <i class="material-icons">shopping_cart</i>
+          <div
+            *ngIf="
+              interestedProducts.invalid &&
+              (interestedProducts.dirty || interestedProducts.touched)
+            "
+            class="error"
+          >
+            Interested Products are required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="address">Address <span class="req-stars">*</span></label>
+          <input
+            type="text"
+            id="address"
+            required
+            [(ngModel)]="interestedCustomerInput.address"
+            name="address"
+            placeholder="Address"
+            #address="ngModel"
+          />
+          <i class="material-icons">home</i>
+          <div
+            *ngIf="address.invalid && (address.dirty || address.touched)"
+            class="error"
+          >
+            Address is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="city">City <span class="req-stars">*</span></label>
+          <input
+            type="text"
+            id="city"
+            required
+            [(ngModel)]="interestedCustomerInput.city"
+            name="city"
+            placeholder="City"
+            #city="ngModel"
+          />
+          <i class="material-icons">location_city</i>
+          <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error">
+            City is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="state">State <span class="req-stars">*</span></label>
+          <select
+            id="state"
+            required
+            [(ngModel)]="interestedCustomerInput.state"
+            name="state"
+            #state="ngModel"
+          >
+            <option *ngFor="let state of states" [value]="state">
+              {{ state }}
+            </option>
+          </select>
+          <i class="material-icons">map</i>
+          <div
+            *ngIf="state.invalid && (state.dirty || state.touched)"
+            class="error"
+          >
+            State is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="zipCode">Zip Code <span class="req-stars">*</span></label>
+          <input
+            type="text"
+            id="zipCode"
+            required
+            [(ngModel)]="interestedCustomerInput.zipCode"
+            name="zipCode"
+            placeholder="Zip Code"
+            #zipCode="ngModel"
+          />
+          <i class="material-icons">local_post_office</i>
+          <div
+            *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)"
+            class="error"
+          >
+            Zip Code is required.
+          </div>
+        </div>
+    
+        <div class="form-group form-group-full-width">
+          <label for="comments">Comments <span class="req-stars">*</span></label>
+          <textarea
+            id="comments"
+            [(ngModel)]="interestedCustomerInput.comments"
+            name="comments"
+            placeholder="Comments"
+            #comments="ngModel"
+          ></textarea>
+          <i class="material-icons">comment</i>
+        </div>
+    
+        <div class="form-group form-group-full-width">
+          <button class="form-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

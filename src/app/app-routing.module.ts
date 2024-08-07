@@ -58,13 +58,20 @@ const routes: Routes = [
         // canActivate: [TabGuard],
         // data: { expectedUserType: UserType.Admin }, // Only Admins can access xfinity
       },
-      
+
       {
         path: 'register',
         loadChildren: () =>
           import('./modules/UserReg/userReg.module').then(
             (m) => m.UserRegModule
           ),
+      },
+      {
+        path: 'interested-customer',
+        loadComponent: () =>
+          import(
+            './components/standalone/interested-customer/interested-customer.component'
+          ).then((m) => m.InterestedCustomerComponent),
       },
       {
         path: 'unauthorized',
