@@ -1,20 +1,32 @@
+<!-- src/app/components/standalone/interested-customer/interested-customer.component.html -->
 <div class="new_sale_wrapper">
   <form (ngSubmit)="onSubmit(leadForm)" #leadForm="ngForm" class="my_form">
     <div class="form-group">
-      <label for="name">Name</label>
+      <label for="cx_firstName">Customer's First Name</label>
       <input
         type="text"
-        id="name"
+        id="cx_firstName"
         required
-        [(ngModel)]="interestedCustomerInput.name"
-        name="name"
-        placeholder="Name"
-        #name="ngModel"
+        [(ngModel)]="interestedCustomerInput.cx_firstName"
+        name="cx_firstName"
+        placeholder="Michael"
+        #cx_firstName="ngModel"
       />
       <i class="material-icons">person</i>
-      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-        Name is required.
-      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cx_lastName">Customer's Last Name</label>
+      <input
+        type="text"
+        id="cx_lastName"
+        required
+        [(ngModel)]="interestedCustomerInput.cx_lastName"
+        name="cx_lastName"
+        placeholder="Hosier"
+        #cx_lastName="ngModel"
+      />
+      <i class="material-icons">person</i>
     </div>
 
     <div class="form-group">
@@ -29,14 +41,6 @@
         #phoneNumber="ngModel"
       />
       <i class="material-icons">phone</i>
-      <div
-        *ngIf="
-          phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)
-        "
-        class="error"
-      >
-        Phone Number is required.
-      </div>
     </div>
 
     <div class="form-group">
@@ -51,12 +55,6 @@
         #email="ngModel"
       />
       <i class="material-icons">email</i>
-      <div
-        *ngIf="email.invalid && (email.dirty || email.touched)"
-        class="error"
-      >
-        Valid Email is required.
-      </div>
     </div>
 
     <div class="form-group">
@@ -71,15 +69,6 @@
         #interestedProducts="ngModel"
       />
       <i class="material-icons">shopping_cart</i>
-      <div
-        *ngIf="
-          interestedProducts.invalid &&
-          (interestedProducts.dirty || interestedProducts.touched)
-        "
-        class="error"
-      >
-        Interested Products are required.
-      </div>
     </div>
 
     <div class="form-group">
@@ -94,12 +83,20 @@
         #address="ngModel"
       />
       <i class="material-icons">home</i>
-      <div
-        *ngIf="address.invalid && (address.dirty || address.touched)"
-        class="error"
-      >
-        Address is required.
-      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="addressLine2">Address Line 2</label>
+      <input
+        type="text"
+        id="addressLine2"
+        required
+        [(ngModel)]="interestedCustomerInput.addressLine2"
+        name="addressLine2"
+        placeholder="apt b 302 | suite 100 | trailer 3"
+        #address="ngModel"
+      />
+      <i class="material-icons">home</i>
     </div>
 
     <div class="form-group">
@@ -114,9 +111,6 @@
         #city="ngModel"
       />
       <i class="material-icons">location_city</i>
-      <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error">
-        City is required.
-      </div>
     </div>
 
     <div class="form-group">
@@ -133,12 +127,6 @@
         </option>
       </select>
       <i class="material-icons">map</i>
-      <div
-        *ngIf="state.invalid && (state.dirty || state.touched)"
-        class="error"
-      >
-        State is required.
-      </div>
     </div>
 
     <div class="form-group">
@@ -153,12 +141,60 @@
         #zipCode="ngModel"
       />
       <i class="material-icons">local_post_office</i>
-      <div
-        *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)"
-        class="error"
-      >
-        Zip Code is required.
-      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="SSN">SSN</label>
+      <input
+        type="text"
+        id="SSN"
+        required
+        [(ngModel)]="interestedCustomerInput.SSN"
+        name="SSN"
+        placeholder="SSN"
+        #city="ngModel"
+      />
+      <i class="material-icons">card</i>
+    </div>
+
+    <div class="form-group">
+      <label for="DOB">Date of Birth</label>
+      <input
+        type="date"
+        id="DOB"
+        required
+        [(ngModel)]="interestedCustomerInput.DOB"
+        name="DOB"
+        placeholder="Date of Birth"
+        #dob="ngModel"
+      />
+      <i class="material-icons">calendar_today</i>
+    </div>
+
+    <div class="form-group">
+      <label for="callbackDate">CallBack Date</label>
+      <input
+        type="date"
+        id="callbackDate"
+        required
+        [(ngModel)]="interestedCustomerInput.callbackDate"
+        name="callbackDate"
+        #dob="ngModel"
+      />
+      <i class="material-icons">calendar_today</i>
+    </div>
+
+    <div class="form-group">
+      <label for="callbackTime">CallBack Time</label>
+      <input
+        type="time"
+        id="callbackTime"
+        required
+        [(ngModel)]="interestedCustomerInput.callbackTime"
+        name="callbackTime"
+        #dob="ngModel"
+      />
+      <i class="material-icons">access_time</i>
     </div>
 
     <div class="form-group">
