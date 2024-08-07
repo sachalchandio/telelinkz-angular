@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 interface InterestedCustomerInput {
@@ -12,6 +12,13 @@ interface InterestedCustomerInput {
   state: string;
   zipCode: string;
   comments: string;
+  cx_firstName: string;
+  cx_lastName: string;
+  addressLine2: string;
+  SSN: string;
+  DOB: string;
+  callbackDate: Date | string;
+  callbackTime: Date | string;
 }
 
 @Component({
@@ -32,6 +39,13 @@ export class InterestedCustomerComponent {
     state: '',
     zipCode: '',
     comments: '',
+    cx_firstName: '',
+    cx_lastName: '',
+    addressLine2: '',
+    SSN: '',
+    DOB: '',
+    callbackDate: '',
+    callbackTime: '',
   };
 
   states: string[] = [

@@ -9,23 +9,77 @@
     </div>
     <div class="new_sale_wrapper">
       <form (ngSubmit)="onSubmit(leadForm)" #leadForm="ngForm" class="my_form">
-        <div class="form-group">
-          <label for="name">Name <span class="req-stars">*</span></label>
-          <input
-            type="text"
-            id="name"
-            required
-            [(ngModel)]="interestedCustomerInput.name"
-            name="name"
-            placeholder="Name"
-            #name="ngModel"
-          />
-          <i class="material-icons">person</i>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-            Name is required.
-          </div>
-        </div>
+       <div class="form-group">
+      <label for="cx_firstName"
+        >Customer's First Name<span class="req-stars">*</span></label
+      >
+      <input
+        type="text"
+        id="cx_firstName"
+        required
+        [(ngModel)]="interestedCustomerInput.cx_firstName"
+        name="cx_firstName"
+        placeholder="Michael"
+        #cx_firstName="ngModel"
+      />
+      <i class="material-icons">person</i>
+    </div>
+
+    <div class="form-group">
+      <label for="cx_lastName">Customer's Last Name</label>
+      <input
+        type="text"
+        id="cx_lastName"
+        required
+        [(ngModel)]="interestedCustomerInput.cx_lastName"
+        name="cx_lastName"
+        placeholder="Hosier"
+        #cx_lastName="ngModel"
+      />
+      <i class="material-icons">person</i>
+    </div>
     
+        <div class="form-group">
+      <label for="SSN">SSN</label>
+      <input
+        type="text"
+        id="SSN"
+        required
+        [(ngModel)]="interestedCustomerInput.SSN"
+        name="SSN"
+        placeholder="SSN"
+        #city="ngModel"
+      />
+      <i class="material-icons">card</i>
+    </div>
+        
+         <div class="form-group">
+      <label for="DOB">Date of Birth</label>
+      <input
+        type="date"
+        id="DOB"
+        required
+        [(ngModel)]="interestedCustomerInput.DOB"
+        name="DOB"
+        placeholder="Date of Birth"
+        #dob="ngModel"
+      />
+      <i class="material-icons">calendar_today</i>
+    </div>
+
+    <div class="form-group">
+      <label for="callbackDate">CallBack Date</label>
+      <input
+        type="date"
+        id="callbackDate"
+        required
+        [(ngModel)]="interestedCustomerInput.callbackDate"
+        name="callbackDate"
+        #dob="ngModel"
+      />
+      <i class="material-icons">calendar_today</i>
+    </div>
+        
         <div class="form-group">
           <label for="phoneNumber">Phone Number <span class="req-stars">*</span></label>
           <input
