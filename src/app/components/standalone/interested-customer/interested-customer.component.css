@@ -17,9 +17,25 @@
 
 .form-group {
   margin-bottom: 20px;
-  width: 25%;
+  width: 49%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
+.form-group-full-width{
+  width: 100%;
+}
+.error {
+  color: red;
+  font-size: 11px;
+}
+.my_form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .form-group i {
   position: absolute;
   color: #b9b9b9;
@@ -41,8 +57,8 @@
 }
 
 .form-group input,
-.form-group select {
-  width: 83%;
+.form-group select,
+.form-group textarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -52,60 +68,34 @@
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
-.form-group input:focus-visible,
-.form-group select:focus-visible {
-  border-color: #fff;
-  background-color: #ffac0b;
-  outline: none;
-  color: #ffffff;
+.form-group textarea{
+  min-height: 100px;
 }
-.form-group input:focus-visible + i,
-.form-group select:focus-visible + i {
+.dashboard {
+  position: relative;
+  margin-top: 70px;
+  max-width: 76%;
+  width: 100%;
+  margin: 40px auto 0 auto;
+}
+.new_sale_wrapper{
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+.inner-header-heading {
+  width: 100%;
+  text-align: center;
   color: #fff;
-}
-
-.form-group select {
-  width: 96%;
-}
-
-button[type="submit"] {
-  padding: 10px 20px;
-  /* background-color: #007bff; */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 21px;
-  margin-left: auto;
-  background-color: #0e72fe;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-  height: auto;
-}
-.form-group button {
-  padding: 0;
-  height: 34px;
-  width: 66px;
-}
-.form-group::before {
-  content: "";
-  position: absolute;
-  top: 12px;
-  left: 33px;
-  width: 1px;
-  height: 16px;
-  background: #b5b5b5;
-}
-.form-group input:focus-visible ~ i {
-  color: #fff;
-}
-.form-group:focus-visible ~ i {
-  color: #fff;
+  font-size: 33px;
+  position: relative;
+  z-index: 2;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: capitalize;
 }
 .dashboard_inner_header {
-  min-height: 115px;
+  min-height: 90px;
   background-position: center;
   background-size: cover;
   max-width: 100%;
@@ -115,7 +105,7 @@ button[type="submit"]:hover {
   justify-content: space-between;
   padding: 20px;
   position: relative;
-  margin: 46px 0 0 0;
+  margin: 0 0 40px 0;
 }
 .dashboard_inner_header::before {
   content: "";
@@ -153,6 +143,19 @@ button[type="submit"]:hover {
   bottom: -75px;
   width: 200px;
 }
+.form-button{
+padding: 10px 20px;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin-left: auto;
+background: linear-gradient(90deg, #0e5298 47%, #0057b8 100%);
+width: 100%;
+min-height: 42px;
+font-size: 19px;
+margin-left: auto;
+}
 @keyframes bg {
   0% {
     background-position-x: 0;
@@ -162,10 +165,14 @@ button[type="submit"]:hover {
     background-position-x: calc(var(--bgWidth) * 1);
   }
 }
-
-@media screen and (max-width: 1600px) {
-  .form-group input {
-    width: 77%;
+.form-group label span {
+  color: red;
+}
+@media screen and (max-width:1500px) {
+  .dashboard {
+    max-width: 90%;
+    width: 100%;
+    margin: 40px auto 0 auto;
   }
 }
 @media screen and (min-width: 1440px) {
