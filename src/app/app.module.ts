@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import * as shared from './components/shared';
 import { GraphQLModule } from './graphql.module';
 import {
+  HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
@@ -32,6 +33,7 @@ import { SaleEffects } from './store/effects/sale.effects';
 import { appReducers } from './store/app.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment.myenv';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 class GlobalErrorHandler implements ErrorHandler {
   handleError(error: any): void {
@@ -80,6 +82,11 @@ const COMPONENTS = [
     AuthenticationService,
     provideHttpClient(withInterceptorsFromDi()),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
 })
 export class AppModule {}
