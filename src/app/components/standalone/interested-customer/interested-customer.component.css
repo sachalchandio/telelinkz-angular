@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.filter-form {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 11px;
+  margin: 48px 0px 30px 0;
+  box-shadow: 0 1px 2px rgba(56, 65, 74, 0.15);
+  font-family: "Poppins", sans-serif;
+}
+
+.has-error input,
+.has-error select,
+.has-error textarea {
+  border-color: red !important;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 1em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
+.error-icon {
+  font-size: 1.5em;
+  color: #721c24;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 49%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.form-group-full-width {
+  width: 100%;
+}
+.error {
+  color: red;
+  font-size: 11px;
+}
+.my_form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-group i {
+  position: absolute;
+  color: #b9b9b9;
+  font-size: 14px;
+  position: absolute;
+  color: #b9b9b9;
+  top: 12px;
+  left: 9px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 10px;
+  position: absolute;
+  top: -7px;
+  left: 11px;
+  background-color: #fff;
+  padding: 0 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #757575;
+  padding-left: 38px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.form-group textarea {
+  min-height: 100px;
+}
+.dashboard {
+  position: relative;
+  margin-top: 70px;
+  max-width: 76%;
+  width: 100%;
+  margin: 40px auto 0 auto;
+}
+.new_sale_wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+.inner-header-heading {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 33px;
+  position: relative;
+  z-index: 2;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+.dashboard_inner_header {
+  min-height: 90px;
+  background-position: center;
+  background-size: cover;
+  max-width: 100%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  margin: 0 0 40px 0;
+}
+.dashboard_inner_header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -22px;
+  --bgWidth: 10000px;
+  height: 100px;
+  background: linear-gradient(
+    to right,
+    #1e5799 0%,
+    #33167a 19%,
+    #5449eb 60%,
+    #8700a3 83%,
+    #1e5799 100%
+  );
+  background-size: var(--bgWidth) 100%;
+  animation: bg 10s linear infinite;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 15px;
+}
+.dns_inner_img img {
+  max-width: 200px;
+  position: relative;
+}
+.dsi_half_right {
+  position: relative;
+}
+.dsi_half_right img {
+  position: absolute;
+  right: 0;
+  bottom: -75px;
+  width: 200px;
+}
+.form-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  background: linear-gradient(90deg, #0e5298 47%, #0057b8 100%);
+  width: 100%;
+  min-height: 42px;
+  font-size: 19px;
+  margin-left: auto;
+}
+@keyframes bg {
+  0% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: calc(var(--bgWidth) * 1);
+  }
+}
+.form-group label span {
+  color: red;
+}
+@media screen and (max-width: 1500px) {
+  .dashboard {
+    max-width: 90%;
+    width: 100%;
+    margin: 40px auto 0 auto;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .form-group input,
+  .form-group select {
+    font-size: 12px;
+  }
+  .form-group i {
+    font-size: 17px;
+  }
+}

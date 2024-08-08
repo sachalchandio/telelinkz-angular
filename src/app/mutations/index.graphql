@@ -273,3 +273,23 @@ mutation CreateAtntSaleBulk($input: CreateBatchAtntSaleInput!) {
     packageSold
   }
 }
+
+mutation CreateInterestedCustomer($input: CreateInterestedCustomerInput!) {
+  createInterestedCustomer(createInterestedCustomerInput: $input) {
+    id
+    firstName
+    lastName
+    ssn
+    dob
+    callbackDate
+    callbackTime
+    phoneNumber
+    email
+    provider
+    address
+    city
+    state
+    zipCode
+    comments
+  }
+}
