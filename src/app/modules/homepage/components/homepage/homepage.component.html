@@ -69,24 +69,13 @@
       </canvas>
     </div>
     <div class="graphContainer">
-      <h2>Radar Graph</h2>
+      <h2>Scatter Graph</h2>
       <canvas
         baseChart
         [datasets]="chartData"
         [labels]="chartLabels"
         [options]="chartOptions"
-        [type]="'radar'"
-      >
-      </canvas>
-    </div>
-    <div class="graphContainer">
-      <h2>Pie Chart</h2>
-      <canvas
-        baseChart
-        [datasets]="chartData"
-        [labels]="chartLabels"
-        [options]="chartOptions"
-        [type]="'pie'"
+        [type]="'scatter'"
       >
       </canvas>
     </div>
@@ -113,16 +102,30 @@
       </canvas>
     </div>
     <div class="graphContainer">
-      <h2>Scatter Graph</h2>
+      <h2>Radar Graph</h2>
       <canvas
         baseChart
         [datasets]="chartData"
         [labels]="chartLabels"
         [options]="chartOptions"
-        [type]="'scatter'"
+        [type]="'radar'"
       >
       </canvas>
     </div>
+    <div class="graphContainer">
+      <h2>Pie Chart</h2>
+      <canvas
+        baseChart
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [type]="'pie'"
+      >
+      </canvas>
+    </div>
+    
+    
+    
     <div class="graphContainer">
       <h2>Bubble Graph</h2>
       <canvas

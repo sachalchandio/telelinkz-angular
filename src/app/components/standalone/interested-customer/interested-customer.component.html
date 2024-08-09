@@ -11,7 +11,7 @@
 </div>
 <div class="creat-alead-outer">
   <div class="dashboard">
-    <div class="dashboard_inner_header">
+    <!-- <div class="dashboard_inner_header">
       <h2 class="inner-header-heading">
         Lead
       </h2>
@@ -21,43 +21,84 @@
           alt=""
         />
       </div>
-    </div>
+    </div> -->
     <div class="new_sale-gwrap">
+      <!-- user info sec -->
       <div class="user-info">
         <div class="user-info-header">
           <img src="../../../../assets/images/user-dp.jpg" alt="">
+          <div class="camera">
+            <img src="../../../../assets/images/photo-camera.png" alt="">
+          </div>
         </div>
-        <div class="info-details">
-          <p>
-            Lorem ipsum dolor, sit amet 
-          </p>
-          <span>
-            32
-          </span>
+        <div class="persone-info">
+          <h3 class="name">
+            stive wolf
+          </h3>
+          <h6 class="its-comp">
+            Micro soft
+          </h6>
         </div>
-        <div class="info-details">
-          <p>
-            Lorem ipsum dolor, sit amet 
-          </p>
-          <span>
-            32
-          </span>
-        </div>
-        <div class="info-details">
-          <p>
-            Lorem ipsum dolor, sit amet 
-          </p>
-          <span>
-            32
-          </span>
-        </div>
+        <ul class="del-list">
+          <li class="info-details">
+            <p>
+              Lorem ipsum dolor, sit amet 
+            </p>
+            <span>
+              32
+            </span>
+          </li>
+          <li class="info-details">
+            <p>
+              Lorem ipsum dolor, sit amet 
+            </p>
+            <span>
+              32
+            </span>
+          </li>
+          <li class="info-details">
+            <p>
+              Lorem ipsum dolor, sit amet 
+            </p>
+            <span>
+              32
+            </span>
+          </li>
+        </ul>
         <div class="user-footer">
+          <div class="v-pro">
+            <button class="view-pr-btn">
+              View Publick Profile
+            </button>
+            <div class="cpy-form-wrap">
+              <form action="">
+                <div class="cpy-form-inp">
+                  <input type="text" name="copy" id="copy" placeholder="https://innov8ivs.com/">
+                  <button type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" x="0" y="0" viewBox="0 0 488.3 488.3" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M314.25 85.4h-227c-21.3 0-38.6 17.3-38.6 38.6v325.7c0 21.3 17.3 38.6 38.6 38.6h227c21.3 0 38.6-17.3 38.6-38.6V124c-.1-21.3-17.4-38.6-38.6-38.6zm11.5 364.2c0 6.4-5.2 11.6-11.6 11.6h-227c-6.4 0-11.6-5.2-11.6-11.6V124c0-6.4 5.2-11.6 11.6-11.6h227c6.4 0 11.6 5.2 11.6 11.6v325.6z" fill="#77889a" opacity="1" data-original="#000000" class=""></path><path d="M401.05 0h-227c-21.3 0-38.6 17.3-38.6 38.6 0 7.5 6 13.5 13.5 13.5s13.5-6 13.5-13.5c0-6.4 5.2-11.6 11.6-11.6h227c6.4 0 11.6 5.2 11.6 11.6v325.7c0 6.4-5.2 11.6-11.6 11.6-7.5 0-13.5 6-13.5 13.5s6 13.5 13.5 13.5c21.3 0 38.6-17.3 38.6-38.6V38.6c0-21.3-17.3-38.6-38.6-38.6z" fill="#77889a" opacity="1" data-original="#000000" class=""></path></g></svg>
+                  </button>
+                </div>
+              </form>
+            </div>
 
+          </div>
         </div>
         
       </div>
+      <!-- form sev start from here -->
         <div class="new_sale_wrapper">
-          <form
+          <div class="form-header">
+            <div class="form-header-btn-wrap">
+              <button class="active">
+                Create A Lead
+              </button>
+              <button>
+                Audit A Lead
+              </button>
+            </div>
+          </div>
+          <div class="form-body">
+            <form
             [formGroup]="interestedCustomerForm"
             (ngSubmit)="onSubmit()"
             class="my_form"
@@ -295,6 +336,8 @@
               <button class="form-button" type="submit">Submit</button>
             </div>
           </form>
+          </div>
+          
         </div>
       
     </div>

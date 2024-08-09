@@ -16,10 +16,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 1.25rem;
+  padding: 1.25rem;
   position: relative;
-  margin-top: 70px;
+  margin-top: 4.375rem;
   max-width: 76%;
   width: 100%;
 }
@@ -30,10 +30,10 @@
 .card {
   background-color: #ffffff;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
+  border-radius: .9375rem;
+  box-shadow: 0rem 0rem 1.875rem 0rem rgba(162, 162, 162, 0.5);
   width: 16%;
-  min-height: 100px;
+  min-height: 6.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,18 +41,18 @@
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   text-align: center;
-  padding: 30px;
+  padding: 1.875rem;
 }
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-0.625rem);
 }
 .card i.material-icons {
-  font-size: 30px;
+  font-size: 1.875rem;
   color: #7314da;
-  margin-bottom: 10px;
+  margin-bottom: .625rem;
   background-color: #eaedf6;
   border-radius: 100%;
-  padding: 15px;
+  padding: .9375rem;
 }
 .cards .card:hover {
   background-color: #7314da;
@@ -66,7 +66,7 @@
 }
 
 .card p {
-  font-size: 15px; /* Larger text for readability */
+  font-size: .9375rem; /* Larger text for readability */
   color: #331679;
   font-weight: 500;
 }
@@ -75,15 +75,15 @@
   position: relative;
 }
 .dashboard_inner_header {
-  min-height: 115px;
+  min-height: 7.1875rem;
   background-position: center;
   background-size: cover;
   width: 100%;
-  border-radius: 15px;
+  border-radius: .9375rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 1.25rem;
   justify-content: space-between;
   position: relative;
 }
@@ -91,9 +91,9 @@
   content: "";
   position: absolute;
   top: 0;
-  left: -22px;
-  --bgWidth: 10000px;
-  height: 100px;
+  left: -1.375rem;
+  --bgWidth: 625rem;
+  height: 6.25rem;
   background: linear-gradient(
     to right,
     #1e5799 0%,
@@ -108,10 +108,10 @@
   height: 100%;
   left: 0;
   top: 0;
-  border-radius: 15px;
+  border-radius: .9375rem;
 }
 .dns_inner_img img {
-  max-width: 200px;
+  max-width: 12.5rem;
   position: relative;
 }
 .dsi_half_right {
@@ -120,8 +120,8 @@
 .dsi_half_right img {
   position: absolute;
   right: 0;
-  bottom: -75px;
-  width: 200px;
+  bottom: -4.6875rem;
+  width: 12.5rem;
 }
 ::-webkit-inner-spin-button,
 ::-webkit-calendar-picker-indicator {
@@ -139,11 +139,11 @@
 
 .tabs {
   display: flex;
-  margin-bottom: .625rem;
+  margin-bottom: 10px;
   width: 100%;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: .9375rem;
   flex-wrap: wrap;
 }
 
@@ -156,33 +156,33 @@
   justify-content: center;
   cursor: pointer;
   text-align: center;
-  padding: 0.7375rem 1.875rem;
-  font-size: 16px;
+  padding: .7375rem 1.875rem;
+  font-size: 1rem;
   font-family: "Poppins", sans-serif;
   
 }
 
 .tabs button:hover {
   transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
+  box-shadow: 0rem 0rem 1.875rem 0rem rgba(162, 162, 162, 0.5);
 }
 
 .tabs button.selected {
-  box-shadow: 0px 0px 30px 0px rgba(162, 162, 162, 0.5);
+  box-shadow: 0rem 0rem 1.875rem 0rem rgba(162, 162, 162, 0.5);
   font-weight: 600;
   position: relative;
-  border-bottom: 3px solid #731dc0;
+  border-bottom: .1875rem solid #731dc0;
 }
 .ng-star-inserted.selected::before {
   content: "";
   position: absolute;
-  bottom: -13px;
-  width: 20px;
-  height: 20px;
+  bottom: -0.8125rem;
+  width: 1.25rem;
+  height: 1.25rem;
   background-color: #fff;
-  border-bottom: 2px solid #731dc0;
+  border-bottom: .125rem solid #731dc0;
   transform: rotate(45deg);
-  border-right: 2px solid #731dc0;
+  border-right: .125rem solid #731dc0;
 }
 
 .cards {
@@ -191,7 +191,7 @@
 }
 
 .cards .card {
-  margin: 10px;
+  margin: .625rem;
   cursor: pointer;
   transition: transform 0.3s;
 }
@@ -201,18 +201,21 @@
 }
 
 .tab-content {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-top: -1px;
+  padding: 1.25rem;
+  border: .0625rem solid #ccc;
+  border-radius: .5rem;
+  margin-top: -0.0625rem;
   background-color: #fff;
 }
 
 @media screen and (max-width: 1500px) {
   .card {
-    min-height: 110px; /* Ensuring cards are uniformly sized */
+    min-height: 6.875rem; /* Ensuring cards are uniformly sized */
   }
   .dashboard {
-    max-width: 85%;
+    max-width: 90%;
   }
+  .dashboard{
+    margin-top: 1.375rem;
+}
 }
