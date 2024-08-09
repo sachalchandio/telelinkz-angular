@@ -2,16 +2,16 @@
 .filter-form {
   max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1.25rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   background-color: #fff;
-  border-radius: 11px;
-  margin: 48px 0px 30px 0;
-  box-shadow: 0 1px 2px rgba(56, 65, 74, 0.15);
+  border-radius: .6875rem;
+  margin: 3rem 0rem 1.875rem 0;
+  box-shadow: 0 .0625rem .125rem rgba(56, 65, 74, 0.15);
   font-family: "Poppins", sans-serif;
 }
 
@@ -32,18 +32,18 @@
   align-items: center;
   justify-content: center;
   background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+  border: .0625rem solid #f5c6cb;
   color: #721c24;
-  padding: 20px;
-  border-radius: 5px;
-  margin-top: 20px;
+  padding: 1.25rem;
+  border-radius: .3125rem;
+  margin-top: 1.25rem;
   margin-bottom: 1em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 .25rem .375rem rgba(0, 0, 0, 0.1);
 }
 
 .error-message {
   font-size: 1.2em;
-  margin-left: 10px;
+  margin-left: .625rem;
 }
 
 .error-icon {
@@ -52,7 +52,7 @@
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   width: 32%;
   position: relative;
   display: flex;
@@ -60,14 +60,14 @@
   align-items: stretch;
 }
 :focus-visible {
-  outline: 2px solid #0074fd;
+  outline: .125rem solid #0074fd;
 }
 .form-group-full-width {
   width: 100%;
 }
 .error {
   color: red;
-  font-size: 11px;
+  font-size: .6875rem;
 }
 .my_form {
   display: flex;
@@ -78,81 +78,82 @@
 .form-group i {
   position: absolute;
   color: #b9b9b9;
-  font-size: 14px;
+  font-size: .875rem;
   position: absolute;
   color: #b9b9b9;
-  top: 12px;
-  left: 9px;
+  top: .75rem;
+  left: .5625rem;
 }
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  font-size: 10px;
+  margin-bottom: .3125rem;
+  font-size: .625rem;
   position: absolute;
-  top: -7px;
-  left: 11px;
-  background-color: #fff;
-  padding: 0 5px;
+  top: -0.4375rem;
+  left: .6875rem;
+  padding: 0 .3125rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 40%, #f5f6fb 61%);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 10px;
+  padding: .625rem;
+  border: .0625rem solid #ccc;
+  border-radius: .25rem;
+  font-size: .625rem;
   color: #757575;
-  padding-left: 38px;
+  padding-left: 2.375rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+  background-color: #f5f6fb;
 }
 .form-group textarea {
-  min-height: 100px;
+  min-height: 6.25rem;
 }
 .dashboard {
   position: relative;
-  margin-top: 70px;
+  margin-top: 4.375rem;
   max-width: 76%;
   width: 100%;
-  margin: 70px auto 0 auto;
+  margin: 4.375rem auto 0 auto;
 }
 .new_sale_wrapper {
   background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: .5rem;
+  padding: 1.25rem;
 }
 .inner-header-heading {
   width: 100%;
   text-align: center;
   color: #fff;
-  font-size: 33px;
+  font-size: 2.0625rem;
   position: relative;
   z-index: 2;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: .125rem;
   text-transform: capitalize;
 }
 .dashboard_inner_header {
-  min-height: 90px;
+  min-height: 5.625rem;
   background-position: center;
   background-size: cover;
   max-width: 100%;
-  border-radius: 15px;
+  border-radius: .9375rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 1.25rem;
   position: relative;
-  margin: 0 0 40px 0;
+  margin: 0 0 2.5rem 0;
 }
 .dashboard_inner_header::before {
   content: "";
   position: absolute;
   top: 0;
-  left: -22px;
-  --bgWidth: 10000px;
-  height: 100px;
+  left: -1.375rem;
+  --bgWidth: 625rem;
+  height: 6.25rem;
   background: linear-gradient(
     to right,
     #1e5799 0%,
@@ -167,10 +168,10 @@
   height: 100%;
   left: 0;
   top: 0;
-  border-radius: 15px;
+  border-radius: .9375rem;
 }
 .dns_inner_img img {
-  max-width: 200px;
+  max-width: 12.5rem;
   position: relative;
 }
 .dsi_half_right {
@@ -179,21 +180,22 @@
 .dsi_half_right img {
   position: absolute;
   right: 0;
-  bottom: -64px;
-  width: 170px;
+  bottom: -4rem;
+  width: 19.425rem;
+  max-width: 19.525rem;
 }
 .form-button {
-  padding: 10px 20px;
+  padding: .625rem 1.25rem;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: .3125rem;
   cursor: pointer;
   margin-left: auto;
   background: linear-gradient(90deg, #0e5298 47%, #0057b8 100%);
-  width: 100%;
-  min-height: 42px;
-  font-size: 19px;
-  margin-left: auto;
+  width: 8.9375rem;
+  min-height: 2.625rem;
+  font-size: 1.1875rem;
+  margin: 13px auto 0 auto;
 }
 /* [type="date"]::-webkit-inner-spin-button {
   display: none;
@@ -220,6 +222,28 @@
   content: "222";
   position: relative;
 }
+.form-group select{
+  cursor: pointer;
+}
+.inner-header-heading{
+  font-size: 55px;
+  color: #fff;
+  font-weight: 500;
+  position: relative;
+  text-align: left;
+  text-transform: uppercase;
+  font-family: "DM Sans", sans-serif;
+}
+/* user css is start from here */
+.user-info-header {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+.user-info-header img{
+  width: 100%;
+}
  /* -------------------------------------------------------important css of form---------------------------------------- */
 
 @keyframes bg {
@@ -238,15 +262,15 @@
   .dashboard {
     max-width: 90%;
     width: 100%;
-    margin: t0px auto 0 auto;
+    margin: t0rem auto 0 auto;
   }
 }
 @media screen and (min-width: 1440px) {
   .form-group input,
   .form-group select {
-    font-size: 12px;
+    font-size: .75rem;
   }
   .form-group i {
-    font-size: 17px;
+    font-size: 1.0625rem;
   }
 }

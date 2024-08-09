@@ -12,12 +12,9 @@
 <div class="creat-alead-outer">
   <div class="dashboard">
     <div class="dashboard_inner_header">
-      <div class="dns_inner_img">
-        <img
-          src="../../../../../../assets/images/xfinty_page_logo.png"
-          alt=""
-        />
-      </div>
+      <h2 class="inner-header-heading">
+        Lead
+      </h2>
       <div class="dns_inner_img dsi_half_right">
         <img
           src="../../../../../../assets/images/create-a-lead-header.png"
@@ -25,245 +22,281 @@
         />
       </div>
     </div>
-    <div class="new_sale_wrapper">
-      <form
-        [formGroup]="interestedCustomerForm"
-        (ngSubmit)="onSubmit()"
-        class="my_form"
-      >
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['firstName'].invalid }"
-        >
-          <label for="firstName"
-            >Customer's First Name<span class="req-stars">*</span></label
+    <div class="new_sale-gwrap">
+      <div class="user-info">
+        <div class="user-info-header">
+          <img src="../../../../assets/images/user-dp.jpg" alt="">
+        </div>
+        <div class="info-details">
+          <p>
+            Lorem ipsum dolor, sit amet 
+          </p>
+          <span>
+            32
+          </span>
+        </div>
+        <div class="info-details">
+          <p>
+            Lorem ipsum dolor, sit amet 
+          </p>
+          <span>
+            32
+          </span>
+        </div>
+        <div class="info-details">
+          <p>
+            Lorem ipsum dolor, sit amet 
+          </p>
+          <span>
+            32
+          </span>
+        </div>
+        <div class="user-footer">
+
+        </div>
+        
+      </div>
+        <div class="new_sale_wrapper">
+          <form
+            [formGroup]="interestedCustomerForm"
+            (ngSubmit)="onSubmit()"
+            class="my_form"
           >
-          <input
-            type="text"
-            id="firstName"
-            formControlName="firstName"
-            placeholder="Michael"
-          />
-          <i class="material-icons">person</i>
-          <div *ngIf="submitted && f['firstName'].invalid" class="error">
-            First Name is required.
-          </div>
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['firstName'].invalid }"
+            >
+              <label for="firstName"
+                >Customer's First Name<span class="req-stars">*</span></label
+              >
+              <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                placeholder="Michael"
+              />
+              <i class="material-icons">person</i>
+              <div *ngIf="submitted && f['firstName'].invalid" class="error">
+                First Name is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['lastName'].invalid }"
+            >
+              <label for="lastName">Customer's Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                placeholder="Hosier"
+              />
+              <i class="material-icons">person</i>
+              <div *ngIf="submitted && f['lastName'].invalid" class="error">
+                Last Name is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['ssn'].invalid }"
+            >
+              <label for="ssn">SSN</label>
+              <input type="text" id="ssn" formControlName="ssn" placeholder="SSN" />
+              <i class="material-icons">card</i>
+              <div *ngIf="submitted && f['ssn'].invalid" class="error">
+                SSN is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['dob'].invalid }"
+            >
+              <label for="dob">Date of Birth</label>
+              <input
+                type="date"
+                id="dob"
+                formControlName="dob"
+                placeholder="Date of Birth"
+              />
+              <i class="material-icons">calendar_today</i>
+              <div *ngIf="submitted && f['dob'].invalid" class="error">
+                Date of Birth is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['callbackDate'].invalid }"
+            >
+              <label for="callbackDate">CallBack Date</label>
+              <input type="date" id="callbackDate" formControlName="callbackDate" />
+              <i class="material-icons">calendar_today</i>
+              <div *ngIf="submitted && f['callbackDate'].invalid" class="error">
+                Callback Date is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['callbackTime'].invalid }"
+            >
+              <label for="callbackTime">CallBack Time</label>
+              <input type="time" id="callbackTime" formControlName="callbackTime" />
+              <i class="material-icons">calendar_today</i>
+              <div *ngIf="submitted && f['callbackTime'].invalid" class="error">
+                Callback Time is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['phoneNumber'].invalid }"
+            >
+              <label for="phoneNumber"
+                >Phone Number <span class="req-stars">*</span></label
+              >
+              <input
+                type="tel"
+                id="phoneNumber"
+                formControlName="phoneNumber"
+                placeholder="Phone Number"
+              />
+              <i class="material-icons">phone</i>
+              <div *ngIf="submitted && f['phoneNumber'].invalid" class="error">
+                Phone Number is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['email'].invalid }"
+            >
+              <label for="email">Email <span class="req-stars">*</span></label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="Email"
+              />
+              <i class="material-icons">email</i>
+              <div *ngIf="submitted && f['email'].invalid" class="error">
+                Valid Email is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['provider'].invalid }"
+            >
+              <label for="provider"
+                >Provider <span class="req-stars">*</span></label
+              >
+              <select id="provider" formControlName="provider">
+                <option *ngFor="let provider of providers" [value]="provider">
+                  {{ provider }}
+                </option>
+              </select>
+              <i class="material-icons">shopping_cart</i>
+              <div *ngIf="submitted && f['provider'].invalid" class="error">
+                Provider is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['address'].invalid }"
+            >
+              <label for="address">Address <span class="req-stars">*</span></label>
+              <input
+                type="text"
+                id="address"
+                formControlName="address"
+                placeholder="Address"
+              />
+              <i class="material-icons">home</i>
+              <div *ngIf="submitted && f['address'].invalid" class="error">
+                Address is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['city'].invalid }"
+            >
+              <label for="city">City <span class="req-stars">*</span></label>
+              <input
+                type="text"
+                id="city"
+                formControlName="city"
+                placeholder="City"
+              />
+              <i class="material-icons">location_city</i>
+              <div *ngIf="submitted && f['city'].invalid" class="error">
+                City is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group"
+              [ngClass]="{ 'has-error': submitted && f['state'].invalid }"
+            >
+              <label for="state">State <span class="req-stars">*</span></label>
+              <input
+                type="text"
+                id="state"
+                formControlName="state"
+                placeholder="State"
+              />
+              <i class="material-icons">map</i>
+              <div *ngIf="submitted && f['state'].invalid" class="error">
+                State is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group form-group-full-width"
+              [ngClass]="{ 'has-error': submitted && f['zipCode'].invalid }"
+            >
+              <label for="zipCode">Zip Code <span class="req-stars">*</span></label>
+              <input
+                type="text"
+                id="zipCode"
+                formControlName="zipCode"
+                placeholder="Zip Code"
+              />
+              <i class="material-icons">local_post_office</i>
+              <div *ngIf="submitted && f['zipCode'].invalid" class="error">
+                Zip Code is required.
+              </div>
+            </div>
+    
+            <div
+              class="form-group form-group-full-width"
+              [ngClass]="{ 'has-error': submitted && f['comments'].invalid }"
+            >
+              <label for="comments"
+                >Comments <span class="req-stars">*</span></label
+              >
+              <textarea
+                id="comments"
+                formControlName="comments"
+                placeholder="Comments"
+              ></textarea>
+              <i class="material-icons">comment</i>
+              <div *ngIf="submitted && f['comments'].invalid" class="error">
+                Comments are required.
+              </div>
+            </div>
+    
+            <div class="form-group form-group-full-width">
+              <button class="form-button" type="submit">Submit</button>
+            </div>
+          </form>
         </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['lastName'].invalid }"
-        >
-          <label for="lastName">Customer's Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            formControlName="lastName"
-            placeholder="Hosier"
-          />
-          <i class="material-icons">person</i>
-          <div *ngIf="submitted && f['lastName'].invalid" class="error">
-            Last Name is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['ssn'].invalid }"
-        >
-          <label for="ssn">SSN</label>
-          <input type="text" id="ssn" formControlName="ssn" placeholder="SSN" />
-          <i class="material-icons">card</i>
-          <div *ngIf="submitted && f['ssn'].invalid" class="error">
-            SSN is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['dob'].invalid }"
-        >
-          <label for="dob">Date of Birth</label>
-          <input
-            type="date"
-            id="dob"
-            formControlName="dob"
-            placeholder="Date of Birth"
-          />
-          <i class="material-icons">calendar_today</i>
-          <div *ngIf="submitted && f['dob'].invalid" class="error">
-            Date of Birth is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['callbackDate'].invalid }"
-        >
-          <label for="callbackDate">CallBack Date</label>
-          <input type="date" id="callbackDate" formControlName="callbackDate" />
-          <i class="material-icons">calendar_today</i>
-          <div *ngIf="submitted && f['callbackDate'].invalid" class="error">
-            Callback Date is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['callbackTime'].invalid }"
-        >
-          <label for="callbackTime">CallBack Time</label>
-          <input type="time" id="callbackTime" formControlName="callbackTime" />
-          <i class="material-icons">calendar_today</i>
-          <div *ngIf="submitted && f['callbackTime'].invalid" class="error">
-            Callback Time is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['phoneNumber'].invalid }"
-        >
-          <label for="phoneNumber"
-            >Phone Number <span class="req-stars">*</span></label
-          >
-          <input
-            type="tel"
-            id="phoneNumber"
-            formControlName="phoneNumber"
-            placeholder="Phone Number"
-          />
-          <i class="material-icons">phone</i>
-          <div *ngIf="submitted && f['phoneNumber'].invalid" class="error">
-            Phone Number is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['email'].invalid }"
-        >
-          <label for="email">Email <span class="req-stars">*</span></label>
-          <input
-            type="email"
-            id="email"
-            formControlName="email"
-            placeholder="Email"
-          />
-          <i class="material-icons">email</i>
-          <div *ngIf="submitted && f['email'].invalid" class="error">
-            Valid Email is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['provider'].invalid }"
-        >
-          <label for="provider"
-            >Provider <span class="req-stars">*</span></label
-          >
-          <select id="provider" formControlName="provider">
-            <option *ngFor="let provider of providers" [value]="provider">
-              {{ provider }}
-            </option>
-          </select>
-          <i class="material-icons">shopping_cart</i>
-          <div *ngIf="submitted && f['provider'].invalid" class="error">
-            Provider is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['address'].invalid }"
-        >
-          <label for="address">Address <span class="req-stars">*</span></label>
-          <input
-            type="text"
-            id="address"
-            formControlName="address"
-            placeholder="Address"
-          />
-          <i class="material-icons">home</i>
-          <div *ngIf="submitted && f['address'].invalid" class="error">
-            Address is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['city'].invalid }"
-        >
-          <label for="city">City <span class="req-stars">*</span></label>
-          <input
-            type="text"
-            id="city"
-            formControlName="city"
-            placeholder="City"
-          />
-          <i class="material-icons">location_city</i>
-          <div *ngIf="submitted && f['city'].invalid" class="error">
-            City is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group"
-          [ngClass]="{ 'has-error': submitted && f['state'].invalid }"
-        >
-          <label for="state">State <span class="req-stars">*</span></label>
-          <input
-            type="text"
-            id="state"
-            formControlName="state"
-            placeholder="State"
-          />
-          <i class="material-icons">map</i>
-          <div *ngIf="submitted && f['state'].invalid" class="error">
-            State is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group form-group-full-width"
-          [ngClass]="{ 'has-error': submitted && f['zipCode'].invalid }"
-        >
-          <label for="zipCode">Zip Code <span class="req-stars">*</span></label>
-          <input
-            type="text"
-            id="zipCode"
-            formControlName="zipCode"
-            placeholder="Zip Code"
-          />
-          <i class="material-icons">local_post_office</i>
-          <div *ngIf="submitted && f['zipCode'].invalid" class="error">
-            Zip Code is required.
-          </div>
-        </div>
-
-        <div
-          class="form-group form-group-full-width"
-          [ngClass]="{ 'has-error': submitted && f['comments'].invalid }"
-        >
-          <label for="comments"
-            >Comments <span class="req-stars">*</span></label
-          >
-          <textarea
-            id="comments"
-            formControlName="comments"
-            placeholder="Comments"
-          ></textarea>
-          <i class="material-icons">comment</i>
-          <div *ngIf="submitted && f['comments'].invalid" class="error">
-            Comments are required.
-          </div>
-        </div>
-
-        <div class="form-group form-group-full-width">
-          <button class="form-button" type="submit">Submit</button>
-        </div>
-      </form>
+      
     </div>
   </div>
 </div>

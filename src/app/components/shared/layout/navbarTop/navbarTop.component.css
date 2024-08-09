@@ -1,11 +1,12 @@
 .top_header {
-  padding: 20px;
+  padding: .9375rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #91b8d6af;
+  background-color: #fff;
   position: static;
   top: 0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 .header_button {
   border: none;
@@ -14,16 +15,6 @@
 
 img {
   max-width: 100%;
-}
-.top_header {
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f4f7fa;
-  position: static;
-  top: 0;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 .top_header i {
   color: #39465f;

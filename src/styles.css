@@ -40,7 +40,9 @@
   /* scrollbar track color */
   height: 10px;
 }
-
+html{
+  font-size: 16px;
+}
 a,
 button {
   cursor: pointer;
@@ -84,4 +86,9 @@ p {
 
 .all-main a {
   text-decoration: none;
+}
+@media screen and (max-width:1500px) {
+  html{
+    font-size: 14px;
+  }
 }

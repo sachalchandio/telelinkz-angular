@@ -47,23 +47,28 @@
   transform: translateY(-10px);
 }
 .card i.material-icons {
-  font-size: 40px; /* Larger icon for better visibility */
-  color: #7314da; /* Adding a splash of color */
+  font-size: 30px;
+  color: #7314da;
   margin-bottom: 10px;
+  background-color: #eaedf6;
+  border-radius: 100%;
+  padding: 15px;
 }
 .cards .card:hover {
   background-color: #7314da;
 
 }
-.card:hover i.material-icons,
+.card:hover i.material-icons{
+  background-color: #fff;
+}
 .card:hover p{
   color: #fff;
 }
 
 .card p {
-  font-size: 14px; /* Larger text for readability */
+  font-size: 15px; /* Larger text for readability */
   color: #331679;
-  font-weight: 700;
+  font-weight: 500;
 }
 .vh_main {
   overflow-x: hidden;
